@@ -67,3 +67,8 @@ See the guidance in the [wiki].
   [React]: https://reactjs.org/
   [Webpack]: https://webpack.js.org/
   [wiki]: https://github.com/textbook/starter-kit/wiki
+
+### packages
+`yarn add react-bootstrap bootstrap`
+`yarn add styled-components`
+`yarn add formik yup`
