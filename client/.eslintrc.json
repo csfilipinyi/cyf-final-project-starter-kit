@@ -13,7 +13,11 @@
     "react/jsx-tag-spacing": "error",
     "react/no-unused-prop-types": "error",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error"
+    "react-hooks/exhaustive-deps": "error",
+    "linebreak-style": 0,
+    // "quotes": [2, "single", { "avoidEscape": true }],
+    "quotes": [0, "double"]
+    
   },
   "settings": {
     "react": {
