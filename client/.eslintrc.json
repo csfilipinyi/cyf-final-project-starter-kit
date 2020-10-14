@@ -17,7 +17,6 @@
     "linebreak-style": 0,
     // "quotes": [2, "single", { "avoidEscape": true }],
     "quotes": [0, "double"]
-    
   },
   "settings": {
     "react": {
