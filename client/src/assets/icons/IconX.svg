@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>9AF58382-158F-494B-B01E-1C82CF6207C0</title>
+    <defs>
+        <path d="M7.4141,6 L11.7071,1.707 C12.0981,1.316 12.0981,0.684 11.7071,0.293 C11.3161,-0.098 10.6841,-0.098 10.2931,0.293 L6.0001,4.586 L1.7071,0.293 C1.3161,-0.098 0.6841,-0.098 0.2931,0.293 C-0.0979,0.684 -0.0979,1.316 0.2931,1.707 L4.5861,6 L0.2931,10.293 C-0.0979,10.684 -0.0979,11.316 0.2931,11.707 C0.4881,11.902 0.7441,12 1.0001,12 C1.2561,12 1.5121,11.902 1.7071,11.707 L6.0001,7.414 L10.2931,11.707 C10.4881,11.902 10.7441,12 11.0001,12 C11.2561,12 11.5121,11.902 11.7071,11.707 C12.0981,11.316 12.0981,10.684 11.7071,10.293 L7.4141,6 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-guide-/-Icons-" transform="translate(-64.000000, -512.000000)">
+            <g id="27)-Icon/close" transform="translate(64.000000, 512.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="🎨-Icon-Сolor" fill="black" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
