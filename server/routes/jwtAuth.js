@@ -9,6 +9,7 @@ const authorization = require('../middleware/authorization');
 
 
 
+
  
   router.post("/register",validInfo, async (req, res) => {
     const { firstName, lastName, userRole, userEmail, userSlack, userPassword, userGithub, userClassId ,username,userPhone,cyfCity,userDateOfBirth} = req.body;
@@ -65,9 +66,10 @@ const authorization = require('../middleware/authorization');
       }
            })
     
-  router.get("/verify", authorization, async (req, res) => {
-  try {
-    res.json(true);
+  router.get("/verify",authorization, async (req, res) => {
+    try {
+      console.log("passed the authorization");
+     res.json(true);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
