@@ -6,13 +6,15 @@ import "../App.css";
 const SignupForm = () => {
   const [submit, setSubmit] = useState(false);
   const [input, setInput] = useState({
+    
     firstName: "",
     surname: "",
     role: "",
     email: "",
     password: "",
     confirmPassword: "",
-    ClassId: "",
+    city: "",
+    classId: "",
     githubName: "",
     slackHandler: "",
   });
@@ -21,6 +23,7 @@ const SignupForm = () => {
       ...input,
       [event.target.name]: event.target.value,
     };
+    console.log(updateInput);
     setInput(updateInput);
   }
 
@@ -34,7 +37,8 @@ const SignupForm = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      ClassId: "",
+      city: "",
+      classId: "",
       githubName: "",
       slackHandler: "",
     });
@@ -55,7 +59,7 @@ const SignupForm = () => {
               name="firstName"
               required
             />
-            <label for="surname">surname</label>
+            <label for="surname">Surname</label>
             <input
               type="text"
               placeholder="Surname"
@@ -64,15 +68,7 @@ const SignupForm = () => {
               name="surname"
               required
             />
-            <label for="role">Role</label>
-            <input
-              type="text"
-              placeholder="role"
-              value={input.role}
-              onChange={handleChange}
-              name="role"
-              required
-            />
+
             <label for="email">Email</label>
             <input
               type="email"
@@ -98,6 +94,15 @@ const SignupForm = () => {
               value={input.confirmPassword}
               onChange={handleChange}
               name="confirmPassword"
+              required
+            />
+            <label for="city">City</label>
+            <input
+              type="text"
+              placeholder="city"
+              value={input.city}
+              onChange={handleChange}
+              name="city"
               required
             />
             <label for="ClassId">Class-id</label>
@@ -127,6 +132,13 @@ const SignupForm = () => {
               name="slackHandler"
               required
             />
+
+<label for="">Role</label>
+            <select name="role" onChange={handleChange} required>
+            <option  value={input.role}>Student</option>
+            <option  value={input.role}>Mentor</option>
+            </select>
+
             <Link to="/modal">
               <input type="submit" value="Submit" className="submit" />
             </Link>
