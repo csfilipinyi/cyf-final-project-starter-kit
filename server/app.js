@@ -21,6 +21,7 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(require('./routes/jwtAuth'))
+//app.use(require('./routes/dashboard'))
 app.use(express.json());
 app.use(helmet());
 app.use(logErrors());
