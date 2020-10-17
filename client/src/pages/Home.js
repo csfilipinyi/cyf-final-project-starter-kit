@@ -22,8 +22,7 @@ const Home = () => {
 				{profile&&<ViewProfileDetail />}
 			</Container>
 		</Screen>
-	);
-};
+
 
 
 export default Home;
@@ -37,3 +36,6 @@ const Container = styled.div`
 	flex-wrap:wrap;
 	justify-content:center;
 `;
+
+
+
