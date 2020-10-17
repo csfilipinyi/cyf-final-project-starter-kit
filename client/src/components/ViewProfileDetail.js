@@ -7,7 +7,7 @@ import close from '../assets/icons/IconX.svg';
 
 const ViewProfileDetail = () => {
 	const { profile, clearProfile } = useContext(ProfileContext);
-	console.log('prof', profile);
+
 	const handleClick = ()=>{
 		clearProfile();
 	};

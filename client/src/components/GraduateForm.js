@@ -38,7 +38,7 @@ const GraduateForm = () => {
 						<StyledForm id='formLogin' noValidate>
 							<FormField
 								name='name'
-								placeholder='FUll Name'
+								placeholder='Full Name'
 								label='Full Name'
 							/>
 							<FormField

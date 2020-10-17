@@ -12,6 +12,7 @@ const Routes = () => {
 				<Route exact path='/' component={Home} />
 				<Route path='/viewprofile' component={ViewProfile} />
 				<Route path='/createprofile' component={CreateProfile} />
+				<Route path='/oauth2' component={CreateProfile} />
 			</Switch>
 		</BrowserRouter>
 	);

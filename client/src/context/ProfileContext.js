@@ -33,9 +33,9 @@ const profileReducer = (state, action) => {
 	case types.Clear_Profile:
 		return { ...state, profile: null, loading: false };
 	case types.Get_Profiles:
-		return { ...state, profiles: action.payload, loading: false };
+		return { ...state, profiles:action.payload, loading: false };
 	case types.Edit_Profile:
-		return { ...state, profile: action.payload, loading: false };
+		return { ...state, profile: action.payload, edit:false, loading: false  };
 	case types.Delete_Applicaton:
 		return { ...state, profiles: state.profiles.filter((profile) => profile.id !== action.payload), loading: false };
 	case types.Open_Edit:
@@ -44,7 +44,6 @@ const profileReducer = (state, action) => {
 		return state;
 	}
 };
-
 
 //Context has Provider and Consumer in itself.
 //Here we set Context Provider and stored our states and actions in it to provide them to Consumer
@@ -55,6 +54,7 @@ const ProfileState = (props) =>{
 		profiles:[],
 		profile:null,
 		edit:false,
+		loading:false,
 	};
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import OverviewProfileCard from '../components/OverviewProfileCard';
 import { ProfileContext } from '../context/ProfileContext';
 import ViewProfileDetail from '../components/ViewProfileDetail';
+import Header from '../components/Header';
 import styled from 'styled-components';
 
 const Home = () => {
@@ -13,12 +14,11 @@ const Home = () => {
 
 	return (
 		<Screen>
-            This is Overview Page
+			<Header />
 			<Container>
 				{profiles&&profiles.map((profile, i)=>{
 					return (<OverviewProfileCard profile={profile} key={i} />);
-				})
-				}
+				})}
 				{profile&&<ViewProfileDetail />}
 			</Container>
 		</Screen>
