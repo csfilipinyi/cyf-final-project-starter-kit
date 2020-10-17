@@ -9,7 +9,7 @@ const SignupForm = () => {
     
     firstName: "",
     surname: "",
-    role: "",
+    role: "Student",
     email: "",
     password: "",
     confirmPassword: "",
@@ -23,6 +23,8 @@ const SignupForm = () => {
       ...input,
       [event.target.name]: event.target.value,
     };
+    console.log(event.target.name);
+    console.log(event.target.value);
     console.log(updateInput);
     setInput(updateInput);
   }
@@ -105,13 +107,13 @@ const SignupForm = () => {
               name="city"
               required
             />
-            <label for="ClassId">Class-id</label>
+            <label for="classId">Class</label>
             <input
               type="number"
               placeholder="Class-id"
-              value={input.ClassId}
+              value={input.classId}
               onChange={handleChange}
-              name="ClassId"
+              name="classId"
               required
             />
             <label for="githubName">Github Name</label>
@@ -133,10 +135,11 @@ const SignupForm = () => {
               required
             />
 
-<label for="">Role</label>
-            <select name="role" onChange={handleChange} required>
-            <option  value={input.role}>Student</option>
-            <option  value={input.role}>Mentor</option>
+<label for="role">Please select a role</label>
+            <select name="role"  onChange={handleChange} required>
+          
+            <option  value= "Student" >Student</option>
+            <option  value= "Mentor" >Mentor</option>
             </select>
 
             <Link to="/modal">
