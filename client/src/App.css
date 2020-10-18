@@ -1,6 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
 body {
-    margin: 10vh;
-    
-  }
+  margin: 10vh;
+  font-family: "Raleway", sans-serif;
+}
 
+* {
+  box-sizing: border-box;
+}
 
+.sign-form {
+  background-color: #efefef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2%;
+  font-size: larger;
+}
+
+.sign-form label {
+  margin-top: 2vh;
+}
+
+input {
+  border-radius: 10%;
+}
+
+button {
+  background-color: #d12f2f;
+  margin-top: 3vh;
+}
+
+.submit {
+  background-color: #d12f2f;
+  margin: 3vh;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+  font-size: larger;
+}
+
+.login-page label {
+  margin-top: 2vh;
+}
+
+.signup-link {
+  margin-top: 2vh;
+}
+
+li {
+  list-style: none;
+  font-size: larger;
+  margin-bottom: 1vh;
+}
+
+.learning-objective-container {
+  background-color: #efefef;
+  position: absolute;
+  margin-top: 3%;
+  margin-left: 25%;
+  width: 50%;
+  padding: 2%;
+}
+
+.skills-container {
+  width: 15%;
+  padding: 2%;
+}
+
+.skills-container h2 {
+  margin-bottom: 5vh;
+  color: #d12f2f;
+}
+
+.modal-body .modal-footer {
+  font-size: larger;
+}
+
+.modal-footer button {
+  background-color: #d12f2f;
+}
