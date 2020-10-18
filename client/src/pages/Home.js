@@ -23,8 +23,7 @@ const Home = () => {
 				{profile&&<ViewProfileDetail clearProfile={clearProfile} profile={profile} />}
 			</Container>
 		</Screen>
-	);
-};
+
 
 
 export default Home;
@@ -42,3 +41,4 @@ const Container = styled.div`
 const Text = styled.p`
 	fontSize:20;
 `;
+
