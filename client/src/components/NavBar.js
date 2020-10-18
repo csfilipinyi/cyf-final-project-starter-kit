@@ -36,7 +36,7 @@ const Navigator = styled.div`
         position:absolute;
         right:5px;
         top:25px;
-        width:100px;
+        width:200px;
         height:150px;
         align-items:center;
         justify-content:flex-start;

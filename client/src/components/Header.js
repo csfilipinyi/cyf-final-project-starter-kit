@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import LogoName from './Logo';
+import React, { useState, useEffect } from 'react';
+import LogoName from '../constant/Logo';
 import NavBar from './NavBar';
 import styled from 'styled-components';
 import Burger from '../constant/Burger';
@@ -9,12 +9,14 @@ const Header = () => {
 	const [open, setOpen] = useState(false);
 	const media = useMediaQuery();
 
+	useEffect (()=>{
+		media&&!media.isTablet&&setOpen(false);
+	},[media]);
 	return (
 		<Container>
 			<LogoName />
 			{media && media.isTablet && <Burger open={open} setOpen={setOpen} />}
 			{media && !media.isTablet && <NavBar open={open} />}
-			{media && (open && media.isTablet) && <NavBar open={open} />}
 		</Container>
 	);
 };

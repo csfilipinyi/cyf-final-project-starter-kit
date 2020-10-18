@@ -1,22 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
-import { ProfileContext } from '../context/ProfileContext';
 import avatar from '../assets/icons/avatar.svg';
 import close from '../assets/icons/IconX.svg';
 
-const ViewProfileDetail = () => {
-	const { profile, clearProfile } = useContext(ProfileContext);
-
-	const handleClick = ()=>{
-		clearProfile();
-	};
-
+const ViewProfileDetail = ({ profile, clearProfile }) => {
 	return (
 		<Container>
-  			<Icon variant="top" src={close} onClick={handleClick} />
+  			<Icon variant="top" src={close} onClick={clearProfile} />
 			<CardContainer>
-				<Img variant="top" src={profile.img?profile.img:avatar} />
+				<Img variant="top" src={profile.img||avatar} />
 				<Card.Body>
 					<Card.Title>{profile.name}</Card.Title>
 					<Card.Text>

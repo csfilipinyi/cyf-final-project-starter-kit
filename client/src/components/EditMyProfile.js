@@ -1,34 +1,34 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import { ProfileContext } from '../context/ProfileContext';
-import * as Yup from "yup";
+// import * as Yup from "yup";
 import FormField from "../constant/FormField";
 import StyledButton from '../constant/StyledButton';
-import avatar from '../assets/icons/avatar.svg';
-import GraduateForm from './GraduateForm';
 
 const EditMyProfile = () => {
-	const { profile, editProfile, manageEdit, edit }  = useContext(ProfileContext);
+	const { profile, editProfile }  = useContext(ProfileContext);
+	let history = useHistory();
 
 	const handleSubmit = (values)=>{
 		const { name, email, website, phone } = values;
 		const editedProfile ={
 			'id':profile.id,
-			'full_name':name,
+			'name':name,
 			'email':email,
 			'website':website,
 			'phone':phone,
 		};
 		editProfile(editedProfile);
+		history.goBack();
 	};
 
 	const handleReset = ()=>{
-		manageEdit(false);
-		console.log('ed', edit);
+		history.goBack();
 	};
 
-	const initialValue = profile ? { name:`${profile.name}`, email:`${profile.email}`, website:`${profile.website}`, phone:`${profile.phone}` }:{ name:'', email:'', website:'', phone:'' };
+	const initialValue = profile || { name:'', email:'', website:'', phone:'' };
 
 	return (
 		<Container >
@@ -45,7 +45,7 @@ const EditMyProfile = () => {
 						<StyledForm id='formLogin' noValidate>
 							<FormField
 								name='name'
-								placeholder='FUll Name'
+								placeholder='Full Name'
 								label='Full Name'
 							/>
 							<FormField
