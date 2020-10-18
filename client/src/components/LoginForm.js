@@ -1,27 +1,22 @@
 import React, { useState } from "react";
 import { Jumbotron, Container, Form, Col, Row } from "react-bootstrap";
+import useForm from "./useForm"
+import "../App.css";
+import loginValidation from "./loginValidation"
+import { Link, useHistory  } from "react-router-dom";
 
-import { Link } from "react-router-dom";
 export default function LoginForm() {
-  const [input, setInput] = useState({
+  let history = useHistory();
+  const intialState = {
     email: "",
     password: "",
-  });
-
-  function handleChange(event) {
-    let updateInput = {
-      ...input,
-      [event.target.name]: event.target.value,
-    };
-    console.log(updateInput);
-    setInput(updateInput);
   }
-  function handleSubmit(event) {
-    event.prevendDefault();
-    setInput({
-      email: "",
-      password: "",
-    });
+  const {handleChange, input, handleSubmit, errors, submit} = useForm(loginValidation, intialState)
+  console.log(errors)
+  
+  if(submit){
+
+    history.push("/skills");
   }
   return (
     <Jumbotron fluid>
@@ -35,6 +30,7 @@ export default function LoginForm() {
             onChange={handleChange}
             value={input.email}
           />
+              {errors.email && <p>{errors.email} </p>}
           <label>Password</label>
           <input
             type="password"
@@ -43,12 +39,13 @@ export default function LoginForm() {
             onChange={handleChange}
             value={input.password}
           />
-
-          <Link to="/Skills">
-            <button type="button" variant="secondary" size="lg" p-2 active>
+           {errors.password && <p>{errors.password} </p>}
+          {/* <Link to="/Skills"> */}
+          
+            <button type="submit" variant="secondary" size="lg" p-2 active>
               Login
             </button>
-          </Link>
+     
           <Link to="/signup" className="signup-link">
             signup
           </Link>

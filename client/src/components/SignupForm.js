@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Modal from "./Modal";
+import useForm from "./useForm"
 import "../App.css";
+import validate from "./validation"
 
 const SignupForm = () => {
-  const [submit, setSubmit] = useState(false);
-  const [input, setInput] = useState({
-    
+  
+  const intialState = {
     firstName: "",
     surname: "",
-    role: "Student",
+    role: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -17,34 +18,10 @@ const SignupForm = () => {
     classId: "",
     githubName: "",
     slackHandler: "",
-  });
-  function handleChange(event) {
-    let updateInput = {
-      ...input,
-      [event.target.name]: event.target.value,
-    };
-    console.log(event.target.name);
-    console.log(event.target.value);
-    console.log(updateInput);
-    setInput(updateInput);
   }
+const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, intialState)
+ console.log(errors)
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    setSubmit(true);
-    setInput({
-      firstName: "",
-      surname: "",
-      role: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      city: "",
-      classId: "",
-      githubName: "",
-      slackHandler: "",
-    });
-  }
   return (
     <div>
       {submit ? (
@@ -52,15 +29,15 @@ const SignupForm = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="sign-form">
-            <label for="firstName">First Name</label>
+            <label for="firstName">Name</label>
             <input
               type="text"
-              placeholder="First name"
+              placeholder="Name"
               value={input.firstName}
               onChange={handleChange}
               name="firstName"
-              required
             />
+            {errors.firstName && <p>{errors.firstName} </p>}
             <label for="surname">Surname</label>
             <input
               type="text"
@@ -68,9 +45,8 @@ const SignupForm = () => {
               value={input.surname}
               onChange={handleChange}
               name="surname"
-              required
             />
-
+            {errors.surname && <p>{errors.surname} </p>}
             <label for="email">Email</label>
             <input
               type="email"
@@ -78,8 +54,8 @@ const SignupForm = () => {
               value={input.email}
               onChange={handleChange}
               name="email"
-              required
             />
+              {errors.email && <p>{errors.email} </p>}
             <label for="password">password</label>
             <input
               type="password"
@@ -87,17 +63,17 @@ const SignupForm = () => {
               value={input.password}
               onChange={handleChange}
               name="password"
-              required
             />
-            <label for="">Conform Password</label>
+              {errors.password && <p>{errors.password} </p>}
+            <label for="">Confirm Password</label>
             <input
               type="password"
-              placeholder="Conform Password"
+              placeholder="Confirm Password"
               value={input.confirmPassword}
               onChange={handleChange}
               name="confirmPassword"
-              required
             />
+             {errors.confirmPassword && <p>{errors.confirmPassword} </p>}
             <label for="city">City</label>
             <input
               type="text"
@@ -105,8 +81,8 @@ const SignupForm = () => {
               value={input.city}
               onChange={handleChange}
               name="city"
-              required
             />
+             {errors.city && <p>{errors.city} </p>}
             <label for="classId">Class</label>
             <input
               type="number"
@@ -114,8 +90,8 @@ const SignupForm = () => {
               value={input.classId}
               onChange={handleChange}
               name="classId"
-              required
             />
+             {errors.classId && <p>{errors.classId} </p>}
             <label for="githubName">Github Name</label>
             <input
               type="text"
@@ -123,7 +99,6 @@ const SignupForm = () => {
               value={input.githubName}
               onChange={handleChange}
               name="githubName"
-              required
             />
             <label for="slackHandler">Slack Handler</label>
             <input
@@ -132,19 +107,20 @@ const SignupForm = () => {
               value={input.slackHandler}
               onChange={handleChange}
               name="slackHandler"
-              required
+         
             />
 
-<label for="role">Please select a role</label>
-            <select name="role"  onChange={handleChange} required>
-          
+     <label for="role">Please select a role</label>
+            <select name="role"  onChange={handleChange} >
+            <option  value= "select" >Select</option>
             <option  value= "Student" >Student</option>
             <option  value= "Mentor" >Mentor</option>
             </select>
-
-            <Link to="/modal">
-              <input type="submit" value="Submit" className="submit" />
-            </Link>
+            {errors.role && <p>{errors.role} </p>}
+            {/* <Link> */}
+            {/* <input  to="/modal" type="submit" value="Submit" className="submit" /> */}
+            {/* </Link> */}
+            <button to="/modal" type="submit" value="Submit" className="submit">Submit</button>
           </div>
         </form>
       )}
