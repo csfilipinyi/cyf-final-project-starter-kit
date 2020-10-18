@@ -1,20 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { ProfileContext } from '../context/ProfileContext';
 import { ListGroup, Card } from 'react-bootstrap';
 import avatar from '../assets/icons/avatar.svg';
 import StyledButton from '../constant/StyledButton';
 
-const DisplayMyProfile = () => {
-	const { profile, manageEdit }  = useContext(ProfileContext);
+const ViewMyProfile = ({ profile }) => {
+	let history = useHistory();
 
 	const handleClick = ()=>{
-		manageEdit(true);
+		history.push('/editprofile');
 	};
 
 	return (
 		<Container>
-			<Img variant="top" src={profile.img?profile.img:avatar} />
+			<Img variant="top" src={profile.img||avatar} />
 			<ListGroup as="ul">
 				<ListItem as="li"><Label>Name</Label><Value>{profile.name}</Value></ListItem>
 				<ListItem as="li"><Label>Email</Label><Value>{profile.email}</Value></ListItem>
@@ -26,7 +26,7 @@ const DisplayMyProfile = () => {
 	);
 };
 
-export default DisplayMyProfile;
+export default ViewMyProfile;
 
 
 

@@ -3,11 +3,9 @@ import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import StyledButton from '../constant/StyledButton';
 import avatar from '../assets/icons/avatar.svg';
-import { ProfileContext } from '../context/ProfileContext';
 
 
-const OverviewProfileCard = ({ profile }) => {
-	const { getProfile } = useContext(ProfileContext);
+const OverviewProfileCard = ({ profile, getProfile }) => {
 
 	const handleClick = (id)=>{
 		getProfile(id);
@@ -16,7 +14,7 @@ const OverviewProfileCard = ({ profile }) => {
 	return (
 		<Container>
 			<CardContainer>
-				<Img variant="top" src={profile.img?profile.img:avatar} />
+				<Img variant="top" src={profile.img||avatar} />
 				<Card.Body>
 					<Card.Title>{profile.name}</Card.Title>
 					<Card.Text>

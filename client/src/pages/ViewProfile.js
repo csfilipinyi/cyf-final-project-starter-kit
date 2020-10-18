@@ -2,24 +2,21 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { ProfileContext } from '../context/ProfileContext';
 import BasicDropDown from '../constant/BasicDropdown';
-import DisplayMyProfile from '../components/DisplayMyProfile';
-import EditMyProfile from '../components/EditMyProfile';
+import ViewMyProfile from '../components/ViewMyProfile';
 
 
-const CreateProfile = () => {
-	const { profile, edit }= useContext(ProfileContext);
+const ViewProfile = () => {
+	const { profile }= useContext(ProfileContext);
 
 
 	return (
 		<Screen>
-			{!profile&&<BasicDropDown />}
-			{profile&&!edit&&<DisplayMyProfile />}
-			{edit&&<EditMyProfile />}
+			{profile?<ViewMyProfile profile={profile} />:<BasicDropDown />}
 		</Screen>
 	);
 };
 
-export default CreateProfile;
+export default ViewProfile;
 
 const Screen =styled.div`
     width:100%;

@@ -9,14 +9,11 @@ export const ProfileContext = React.createContext();
 //Stored action types names
 
 const types = {
-	Add_Profile:"Add_Profile",
-	Get_Profile: "Get_Profile",
-	Get_Profiles: "Get_Profiles",
-	Delete_Profile: "Delete_Profile",
-	Edit_Profile: "Edit_Profile",
-	Profile_Error: "Profile_Error",
+	Set_All_Profiles: "Set_All_Profiles",
+	Set_Is_Loading: "Set_Is_Loading",
+	Set_Error: "Set_Error",
+	Set_Profile: "Set_Profile",
 	Clear_Profile :"Clear_Profile",
-	Open_Edit :"Open_Edit",
 };
 
 
@@ -24,27 +21,22 @@ const types = {
 
 const profileReducer = (state, action) => {
 	switch (action.type) {
-	case types.Profile_Error:
-		return { ...state, errorMessage: action.payload, loading: false };
-	case types.Add_Profile:
-		return { ...state, profiles: [...state.profiles, action.payload], loading: false };
-	case types.Get_Profile:
-		return { ...state, profile: action.payload, loading: false };
+	case types.Set_Is_Loading:
+		return { ...state, isLoading: true };
+	case types.Set_Error:
+		return { ...state, isLoading: false, error:action.payload };
+	case types.Set_All_Profiles:
+		return { ...state, allProfiles: action.payload, isLoading: false };
+	case types.Set_Profile:
+		return { ...state, profile: action.payload, isLoading: false };
 	case types.Clear_Profile:
-		return { ...state, profile: null, loading: false };
-	case types.Get_Profiles:
-		return { ...state, profiles: action.payload, loading: false };
-	case types.Edit_Profile:
-		return { ...state, profile: action.payload, loading: false };
-	case types.Delete_Applicaton:
-		return { ...state, profiles: state.profiles.filter((profile) => profile.id !== action.payload), loading: false };
-	case types.Open_Edit:
-		return { ...state, edit:action.payload };
+		return { ...state, profile: null, isLoading: false };
+	// case types.Delete_Profile:
+	// 	return { ...state, allProfiles: state.allProfiles.filter((profile) => profile.id !== action.payload), loading: false };
 	default:
 		return state;
 	}
 };
-
 
 //Context has Provider and Consumer in itself.
 //Here we set Context Provider and stored our states and actions in it to provide them to Consumer
@@ -52,99 +44,102 @@ const profileReducer = (state, action) => {
 const ProfileState = (props) =>{
 
 	const initialState ={
-		profiles:[],
+		allProfiles:[],
 		profile:null,
-		edit:false,
+		isLoading:false,
+		error:null,
 	};
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
-
-	const getProfiles = async ()=>{
-		const response = await axios.get(`https://jsonplaceholder.typicode.com/users`);
-		return (!response) ? (dispatch({ type: types.Profile_Error, payload: 'An error occured' })
-		) : (dispatch({ type:types.Get_Profiles, payload:response.data })
-		);
+	const baseUrl ='https://jsonplaceholder.typicode.com/users';
+	const getAllProfiles = ()=>{
+		dispatch({ type: types.Set_Is_Loading }),
+		axios.get(`${baseUrl}`)
+			.then((response)=>{
+				console.log(response);
+				dispatch({ type: types.Set_All_Profiles, payload:response.data });
+			})
+			.catch((error)=>{
+				dispatch({ type:types.Set_Error, payload:error });
+			});
 	};
 
 
-	const getProfile = async (id) => {
-		const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
-		return (!response) ? (
-			dispatch({ type: types.Profile_Error, payload: 'An error occured' })
-		) : (
-			console.log(response.data),
-			dispatch({ type: types.Get_Profile, payload:response.data })
-		);
+	const getProfile =  (id) => {
+		dispatch({ type: types.Set_Is_Loading });
+		axios.get(`${baseUrl}/${id}`)
+			.then((response)=>{
+				dispatch({ type: types.Set_Profile, payload:response.data });
+			})
+			.catch((error)=>{
+				dispatch({ type:types.Set_Error, payload:error });
+			});
 	};
 
 
-	const addProfile = async (profile) => {
+	const addProfile = (profile) => {
+		dispatch({ type: types.Set_Is_Loading });
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		};
 
-		const response = await axios.post(`https://jsonplaceholder.typicode.com/users/`, profile, config);
-		(!response) ? (
-			dispatch({ type: types.Profile_Error, payload: 'An error occured' })
-		) : (
-			console.log('Add Context', response),
-			dispatch({ type: types.Add_Profile, payload: response.data })
-		);
+		axios.post(`${baseUrl}`, profile, config)
+			.then((response)=>{
+				dispatch({ type: types.Set_Profile, payload:response.data });
+			})
+			.catch((error)=>{
+				dispatch({ type:types.Set_Error, payload:error });
+			});
 	};
 
 
-	const deleteProfile = async (id) => {
-		const response = await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
-		(!response) ? (
-			dispatch({ type: types.Profile_Error, payload: 'An error occured' })
-		) : (
-			dispatch({ type: types.Delete_Profile, payload: id })
-		);
-	};
+	// const deleteProfile = (id) => {
+	// 	dispatch({ type: types.Set_Is_Loading });
+	// 	axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+	// 		.then((response)=>{
+	// 			dispatch({ type: types.Set_Profile, payload:response.data });
+	// 		})
+	// 		.catch((error)=>{
+	// 			dispatch({ type:types.Set_Error, payload:error });
+	// 		});
+	// };
 
-
-
-	const editProfile = async (profile) => {
-		console.log('context', profile);
+	const editProfile = (profile) => {
+		dispatch({ type: types.Set_Is_Loading });
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		};
 
-		const response = await axios.put(`https://jsonplaceholder.typicode.com/users/${profile.id}`, profile, config);
-		(!response) ? (
-			dispatch({ type: types.Profile_Error, payload: 'An error occured' })
-		) : (
-			console.log('context res', response),
-			dispatch({ type: types.Edit_Profile, payload: response.data })
-		);
+		axios.put(`${baseUrl}/${profile.id}`, profile, config)
+			.then((response)=>{
+				dispatch({ type: types.Set_Profile, payload:response.data });
+			})
+			.catch((error)=>{
+				dispatch({ type:types.Set_Error, payload:error });
+			});
 	};
-
 
 	const clearProfile = ()=>{
 		dispatch({ type: types.Clear_Profile });
 	};
 
-	const manageEdit = (bool)=>{
-		dispatch({ type:types.Open_Edit, payload:bool });
-	};
-
 	return (
 		<ProfileContext.Provider
 			value={{
-				profiles:state.profiles,
+				allProfiles:state.allProfiles,
 				profile:state.profile,
-				edit:state.edit,
+				isLoading:state.isLoading,
+				error: state.error,
 				addProfile,
-				getProfiles,
+				getAllProfiles,
 				getProfile,
 				editProfile,
-				deleteProfile,
+				// deleteProfile,
 				clearProfile,
-				manageEdit,
 			}}
 		>
 			{props.children}

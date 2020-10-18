@@ -1,25 +1,26 @@
 import React, { useContext, useEffect } from "react";
 import OverviewProfileCard from '../components/OverviewProfileCard';
-import { ProfileContext } from '../context/ProfileContext';
 import ViewProfileDetail from '../components/ViewProfileDetail';
+import { ProfileContext } from '../context/ProfileContext';
+import Header from '../components/Header';
 import styled from 'styled-components';
 
 const Home = () => {
-	const { getProfiles, profiles, profile }= useContext(ProfileContext);
+	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
 
-	useEffect(()=>{
-		getProfiles();
-	}, []);
+	useEffect(getAllProfiles, []);
 
 	return (
 		<Screen>
-            This is Overview Page
+			<Header />
 			<Container>
-				{profiles&&profiles.map((profile, i)=>{
-					return (<OverviewProfileCard profile={profile} key={i} />);
-				})
-				}
-				{profile&&<ViewProfileDetail />}
+				{console.log('isLoading', isLoading)}
+				{isLoading ? <Text>Loading...</Text>
+					: allProfiles && allProfiles.map(( profile, i ) => {
+						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
+					})}
+				{error && <Text>{error}</Text>}
+				{profile&&<ViewProfileDetail clearProfile={clearProfile} profile={profile} />}
 			</Container>
 		</Screen>
 
@@ -37,5 +38,7 @@ const Container = styled.div`
 	justify-content:center;
 `;
 
-
+const Text = styled.p`
+	fontSize:20;
+`;
 
