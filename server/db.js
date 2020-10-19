@@ -14,10 +14,10 @@ if (process.env.DATABASE_URL) { //it's set in Heroku
   }
 } else { //default local config
   config = {
-  user: 'postgres',
+  user: 'Altom',
   host: 'localhost',
   database: 'cyf_knowledge_checklist',
-  password: 'Loveyouta55u',
+  password: '123',
   port: 5432,
   }
 }
