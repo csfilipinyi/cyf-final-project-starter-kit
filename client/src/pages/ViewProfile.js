@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ProfileContext } from '../context/ProfileContext';
+import BasicDropDown from '../constant/BasicDropdown';
+import ViewMyProfile from '../components/ViewMyProfile';
 
-const CreateProfile = () => {
+
+const ViewProfile = () => {
+	const { profile }= useContext(ProfileContext);
+
+
 	return (
-		<Container>
-			This is Overview Page
-		</Container>
+		<Screen>
+			{profile?<ViewMyProfile profile={profile} />:<BasicDropDown />}
+		</Screen>
 	);
 };
 
-export default CreateProfile;
+export default ViewProfile;
 
-const Container =styled.div`
+const Screen =styled.div`
     width:100%;
     min-height:100vh;
     background-color:#DFEDFA;
