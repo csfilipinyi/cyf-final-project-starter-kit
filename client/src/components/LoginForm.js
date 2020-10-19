@@ -15,7 +15,6 @@ export default function LoginForm() {
   console.log(errors)
   
   if(submit){
-
     history.push("/skills");
   }
   return (
@@ -42,7 +41,7 @@ export default function LoginForm() {
            {errors.password && <p>{errors.password} </p>}
           {/* <Link to="/Skills"> */}
           
-            <button type="submit" variant="secondary" size="lg" p-2 active>
+            <button className="sumbit" type="submit" variant="secondary" size="lg" p-2 active>
               Login
             </button>
      

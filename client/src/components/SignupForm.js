@@ -120,7 +120,7 @@ const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, in
             {/* <Link> */}
             {/* <input  to="/modal" type="submit" value="Submit" className="submit" /> */}
             {/* </Link> */}
-            <button to="/modal" type="submit" value="Submit" className="submit">Submit</button>
+            <button to="/modal" className="submit" type="submit" value="Submit" className="submit">Submit</button>
           </div>
         </form>
       )}

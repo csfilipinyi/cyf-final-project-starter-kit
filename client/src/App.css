@@ -27,7 +27,7 @@ input {
   border-radius: 10%;
 }
 
-button {
+.sumbit{
   background-color: #d12f2f;
   margin-top: 3vh;
 }
