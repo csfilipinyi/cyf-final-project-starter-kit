@@ -1,4 +1,5 @@
 import React from 'react';
+// import { Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -6,17 +7,8 @@ const NavBar = ({ open }) => {
 	return (
 		<Navigator className={open ? 'open' : null}>
 			<StyledList className={open ? 'open' : null}>
-				<StyledNavLink exact to='/' >
-                    Home
-				</StyledNavLink>
-				<StyledNavLink exact to='/createprofile' >
-                    Create Profile
-				</StyledNavLink>
-				<StyledNavLink exact to='/viewprofile' >
-                    View Profile
-				</StyledNavLink>
-				<StyledNavLink exact to='/oauth2' >
-                    Sign In
+				<StyledNavLink exact to='/createprofile' variant="success">
+                    Log in
 				</StyledNavLink>
 			</StyledList>
 		</Navigator>
@@ -29,8 +21,9 @@ export default NavBar;
 
 
 const Navigator = styled.div`
-    width:40%;
     display:flex;
+    margin-right:15%;
+    margin-top:5px;
     &.open{
         flex-directon:column;
         position:absolute;
@@ -68,12 +61,20 @@ const StyledList = styled.ul`
 
 const StyledNavLink = styled(NavLink)`
     text-decoration:none;
-    color:'#EFF3F7';
-    font-size:1.2rem;
-    font-weight:600;
+    color:#FFF;
+    background-color:${(props)=>props.theme.colors.primaryGreen};
+    font-family: Arial;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 26px;
+    border:none;
+    padding:14px 20px;
     &:hover{
         text-decoration:none;
-        color:'#920C43';
+        color:#FFF;
+        background-color:${(props)=>props.theme.colors.primaryGreen};
+
     }
 `;
 
