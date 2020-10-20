@@ -5,18 +5,19 @@ import styled from 'styled-components';
 import Burger from '../constant/Burger';
 import useMediaQuery from '../helpers/useMediaQuery';
 
-const Header = () => {
+const Header = ({ nav }) => {
 	const [open, setOpen] = useState(false);
 	const media = useMediaQuery();
 
 	useEffect (()=>{
 		media&&!media.isTablet&&setOpen(false);
 	},[media]);
+
 	return (
 		<Container>
 			<LogoName />
-			{media && media.isTablet && <Burger open={open} setOpen={setOpen} />}
-			{media && !media.isTablet && <NavBar open={open} />}
+			{nav&&media && media.isTablet && <Burger open={open} setOpen={setOpen} />}
+			{nav&&media && !media.isTablet && <NavBar open={open} />}
 		</Container>
 	);
 };
@@ -29,10 +30,6 @@ const Container = styled.div`
     justify-content:space-between;
     align-items:center;
     width: 100%;
-    background-color:transparent;
-    height:70px;
-    transition:border-bottom, 2s;
-    &:hover {
-        border-bottom:1px solid #EFF3F7;
-    }
+    background-color:${(props)=>props.theme.colors.primaryMidGray};
+    height:86px;
 `;

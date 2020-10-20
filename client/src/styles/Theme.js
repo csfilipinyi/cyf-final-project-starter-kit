@@ -1,6 +1,12 @@
 export const theme = {
-	primaryDark: '#0D0C1D',
-	primaryLight: '#EFFFFA',
-	primaryHover: '#343078',
-	mobile: '576px',
+	colors:{
+		primaryGreen: '#28A228',
+		primaryRed: '#ED2705',
+		primaryMidGray:'#F3F3F3',
+		primaryLightGray: '#FAFAFA',
+		primaryDarkGray:'#ACA8A8',
+	},
+	fontFamily:{
+		primaryText:'Lato',
+	},
 };

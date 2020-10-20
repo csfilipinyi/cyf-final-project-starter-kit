@@ -5,24 +5,16 @@ import logo from '../assets/images/logo.png';
 
 const LogoName = () => {
 	return (
-		<Container>
-			<Logo src={logo} />
-			<Name to='/' >Code Your Future</Name>
-		</Container>
+		<Logo src={logo} />
 	);
 };
 
 export default LogoName;
 
-const Container = styled.div`
-    display:flex;
-    justify-content:flex-start;
-`;
-
 const Logo = styled.img`
-    width:90px;
+    width:200px;
     height:60px;
-    margin-left:10px;
+    margin-left:15%;
     @media (max-width: 680px) {
         width:75px;
         height:45px;

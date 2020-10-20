@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const StyledButton = (props) => {
 	return (
-		<StyleButton className={`btn btn-outline-light ${props.class}`} bsPrefix="super-btn"
+		<StyleButton variant='success' className={props.className}
 			onClick={props.handleClick}>
 			{props.name}
 		</StyleButton>
@@ -16,23 +16,31 @@ export default StyledButton;
 
 
 const StyleButton = styled(Button)`
-    height:36px;
+    height: 56px;
+    width: 220px;
+    border-radius: 2px;
     color:#fff;
     margin:5px;
     align-self:center;
-    font-weight:500;
-    background-color:#021E39;
+    font-weight:bold;
+    font-family: Arial;
+    background-color:${(props)=>props.theme.colors.primaryGreen};
     border:none;
     transition:1.5s;
     &:hover{
-        background-color:#7FB3D5;
+        background-color:${(props)=>props.theme.colors.primaryGreen};
         border:0.5px solid black;
     }
     &.sm{
-        height:28px;
-        width:45px;
-        font-size:0.5rem;
-        padding:0;
+        height:56px;
+        width:92px;
+    }
+    &.md{
+        height:56px;
+        width:113px;
+        background-color:white;
+        border:4px solid ${(props)=>props.theme.colors.primaryGreen};
+        color:${(props)=>props.theme.colors.primaryGreen};
     }
     &.lg{
         height:40px;
