@@ -25,7 +25,7 @@ const Home = () => {
       	<GitHubLogin clientId= "d46845e5f1d464b34454" //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
-			redirectUri={'https://dev-graduate-directory/api/callback'}	 //this needs to be changed according to heroku app configs
+			redirectUri={'https://dev-graduate-directory.herokuapp.com/api/callback'}	 //this needs to be changed according to heroku app configs
 			/>
 			<Container>
 				{isLoading ? <Text>Loading...</Text>
