@@ -22,10 +22,10 @@ const Home = () => {
 				header = 'Lorem ipsum dolor sit amet'
 				text = 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi'
 		  />	
-      <GitHubLogin clientId= "e166cb1f254d73d2fac6" //this needs to change according to heroku app configs
+      	<GitHubLogin clientId= "d46845e5f1d464b34454" //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
-			redirectUri={'http://localhost:3100/api/callback'}	 //this needs to be changed according to heroku app configs
+			redirectUri={'https://cyf-graduate-directory.herokuapp.com/api/callback'}	 //this needs to be changed according to heroku app configs
 			/>
 			<Container>
 				{isLoading ? <Text>Loading...</Text>
