@@ -48,7 +48,9 @@ input {
 .login-page label {
   margin-top: 2vh;
 }
-
+.error{
+  color: #ff0033;
+}
 .signup-link {
   margin-top: 2vh;
 }
