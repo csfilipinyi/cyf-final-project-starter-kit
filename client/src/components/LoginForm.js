@@ -29,7 +29,7 @@ export default function LoginForm() {
             onChange={handleChange}
             value={input.email}
           />
-              {errors.email && <p>{errors.email} </p>}
+              {errors.email && <p className = "error" >*{errors.email} </p>}
           <label>Password</label>
           <input
             type="password"
@@ -38,7 +38,7 @@ export default function LoginForm() {
             onChange={handleChange}
             value={input.password}
           />
-           {errors.password && <p>{errors.password} </p>}
+           {errors.password && <p className = "error">*{errors.password} </p>}
           {/* <Link to="/Skills"> */}
           
             <button className="sumbit" type="submit" variant="secondary" size="lg" p-2 active>

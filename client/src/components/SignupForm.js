@@ -37,7 +37,7 @@ const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, in
               onChange={handleChange}
               name="firstName"
             />
-            {errors.firstName && <p>{errors.firstName} </p>}
+            {errors.firstName && <p className = "error">*{errors.firstName} </p>}
             <label for="surname">Surname</label>
             <input
               type="text"
@@ -46,7 +46,7 @@ const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, in
               onChange={handleChange}
               name="surname"
             />
-            {errors.surname && <p>{errors.surname} </p>}
+            {errors.surname && <p className = "error">*{errors.surname} </p>}
             <label for="email">Email</label>
             <input
               type="email"
@@ -55,7 +55,7 @@ const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, in
               onChange={handleChange}
               name="email"
             />
-              {errors.email && <p>{errors.email} </p>}
+              {errors.email && <p className = "error">*{errors.email} </p>}
             <label for="password">password</label>
             <input
               type="password"
@@ -64,7 +64,7 @@ const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, in
               onChange={handleChange}
               name="password"
             />
-              {errors.password && <p>{errors.password} </p>}
+              {errors.password && <p className = "error">*{errors.password} </p>}
             <label for="">Confirm Password</label>
             <input
               type="password"
@@ -73,7 +73,7 @@ const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, in
               onChange={handleChange}
               name="confirmPassword"
             />
-             {errors.confirmPassword && <p>{errors.confirmPassword} </p>}
+             {errors.confirmPassword && <p className = "error">*{errors.confirmPassword} </p>}
             <label for="city">City</label>
             <input
               type="text"
@@ -116,7 +116,7 @@ const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, in
             <option  value= "Student" >Student</option>
             <option  value= "Mentor" >Mentor</option>
             </select>
-            {errors.role && <p>{errors.role} </p>}
+            {errors.role && <p className = "error">*{errors.role} </p>}
             {/* <Link> */}
             {/* <input  to="/modal" type="submit" value="Submit" className="submit" /> */}
             {/* </Link> */}

@@ -48,7 +48,9 @@ input {
 .login-page label {
   margin-top: 2vh;
 }
-
+.error{
+  color: #ff0033;
+}
 .signup-link {
   margin-top: 2vh;
 }
@@ -62,18 +64,17 @@ li {
 .learning-objective-container {
   background-color: #efefef;
   position: absolute;
-  margin-top: 3%;
   margin-left: 25%;
   width: 50%;
   padding: 2%;
 }
 
 .skills-container {
-  width: 15%;
+  width: 20%;
   padding: 2%;
 }
 
-.skills-container h2 {
+.skills-container h2 A {
   margin-bottom: 5vh;
   color: #d12f2f;
 }

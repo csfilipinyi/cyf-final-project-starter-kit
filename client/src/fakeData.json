@@ -1,7 +1,7 @@
- [
+{
   
 
-  {"html":[
+ "html":[
 
     "Understand what 'parent' and 'child' is",
    "Can create and link a stylesheet",
@@ -9,9 +9,9 @@
    "Be able to include a form in a web page",
    "Be able to create a button"
    
-   ]},
+   ] ,
  
-   {"css" : [
+  "css" : [
      "Understand what a selector is in CSS",
      "Understand the difference between a tag, class and ID",
      "Understand what prefixes are",
@@ -23,9 +23,9 @@
      "Understand how to implement Grid and when to use it",
      "Understand how to include Bootstrap in a project",
      "Be able to use Bootstrap classes"
-     ]},
+     ],
  
-   {"javascript" : [
+  "javascript" : [
      "Be able to link a Javascript file in your project",
      "Be able to do a console.log()",
      "Understand what a console.log is used for",
@@ -34,9 +34,9 @@
      "Be able to assign a variable with const and let",
      "Understand the difference between const and let",
      "Be able to write a function"
-     ]},
+     ],
  
-   {"reactLib" : [
+  "reactLib" : [
      "Understand the difference between class and functional components",
      "Be able to create a React application with create-react-app",
      "Understand what JSX is and how it's different to HTML and Javascript",
@@ -47,9 +47,9 @@
      "Be able to use conditional rendering",
      "Understand what state is and how to use it"
  
-     ]},
+     ],
      
-   {"node" : [
+  "node" : [
  
      "Be able to create a basic express server",
      "Understand what NPM is and how to use it",
@@ -60,8 +60,8 @@
      "Be able to implement a POST request",
      "Be able to implement a DELETE request"
  
-     ]},
-   {"sql" : [
+     ],
+  "sql" : [
      "Understand what SQL is and what it is used for",
      "Understand what table, rows and columns refer to",
      "Be able to create a database",
@@ -74,8 +74,8 @@
      "Be able to update data in a table",
      "Be able to delete rows",
      "Be able to join tables"
-     ]}
- ]
+     ]
+   }
  
 
 
