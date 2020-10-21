@@ -9,7 +9,7 @@ function getAbility(achievements,  skill, objective){
   const matchingAbility = achievements.filter((ability)=>(ability.skill===skill && ability.objective===objective))
   return matchingAbility.length? matchingAbility[0].ability: null
 }
-export default function Html() {
+export default function Html({skill}) {
   
 const [achievements, setAchievements] = useState([])
 
@@ -26,12 +26,12 @@ const [achievements, setAchievements] = useState([])
   }
   console.log(achievements)
   
-const skill = "html";
+//const skill = "css";
   return (
     <div className="learning-objective-container">
       <h2>{skill}</h2>
       <ul>
-        {fakeData[0][skill].map((objective, index) => {
+        {fakeData[skill].map((objective, index) => {
         const ability =   getAbility(achievements, skill, objective)
         function updateAbility(newAbility){
           updateAchievement( newAbility, skill, objective)

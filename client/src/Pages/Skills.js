@@ -11,17 +11,14 @@ import Sql from "./Sql";
 
 const routes = {
   
-  '/html':() => <Html props = {"hello"}/>,
-   '/css': () => <Css />,
-   '/javascript': () => <Javascript  />,
-   '/react': () => <ReactLib  />,
-   '/node': () => <Node  />,
-   '/sql': () => <Sql  />
+  '/skills/html':() => <Html skill ="html"/>,
+   '/skills/css': () => <Html  skill ="css"/>,
+   '/skills/javascript': () => <Html   skill ="javascript"/>,
+   '/skills/react': () => <Html  skill ="reactLib" />,
+   '/skills/node': () => <Html   skill ="node"/>,
+   '/skills/sql': () => <Html   skill ="sql"/>
 };
 
-
-
-  
 export default function Skills() {
   const routeResult = useRoutes(routes);
   return (
@@ -29,12 +26,12 @@ export default function Skills() {
      
   
   
-      <A href="/html">html</A>
-      <A href="/css">Css</A>
-      <A href="/javascript">Javascript</A>
-      <A href="/react">React</A>
-      <A href="/node">Node JS</A>
-      <A href="/sql">SQL</A>
+      <A href="/skills/html">html</A>
+      <A href="/skills/css">Css</A>
+      <A href="/skills/javascript">Javascript</A>
+      <A href="/skills/react">React</A>
+      <A href="/skills/node">Node JS</A>
+      <A href="/skills/sql">SQL</A>
       {routeResult}
    
         {/* <BrowserRouter><Switch>
