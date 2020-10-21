@@ -13,7 +13,7 @@ const types = {
 };
 
 
-const profileReducer = (state, action) => {
+const authReducer = (state, action) => {
 	switch (action.type) {
 	case types.Set_Is_Loading:
 		return { ...state, isLoading: true };
@@ -38,7 +38,7 @@ const AuthState = (props) =>{
 		error:null,
     }
 
-    const [state, dispatch] = useReducer(profileReducer, initialState);
+    const [state, dispatch] = useReducer(authReducer, initialState);
 
 
     const baseUrl = 'https://dev-graduate-directory.herokuapp.com/api'
@@ -72,7 +72,7 @@ const AuthState = (props) =>{
     }
 
     return (
-		<ProfileContext.Provider
+		<AuthContext.Provider
 			value={{
 				userName :state.userName,
                 userProfile :state.userProfile,
@@ -85,7 +85,7 @@ const AuthState = (props) =>{
 			}}
 		>
 			{props.children}
-		</ProfileContext.Provider>
+		</AuthContext.Provider>
 	);
 }
 

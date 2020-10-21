@@ -17,8 +17,8 @@ const client = new AuthorizationCode({
 		//these would come from the github where the app is registered.
 		// id: process.env.CLIENT_ID,
 		// secret: process.env.CLIENT_SECRET,
-		id:'3924454def52d1ff67f8',
-		secret:'0a72bf5e1eed3060f1199671c02ef57c6d17e87c',
+		id:'d46845e5f1d464b34454',
+		secret:'9d0e5bdd8d4ac5af815570f6627073fabb3b27d7',
 	},
 	auth: {
 		tokenHost: 'https://github.com',
@@ -29,7 +29,7 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
 	//we can put in the redirect_uri when we deploy the app
-	redirect_uri:'https://dev-graduate-directory.herokuapp.com/createprofile',
+	redirect_uri:'https://gd-auth-test.herokuapp.com/createprofile',
 	scope: 'user',
 	// expires_in: '30' something to look into later
 	// state: '3(#0/!~',
