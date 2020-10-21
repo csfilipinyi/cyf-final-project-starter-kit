@@ -10,7 +10,16 @@ import GitHubLogin from 'react-github-login';
 const Home = () => {
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
 	
-	const onSuccess = response => console.log(response);
+	const onSuccess =  (response) =>{
+		const accessCode = response.code;
+		console.log('acces', accessCode)
+	  fetch(`https://dev-graduate-directory.herokuapp.com/api/callback?code=${accessCode}`)
+      .then(res => res.json())
+      .then(data => {
+	//    setUserName(data);
+	  console.log(data);
+	   })
+	}
     const onFailure = response => console.error(response);  
 
 	useEffect(getAllProfiles, []);
@@ -22,10 +31,10 @@ const Home = () => {
 				header = 'Lorem ipsum dolor sit amet'
 				text = 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi'
 		  />	
-      	<GitHubLogin clientId= "d46845e5f1d464b34454" //this needs to change according to heroku app configs
+      	<GitHubLogin clientId= 'd46845e5f1d464b34454' //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
-			redirectUri={'https://dev-graduate-directory.herokuapp.com/api/callback'}	 //this needs to be changed according to heroku app configs
+			redirect_uri='https://dev-graduate-directory.herokuapp.com/'
 			/>
 			<Container>
 				{isLoading ? <Text>Loading...</Text>

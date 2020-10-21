@@ -3,8 +3,11 @@ import { Router } from "express";
 
 import { Connection } from "./db";
 
-
 import { AuthorizationCode } from "simple-oauth2";
+
+const router = new Router();
+var cors = require('cors');
+router.use(cors());
 
 const router = new Router();
 const { Octokit } = require("@octokit/core");
@@ -13,8 +16,8 @@ const { Octokit } = require("@octokit/core");
 const client = new AuthorizationCode({
 	client: {
 		//these would come from the github where the app is registered.
-		id: process.env.CLIENT_ID,
-		secret: process.env.CLIENT_SECRET,
+		id: 'd46845e5f1d464b34454',
+		secret: '98a8c72bda2bbbdde22ac8ce5d6587765ce18bc0',
 	},
 	auth: {
 		tokenHost: 'https://github.com',
@@ -25,7 +28,7 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
 	//we can put in the redirect_uri when we deploy the app
-	redirect_uri: 'https://dev-graduate-directory.herokuapp.com/api/callback',
+	redirect_uri: 'https://dev-graduate-directory.herokuapp.com/',
 	scope: 'user',
 	// expires_in: '30' something to look into later
 	// state: '3(#0/!~',
@@ -45,7 +48,7 @@ router.get('/login', (req, res) => {
 
     try {
 	  const accessToken = await client.getToken(options);
-
+		console.log('acces token', accessToken)
 	  //accessing the token number from the above
 	  const token = accessToken.token.access_token; 
 
@@ -56,7 +59,7 @@ router.get('/login', (req, res) => {
 
 	  //this returns the authenticated user's username/login
 	  const { data } = await octokit.request("/user");
-	  return res.status(200).json(data.login);
+	  return res.status(200).json(data);
 
 	
     } catch (error) {
