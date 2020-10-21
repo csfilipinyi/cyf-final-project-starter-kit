@@ -5,7 +5,7 @@ import Introducing from '../components/Introducing';
 import { ProfileContext } from '../context/ProfileContext';
 import Header from '../components/Header';
 import styled from 'styled-components';
-import GitHubLogin from 'react-github-login';
+import GitHubLogin from "react-github-login";
 
 const Home = () => {
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
@@ -34,7 +34,7 @@ const Home = () => {
       	<GitHubLogin clientId= 'd46845e5f1d464b34454' //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
-			redirect_uri='https://dev-graduate-directory.herokuapp.com/'
+			redirect_uri='https://dev-graduate-directory.herokuapp.com'
 			/>
 			<Container>
 				{isLoading ? <Text>Loading...</Text>
