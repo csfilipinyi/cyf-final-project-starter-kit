@@ -54,6 +54,60 @@ const github_id=result.row.id;
 }
 			});
 		})
+		//checking the github username exist in our database
+		router.get("/accounts", (_, res, next) => {
+	const username=req.params.username;
+			Connection.connect((err) => {
+				if (err) {
+					return next(err);
+				}
+				Connection.query('SELECT * FROM github_accounts where account_name=$1 ',[username], (error, result) => {
+					if (result.rowCount > 0) 
+	  
+						res.json(result.rows);
+						else
+						res .status(400).send("this is not  a graduate")
+					})
+			});
+		});
+
+		router.get("/graduate/:id", (_, res, next) => {
+			const github_id=parseInt(req.params.id);
+					Connection.connect((err) => {
+						if (err) {
+							return next(err);
+						}
+						Connection.query('SELECT * FROM graduates where github_id=$1 ',[github_id], (error, result) => {
+							if (result.rowCount > 0) 
+			  
+								res.json(result.rows);
+								else
+								res .status(400).send("It has not been added to the graduate table yet")
+							})
+					});
+				});
+
+				//editing existing graduate
+				router.put("/graduates/:graduateId" ,function (req,res){
+					const graduateId=parseInt( req.params.graduateId);
+					const newFirstName =req.body.first_name;
+	                const newSurname=req.body.surname;
+	                const newCity=req.body.city;
+	                const newPersonal_bio=req.body.personal_bio;
+	                const newPast_experience=req.body.past_experience;
+					pool.query("update graduates set first_name=$1 ,surname=$2,city =$3,personal_bio=$4 ,past_experience=$5"+
+					"where id =$6"
+				 ,[newFirstName,newSurname,newCity ,newPersonal_bio,newPast_experience,graduateId],(error)=> {
+						if ((error)== undefined){
+							
+							res.send("graduate "+graduateId+" updated.");
+						}
+					
+				
+				});
+			
+				
+
 router.delete("/graduates/:id" ,function (req,res){
 			const graduateId=parseInt( req.params.id);
 		
@@ -65,5 +119,6 @@ router.delete("/graduates/:id" ,function (req,res){
 				}
 			});
 		});
+
 
 export default router;
