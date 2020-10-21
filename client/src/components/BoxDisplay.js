@@ -37,7 +37,7 @@ function BoxDisplay(props) {
         <li>Node:{progress(props.studentData[0].achievement[9].ability)}</li>
         <li>SQL:{progress(props.studentData[0].achievement[11].ability)}</li>
       </ul>
-    </div>
+</div>
   );
 }
 export default BoxDisplay;
