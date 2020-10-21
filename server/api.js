@@ -15,8 +15,8 @@ const { Octokit } = require("@octokit/core");
 const client = new AuthorizationCode({
 	client: {
 		//these would come from the github where the app is registered.
-		id: 'd46845e5f1d464b34454',
-		secret: '98a8c72bda2bbbdde22ac8ce5d6587765ce18bc0',
+		id: process.env.CLIENT_ID,
+		secret: process.env.CLIENT_SECRET,
 	},
 	auth: {
 		tokenHost: 'https://github.com',
