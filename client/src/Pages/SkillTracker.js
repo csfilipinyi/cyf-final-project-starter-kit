@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import fakeData from "../fakeData.json";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import Javascript from "./Javascript";
+
 
 import BtnContainer from "../components/BtnContainer";
 

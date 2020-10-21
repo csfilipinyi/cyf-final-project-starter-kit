@@ -1,0 +1,25 @@
+.btn-green{
+    background-color: green;
+}
+.btn-yellow{
+    background-color:orange;
+}
+.btn-red{
+    background-color:red;
+}
+.btn-blue{
+    background-color: blue;
+}
+
+
+.btn-container{
+    display: flex;
+    justify-content: space-between;
+ 
+}
+.btn-style button{
+    border-radius: 7%;
+    box-shadow:  0px 0px 3px 1px black;
+    margin-bottom: 10%;
+    margin-top: 5%;
+}

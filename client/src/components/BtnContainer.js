@@ -1,11 +1,11 @@
 import React from 'react'
 import TrackBtn from "./TrackBtn"
-import "./html.css";
+import "./BtnContainer.css";
 export default function BtnContainer({ability, updateAbility}) {
     console.log(ability);
     return (
         
-        <div className = "container">
+        <div className = "btn-container">
             
          <TrackBtn classNameBtn ={ability===0? "btn-red": ""}
           onClick={()=> updateAbility(0)} 
