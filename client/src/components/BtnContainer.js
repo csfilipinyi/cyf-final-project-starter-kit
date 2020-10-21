@@ -1,24 +1,24 @@
 import React from 'react'
 import TrackBtn from "./TrackBtn"
 import "./html.css";
-export default function BtnContainer({ability, updateAchievement}) {
+export default function BtnContainer({ability, updateAbility}) {
     console.log(ability);
     return (
         
         <div className = "container">
             
          <TrackBtn classNameBtn ={ability===0? "btn-red": ""}
-          onClick={()=> updateAchievement(0, skill, objective)} 
+          onClick={()=> updateAbility(0)} 
           btnText = {"Not Confident"}
           />
 
           <TrackBtn classNameBtn ={ability===1? "btn-yellow": ""}
-          onClick={()=> updateAchievement(1, skill, objective)} 
+          onClick={()=> updateAbility(1)} 
           btnText = {"Needs revision"}
           />
 
          <TrackBtn classNameBtn ={ability===2? "btn-green": ""}
-          onClick={()=> updateAchievement(2, skill, objective)} 
+          onClick={()=> updateAbility(2)} 
           btnText = {"Confident"}
           />
         </div>

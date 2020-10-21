@@ -33,10 +33,13 @@ const skill = "html";
       <ul>
         {fakeData[0][skill].map((objective, index) => {
         const ability =   getAbility(achievements, skill, objective)
+        function updateAbility(newAbility){
+          updateAchievement( newAbility, skill, objective)
+        }
         console.log(ability)
           return <li key={index}>{objective}
 
-          <BtnContainer ability = {ability} updateAchievement={updateAchievement} />
+          <BtnContainer ability = {ability} updateAbility={updateAbility} />
          
 
   
