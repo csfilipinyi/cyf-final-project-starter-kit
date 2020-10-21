@@ -12,7 +12,6 @@ const Home = () => {
 	
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
-		console.log('acces', accessCode)
 	  fetch(`https://dev-graduate-directory.herokuapp.com/api/callback?code=${accessCode}`)
       .then(res => res.json())
       .then(data => {
@@ -34,7 +33,7 @@ const Home = () => {
       	<GitHubLogin clientId= 'd46845e5f1d464b34454' //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
-			redirect_uri='https://dev-graduate-directory.herokuapp.com/'
+			redirect_uri={"https://dev-graduate-directory.herokuapp.com/"}
 			/>
 			<Container>
 				{isLoading ? <Text>Loading...</Text>
