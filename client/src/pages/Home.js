@@ -12,12 +12,12 @@ import {graduates, graduateProfile} from '../api/graduates'
 
 const Home = () => {
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { checkGraduate, isAuthenticated, setIsAuth }= useContext(AuthContext);
+	// const { checkGraduate, isAuthenticated, setIsAuth }= useContext(AuthContext);
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
 		console.log('acces', accessCode)
-	  fetch(`https://dev-graduate-directory.herokuapp.com/api/callback?code=${accessCode}`)
+	  fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${accessCode}`)
       .then(res => res.json())
       .then(data => {
 		  const graduatesList = graduates()
