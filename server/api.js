@@ -9,7 +9,6 @@ const router = new Router();
 var cors = require('cors');
 router.use(cors());
 
-const router = new Router();
 const { Octokit } = require("@octokit/core");
 
 
