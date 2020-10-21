@@ -31,22 +31,3 @@ export const graduateProfile = (name) =>{
 	return graduates[name];
 };
 
-
-{   
-    "user_name":"OBakir90",
-"first_name":"Orhan",
-"last_name":"Bakir",
-"skills":["HTML", "JavaScript", "ReactJs", "NodeJs"]
-},
-{   
-    "user_name":"csfilipinyi",
-"first_name":"Cs",
-"last_name":"Flinpinyi",
-"skills":["JavaScript", "ReactJs", "NodeJs", "Java"]
-},
-{   
-    "user_name":"Buchraatkeh1984",
-"first_name":"Buchra",
-"last_name":"Atkeeh",
-"skills":["CSS", "ReactJs", "NodeJs", "ReactNative"]
-}
