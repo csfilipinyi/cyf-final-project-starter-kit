@@ -33,7 +33,7 @@ const Home = () => {
       	<GitHubLogin clientId= 'd46845e5f1d464b34454' //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
-			redirect_uri={"https://dev-graduate-directory.herokuapp.com/"}
+			redirect_uri={"https://dev-graduate-directory.herokuapp.com/createprofile"}
 			/>
 			<Container>
 				{isLoading ? <Text>Loading...</Text>
