@@ -3,7 +3,7 @@ import OverviewProfileCard from '../components/OverviewProfileCard';
 import ViewProfileDetail from '../components/ViewProfileDetail';
 import Introducing from '../components/Introducing';
 import { ProfileContext } from '../context/ProfileContext';
-import { AuthContext } from '../context/ProfileContext';
+import { AuthContext } from '../context/AuthContext';
 import Header from '../components/Header';
 import styled from 'styled-components';
 import GitHubLogin from "react-github-login";
@@ -12,7 +12,7 @@ import {graduates, graduateProfile} from '../api/graduates'
 
 const Home = () => {
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	// const { checkGraduate, isAuthenticated, setIsAuth }= useContext(AuthContext);
+	const { checkGraduate, isAuthenticated, setIsAuth }= useContext(AuthContext);
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
