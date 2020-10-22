@@ -54,8 +54,8 @@ const AuthState = (props) =>{
             .then(data=>{     
                 const graduatesObject =data[0];  
                 console.log('graduatelist', data, userName in graduatesObject)  
-                if(true){
-                    console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
+                userName in graduatesObject&&console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
+                // if(true){
                 //     dispatch({ type: types.Set_Logged_In, payload:userName});       
                 //    if(graduatesList[data]){
                 //     fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
@@ -69,10 +69,10 @@ const AuthState = (props) =>{
                 //       history.push('/createprofile')
                 //       console.log('hasntprofile', data, isAuthenticated)
                 //    }		
-            } else {
-                console.log('not found')
-                  history.push('/notfound')
-                } 
+                // } else {
+                //     console.log('not found')
+                //     history.push('/notfound')
+                // } 
             })
             .catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
