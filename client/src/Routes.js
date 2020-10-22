@@ -5,6 +5,9 @@ import Home from "./pages/Home";
 import CreateProfile from "./pages/CreateProfile";
 import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
+import NotEligible from './pages/NotEligible'
+
+import { ProtectedRoute } from './authentication/ProtectedRoute'
 
 const Routes = () => {
 	return (
@@ -14,7 +17,7 @@ const Routes = () => {
 				<Route path='/createprofile' component={CreateProfile} />
 				<Route path='/viewprofile' component={ViewProfile} />
 				<Route path='/editprofile' component={EditProfile} />
-				<Route path='/oauth2' component={CreateProfile} />
+				<Route path='/notfound' component={NotEligible} />
 			</Switch>
 		</BrowserRouter>
 	);

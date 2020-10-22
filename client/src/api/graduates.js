@@ -1,11 +1,11 @@
 export const graduates = () =>{
-	let grdats= [
-		'OBakir90',
-		'csfilipinyi',
-		'Buchraatkeh1984',
-        'FarhanaFKhan',
-        'juditlehoczki'
-	];
+	let grdats= {
+		OBakir90:true,
+		csfilipinyi:true,
+		Buchraatkeh1984:true,
+        FarhanaFKhan:false,
+        juditlehoczki:false
+    };
 	return grdats;
 };
 

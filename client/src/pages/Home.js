@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import {Redirect, useHistory} from 'react-router-dom';
 import OverviewProfileCard from '../components/OverviewProfileCard';
 import ViewProfileDetail from '../components/ViewProfileDetail';
 import Introducing from '../components/Introducing';
@@ -11,6 +12,8 @@ import {graduates, graduateProfile} from '../api/graduates'
 
 
 const Home = () => {
+	let history = useHistory();
+
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
 	const { checkGraduate, isAuthenticated, setIsAuth }= useContext(AuthContext);
 
@@ -21,14 +24,22 @@ const Home = () => {
       .then(res => res.json())
       .then(data => {
 		  const graduatesList = graduates()
-		  graduatesList.includes(data)&&setIsAuth(data)
-		  console.log(data);
+		  if(data in graduatesList){
+			graduatesList[data]?setIsAuth(data)&&history.push('/viewprofile'):history.push('/createprofile')
+		  } else {
+			history.push('/notfound')
+		  }
+
 			//checkGraduate(data) will be called here
 	   })
 	}
     const onFailure = response => console.error(response);  
 
 	useEffect(getAllProfiles, []);
+
+	// useEffect (()=>{
+	// 	isAuthenticated?history.push('/createprofile'):<Redirect to='/'/>
+	// },[isAuthenticated])
 
 	return (
 		<Screen>

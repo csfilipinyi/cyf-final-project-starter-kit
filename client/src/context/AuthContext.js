@@ -7,9 +7,10 @@ export const AuthContext = React.createContext();
 
 const types = {
     Set_Is_Loading: "Set_Is_Loading",
-	Set_User_Name: "Set_UserName",
+	Set_Success: "Set_UserName",
     Set_User_Profile: "Set_UserProfile",
     Set_Error: "Set_Error",
+    Set_Logout:"Set_Logout"
 };
 
 
@@ -19,10 +20,12 @@ const authReducer = (state, action) => {
 		return { ...state, isLoading: true };
 	case types.Set_Error:
 		return { ...state, isLoading: false, error:action.payload };
-	case types.Set_User_Name:
+	case types.Set_Success:
 		return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
 	case types.Set_User_Profile:
 		return { ...state, userProfile: action.payload, isAuthenticated:true, isLoading: false };
+    case types.Set_Logout:
+        return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
     default:
 		return state;
 	}
@@ -47,7 +50,7 @@ const AuthState = (props) =>{
         dispatch({ type: types.Set_Is_Loading }),       
         axios.get(`${baseUrl}/graduates`)
             .then(response=>response.json(
-                response.includes(userName)&&dispatch({ type: types.Set_User_Name, payload:userName })
+                response.includes(userName)&&dispatch({ type: types.Set_Success, payload:userName })
             ))
             .catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
@@ -56,7 +59,7 @@ const AuthState = (props) =>{
 
     const fetchUserProfile =(userName)=>{
         dispatch({ type: types.Set_Is_Loading }),       
-        axios.get(`${baseUrl}/graduates?name=${userName}`)
+        axios.get(`${baseUrl}/graduates/${userName}`)
             .then(response=>response.json(
                 dispatch({ type: types.Set_User_Profile, payload:response.data })
             ))
@@ -65,10 +68,9 @@ const AuthState = (props) =>{
 			});
     }
 
-
     //Temporary Functions 
     const setIsAuth = (userName)=>{
-        dispatch({ type: types.Set_User_Name, payload:userName })
+        dispatch({ type: types.Set_Success, payload:userName })
     }
 
     return (
