@@ -15,7 +15,7 @@ const Home = () => {
 	let history = useHistory();
 
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { checkGraduate, isAuthenticated, setIsAuth, userProfile, user }= useContext(AuthContext);
+	const { checkGraduate, isAuthenticated, setIsAuth, userProfile, userName }= useContext(AuthContext);
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
@@ -47,8 +47,9 @@ const Home = () => {
 	},[userProfile])
 
 	useEffect(()=>{
-		user&&history.push('/createprofile')
-	},[user])
+		console.log('xxx', userName)
+		userName&&history.push('/createprofile')
+	},[userName])
 
     const onFailure = response => console.error(response);  
 
