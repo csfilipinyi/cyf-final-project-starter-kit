@@ -41,12 +41,12 @@ const Circle = styled.div`
 	display:flex;
 	justify-content:center;
 	align-items:center;
+	margin-right:8px;
 `
 
 const IUser = styled.img`
 	width:22px;
 	height:22px;
-	margin-right:8px;
 	color:#0090FF;
 `;
 
