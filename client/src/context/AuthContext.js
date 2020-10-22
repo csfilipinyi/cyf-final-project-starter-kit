@@ -1,6 +1,9 @@
 import React, { useReducer } from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
+
+const history = useHistory()
 
 export const AuthContext = React.createContext();
 
@@ -59,8 +62,8 @@ const AuthState = (props) =>{
                     fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
                     .then(response=>response.json())
                     .then(profile=>{ 
-                        dispatch({ type: types.Set_User_Profile, payload:profile}),       
-                        history.push('/viewprofile'),
+                        dispatch({ type: types.Set_User_Profile, payload:profile}),
+                        history.push('viewprofile'),
                         console.log('hasprofile', data, profile)
                         })     
                 }else{
