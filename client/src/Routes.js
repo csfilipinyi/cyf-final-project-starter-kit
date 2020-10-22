@@ -14,6 +14,7 @@ const Routes = () => {
 		<BrowserRouter>
 			<Switch>
 				<Route exact path='/' component={Home} />
+				<Route path='/viewdetail' component={ViewProfile} />
 				<Route path='/createprofile' component={CreateProfile} />
 				<Route path='/viewprofile' component={ViewProfile} />
 				<Route path='/editprofile' component={EditProfile} />

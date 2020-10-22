@@ -56,7 +56,7 @@ const Home = () => {
 						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
 					})}
 				{error && <Text>{error}</Text>}
-				{profile&&<ViewProfileDetail clearProfile={clearProfile} profile={profile} />}
+				{profile&&<Redirect to='/viewdetail'/>}
 			</Container>
 		</Screen>
 	)}
