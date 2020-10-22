@@ -1,17 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { ProfileContext } from '../context/ProfileContext';
-import BasicDropDown from '../constant/BasicDropdown';
-import ViewMyProfile from '../components/ViewMyProfile';
+import Header from '../components/Header'
+import BackButton from '../constant/BackButton'
+import ViewMyProfile from '../components/ViewMyProfile'
 
 
 const ViewProfile = () => {
-	const { profile }= useContext(ProfileContext);
-
-
 	return (
 		<Screen>
-            <ViewMyProfile profile={profile} />
+            <Header/>
+            <BackButton/>
+            <ViewMyProfile />
 		</Screen>
 	);
 };
