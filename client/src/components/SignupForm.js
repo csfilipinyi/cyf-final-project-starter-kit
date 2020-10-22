@@ -19,7 +19,7 @@ const SignupForm = () => {
     githubName: "",
     slackHandler: "",
   }
-const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, intialState)
+const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, intialState)
  console.log(errors)
 
   return (

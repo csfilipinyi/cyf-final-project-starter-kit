@@ -11,7 +11,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   }
-  const {handleChange, input, handleSubmit, errors, submit} = useForm(loginValidation, intialState)
+  const {handleChange, input, handleSubmit, errors, submit} = UseForm(loginValidation, intialState)
   console.log(errors)
   
   if(submit){
