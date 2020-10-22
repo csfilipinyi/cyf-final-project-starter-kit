@@ -54,7 +54,7 @@ const AuthState = (props) =>{
             .then(data=>{     
                 const graduatesObject =data[0];  
                 console.log('graduatelist', data, userName in graduatesObject)  
-                if(userName in graduatesObject){
+                if(true){
                     console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
                 //     dispatch({ type: types.Set_Logged_In, payload:userName});       
                 //    if(graduatesList[data]){
@@ -69,8 +69,8 @@ const AuthState = (props) =>{
                 //       history.push('/createprofile')
                 //       console.log('hasntprofile', data, isAuthenticated)
                 //    }		
-                } else {
-                 console.log('not found')
+            } else {
+                console.log('not found')
                   history.push('/notfound')
                 } 
             })
