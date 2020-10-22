@@ -103,6 +103,7 @@ const AuthState = (props) =>{
                 isAuthenticated: state.isAuthenticated,
                 isLoading:state.isLoading,
                 error:state.error,
+                isNotAuth:state.isNotAuth,
                 checkGraduate,
                 fetchUserProfile,
                 setIsAuth
