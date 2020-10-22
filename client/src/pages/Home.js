@@ -47,7 +47,7 @@ const Home = () => {
 	},[userProfile])
 
 	useEffect(()=>{
-		user&&history.push('/viewprofile')
+		user&&history.push('/createprofile')
 	},[user])
 
     const onFailure = response => console.error(response);  
