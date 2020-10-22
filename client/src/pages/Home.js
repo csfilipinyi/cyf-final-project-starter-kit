@@ -19,14 +19,7 @@ const Home = () => {
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
-		console.log('acces', accessCode);
 		fetchUserName(accessCode);
-	//   fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${accessCode}`)
-    //   .then(res => res.json())
-    //   .then(data => {
-	// 	  checkGraduate(data)
-	// 	  console.log('isauth', isAuthenticated)
-	//    })
 	}
 
 	useEffect(()=>{
@@ -41,10 +34,6 @@ const Home = () => {
     const onFailure = response => console.error(response);  
 
 	useEffect(getAllProfiles, []);
-
-	// useEffect (()=>{
-	// 	isAuthenticated?history.push('/createprofile'):<Redirect to='/'/>
-	// },[isAuthenticated])
 
 	return (
 		<Screen>

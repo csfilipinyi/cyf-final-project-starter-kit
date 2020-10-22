@@ -48,14 +48,11 @@ const AuthState = (props) =>{
     const [state, dispatch] = useReducer(authReducer, initialState);
 
 
-    const baseUrl = 'https://dev-graduate-directory.herokuapp.com/api'
-
     const fetchUserName = (code)=>{
         fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${code}`)
         .then(res => res.json())
         .then(username => {
             checkGraduate(username)
-            console.log('isauth', isAuthenticated, username)
          })
     }
 
