@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="7px" viewBox="0 0 14 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>72D64AF1-5DA0-475F-8D74-06DACC0E4464</title>
+    <defs>
+        <path d="M12.9995,7 C12.7735,7 12.5465,6.924 12.3595,6.768 L6.9885,2.292 L1.6265,6.607 C1.1975,6.954 0.5675,6.886 0.2205,6.455 C-0.1255,6.025 -0.0575,5.396 0.3735,5.049 L6.3735,0.221 C6.7435,-0.078 7.2745,-0.074 7.6405,0.232 L13.6405,5.232 C14.0645,5.585 14.1215,6.216 13.7685,6.64 C13.5705,6.877 13.2865,7 12.9995,7" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-guide-/-Icons-" transform="translate(-351.000000, -271.000000)">
+            <g id="27)-Icon/arrow-ios-up" transform="translate(351.000000, 271.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="🎨-Icon-Сolor" fill="#222B45" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

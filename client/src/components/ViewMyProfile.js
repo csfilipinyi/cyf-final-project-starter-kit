@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListGroup, Card } from 'react-bootstrap';
+import Header from '../components/Header'
 import avatar from '../assets/icons/avatar.svg';
 import StyledButton from '../constant/StyledButton';
 
@@ -14,6 +15,7 @@ const ViewMyProfile = ({ profile }) => {
 
 	return (
 		<Container>
+			<Header/>
 			This is View My Profile Page
 			{/* <Img variant="top" src={profile.img||avatar} />
 			<ListGroup as="ul">
