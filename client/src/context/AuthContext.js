@@ -49,16 +49,16 @@ const AuthState = (props) =>{
     const checkGraduate = (userName)=>{
         console.log('context test')
         dispatch({ type: types.Set_Is_Loading }),       
-        fetch('https://gist.githubusercontent.com/OBakir90/ecab122e19b0292737d85699dab2696c/raw/ed9e2fa9066cd1c67d7248db75eb9912804b9ec3/graduates.json')
+        axios.get('https://gist.githubusercontent.com/OBakir90/ecab122e19b0292737d85699dab2696c/raw/ed9e2fa9066cd1c67d7248db75eb9912804b9ec3/graduates.json')
             .then(response=>response.json())
             .then(data=>{     
-                console.log('graduatelist', data)  
-                const graduatesObject =data[0];     
-                if(userName in graduatesList){
+                const graduatesObject =data[0];  
+                console.log('graduatelist', data, userName in graduatesObject)  
+                if(userName in graduatesObject){
                     dispatch({ type: types.Set_Logged_In, payload:userName}),       
                     console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName])
                    if(graduatesList[data]){
-                    fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
+                    axios.get('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
                     .then(response=>response.json())
                     .then(profile=>{ 
                         dispatch({ type: types.Set_User_Profile, payload:profile}),       
@@ -70,7 +70,7 @@ const AuthState = (props) =>{
                       console.log('hasntprofile', data, isAuthenticated)
                    }		
                 } else {
-                    console.log('not found')
+                 console.log('not found')
                   history.push('/notfound')
                 } 
             })
