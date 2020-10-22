@@ -8,9 +8,9 @@ const UserNav = ({ open, setOpen, ...props }) => {
 	return (
 		<>
 			<div>
-				<IconUser src={IconUser} alt='User'/>
+				<IUser src={IconUser} alt='User'/>
 				<Text>Your Profile</Text>
-				<IconUser src={IconArrow} alt='User' onClick={() => setOpen(!open)}/>
+				<IUser src={IconArrow} alt='User' onClick={() => setOpen(!open)}/>
 			</div>
 			{open&&<NavBar open={open} />}
 		</>
@@ -20,7 +20,7 @@ const UserNav = ({ open, setOpen, ...props }) => {
 export default UserNav;
 
 
-const IconUser = styled.img`
+const IUser = styled.img`
    margin-right:20px;
    &.close{
        margin-right:10px;
