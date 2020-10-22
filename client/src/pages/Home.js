@@ -15,17 +15,18 @@ const Home = () => {
 	let history = useHistory();
 
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { checkGraduate, isAuthenticated, userName, isGraduate }= useContext(AuthContext);
+	const { fetchUserName, isAuthenticated, userName, isGraduate }= useContext(AuthContext);
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
-		console.log('acces', accessCode)
-	  fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${accessCode}`)
-      .then(res => res.json())
-      .then(data => {
-		  checkGraduate(data)
-		  console.log('isauth', isAuthenticated)
-	   })
+		console.log('acces', accessCode);
+		fetchUserName(accessCode);
+	//   fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${accessCode}`)
+    //   .then(res => res.json())
+    //   .then(data => {
+	// 	  checkGraduate(data)
+	// 	  console.log('isauth', isAuthenticated)
+	//    })
 	}
 
 	useEffect(()=>{

@@ -50,8 +50,16 @@ const AuthState = (props) =>{
 
     const baseUrl = 'https://dev-graduate-directory.herokuapp.com/api'
 
+    const fetchUserName = (code)=>{
+        fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${code}`)
+        .then(res => res.json())
+        .then(username => {
+            checkGraduate(username)
+            console.log('isauth', isAuthenticated, username)
+         })
+    }
+
     const checkGraduate = (userName)=>{
-        console.log('context test')
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
         fetch('https://gist.githubusercontent.com/OBakir90/ecab122e19b0292737d85699dab2696c/raw/ed9e2fa9066cd1c67d7248db75eb9912804b9ec3/graduates.json')
             .then(response=>response.json())
@@ -63,8 +71,7 @@ const AuthState = (props) =>{
                         :     
                         dispatch({ type: types.Set_Logged_In, payload:userName});   
                 }else{
-                   dispatch({ type: types.Set_Isnot_Graduate}),  
-                   console.log('is not authenticated')     
+                   dispatch({ type: types.Set_Isnot_Graduate})
                 }
             })
             .catch((error)=>{
@@ -81,6 +88,7 @@ const AuthState = (props) =>{
                 isGraduate:state.isGraduate,
                 error:state.error,
                 checkGraduate,
+                fetchUserName
 			}}
 		>
 			{props.children}
