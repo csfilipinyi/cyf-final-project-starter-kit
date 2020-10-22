@@ -56,19 +56,19 @@ const AuthState = (props) =>{
                 console.log('graduatelist', data, userName in graduatesObject)  
                 if(userName in graduatesObject){
                     console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
-                    dispatch({ type: types.Set_Logged_In, payload:userName});       
-                   if(graduatesList[data]){
-                    fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
-                    .then(response=>response.json())
-                    .then(profile=>{ 
-                        dispatch({ type: types.Set_User_Profile, payload:profile}),       
-                        history.push('/viewprofile')
-                        console.log('hasprofile', data, isAuthenticated, profile)
-                        })
-                    }else{
-                      history.push('/createprofile')
-                      console.log('hasntprofile', data, isAuthenticated)
-                   }		
+                //     dispatch({ type: types.Set_Logged_In, payload:userName});       
+                //    if(graduatesList[data]){
+                //     fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
+                //     .then(response=>response.json())
+                //     .then(profile=>{ 
+                //         dispatch({ type: types.Set_User_Profile, payload:profile}),       
+                //         history.push('/viewprofile')
+                //         console.log('hasprofile', data, isAuthenticated, profile)
+                //         })
+                //     }else{
+                //       history.push('/createprofile')
+                //       console.log('hasntprofile', data, isAuthenticated)
+                //    }		
                 } else {
                  console.log('not found')
                   history.push('/notfound')
