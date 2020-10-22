@@ -18,7 +18,7 @@ const types = {
 const authReducer = (state, action) => {
 	switch (action.type) {
 	case types.Set_Is_Loading:
-		return { ...state, isLoading: true };
+		return { ...state, isLoading: action.payload };
 	case types.Set_Error:
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_Logged_In:
@@ -49,12 +49,11 @@ const AuthState = (props) =>{
 
     const checkGraduate = (userName)=>{
         console.log('context test')
-        dispatch({ type: types.Set_Is_Loading }),       
+        dispatch({ type: types.Set_Is_Loading, payload:true }),       
         fetch('https://gist.githubusercontent.com/OBakir90/ecab122e19b0292737d85699dab2696c/raw/ed9e2fa9066cd1c67d7248db75eb9912804b9ec3/graduates.json')
             .then(response=>response.json())
             .then(data=>{     
                 const graduatesObject =data[0];  
-
                 if(userName in graduatesObject){
                     if(graduatesObject[userName]){
                         fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
@@ -65,29 +64,11 @@ const AuthState = (props) =>{
                             })   
                     }else{
                         dispatch({ type: types.Set_Logged_In, payload:userName}); 
-                    }
-                      
+                    }       
                 }else{
-                    console.log('not found')
-            } 
-                // (userName in graduatesObject)&&console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
-                // if(true){
-                //    if(graduatesList[data]){
-                //     fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
-                //     .then(response=>response.json())
-                //     .then(profile=>{ 
-                //         dispatch({ type: types.Set_User_Profile, payload:profile}),       
-                //         history.push('/viewprofile')
-                //         console.log('hasprofile', data, isAuthenticated, profile)
-                //         })
-                //     }else{
-                //       history.push('/createprofile')
-                //       console.log('hasntprofile', data, isAuthenticated)
-                //    }		
-                // } else {
-                //     console.log('not found')
-                //     history.push('/notfound')
-                // } 
+                   dispatch({ type: types.Set_Is_Loading, payload:false }),  
+                   console.log('is not authenticated')     
+                }
             })
             .catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
