@@ -26,10 +26,15 @@ const Home = () => {
 		  const graduatesList = graduates()
 		  if(data in graduatesList){
 			  console.log('graduate', data, isAuthenticated, 'list', graduatesList[data])
-			graduatesList[data]?
-				setIsAuth(data)&&history.push('/viewprofile')&&console.log('hasprofile', data, isAuthenticated)
-				:
-				history.push('/createprofile')&&console.log('hasntprofile', data, isAuthenticated)
+			 if(graduatesList[data]){
+				setIsAuth(data)
+				history.push('/viewprofile')
+				console.log('hasprofile', data, isAuthenticated)
+			 } else{
+				history.push('/createprofile')
+				console.log('hasntprofile', data, isAuthenticated)
+			 }
+			
 		  } else {
 			history.push('/notfound')
 		  }
@@ -71,7 +76,10 @@ const Home = () => {
 export default Home;
 
 const GitHub = styled(GitHubLogin)`
-	background-color:red;				
+	background-color:red;	
+	color:green;
+	width:300px;
+	height:150px;			
 `
 
 const Screen =styled.div`
