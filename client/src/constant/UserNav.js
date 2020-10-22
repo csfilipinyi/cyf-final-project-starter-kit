@@ -28,13 +28,15 @@ export default UserNav;
 
 const Container = styled.div`
 	display:flex;
+	justify-content:center;
+	align-items:center;
 	margin-right:15%;
 `
 
 const Circle = styled.div`
 	border-radius:50%;
-	height: 36px;
-	width: 36px;
+	height: 38px;
+	width: 38px;
 	border:3px solid #0090FF;
 	display:flex;
 	justify-content:center;
@@ -42,9 +44,10 @@ const Circle = styled.div`
 `
 
 const IUser = styled.img`
-	width:25px;
-	height:25px;
+	width:22px;
+	height:22px;
 	margin-right:8px;
+	color:#0090FF;
 `;
 
 const IArrow = styled.img`

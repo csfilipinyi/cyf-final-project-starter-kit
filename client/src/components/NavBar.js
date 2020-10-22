@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 // import { Button } from 'react-bootstrap';
 import { NavLink, useHistory } from 'react-router-dom';
+import {AuthContext} from '../context/AuthContext'
 import styled from 'styled-components';
 
 const NavBar = ({ open }) => {
