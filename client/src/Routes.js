@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Home from "./pages/Home";
+import Login from './pages/Login'
 import CreateProfile from "./pages/CreateProfile";
 import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
@@ -14,6 +15,7 @@ const Routes = () => {
 		<BrowserRouter>
 			<Switch>
 				<Route exact path='/' component={Home} />
+				<Route path='/login' component={Login} />
 				<Route path='/viewdetail' component={ViewProfile} />
 				<Route path='/createprofile' component={CreateProfile} />
 				<Route path='/viewprofile' component={ViewProfile} />
