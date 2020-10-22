@@ -1,9 +1,7 @@
 import React, { useReducer } from 'react';
-import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 
-const history = useHistory()
 
 export const AuthContext = React.createContext();
 
