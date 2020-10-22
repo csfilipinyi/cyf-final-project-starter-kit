@@ -15,7 +15,7 @@ const Home = () => {
 	let history = useHistory();
 
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { checkGraduate, isAuthenticated, setIsAuth, userProfile, userName, isNotAuth }= useContext(AuthContext);
+	const { checkGraduate, isAuthenticated, userName, isGraduate }= useContext(AuthContext);
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
@@ -25,32 +25,17 @@ const Home = () => {
       .then(data => {
 		  checkGraduate(data)
 		  console.log('isauth', isAuthenticated)
-		//   const graduatesList = graduates()
-		//   if(data in graduatesList){
-		// 	  console.log('graduate', data, isAuthenticated, 'list', graduatesList[data])
-		// 	 if(graduatesList[data]){
-		// 		setIsAuth(data)
-		// 		history.push('/viewprofile')
-		// 		console.log('hasprofile', data, isAuthenticated)
-		// 	 } else{
-		// 		history.push('/createprofile')
-		// 		console.log('hasntprofile', data, isAuthenticated)
-		// 	 }		
-		//   } else {
-		// 	history.push('/notfound')
-		//   }
 	   })
 	}
 
 	useEffect(()=>{
-		userProfile&&history.push('/viewprofile')
-	},[userProfile])
+		userName&&history.push('/viewprofile')
+	},[userName])
 
 	useEffect(()=>{
-		console.log('xxx', userName)
-		userName&&history.push('/createprofile')
-		isNotAuth&&history.push('/notfound')
-	},[userName, isNotAuth])
+		isAuthenticated&&history.push('/createprofile')
+		isGraduate&&history.push('/notfound')
+	},[isAuthenticated, isGraduate])
 
     const onFailure = response => console.error(response);  
 

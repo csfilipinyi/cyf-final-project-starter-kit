@@ -8,9 +8,9 @@ export const AuthContext = React.createContext();
 
 const types = {
     Set_Is_Loading: "Set_Is_Loading",
-	Set_Logged_In: "Set_UserName",
-    Set_User_Profile: "Set_UserProfile",
-    Set_Is_UnAuthenticated:'Set_Is_UnAuthenticated',
+	Set_Logged_In: "Set_Logged_In",
+    Set_User: "Set_User",
+    Set_Isnot_Graduate:'Set_Isnot_Graduate',
     Set_Error: "Set_Error",
     Set_Logout:"Set_Logout"
 };
@@ -23,11 +23,11 @@ const authReducer = (state, action) => {
 	case types.Set_Error:
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_Logged_In:
-		return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
-    case types.Set_Is_UnAuthenticated:
-            return { ...state, userName: false, isAuthenticated:true, isLoading: false, isNotAuth:true }; 
-    case types.Set_User_Profile:
-		return { ...state, userProfile: action.payload, isAuthenticated:true, isLoading: false };
+		return { ...state, isAuthenticated:true, isLoading: false };
+    case types.Set_User:
+        return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
+    case types.Set_Isnot_Graduate:
+        return { ...state, isGraduate:false, isLoading: false }; 
     case types.Set_Logout:
         return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
     default:
@@ -39,9 +39,8 @@ const authReducer = (state, action) => {
 const AuthState = (props) =>{
     const initialState={
         userName : null,
-        userProfile :null,
         isAuthenticated: false,
-        isNotAuth:false,
+        isGraduate:true,
         isLoading:false,
 		error:null,
     }
@@ -59,18 +58,12 @@ const AuthState = (props) =>{
             .then(data=>{     
                 const graduatesObject =data[0];  
                 if(userName in graduatesObject){
-                    if(graduatesObject[userName]){
-                        fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
-                        .then(response=>response.json())
-                        .then(profile=>{ 
-                            dispatch({ type: types.Set_User_Profile, payload:profile}),
-                            console.log('hasprofile', data, profile)
-                            })   
-                    }else{
-                        dispatch({ type: types.Set_Logged_In, payload:userName}); 
-                    }       
+                    (graduatesObject[userName])?
+                        dispatch({ type: types.Set_User, payload:data})
+                        :     
+                        dispatch({ type: types.Set_Logged_In, payload:userName});   
                 }else{
-                   dispatch({ type: types.Set_Is_UnAuthenticated }),  
+                   dispatch({ type: types.Set_Isnot_Graduate}),  
                    console.log('is not authenticated')     
                 }
             })
@@ -79,34 +72,15 @@ const AuthState = (props) =>{
 			});
     }
 
-    const fetchUserProfile =(userName)=>{
-        dispatch({ type: types.Set_Is_Loading }),       
-        axios.get(`${baseUrl}/graduates/${userName}`)
-            .then(response=>response.json(
-                dispatch({ type: types.Set_User_Profile, payload:response.data })
-            ))
-            .catch((error)=>{
-				dispatch({ type:types.Set_Error, payload:error });
-			});
-    }
-
-    //Temporary Functions 
-    const setIsAuth = (userName)=>{
-        dispatch({ type: types.Set_Logged_In, payload:userName })
-    }
-
     return (
 		<AuthContext.Provider
 			value={{
 				userName :state.userName,
-                userProfile :state.userProfile,
                 isAuthenticated: state.isAuthenticated,
                 isLoading:state.isLoading,
+                isGraduate:state.isGraduate,
                 error:state.error,
-                isNotAuth:state.isNotAuth,
                 checkGraduate,
-                fetchUserProfile,
-                setIsAuth
 			}}
 		>
 			{props.children}
