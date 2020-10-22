@@ -35,13 +35,15 @@ const Circle = styled.div`
 	border-radius:50%;
 	height: 36px;
 	width: 36px;
-	background-color: #424344;
 	border:1px solid #0090FF;
+	display:flex;
+	justify-content:center;
+	align-items:center;
 `
 
 const IUser = styled.img`
-	width:14px;
-	height:14px;
+	width:30px;
+	height:30px;
 	margin-right:8px;
 `;
 
@@ -52,7 +54,7 @@ const IArrow = styled.img`
 `;
 
 const Text = styled.p`
-	color: #424344;
+	color: #0090FF;
   	font-family: Raleway;
   	font-size: 18px;
   	font-weight: bold;
