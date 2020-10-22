@@ -7,11 +7,11 @@ import IconArrow from '../assets/icons/IconArrowUp.svg';
 const UserNav = ({ open, setOpen, ...props }) => {
 	return (
 		<>
-			<div>
+			<Container>
 				<IUser src={IconUser} alt='User'/>
 				<Text>Your Profile</Text>
 				<IUser src={IconArrow} alt='User' onClick={() => setOpen(!open)}/>
-			</div>
+			</Container>
 			{open&&<NavBar open={open} />}
 		</>
 	);
@@ -19,17 +19,27 @@ const UserNav = ({ open, setOpen, ...props }) => {
 
 export default UserNav;
 
-
+const Container = styled.div`
+	display:flex;
+`
 const IUser = styled.img`
-   margin-right:20px;
-   &.close{
-       margin-right:10px;
-       z-index:2;
-   }
+	width:14px;
+	height:14px;
+	margin-right:8px;
 `;
 
+const IArrow = styled.img`
+	width:16px;
+	height:10px;
+	margin-left:10px;
+`;
 
 const Text = styled.p`
-
+	color: #424344;
+  	font-family: Raleway;
+  	font-size: 18px;
+  	font-weight: bold;
+  	letter-spacing: 0;
+  	line-height: 21px;
 `
 
