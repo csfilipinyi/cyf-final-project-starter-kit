@@ -25,7 +25,11 @@ const Home = () => {
       .then(data => {
 		  const graduatesList = graduates()
 		  if(data in graduatesList){
-			graduatesList[data]?setIsAuth(data)&&history.push('/viewprofile'):history.push('/createprofile')
+			  console.log('graduate', data, isAuthenticated)
+			graduatesList[data]?
+				setIsAuth(data)&&history.push('/viewprofile')&&console.log('hasprofile', data, isAuthenticated)
+				:
+				history.push('/createprofile')
 		  } else {
 			history.push('/notfound')
 		  }
