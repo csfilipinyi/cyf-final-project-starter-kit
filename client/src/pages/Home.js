@@ -34,7 +34,7 @@ const Home = () => {
 
 	useEffect(()=>{
 		isAuthenticated&&history.push('/createprofile')
-		isGraduate&&history.push('/notfound')
+		!isGraduate&&history.push('/notfound')
 	},[isAuthenticated, isGraduate])
 
     const onFailure = response => console.error(response);  
