@@ -55,8 +55,8 @@ const AuthState = (props) =>{
                 const graduatesObject =data[0];  
                 console.log('graduatelist', data, userName in graduatesObject)  
                 if(userName in graduatesObject){
-                    dispatch({ type: types.Set_Logged_In, payload:userName}),       
-                    console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName])
+                    console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
+                    dispatch({ type: types.Set_Logged_In, payload:userName});       
                    if(graduatesList[data]){
                     fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
                     .then(response=>response.json())
