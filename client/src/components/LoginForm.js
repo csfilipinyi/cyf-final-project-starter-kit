@@ -45,7 +45,7 @@ export default function LoginForm() {
               Login
             </button>
      
-          <Link to="/signup" className="signup-link">
+          <Link to="/signupform" className="signup-link">
             signup
           </Link>
         </Form>
