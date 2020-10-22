@@ -53,16 +53,21 @@ const AuthState = (props) =>{
             .then(response=>response.json())
             .then(data=>{     
                 const graduatesObject =data[0];  
-                console.log('user', userName, graduatesObject, userName in graduatesObject)
 
                 if(userName in graduatesObject){
-                    console.log('x')
+                    dispatch({ type: types.Set_Logged_In, payload:userName});  
+                    fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
+                    .then(response=>response.json())
+                    .then(profile=>{ 
+                        // dispatch({ type: types.Set_User_Profile, payload:profile}),       
+                        // history.push('/viewprofile')
+                        console.log('hasprofile', data, isAuthenticated, profile)
+                        })     
                 }else{
                     console.log('y')
                 } 
                 // (userName in graduatesObject)&&console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
                 // if(true){
-                //     dispatch({ type: types.Set_Logged_In, payload:userName});       
                 //    if(graduatesList[data]){
                 //     fetch('https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json')
                 //     .then(response=>response.json())
