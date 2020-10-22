@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Jumbotron, Container, Form, Col, Row } from "react-bootstrap";
-import useForm from "./useForm"
+import UseForm from "./UseForm"
 import "../App.css";
-import loginValidation from "./loginValidation"
+import loginValidation from "./LoginValidation"
 import { Link, useHistory  } from "react-router-dom";
 
 export default function LoginForm() {
