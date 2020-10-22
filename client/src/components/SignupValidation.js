@@ -1,4 +1,4 @@
-export default function validation(input){
+export default function SignupValidation(input){
     let errors = {};
      
       if(!input.firstName.trim()){
