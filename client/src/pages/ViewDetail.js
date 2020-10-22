@@ -1,11 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/Header'
+import BackButton from '../constant/BackButton'
+import ViewMyProfile from '../components/ViewMyProfile'
 
 const ViewDetail = () => {
     return (
         <Screen>
             <Header/>
+            <BackButton/>
+            <ViewMyProfile/>
         </Screen>
     )
 }

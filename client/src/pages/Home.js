@@ -14,7 +14,7 @@ import {graduates, graduateProfile} from '../api/graduates'
 const Home = () => {
 	let history = useHistory();
 
-	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
+	const { getAllProfiles, getProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
 	const { fetchUserName, isAuthenticated, userName, isGraduate }= useContext(AuthContext);
 
 	const onSuccess =  (response) =>{
