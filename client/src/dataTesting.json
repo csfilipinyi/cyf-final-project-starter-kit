@@ -1,339 +1,318 @@
 [
   {
-      "name": "Iman",
-      "achievement": [
-          {
-          "skill": "html",
-          "objective": "Understand what 'parent' and 'child' is",
-          "ability": "2"
-          },
-          {
-            "skill": "html",
-            "objective": "Can create and link a stylesheet",
-            "ability": "2"
-            },
+    "name": "Iman",
+    "achievement": [
+      {
+        "skill": "html",
+        "objective": "Understand what 'parent' and 'child' is",
+        "ability": "2"
+      },
+      {
+        "skill": "html",
+        "objective": "Can create and link a stylesheet",
+        "ability": "2"
+      },
 
-            {
-              "skill": "html",
-              "objective": "Be able to include a form in a web page",
-              "ability": "2"
-              },
+      {
+        "skill": "html",
+        "objective": "Be able to include a form in a web page",
+        "ability": "2"
+      },
 
-              {
-                "skill": "css",
-                "objective": "Understand what a selector is in CSS",
-                "ability": "2"
-                },
+      {
+        "skill": "css",
+        "objective": "Understand what a selector is in CSS",
+        "ability": "2"
+      },
 
-                {
-                  "skill": "css",
-                  "objective": "Understand the difference between padding and margin",
-                  "ability": "2"
-                  },
+      {
+        "skill": "css",
+        "objective": "Understand the difference between padding and margin",
+        "ability": "2"
+      },
 
+      {
+        "skill": "javascript",
+        "objective": "Be able to link a Javascript file in your project",
+        "ability": "2"
+      },
 
-                {
-                  "skill": "javascript",
-                  "objective": "Be able to link a Javascript file in your project",
-                  "ability": "2"
-                  },
+      {
+        "skill": "javascript",
+        "objective": "Be able to assign a variable with const and let",
+        "ability": "1"
+      },
+      {
+        "skill": "reactLib",
+        "objective": "Be able to create a React application with create-react-app",
+        "ability": "0"
+      },
 
-                  {
-                    "skill": "javascript",
-                    "objective": "Be able to assign a variable with const and let",
-                    "ability": "1"
-                    },
-                    {
-                      "skill": "reactLib",
-                      "objective": "Be able to create a React application with create-react-app",
-                      "ability": "0"
-                      },
+      {
+        "skill": "reactLib",
+        "objective": "Be able to pass props",
+        "ability": "1"
+      },
 
-                      {
-                        "skill": "reactLib",
-                        "objective": "Be able to pass props",
-                        "ability": "1"
-                        },
+      {
+        "skill": "node",
+        "objective": "Be able to create a basic express server",
+        "ability": "1"
+      },
 
-                        {
-                          "skill": "node",
-                          "objective": "Be able to create a basic express server",
-                          "ability": "1"
-                        },
+      {
+        "skill": "node",
+        "objective": "Be able to create a basic express server",
+        "ability": "1"
+      },
 
-                        {
-                            "skill": "node",
-                            "objective": "Be able to create a basic express server",
-                            "ability": "1"
-                         },
-
-                        {
-                              "skill": "sql",
-                              "objective": "Understand what SQL is and what it is used for",
-                              "ability": "2"
-                         },
-                        {
-                                "skill": "sql",
-                                "objective": "Be able to update data in a table",
-                                "ability": "2"
-                         }
-                            
-
-      ]
-
-      
+      {
+        "skill": "sql",
+        "objective": "Understand what SQL is and what it is used for",
+        "ability": "2"
+      },
+      {
+        "skill": "sql",
+        "objective": "Be able to update data in a table",
+        "ability": "2"
+      }
+    ]
   },
   {
     "name": "Altom",
     "achievement": [
-        {
+      {
+        "skill": "html",
+        "objective": "Understand what 'parent' and 'child' is",
+        "ability": "0"
+      },
+      {
+        "skill": "html",
+        "objective": "Can create and link a stylesheet",
+        "ability": "2"
+      },
+
+      {
+        "skill": "html",
+        "objective": "Be able to include a form in a web page",
+        "ability": "2"
+      },
+
+      {
+        "skill": "css",
+        "objective": "Understand what a selector is in CSS",
+        "ability": "2"
+      },
+
+      {
+        "skill": "css",
+        "objective": "Understand the difference between padding and margin",
+        "ability": "2"
+      },
+
+      {
+        "skill": "javascript",
+        "objective": "Be able to link a Javascript file in your project",
+        "ability": "2"
+      },
+
+      {
+        "skill": "javascript",
+        "objective": "Be able to assign a variable with const and let",
+        "ability": "1"
+      },
+      {
+        "skill": "reactLib",
+        "objective": "Be able to create a React application with create-react-app",
+        "ability": "0"
+      },
+
+      {
+        "skill": "reactLib",
+        "objective": "Be able to pass props",
+        "ability": "1"
+      },
+
+      {
+        "skill": "node",
+        "objective": "Be able to create a basic express server",
+        "ability": "1"
+      },
+
+      {
+        "skill": "node",
+        "objective": "Be able to create a basic express server",
+        "ability": "1"
+      },
+
+      {
+        "skill": "sql",
+        "objective": "Understand what SQL is and what it is used for",
+        "ability": "2"
+      },
+      {
+        "skill": "sql",
+        "objective": "Be able to update data in a table",
+        "ability": "2"
+      }
+    ]
+  },
+  {
+    "name": "Nawal",
+    "achievement": [
+      {
         "skill": "html",
         "objective": "Understand what 'parent' and 'child' is",
         "ability": "2"
-        },
-        {
-          "skill": "html",
-          "objective": "Can create and link a stylesheet",
-          "ability": "2"
-          },
+      },
+      {
+        "skill": "html",
+        "objective": "Can create and link a stylesheet",
+        "ability": "2"
+      },
 
-          {
-            "skill": "html",
-            "objective": "Be able to include a form in a web page",
-            "ability": "2"
-            },
+      {
+        "skill": "html",
+        "objective": "Be able to include a form in a web page",
+        "ability": "2"
+      },
 
-            {
-              "skill": "css",
-              "objective": "Understand what a selector is in CSS",
-              "ability": "2"
-              },
+      {
+        "skill": "css",
+        "objective": "Understand what a selector is in CSS",
+        "ability": "2"
+      },
 
-              {
-                "skill": "css",
-                "objective": "Understand the difference between padding and margin",
-                "ability": "2"
-                },
+      {
+        "skill": "css",
+        "objective": "Understand the difference between padding and margin",
+        "ability": "2"
+      },
 
+      {
+        "skill": "javascript",
+        "objective": "Be able to link a Javascript file in your project",
+        "ability": "2"
+      },
 
-              {
-                "skill": "javascript",
-                "objective": "Be able to link a Javascript file in your project",
-                "ability": "2"
-                },
+      {
+        "skill": "javascript",
+        "objective": "Be able to assign a variable with const and let",
+        "ability": "1"
+      },
+      {
+        "skill": "reactLib",
+        "objective": "Be able to create a React application with create-react-app",
+        "ability": "0"
+      },
 
-                {
-                  "skill": "javascript",
-                  "objective": "Be able to assign a variable with const and let",
-                  "ability": "1"
-                  },
-                  {
-                    "skill": "reactLib",
-                    "objective": "Be able to create a React application with create-react-app",
-                    "ability": "0"
-                    },
+      {
+        "skill": "reactLib",
+        "objective": "Be able to pass props",
+        "ability": "1"
+      },
 
-                    {
-                      "skill": "reactLib",
-                      "objective": "Be able to pass props",
-                      "ability": "1"
-                      },
+      {
+        "skill": "node",
+        "objective": "Be able to create a basic express server",
+        "ability": "1"
+      },
 
-                      {
-                        "skill": "node",
-                        "objective": "Be able to create a basic express server",
-                        "ability": "1"
-                      },
+      {
+        "skill": "node",
+        "objective": "Be able to create a basic express server",
+        "ability": "1"
+      },
 
-                      {
-                          "skill": "node",
-                          "objective": "Be able to create a basic express server",
-                          "ability": "1"
-                       },
-
-                      {
-                            "skill": "sql",
-                            "objective": "Understand what SQL is and what it is used for",
-                            "ability": "2"
-                       },
-                      {
-                              "skill": "sql",
-                              "objective": "Be able to update data in a table",
-                              "ability": "2"
-                       }
-                          
-
+      {
+        "skill": "sql",
+        "objective": "Understand what SQL is and what it is used for",
+        "ability": "2"
+      },
+      {
+        "skill": "sql",
+        "objective": "Be able to update data in a table",
+        "ability": "2"
+      }
     ]
-
-    
-},
-{
-  "name": "Nawal",
-  "achievement": [
+  },
+  {
+    "name": "Tas",
+    "achievement": [
       {
-      "skill": "html",
-      "objective": "Understand what 'parent' and 'child' is",
-      "ability": "2"
+        "skill": "html",
+        "objective": "Understand what 'parent' and 'child' is",
+        "ability": "2"
       },
       {
         "skill": "html",
         "objective": "Can create and link a stylesheet",
         "ability": "2"
-        },
-
-        {
-          "skill": "html",
-          "objective": "Be able to include a form in a web page",
-          "ability": "2"
-          },
-
-          {
-            "skill": "css",
-            "objective": "Understand what a selector is in CSS",
-            "ability": "2"
-            },
-
-            {
-              "skill": "css",
-              "objective": "Understand the difference between padding and margin",
-              "ability": "2"
-              },
-
-
-            {
-              "skill": "javascript",
-              "objective": "Be able to link a Javascript file in your project",
-              "ability": "2"
-              },
-
-              {
-                "skill": "javascript",
-                "objective": "Be able to assign a variable with const and let",
-                "ability": "1"
-                },
-                {
-                  "skill": "reactLib",
-                  "objective": "Be able to create a React application with create-react-app",
-                  "ability": "0"
-                  },
-
-                  {
-                    "skill": "reactLib",
-                    "objective": "Be able to pass props",
-                    "ability": "1"
-                    },
-
-                    {
-                      "skill": "node",
-                      "objective": "Be able to create a basic express server",
-                      "ability": "1"
-                    },
-
-                    {
-                        "skill": "node",
-                        "objective": "Be able to create a basic express server",
-                        "ability": "1"
-                     },
-
-                    {
-                          "skill": "sql",
-                          "objective": "Understand what SQL is and what it is used for",
-                          "ability": "2"
-                     },
-                    {
-                            "skill": "sql",
-                            "objective": "Be able to update data in a table",
-                            "ability": "2"
-                     }
-                        
-
-  ]
-
-  
-},
-{
-  "name": "Tas",
-  "achievement": [
-      {
-      "skill": "html",
-      "objective": "Understand what 'parent' and 'child' is",
-      "ability": "2"
       },
+
       {
         "skill": "html",
-        "objective": "Can create and link a stylesheet",
+        "objective": "Be able to include a form in a web page",
         "ability": "2"
-        },
+      },
 
-        {
-          "skill": "html",
-          "objective": "Be able to include a form in a web page",
-          "ability": "2"
-          },
+      {
+        "skill": "css",
+        "objective": "Understand what a selector is in CSS",
+        "ability": "2"
+      },
 
-          {
-            "skill": "css",
-            "objective": "Understand what a selector is in CSS",
-            "ability": "2"
-            },
+      {
+        "skill": "css",
+        "objective": "Understand the difference between padding and margin",
+        "ability": "2"
+      },
 
-            {
-              "skill": "css",
-              "objective": "Understand the difference between padding and margin",
-              "ability": "2"
-              },
+      {
+        "skill": "javascript",
+        "objective": "Be able to link a Javascript file in your project",
+        "ability": "2"
+      },
 
+      {
+        "skill": "javascript",
+        "objective": "Be able to assign a variable with const and let",
+        "ability": "1"
+      },
+      {
+        "skill": "reactLib",
+        "objective": "Be able to create a React application with create-react-app",
+        "ability": "0"
+      },
 
-            {
-              "skill": "javascript",
-              "objective": "Be able to link a Javascript file in your project",
-              "ability": "2"
-              },
+      {
+        "skill": "reactLib",
+        "objective": "Be able to pass props",
+        "ability": "1"
+      },
 
-              {
-                "skill": "javascript",
-                "objective": "Be able to assign a variable with const and let",
-                "ability": "1"
-                },
-                {
-                  "skill": "reactLib",
-                  "objective": "Be able to create a React application with create-react-app",
-                  "ability": "0"
-                  },
+      {
+        "skill": "node",
+        "objective": "Be able to create a basic express server",
+        "ability": "1"
+      },
 
-                  {
-                    "skill": "reactLib",
-                    "objective": "Be able to pass props",
-                    "ability": "1"
-                    },
+      {
+        "skill": "node",
+        "objective": "Be able to create a basic express server",
+        "ability": "1"
+      },
 
-                    {
-                      "skill": "node",
-                      "objective": "Be able to create a basic express server",
-                      "ability": "1"
-                    },
-
-                    {
-                        "skill": "node",
-                        "objective": "Be able to create a basic express server",
-                        "ability": "1"
-                     },
-
-                    {
-                          "skill": "sql",
-                          "objective": "Understand what SQL is and what it is used for",
-                          "ability": "2"
-                     },
-                    {
-                            "skill": "sql",
-                            "objective": "Be able to update data in a table",
-                            "ability": "2"
-                     }
-                        
-
-  ]
-
-  
-}
+      {
+        "skill": "sql",
+        "objective": "Understand what SQL is and what it is used for",
+        "ability": "2"
+      },
+      {
+        "skill": "sql",
+        "objective": "Be able to update data in a table",
+        "ability": "2"
+      }
+    ]
+  }
 ]
-  
