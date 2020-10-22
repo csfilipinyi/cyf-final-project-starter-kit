@@ -53,7 +53,8 @@ const AuthState = (props) =>{
             .then(response=>response.json())
             .then(data=>{     
                 const graduatesObject =data[0];  
-                (userName in graduatesObject)&&console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
+                console.log('user', userName, graduatesObject, userName in graduatesObject)
+                // (userName in graduatesObject)&&console.log('graduate', data, isAuthenticated, 'list', graduatesList[userName]);
                 // if(true){
                 //     dispatch({ type: types.Set_Logged_In, payload:userName});       
                 //    if(graduatesList[data]){
