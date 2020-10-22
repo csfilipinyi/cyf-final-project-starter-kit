@@ -9,7 +9,9 @@ const UserNav = ({ open, setOpen, ...props }) => {
 	return (
 		<>
 			<Container>
-				<IUser src={IconUser} alt='User'/>
+				<Circle>
+					<IUser src={IconUser} alt='User'/>
+				</Circle>
 				<Text>Your Profile</Text>
 				{open?
 				<IArrow src={IconUp} alt='Arrow' onClick={() => setOpen(!open)}/>
@@ -28,6 +30,15 @@ const Container = styled.div`
 	display:flex;
 	margin-right:15%;
 `
+
+const Circle = styled.div`
+	border-radius:50%;
+	height: 36px;
+	width: 36px;
+	background-color: #424344;
+	border:1px solid #0090FF;
+`
+
 const IUser = styled.img`
 	width:14px;
 	height:14px;

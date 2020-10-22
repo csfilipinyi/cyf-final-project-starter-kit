@@ -35,7 +35,7 @@ const Navigator = styled.div`
         flex-directon:column;
         position:absolute;
         right:0px;
-        top:100px;
+        top:70px;
         width:252px;
         height:165px;
         align-items:flex-start;
@@ -71,7 +71,7 @@ const StyledNavLink = styled(NavLink)`
     &:hover{
         text-decoration:none;
         color: #000000;
-        background-color:${(props)=>props.theme.colors.primaryGreen};
+        background-color:gray;
     }
     &:active{
         color:#0090FF;
