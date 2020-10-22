@@ -63,7 +63,6 @@ const AuthState = (props) =>{
                     .then(response=>response.json())
                     .then(profile=>{ 
                         dispatch({ type: types.Set_User_Profile, payload:profile}),
-                        history.push('viewprofile'),
                         console.log('hasprofile', data, profile)
                         })     
                 }else{

@@ -42,6 +42,9 @@ const Home = () => {
 	   })
 	}
 
+	useEffect(()=>{
+		userProfile&&history.push('/viewprofile')
+	},[userProfile])
 
     const onFailure = response => console.error(response);  
 
