@@ -21,24 +21,25 @@ function progress(params) {
   }
 }
 
-function BoxDisplay(props) {
-  console.log(props.studentData);
+function BoxDisplay({ studentId, studentData }) {
+  console.log(studentData[1]);
+
   return (
     <div className="learning-objective-container">
-      <h2>{props.studentData[0].achievement[0].skill}</h2>
+      <h2>{studentData[studentId].achievement[0].skill}</h2>
 
       <ul>
         <li>
           HTML:
-          {progress(props.studentData[0].achievement[0].ability)}
+          {progress(studentData[studentId].achievement[0].ability)}
         </li>
-        <li>CSS:{progress(props.studentData[0].achievement[3].ability)}</li>
+        <li>CSS:{progress(studentData[studentId].achievement[3].ability)}</li>
         <li>
-          JavaScript:{progress(props.studentData[0].achievement[5].ability)}
+          JavaScript:{progress(studentData[studentId].achievement[5].ability)}
         </li>
-        <li>React:{progress(props.studentData[0].achievement[7].ability)}</li>
-        <li>Node:{progress(props.studentData[0].achievement[9].ability)}</li>
-        <li>SQL:{progress(props.studentData[0].achievement[11].ability)}</li>
+        <li>React:{progress(studentData[studentId].achievement[7].ability)}</li>
+        <li>Node:{progress(studentData[studentId].achievement[9].ability)}</li>
+        <li>SQL:{progress(studentData[studentId].achievement[11].ability)}</li>
       </ul>
     </div>
   );
