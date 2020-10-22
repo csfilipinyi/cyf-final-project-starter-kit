@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/NavBar';
 import IconUser from '../assets/icons/user.svg';
-import IconArrow from '../assets/icons/IconArrowUp.svg';
+import IconUp from '../assets/icons/IconArrowUp.svg';
+import IconDown from '../assets/icons/IconArrowDown.svg'
 
 const UserNav = ({ open, setOpen, ...props }) => {
 	return (
@@ -10,7 +11,11 @@ const UserNav = ({ open, setOpen, ...props }) => {
 			<Container>
 				<IUser src={IconUser} alt='User'/>
 				<Text>Your Profile</Text>
-				<IArrow src={IconArrow} alt='User' onClick={() => setOpen(!open)}/>
+				{open?
+				<IArrow src={IconDown} alt='User' onClick={() => setOpen(!open)}/>
+				:
+				<IArrow src={IconUp} alt='User' onClick={() => setOpen(!open)}/>
+				}
 			</Container>
 			{open&&<NavBar open={open} />}
 		</>
