@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Modal from "./Modal";
-import useForm from "./useForm"
+import UseForm from "./UseForm"
 import "../App.css";
-import validate from "./validation"
+import validate from "./SignupValidation"
 
 const SignupForm = () => {
   
@@ -19,7 +19,7 @@ const SignupForm = () => {
     githubName: "",
     slackHandler: "",
   }
-const {handleChange, input, handleSubmit, errors, submit} = useForm(validate, intialState)
+const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, intialState)
  console.log(errors)
 
   return (
