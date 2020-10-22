@@ -49,7 +49,7 @@ const Home = () => {
 	useEffect(()=>{
 		console.log('xxx', userName)
 		userName&&history.push('/createprofile')
-		!userName&history.push('/notfound')
+		userName===false&history.push('/notfound')
 	},[userName])
 
     const onFailure = response => console.error(response);  

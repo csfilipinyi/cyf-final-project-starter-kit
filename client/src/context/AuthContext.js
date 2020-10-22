@@ -10,6 +10,7 @@ const types = {
     Set_Is_Loading: "Set_Is_Loading",
 	Set_Logged_In: "Set_UserName",
     Set_User_Profile: "Set_UserProfile",
+    Set_Is_UnAuthenticated:'Set_Is_UnAuthenticated',
     Set_Error: "Set_Error",
     Set_Logout:"Set_Logout"
 };
@@ -23,7 +24,9 @@ const authReducer = (state, action) => {
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_Logged_In:
 		return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
-	case types.Set_User_Profile:
+    case types.Set_Is_UnAuthenticated:
+            return { ...state, userName: false, isAuthenticated:true, isLoading: false }; 
+    case types.Set_User_Profile:
 		return { ...state, userProfile: action.payload, isAuthenticated:true, isLoading: false };
     case types.Set_Logout:
         return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
@@ -66,7 +69,7 @@ const AuthState = (props) =>{
                         dispatch({ type: types.Set_Logged_In, payload:userName}); 
                     }       
                 }else{
-                   dispatch({ type: types.Set_Is_Loading, payload:false }),  
+                   dispatch({ type: types.Set_Is_UnAuthenticated }),  
                    console.log('is not authenticated')     
                 }
             })
