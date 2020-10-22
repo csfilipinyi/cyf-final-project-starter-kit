@@ -30,6 +30,7 @@ const Navigator = styled.div`
     display:flex;
     margin-right:15%;
     margin-top:5px;
+    color: #0090FF;
     &.open{
         flex-directon:column;
         position:absolute;
@@ -50,15 +51,6 @@ const StyledList = styled.ul`
     display:flex;
     justify-content:space-around;
     width:100%;
-    li{
-        font-size:13px;
-        line-height:18px;     
-        &:last-child{
-            display:flex;
-            align-self:center;
-            margin-left:auto;
-        }
-    }
     &.open{
         flex-direction:column;
         margin-left:0;
@@ -66,12 +58,11 @@ const StyledList = styled.ul`
     }
 `;
 
-const StyledNavLink = styled.li`
+const StyledNavLink = styled(NavLink)`
     text-decoration:none;
-    color:#FFF;
-    background-color:${(props)=>props.theme.colors.primaryGreen};
+    color: #000000;
     font-family: Arial;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
     letter-spacing: 0;
     line-height: 26px;
@@ -79,9 +70,11 @@ const StyledNavLink = styled.li`
     padding:14px 20px;
     &:hover{
         text-decoration:none;
-        color:#FFF;
+        color: #000000;
         background-color:${(props)=>props.theme.colors.primaryGreen};
-
+    }
+    &:active{
+        color:#0090FF;
     }
 `;
 
