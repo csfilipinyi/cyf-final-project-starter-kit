@@ -49,8 +49,8 @@ const Home = () => {
 	useEffect(()=>{
 		console.log('xxx', userName)
 		userName&&history.push('/createprofile')
-		userName===false&history.push('/notfound')
-	},[userName])
+		isNotAuth&history.push('/notfound')
+	},[userName, isNotAuth])
 
     const onFailure = response => console.error(response);  
 

@@ -25,7 +25,7 @@ const authReducer = (state, action) => {
 	case types.Set_Logged_In:
 		return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
     case types.Set_Is_UnAuthenticated:
-            return { ...state, userName: false, isAuthenticated:true, isLoading: false }; 
+            return { ...state, userName: false, isAuthenticated:true, isLoading: false, isNotAuth:true }; 
     case types.Set_User_Profile:
 		return { ...state, userProfile: action.payload, isAuthenticated:true, isLoading: false };
     case types.Set_Logout:
@@ -41,6 +41,7 @@ const AuthState = (props) =>{
         userName : null,
         userProfile :null,
         isAuthenticated: false,
+        isNotAuth:false,
         isLoading:false,
 		error:null,
     }
