@@ -35,15 +35,15 @@ const Circle = styled.div`
 	border-radius:50%;
 	height: 36px;
 	width: 36px;
-	border:1px solid #0090FF;
+	border:3px solid #0090FF;
 	display:flex;
 	justify-content:center;
 	align-items:center;
 `
 
 const IUser = styled.img`
-	width:30px;
-	height:30px;
+	width:25px;
+	height:25px;
 	margin-right:8px;
 `;
 

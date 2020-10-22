@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="14px" height="7px" viewBox="0 0 14 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="16px" height="10px" viewBox="0 0 14 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>6F74AFD2-7350-4522-89A4-4EF95E21F534</title>
     <defs>
         <path d="M7,7 C6.772,7 6.545,6.923 6.36,6.768 L0.36,1.768 C-0.064,1.415 -0.122,0.784 0.232,0.36 C0.585,-0.064 1.215,-0.121 1.64,0.232 L7.011,4.708 L12.373,0.393 C12.803,0.047 13.433,0.115 13.779,0.545 C14.125,0.975 14.057,1.604 13.627,1.951 L7.627,6.779 C7.444,6.926 7.222,7 7,7" id="path-1"></path>
@@ -10,7 +10,7 @@
                 <mask id="mask-2" fill="white">
                     <use xlink:href="#path-1"></use>
                 </mask>
-                <use id="🎨-Icon-Сolor" fill="#C5CEE0" xlink:href="#path-1"></use>
+                <use id="🎨-Icon-Сolor" fill="#0090FF" xlink:href="#path-1"></use>
             </g>
         </g>
     </g>

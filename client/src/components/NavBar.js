@@ -1,19 +1,28 @@
-import React from 'react';
+import React, {useContext} from 'react';
 // import { Button } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavBar = ({ open }) => {
+    const history = useHistory()
+    const { logOut }= useContext(AuthContext);
+
+
+    const handleClick = ()=>{
+        logOut()
+        history.push('/')
+    }    
+
 	return (
 		<Navigator className={open ? 'open' : null}>
 			<StyledList className={open ? 'open' : null}>
-                <StyledNavLink exact to='/viewprofile'>
+                <StyledNavLink to='/viewprofile'>
                     View Your Profile
 				</StyledNavLink>
-                <StyledNavLink exact to='/editprofile'>
+                <StyledNavLink to='/editprofile'>
                     Edit Your Profile
 				</StyledNavLink>
-				<StyledNavLink exact to='/'>
+				<StyledNavLink to='/' onClick={handleClick}>
                     Log out
 				</StyledNavLink>
 			</StyledList>

@@ -76,6 +76,10 @@ const AuthState = (props) =>{
 			});
     }
 
+    const logOut = ()=>{
+        dispatch({ type:types.Set_LogOut});
+    }
+
     return (
 		<AuthContext.Provider
 			value={{
