@@ -88,7 +88,7 @@ const Header = styled.div`
 
 const GitHub = styled(GitHubLogin)`
 	height: 56px;
-	width: 220px;
+	width: 106px;
 	border-radius: 2px;
 	color:#fff;
 	margin-right:15%;
