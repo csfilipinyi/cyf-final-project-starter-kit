@@ -10,7 +10,7 @@ const UserNav = ({ open, setOpen, ...props }) => {
 			<Container>
 				<IUser src={IconUser} alt='User'/>
 				<Text>Your Profile</Text>
-				<IUser src={IconArrow} alt='User' onClick={() => setOpen(!open)}/>
+				<IArrow src={IconArrow} alt='User' onClick={() => setOpen(!open)}/>
 			</Container>
 			{open&&<NavBar open={open} />}
 		</>
@@ -21,6 +21,7 @@ export default UserNav;
 
 const Container = styled.div`
 	display:flex;
+	margin-right:15%;
 `
 const IUser = styled.img`
 	width:14px;
