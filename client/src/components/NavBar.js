@@ -7,8 +7,14 @@ const NavBar = ({ open }) => {
 	return (
 		<Navigator className={open ? 'open' : null}>
 			<StyledList className={open ? 'open' : null}>
-				<StyledNavLink exact to='/createprofile' variant="success">
-                    Log in
+                <StyledNavLink exact to='/viewprofile'>
+                    View Your Profile
+				</StyledNavLink>
+                <StyledNavLink exact to='/editprofile'>
+                    Edit Your Profile
+				</StyledNavLink>
+				<StyledNavLink exact to='/'>
+                    Log out
 				</StyledNavLink>
 			</StyledList>
 		</Navigator>
@@ -27,13 +33,14 @@ const Navigator = styled.div`
     &.open{
         flex-directon:column;
         position:absolute;
-        right:5px;
-        top:25px;
-        width:200px;
-        height:150px;
-        align-items:center;
+        right:0px;
+        top:100px;
+        width:252px;
+        height:165px;
+        align-items:flex-start;
         justify-content:flex-start;
-        background-color:white;
+        background-color: #FAFAFA;
+        box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2);
         z-index:1;
     }
 `;
@@ -59,7 +66,7 @@ const StyledList = styled.ul`
     }
 `;
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled.li`
     text-decoration:none;
     color:#FFF;
     background-color:${(props)=>props.theme.colors.primaryGreen};

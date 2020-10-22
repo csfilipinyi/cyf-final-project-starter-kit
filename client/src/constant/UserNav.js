@@ -12,9 +12,9 @@ const UserNav = ({ open, setOpen, ...props }) => {
 				<IUser src={IconUser} alt='User'/>
 				<Text>Your Profile</Text>
 				{open?
-				<IArrow src={IconDown} alt='User' onClick={() => setOpen(!open)}/>
+				<IArrow src={IconUp} alt='Arrow' onClick={() => setOpen(!open)}/>
 				:
-				<IArrow src={IconUp} alt='User' onClick={() => setOpen(!open)}/>
+				<IArrow src={IconDown} alt='Arrow' onClick={() => setOpen(!open)}/>
 				}
 			</Container>
 			{open&&<NavBar open={open} />}
