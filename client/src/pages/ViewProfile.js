@@ -11,7 +11,7 @@ const ViewProfile = () => {
 
 	return (
 		<Screen>
-			{profile?<ViewMyProfile profile={profile} />:<BasicDropDown />}
+            <ViewMyProfile profile={profile} />
 		</Screen>
 	);
 };

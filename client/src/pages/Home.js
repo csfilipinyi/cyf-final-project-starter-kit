@@ -53,7 +53,7 @@ const Home = () => {
 	return (
 		<Screen>
 			<Header nav='nav' />
-			<GitHubLogin clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
+			<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
 			redirectUri={'https://gd-auth-test.herokuapp.com/createprofile'}
