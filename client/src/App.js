@@ -26,7 +26,7 @@ export function App() {
             <Route exact path="/" component={LoginForm} />
             <Route path="/signupform" component={SignupForm} />
             {/* <LoginForm /> */}
-            <Route path="/skills" component={SkillsNav} />
+            <Route path="/skillsnav" component={SkillsNav} />
             <Route path="/modal" component={Modal} />
             <Route path="/MentorsView" component={MentorsView} />
           </div>
