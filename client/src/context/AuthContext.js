@@ -47,6 +47,7 @@ const AuthState = (props) =>{
     const baseUrl = 'https://dev-graduate-directory.herokuapp.com/api'
 
     const checkGraduate = (userName)=>{
+        console.log('context test')
         dispatch({ type: types.Set_Is_Loading }),       
         axios.get('https://gist.githubusercontent.com/OBakir90/ecab122e19b0292737d85699dab2696c/raw/ed9e2fa9066cd1c67d7248db75eb9912804b9ec3/graduates.json')
             .then(response=>response.json())

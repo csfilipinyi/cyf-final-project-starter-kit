@@ -24,7 +24,8 @@ const Home = () => {
       .then(res => res.json())
       .then(data => {
 		  checkGraduate(data)
-		  const graduatesList = graduates()
+		  console.log('isauth', isAuthenticated)
+		//   const graduatesList = graduates()
 		//   if(data in graduatesList){
 		// 	  console.log('graduate', data, isAuthenticated, 'list', graduatesList[data])
 		// 	 if(graduatesList[data]){
