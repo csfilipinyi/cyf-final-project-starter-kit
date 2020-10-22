@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Modal from "./Modal";
-import UseForm from "./UseForm"
+import useForm from "./useForm";
 import "../App.css";
-import validate from "./SignupValidation"
+import validate from "./SignupValidation";
 
 const SignupForm = () => {
-  
   const intialState = {
     firstName: "",
     surname: "",
@@ -18,9 +17,12 @@ const SignupForm = () => {
     classId: "",
     githubName: "",
     slackHandler: "",
-  }
-const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, intialState)
- console.log(errors)
+  };
+  const { handleChange, input, handleSubmit, errors, submit } = UseForm(
+    validate,
+    intialState
+  );
+  console.log(errors);
 
   return (
     <div>
@@ -37,7 +39,7 @@ const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, in
               onChange={handleChange}
               name="firstName"
             />
-            {errors.firstName && <p className = "error">*{errors.firstName} </p>}
+            {errors.firstName && <p className="error">*{errors.firstName} </p>}
             <label for="surname">Surname</label>
             <input
               type="text"
@@ -46,7 +48,7 @@ const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, in
               onChange={handleChange}
               name="surname"
             />
-            {errors.surname && <p className = "error">*{errors.surname} </p>}
+            {errors.surname && <p className="error">*{errors.surname} </p>}
             <label for="email">Email</label>
             <input
               type="email"
@@ -55,7 +57,7 @@ const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, in
               onChange={handleChange}
               name="email"
             />
-              {errors.email && <p className = "error">*{errors.email} </p>}
+            {errors.email && <p className="error">*{errors.email} </p>}
             <label for="password">password</label>
             <input
               type="password"
@@ -64,7 +66,7 @@ const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, in
               onChange={handleChange}
               name="password"
             />
-              {errors.password && <p className = "error">*{errors.password} </p>}
+            {errors.password && <p className="error">*{errors.password} </p>}
             <label for="">Confirm Password</label>
             <input
               type="password"
@@ -73,7 +75,9 @@ const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, in
               onChange={handleChange}
               name="confirmPassword"
             />
-             {errors.confirmPassword && <p className = "error">*{errors.confirmPassword} </p>}
+            {errors.confirmPassword && (
+              <p className="error">*{errors.confirmPassword} </p>
+            )}
             <label for="city">City</label>
             <input
               type="text"
@@ -82,7 +86,7 @@ const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, in
               onChange={handleChange}
               name="city"
             />
-             {errors.city && <p>{errors.city} </p>}
+            {errors.city && <p>{errors.city} </p>}
             <label for="classId">Class</label>
             <input
               type="number"
@@ -91,7 +95,7 @@ const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, in
               onChange={handleChange}
               name="classId"
             />
-             {errors.classId && <p>{errors.classId} </p>}
+            {errors.classId && <p>{errors.classId} </p>}
             <label for="githubName">Github Name</label>
             <input
               type="text"
@@ -107,20 +111,27 @@ const {handleChange, input, handleSubmit, errors, submit} = UseForm(validate, in
               value={input.slackHandler}
               onChange={handleChange}
               name="slackHandler"
-         
             />
 
-     <label for="role">Please select a role</label>
-            <select name="role"  onChange={handleChange} >
-            <option  value= "select" >Select</option>
-            <option  value= "Student" >Student</option>
-            <option  value= "Mentor" >Mentor</option>
+            <label for="role">Please select a role</label>
+            <select name="role" onChange={handleChange}>
+              <option value="select">Select</option>
+              <option value="Student">Student</option>
+              <option value="Mentor">Mentor</option>
             </select>
-            {errors.role && <p className = "error">*{errors.role} </p>}
+            {errors.role && <p className="error">*{errors.role} </p>}
             {/* <Link> */}
             {/* <input  to="/modal" type="submit" value="Submit" className="submit" /> */}
             {/* </Link> */}
-            <button to="/modal" className="submit" type="submit" value="Submit" className="submit">Submit</button>
+            <button
+              to="/modal"
+              className="submit"
+              type="submit"
+              value="Submit"
+              className="submit"
+            >
+              Submit
+            </button>
           </div>
         </form>
       )}
