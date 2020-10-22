@@ -16,11 +16,11 @@ CREATE TABLE github_accounts (
 );
 
 
-CREATE TABLE CV (
-    id              SERIAL PRIMARY KEY,
-    cv_file   BYTEA NOT NULL
+-- CREATE TABLE CV (
+--     id              SERIAL PRIMARY KEY,
+--     cv_file   BYTEA NOT NULL
     
-);
+-- );
 
 CREATE TABLE graduates (
   id       SERIAL PRIMARY KEY,
@@ -31,7 +31,10 @@ CREATE TABLE graduates (
   past_experience VARCHAR(120),
   employment_status BOOLEAN DEFAULT FALSE,
   organization VARCHAR(50),
-  cv_id integer references CV(id),
+  cv_link iVARCHAR(50),
+  linkden_link iVARCHAR(50),
+  github_link iVARCHAR(50),
+
   img  BYTEA,
   email VARCHAR(50),
   github_id integer references github_accounts(id)
