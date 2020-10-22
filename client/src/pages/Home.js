@@ -25,11 +25,11 @@ const Home = () => {
       .then(data => {
 		  const graduatesList = graduates()
 		  if(data in graduatesList){
-			  console.log('graduate', data, isAuthenticated)
+			  console.log('graduate', data, isAuthenticated, 'list', graduatesList[data])
 			graduatesList[data]?
 				setIsAuth(data)&&history.push('/viewprofile')&&console.log('hasprofile', data, isAuthenticated)
 				:
-				history.push('/createprofile')
+				history.push('/createprofile')&&console.log('hasntprofile', data, isAuthenticated)
 		  } else {
 			history.push('/notfound')
 		  }
@@ -48,16 +48,16 @@ const Home = () => {
 	return (
 		<Screen>
 			<Header nav='nav' />
-			<Introducing
-				header = 'Lorem ipsum dolor sit amet'
-				text = 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi'
-		  />	
-      	<GitHubLogin clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
+			<GitHubLogin clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
 			redirectUri={'https://gd-auth-test.herokuapp.com/createprofile'}
 			/>
-			<Container>
+			<Introducing
+				header = 'Lorem ipsum dolor sit amet'
+				text = 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi'
+		  />	
+    		<Container>
 				{isLoading ? <Text>Loading...</Text>
 					: allProfiles && allProfiles.map(( profile, i ) => {
 						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
@@ -69,6 +69,10 @@ const Home = () => {
 	)}
 
 export default Home;
+
+const GitHub = styled(GitHubLogin)`
+	background-color:red;				
+`
 
 const Screen =styled.div`
 	display:flex;
