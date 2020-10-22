@@ -1,7 +1,7 @@
 import React from "react";
 //import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import {useRoutes, A} from 'hookrouter';
-import SkillTracker from "./SkillTracker";
+import SkillTracker from "./SkillsTracker";
 
 
 const routes = {
@@ -14,7 +14,7 @@ const routes = {
    '/skills/sql': () => <SkillTracker  skill ="sql"/>
 };
 
-export default function Skills() {
+export default function SkillsNav() {
   const routeResult = useRoutes(routes);
   return (
     <div className="skills-container">

@@ -1,7 +1,7 @@
-export default function validation(input){
+export default function LoginValidation(input){
     let errors = {};
 
-    //emial
+   
     if(!input.email){
         errors.email = "Email required"
     }else if(!/\S+@\S+\.\S+/.test(input.email)){
