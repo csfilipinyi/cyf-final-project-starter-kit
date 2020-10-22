@@ -23,22 +23,21 @@ const Home = () => {
 	  fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${accessCode}`)
       .then(res => res.json())
       .then(data => {
+		  checkGraduate(data)
 		  const graduatesList = graduates()
-		  if(data in graduatesList){
-			  console.log('graduate', data, isAuthenticated, 'list', graduatesList[data])
-			 if(graduatesList[data]){
-				setIsAuth(data)
-				history.push('/viewprofile')
-				console.log('hasprofile', data, isAuthenticated)
-			 } else{
-				history.push('/createprofile')
-				console.log('hasntprofile', data, isAuthenticated)
-			 }		
-		  } else {
-			history.push('/notfound')
-		  }
-
-			//checkGraduate(data) will be called here
+		//   if(data in graduatesList){
+		// 	  console.log('graduate', data, isAuthenticated, 'list', graduatesList[data])
+		// 	 if(graduatesList[data]){
+		// 		setIsAuth(data)
+		// 		history.push('/viewprofile')
+		// 		console.log('hasprofile', data, isAuthenticated)
+		// 	 } else{
+		// 		history.push('/createprofile')
+		// 		console.log('hasntprofile', data, isAuthenticated)
+		// 	 }		
+		//   } else {
+		// 	history.push('/notfound')
+		//   }
 	   })
 	}
     const onFailure = response => console.error(response);  
