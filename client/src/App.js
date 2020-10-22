@@ -8,7 +8,6 @@ import SkillsNav from "./Pages/SkillsNav";
 import Modal from "./components/Modal";
 import MentorsView from "./Pages/MentorsView";
 
-
 export function App() {
   const [message, setMessage] = useState("Loading...");
 
@@ -19,7 +18,6 @@ export function App() {
   return (
     <BrowserRouter>
       <Switch>
-        
         <main role="main">
           <div>
             {/* <SignupForm /> */}
@@ -35,6 +33,5 @@ export function App() {
     </BrowserRouter>
   );
 }
-
 
 export default App;
