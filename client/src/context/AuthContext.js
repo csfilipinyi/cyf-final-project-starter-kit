@@ -50,7 +50,8 @@ const AuthState = (props) =>{
         dispatch({ type: types.Set_Is_Loading }),       
         axios.get('https://gist.githubusercontent.com/OBakir90/ecab122e19b0292737d85699dab2696c/raw/ed9e2fa9066cd1c67d7248db75eb9912804b9ec3/graduates.json')
             .then(response=>response.json())
-            .then(data=>{       
+            .then(data=>{     
+                console.log('graduatelist', data)  
                 const graduatesObject =data[0];     
                 if(userName in graduatesList){
                     dispatch({ type: types.Set_Logged_In, payload:userName}),       
@@ -68,6 +69,7 @@ const AuthState = (props) =>{
                       console.log('hasntprofile', data, isAuthenticated)
                    }		
                 } else {
+                    console.log('not found')
                   history.push('/notfound')
                 } 
             })
