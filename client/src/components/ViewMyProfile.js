@@ -23,7 +23,7 @@ const ViewMyProfile = () => {
 				<Description>
 				Dolorem ipsum quia dolor sit amet, excepturi sint  quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,.
 				</Description>
-				<SubHead>Emily’s skills</SubHead>
+				<SubHeads>Emily’s skills</SubHeads>
 					<SkillsContainer>
 						<SkillBox>HTML</SkillBox>
 						<SkillBox>CSS</SkillBox>
