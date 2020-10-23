@@ -56,7 +56,6 @@ const ProfileState = (props) =>{
 		dispatch({ type: types.Set_Is_Loading }),
 		axios.get(`https://gist.githubusercontent.com/OBakir90/9cf219c42e4d5794988e06b7ff5c3c8e/raw/319814850d688fb126d610b858a970cf8a53858b/graduateprofile.json`)
 			.then((response)=>{
-				console.log(response);
 				dispatch({ type: types.Set_All_Profiles, payload:response.data });
 			})
 			.catch((error)=>{

@@ -61,7 +61,7 @@ const AuthState = (props) =>{
         fetch('https://gist.githubusercontent.com/OBakir90/f8e29b4cafda937e884723470983c777/raw/68db2d010ad45ba0de91cad648f4a51e536f63da/status')
             .then(response=>response.json())
             .then(profile=>{     
-                    console.log(profile)
+                    console.log('profile', profile)
                     profile[0].status?
                     dispatch({ type: types.Set_UserName, payload:userName})
                     :     

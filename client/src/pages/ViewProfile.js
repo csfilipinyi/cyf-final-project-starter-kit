@@ -11,7 +11,10 @@ const ViewProfile = () => {
     const {isAuthenticated} = useContext(AuthContext)
     const {getProfile} = useContext(ProfileContext)
 
-    useEffect(getProfile,[])
+    useEffect(()=>{
+        getProfile
+    },[])
+
 	return (
 		<Screen>
             <Header isAuthenticated={isAuthenticated}/>
