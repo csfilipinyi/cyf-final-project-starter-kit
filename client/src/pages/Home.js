@@ -25,12 +25,14 @@ const Home = () => {
 	}
 
 	useEffect(()=>{
-		userName&&history.push('/viewprofile')
+		userName&&history.push('/xxxx');
+		console.log('effect1', userName)
 	},[userName])
 
 
 	useEffect(()=>{
-		isAuthenticated&&history.push('/createprofile')
+		console.log('effect', userName, isAuthenticated)
+		isAuthenticated&&history.push('/yyyy')
 		!isGraduate&&history.push('/notfound')
 	},[isAuthenticated, isGraduate])
 
