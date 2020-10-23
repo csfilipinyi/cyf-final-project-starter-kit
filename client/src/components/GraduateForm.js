@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import {Redirect, useHistory} from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from "yup";
 import FormField from "../constant/FormField";
@@ -22,6 +23,9 @@ const GraduateForm = () => {
 		addProfile(newProfile);
 	};
 
+	const cancelChanges = ()=>{
+		<Redirect to="/viewprofile"/>
+	} 
 	const deleteSkill = (e)=>{
 		e.preventDefault();
 		let remainedSkills = newSkills.filter((skill)=>skill!==e.target.value);
@@ -34,10 +38,12 @@ const GraduateForm = () => {
 		let event = e.key;
 		let word = e.target.value.trim().toUpperCase();
 		if(event==' '){
-			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills, word]);
+			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills ]);
 			setFieldValue('skills', '');
 		}
 	};
+
+
 
 
 

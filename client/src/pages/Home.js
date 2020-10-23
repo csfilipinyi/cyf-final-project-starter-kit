@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import {Redirect, useHistory} from 'react-router-dom';
+import {NavLink, Redirect, useHistory} from 'react-router-dom';
 import OverviewProfileCard from '../components/OverviewProfileCard';
 import ViewProfileDetail from '../components/ViewProfileDetail';
 import Introducing from '../components/Introducing';
@@ -25,6 +25,7 @@ const Home = () => {
 	useEffect(()=>{
 		userName&&history.push('/viewprofile')
 	},[userName])
+
 
 	useEffect(()=>{
 		isAuthenticated&&history.push('/createprofile')
