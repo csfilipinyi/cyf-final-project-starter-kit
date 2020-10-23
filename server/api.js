@@ -88,7 +88,6 @@ router.post("/graduates", function (req, res) {
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const github_name = req.body.githubName;
-  console.log(newFirstName, newSurname, github_name);
   Connection.query(
     `SELECT * FROM github_accounts WHERE account_name = $1`,
     [github_name],
@@ -168,20 +167,10 @@ router.put("/graduates/:id", function (req, res) {
   const github_id = parseInt(req.params.id);
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
-  const newCity = req.body.city;
-  const newPersonal_bio = req.body.personal_bio;
-  const newPast_experience = req.body.past_experience;
-  pool.query(
-    "update graduates set first_name=$1 ,surname=$2,city =$3,personal_bio=$4 ,past_experience=$5" +
-      "where github_id =$6",
-    [
-      newFirstName,
-      newSurname,
-      newCity,
-      newPersonal_bio,
-      newPast_experience,
-      github_id,
-    ],
+
+  Connection.query(
+    "update graduates set first_name=$1 ,surname=$2" + "where github_id =$3",
+    [newFirstName, newSurname, github_id],
     (error) => {
       if (error == undefined) {
         res.send("graduate " + github_id + " updated.");
@@ -192,14 +181,28 @@ router.put("/graduates/:id", function (req, res) {
 
 router.delete("/graduates/:id", function (req, res) {
   const github_id = parseInt(req.params.id);
-
   Connection.query(
-    "delete from graduates  where  github_id=$1",
+    "SELECT * FROM graduates where github_id=$1 ",
     [github_id],
-    (error) => {
-      if (error == undefined) {
-        res.send("graduat " + github_id + " deleted.");
-      }
+    (error, result) => {
+      if (result.rowCount > 0) graduateId = result.rows.id;
+      Connection.query(
+        "delete from graduate_skill  where  graduate_id=$1",
+        [graduateId],
+        (error) => {
+          if (error == undefined) {
+            Connection.query(
+              "delete from graduates  where  github_id=$1",
+              [github_id],
+              (error) => {
+                if (error == undefined) {
+                  res.send("graduat " + github_id + " deleted.");
+                }
+              }
+            );
+          }
+        }
+      );
     }
   );
 });
