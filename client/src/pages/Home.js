@@ -30,7 +30,7 @@ const Home = () => {
 
 
 	useEffect(()=>{
-		isAuthenticated&&history.push('/createprofile')
+		// isAuthenticated&&history.push('/createprofile')
 		!isGraduate&&history.push('/notfound')
 	},[isAuthenticated, isGraduate])
 
