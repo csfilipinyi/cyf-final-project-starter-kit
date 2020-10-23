@@ -63,7 +63,7 @@ const Container = styled.div`
 
 
 const Circle = styled.div`
-	height: 157px;
+	height: 100px;
 	width: 157px;
 	background-color: #D8D8D8;
 	border-radius:50%;
