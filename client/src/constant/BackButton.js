@@ -1,12 +1,19 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 import IconArrow from '../assets/icons/IconArrowLeft.svg'
 import styled from 'styled-components'
 
 const BackButton = () => {
+    const history = useHistory()
+
+    const handleClick = () =>{
+        history.goBack()
+    }
+
     return (
         <Container>
-            <Arrow src={IconArrow} alt='arrow'/>
-            <Text>Back</Text>
+            <Arrow src={IconArrow} alt='arrow' onClick={handleClick}/>
+            <Text onClick={handleClick}>Back</Text>
         </Container>
     )
 }

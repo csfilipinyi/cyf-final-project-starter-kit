@@ -1,24 +1,35 @@
 import React from 'react';
 import styled from "styled-components";
-
-import EditMyProfile from '../components/EditMyProfile';
+import GraduateForm from "../components/GraduateForm";
+import Header from '../components/Header';
+import Introducing from '../components/Introducing';
 
 const EditProfile = () => {
 	return (
-		<Container>
-			<EditMyProfile />
-		</Container>
+		<Screen>
+			<Header />
+			<Container>
+				<Introducing
+					header = 'Edit your profile'
+				/>
+				<GraduateForm />
+			</Container>
+		</Screen>
 	);
 };
 
 export default EditProfile;
 
-
-const Container =styled.div`
+const Screen =styled.div`
     width:100%;
     min-height:100vh;
-    background-color:#DFEDFA;
     display:flex;
     flex-direction:column;
-    align-items:center;
+`;
+
+const Container = styled.div`
+    display:flex;
+    flex-direction:column;
+    width:70%;
+    margin-left:15%;
 `;
