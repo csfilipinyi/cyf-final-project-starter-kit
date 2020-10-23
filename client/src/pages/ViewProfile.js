@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import styled from "styled-components";
 import {AuthContext} from '../context/AuthContext'
+import {ProfileContext} from '../context/ProfileContext'
 import Header from '../components/Header'
 import BackButton from '../constant/BackButton'
 import ViewMyProfile from '../components/ViewMyProfile'
@@ -8,7 +9,9 @@ import ViewMyProfile from '../components/ViewMyProfile'
 
 const ViewProfile = () => {
     const {isAuthenticated} = useContext(AuthContext)
+    const {getProfile} = useContext(ProfileContext)
 
+    useEffect(getProfile,[])
 	return (
 		<Screen>
             <Header isAuthenticated={isAuthenticated}/>

@@ -26,7 +26,6 @@ const Home = () => {
 
 	useEffect(()=>{
 		userName&&history.push('/viewprofile')
-		getProfile()
 	},[userName])
 
 
