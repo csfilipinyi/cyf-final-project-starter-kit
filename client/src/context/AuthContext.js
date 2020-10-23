@@ -63,7 +63,7 @@ const AuthState = (props) =>{
             .then(profile=>{     
                     console.log(profile)
                     profile[0].status?
-                    dispatch({ type: types.Set_UserName, payload:data})
+                    dispatch({ type: types.Set_UserName, payload:profile})
                     :     
                     dispatch({ type: types.Set_Logged_In, payload:userName});   
             })
