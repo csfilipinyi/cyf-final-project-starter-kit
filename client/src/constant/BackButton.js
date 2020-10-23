@@ -16,6 +16,7 @@ export default BackButton
 const Container =styled.div`
     display:flex;
     margin-left:15%;
+    margin-top:55px;
 `
 
 const Arrow =styled.img`

@@ -43,7 +43,7 @@ const StyleButton = styled(Button)`
         color:${(props)=>props.theme.colors.primaryGreen};
     }
     &.lg{
-        height:40px;
+        height:56px;
         width:155px;
         color: #FFFFFF;
         font-family: Arial;

@@ -57,7 +57,7 @@ export default ViewMyProfile;
 const Container = styled.div`
 	display:flex;
 	width:70%;
-	margin-top:40px 15px;
+	margin:48px 15%;
 `;
 
 
@@ -65,7 +65,7 @@ const Circle = styled.div`
 	height: 157px;
 	width: 157px;
 	background-color: #D8D8D8;
-	border-radius:40%;
+	border-radius:50%;
 `
 
 const SubCon=styled.div`
