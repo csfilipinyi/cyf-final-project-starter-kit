@@ -7,6 +7,7 @@ import LoginForm from "./components/LoginForm";
 import SkillsNav from "./Pages/SkillsNav";
 import Modal from "./components/Modal";
 import MentorsView from "./Pages/MentorsView";
+import MentorsEdit from "./Pages/MentorsEdit";
 
 export function App() {
   const [message, setMessage] = useState("Loading...");
@@ -27,6 +28,7 @@ export function App() {
             <Route path="/skills" component={SkillsNav} />
             <Route path="/modal" component={Modal} />
             <Route path="/MentorsView" component={MentorsView} />
+            <Route path="/MentorsEdit" component={MentorsEdit} />
           </div>
         </main>
       </Switch>
