@@ -12,7 +12,7 @@ import styled from 'styled-components';
 const GraduateForm = () => {
 	let history = useHistory()
 	const [newSkills, setNewSkills] = useState([]);
-	const { profiles, addProfile, profile, editProfile }  = useContext(ProfileContext);
+	const { profiles, addProfile, profile}  = useContext(ProfileContext);
 
 	const handleSubmit = (values) => {
 		const { firstName, lastName, skills } = values;
@@ -24,10 +24,10 @@ const GraduateForm = () => {
 		addProfile(newProfile);
 	};
 
-	const cancelChanges = ()=>{
-		history.push("/viewprofile")
-	} 
-	
+	const handleReset = ()=>{
+		history.goBack();
+	};
+
 	const deleteSkill = (e)=>{
 		e.preventDefault();
 		let remainedSkills = newSkills.filter((skill)=>skill!==e.target.value);
@@ -85,7 +85,7 @@ const GraduateForm = () => {
 							/>
 						</StyledForm>
 						<ButtonContainer>
-							<StyledButton name='Cancel' className='md' handleClick={ cancelChanges }  />
+							<StyledButton name='Cancel' handleClick={props.handleReset} />
 							<StyledButton name='Save' className='sm' handleClick={ props.handleSubmit}  />
 						</ButtonContainer>
 					</>
