@@ -69,6 +69,7 @@ const ProfileState = (props) =>{
 		dispatch({ type: types.Set_Is_Loading });
 		axios.get(`https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json`)
 			.then((response)=>{
+				console.log(response);
 				dispatch({ type: types.Set_Profile, payload:response.data });
 			})
 			.catch((error)=>{
