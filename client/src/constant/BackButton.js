@@ -2,10 +2,10 @@ import React from 'react'
 import IconArrow from '../assets/icons/IconArrowLeft.svg'
 import styled from 'styled-components'
 
-const BackButton = (props) => {
+const BackButton = ({handleClick}) => {
   
     return (
-        <Container onClick={props.handleClick}>
+        <Container onClick={handleClick}>
             <Arrow src={IconArrow} alt='arrow' />
             <Text>Back</Text>
         </Container>
@@ -32,6 +32,4 @@ const Text=styled.p`
     font-family: Lato;
     font-size: 20px;
     font-weight: bold;
-    letter-spacing: 0;
-    line-height: 24px;
 `
