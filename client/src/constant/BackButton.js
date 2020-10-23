@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const BackButton = ({handleClick}) => {
   
     return (
-        <Container onClick={handleClick}>
+        <Container to='/'>
             <Arrow src={IconArrow} alt='arrow' />
             <Text>Back</Text>
         </Container>
