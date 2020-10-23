@@ -6,8 +6,8 @@ import styled from 'styled-components'
 const BackButton = ({isAuthenticated}) => {
 
     const handleClick = () =>{
-        console.log('clicked arrow', isAuthenticated)
-        isAuthenticated?<Redirect to='/viewallprofiles'/>:<Redirect to='/'/>
+        console.log('clicked arrow', isAuthenticated);
+        return isAuthenticated?<Redirect to='/viewallprofiles'/>:<Redirect to='/'/>
     }
 
     return (
