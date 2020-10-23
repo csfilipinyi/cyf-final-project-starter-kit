@@ -21,6 +21,7 @@ function progress(params) {
   }
 }
 
+
 function BoxDisplay({ studentId, studentData }) {
   console.log(studentData[1]);
 
@@ -42,7 +43,7 @@ function BoxDisplay({ studentId, studentData }) {
         <li>SQL:{progress(studentData[studentId].achievement[11].ability)}</li>
       </ul>
     </div>
+
   );
 }
-
 export default BoxDisplay;
