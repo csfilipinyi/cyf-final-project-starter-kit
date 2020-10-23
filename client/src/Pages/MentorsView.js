@@ -30,9 +30,11 @@ function MentorsView() {
 
         })}
       </ul>
-      <div className="skills-container">
+      {studentId && (
+    <div className="skills-container">
         <BoxDisplay studentData={dataTesting} studentId={studentId} />
-      </div>
+    </div>
+)}
     </div>
   );
 }
