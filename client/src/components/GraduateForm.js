@@ -10,6 +10,7 @@ import styled from 'styled-components';
 
 
 const GraduateForm = () => {
+	let history = useHistory()
 	const [newSkills, setNewSkills] = useState([]);
 	const { profiles, addProfile, profile, editProfile }  = useContext(ProfileContext);
 
@@ -24,7 +25,7 @@ const GraduateForm = () => {
 	};
 
 	const cancelChanges = ()=>{
-		<Redirect to="/viewprofile"/>
+		history.push("/viewprofile")
 	} 
 	const deleteSkill = (e)=>{
 		e.preventDefault();
@@ -42,10 +43,6 @@ const GraduateForm = () => {
 			setFieldValue('skills', '');
 		}
 	};
-
-
-
-
 
 	const initialValue = profile || { firstName:'', lastName:'', skills:'' };
 
