@@ -17,6 +17,8 @@ const Home = () => {
 	const { getAllProfiles, getProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
 	const { fetchUserName, isAuthenticated, userName, isGraduate} = useContext(AuthContext);
 
+	console.log('username', userName, 'pr', profile, isAuthenticated)
+
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
 		fetchUserName(accessCode);
@@ -24,6 +26,7 @@ const Home = () => {
 
 	useEffect(()=>{
 		userName&&history.push('/viewprofile')
+		getProfile()
 	},[userName])
 
 
