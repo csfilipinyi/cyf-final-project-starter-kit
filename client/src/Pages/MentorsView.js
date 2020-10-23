@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dataTesting from "../dataTesting.json";
 import BoxDisplay from "../components/BoxDisplay";
-//import { useParams } from "react-router";
 import { useLocation } from "react-router-dom";
 
 
@@ -19,9 +18,6 @@ function MentorsView() {
       <ul>
         {dataTesting.map((person, index) => {
 
-       
-
-          //console.log(person);
           return (
             <li id={index}>
               <a href={`./MentorsView?studentId=${index}`}>{person.name}</a>
