@@ -13,7 +13,7 @@ const GraduateForm = () => {
 	let history = useHistory()
 	const [newSkills, setNewSkills] = useState([]);
 	const { profiles, addProfile, profile}  = useContext(ProfileContext);
-
+	console.log('skills', newSkills)
 	const handleSubmit = (values) => {
 		const { firstName, lastName, skills } = values;
 		const newProfile ={
@@ -33,14 +33,14 @@ const GraduateForm = () => {
 		let remainedSkills = newSkills.filter((skill)=>skill!==e.target.value);
 		setNewSkills(remainedSkills);
 	};
-	const handleValidate =async (e,setFieldValue)=>{
+	const handleValidate =async(e,setFieldValue)=>{
 		e.persist();
 		const res = await skills();
 		const response= res.map((x)=>x.toUpperCase());
 		let event = e.key;
 		let word = e.target.value.trim().toUpperCase();
 		if(event==' '){
-			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills ]);
+			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills, word ]);
 			setFieldValue('skills', '');
 		}
 	};
