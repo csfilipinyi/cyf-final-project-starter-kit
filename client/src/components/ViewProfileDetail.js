@@ -28,7 +28,7 @@ const Container = styled.div`
     position:absolute;
     top:40%;
     left:40%;
-    background-color:gray;
+	background-color:gray;
 `;
 
 

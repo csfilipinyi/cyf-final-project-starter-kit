@@ -45,9 +45,12 @@ const StyleButton = styled(Button)`
     &.lg{
         height:40px;
         width:155px;
-        font-size:0.8rem;
-        padding:0;
-        margin-top:20px;
+        color: #FFFFFF;
+        font-family: Arial;
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 0;
+        line-height: 26px;
     }
     &:active{
         background-color:#red;

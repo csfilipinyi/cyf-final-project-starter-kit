@@ -1,10 +1,11 @@
 import React from 'react'
+import IconArrow from '../assets/icons/IconArrowLeft.svg'
 import styled from 'styled-components'
 
 const BackButton = () => {
     return (
         <Container>
-            <Arrow/>
+            <Arrow src={IconArrow} alt='arrow'/>
             <Text>Back</Text>
         </Container>
     )
@@ -14,18 +15,11 @@ export default BackButton
 
 const Container =styled.div`
     display:flex;
+    margin-left:15%;
 `
 
-const Arrow =styled.div`
-  width: 24px;
-  border: 1px solid #0090FF;
-  background-color: #0090FF;
-  &::before{
-      right:0;
-      width:10px;
-      height:10px;
-      background-color:red;
-  }
+const Arrow =styled.img`
+
 `
 
 const Text=styled.p`
