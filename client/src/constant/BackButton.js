@@ -1,13 +1,13 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
+import {Redirect, useHistory} from 'react-router-dom'
 import IconArrow from '../assets/icons/IconArrowLeft.svg'
 import styled from 'styled-components'
 
 const BackButton = ({isAuthenticated}) => {
-
+    const history = useHistory()
     const handleClick = () =>{
         console.log('clicked arrow', isAuthenticated);
-        return isAuthenticated?<Redirect to='/viewallprofiles'/>:<Redirect to='/'/>
+        isAuthenticated?history.push('/viewallprofiles'):history.push('/')
     }
 
     return (
