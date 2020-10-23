@@ -6,6 +6,7 @@ import styled from 'styled-components'
 const BackButton = ({isAuthenticated}) => {
 
     const handleClick = () =>{
+        console.log('clicked arrow')
         isAuthenticated?<Redirect to='/viewallprofiles'/>:<Redirect to='/'/>
     }
 
@@ -28,7 +29,7 @@ const Container =styled.div`
 `
 
 const Arrow =styled.img`
-
+    
 `
 
 const Text=styled.p`
