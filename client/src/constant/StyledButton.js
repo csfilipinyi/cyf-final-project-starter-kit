@@ -44,7 +44,7 @@ const StyleButton = styled(Button)`
     }
     &.lg{
         height:40px;
-        width:120px;
+        width:155px;
         font-size:0.8rem;
         padding:0;
         margin-top:20px;

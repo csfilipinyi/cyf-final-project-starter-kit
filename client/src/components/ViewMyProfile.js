@@ -19,7 +19,7 @@ const ViewMyProfile = () => {
 			<Circle/>
 			<SubCon>
 				<Name>{'Emily Bradford'}</Name>
-				{isAuthenticated&&<StyledButton/>}
+				{isAuthenticated&&<StyledButton name='Edit profile' handleClick={handleClick} className='lg'/>}
 				<Description>
 				Dolorem ipsum quia dolor sit amet, excepturi sint  quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,.
 				</Description>
@@ -57,8 +57,7 @@ export default ViewMyProfile;
 const Container = styled.div`
 	display:flex;
 	width:70%;
-	margin-top:40px;
-	margin-left:15%;
+	margin-top:40px 15px;
 `;
 
 
@@ -66,11 +65,11 @@ const Circle = styled.div`
 	height: 157px;
 	width: 157px;
 	background-color: #D8D8D8;
-	border-radius:50%;
+	border-radius:40%;
 `
 
 const SubCon=styled.div`
-	
+	margin-left:36px;
 `
 
 const Name =styled.p`
@@ -100,12 +99,14 @@ const SubHeads =styled.p`
 
 const SkillsContainer=styled.div`
 	display:flex;
+	margin-bottom:40px;
 `
 
 const SkillBox = styled.div`
 	border: 1px solid #DEDEDE;
 	border-radius: 2px;
 	background-color: #F3F3F3;
+	margin-right:16px;
 `
 
 const SocialCon =styled.div`

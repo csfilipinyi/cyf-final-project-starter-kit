@@ -20,8 +20,7 @@ export default ViewProfile;
 const Screen =styled.div`
     width:100%;
     min-height:100vh;
-    background-color:#DFEDFA;
     display:flex;
     flex-direction:column;
-    align-items:center;
+    align-items:flex-start;
 `;
