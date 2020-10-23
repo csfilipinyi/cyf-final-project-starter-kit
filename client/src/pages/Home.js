@@ -24,7 +24,7 @@ const Home = () => {
 	}
 
 	useEffect(()=>{
-		userName&&history.push('/viewprofile');
+		userName&&<Redirect to='/viewprofile'/>;
 		!userName&&isAuthenticated&&history.push('/createprofile')
 		!isGraduate&&history.push('/notfound')
 		console.log('effect1', userName)

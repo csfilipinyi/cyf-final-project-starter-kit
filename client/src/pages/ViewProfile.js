@@ -12,6 +12,7 @@ const ViewProfile = () => {
     const {getProfile} = useContext(ProfileContext)
 
     useEffect(()=>{
+        console.log('viewprofile')
         getProfile()
     },[])
 
