@@ -90,12 +90,12 @@ router.post("/graduates", function (req, res) {
   const github_name = req.body.githubName;
   console.log(newFirstName, newSurname, github_name);
   Connection.query(
-    `SELECT id FROM github_accounts WHERE account_name = $1`,
+    `SELECT * FROM github_accounts WHERE account_name = $1`,
     [github_name],
     (err, result) => {
       console.log(result.rowCount);
       if (result.rowCount > 0) {
-        const github_id = parsInt(result.rows[0]);
+        const github_id = result.rows[0].id;
         console.log(github_id);
         Connection.query(
           `insert into graduates (first_name, surname, github_id) values` +
