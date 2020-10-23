@@ -1,13 +1,12 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import IconArrow from '../assets/icons/IconArrowLeft.svg'
 import styled from 'styled-components'
 
-const BackButton = () => {
-    const history = useHistory()
+const BackButton = ({isAuthenticated}) => {
 
     const handleClick = () =>{
-        history.push('/')
+        isAuthenticated?<Redirect to='/viewallprofiles'/>:<Redirect to='/'/>
     }
 
     return (
@@ -22,6 +21,8 @@ export default BackButton
 
 const Container =styled.div`
     display:flex;
+    justify-content:center;
+    align-items:center;
     margin-left:15%;
     margin-top:55px;
 `

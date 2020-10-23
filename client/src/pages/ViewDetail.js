@@ -1,15 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components'
+import {AuthContext} from '../context/AuthContext'
 import Header from '../components/Header'
 import BackButton from '../constant/BackButton'
 import ViewMyProfile from '../components/ViewMyProfile'
 
 const ViewDetail = () => {
+    const {isAuthenticated} = useContext(AuthContext)
+
     return (
         <Screen>
-            <Header/>
-            <BackButton/>
-            <ViewMyProfile/>
+            <Header isAuthenticated={isAuthenticated}/>
+            <BackButton isAuthenticated={isAuthenticated}/>
+            <ViewMyProfile isAuthenticated={isAuthenticated}/>
         </Screen>
     )
 }

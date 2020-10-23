@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from './pages/Login'
 import CreateProfile from "./pages/CreateProfile";
 import ViewDetail from './pages/ViewDetail'
+import ViewAllProfiles from './pages/ViewAllProfiles'
 import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
 import NotEligible from './pages/NotEligible'
@@ -17,6 +18,7 @@ const Routes = () => {
 				<Route path='/login' component={Login} />
 				<Route path='/viewdetail' component={ViewDetail} />
 				<Route path='/createprofile' component={CreateProfile} />
+				<Route path='/viewallprofiles' component={ViewAllProfiles}/>
 				<Route path='/viewprofile' component={ViewProfile} />
 				<Route path='/editprofile' component={EditProfile} />
 				<Route path='/notfound' component={NotEligible} />
