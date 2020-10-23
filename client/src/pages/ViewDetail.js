@@ -11,8 +11,7 @@ const ViewDetail = () => {
     let history = useHistory()
 
     const handleClick = () =>{
-        history.push('/')
-        console.log('pushed')
+        history.goBack('/')
     }    
 
     return (

@@ -13,7 +13,8 @@ const GraduateForm = () => {
 	let history = useHistory()
 	const [newSkills, setNewSkills] = useState([]);
 	const { profiles, addProfile, profile}  = useContext(ProfileContext);
-	console.log('skills', newSkills)
+	console.log('profile', profile)
+	
 	const handleSubmit = (values) => {
 		const { firstName, lastName, skills } = values;
 		const newProfile ={
@@ -25,7 +26,7 @@ const GraduateForm = () => {
 	};
 
 	const handleReset = ()=>{
-		history.goBack();
+		history.push('/viewprofile');
 	};
 
 	const deleteSkill = (e)=>{
@@ -33,6 +34,7 @@ const GraduateForm = () => {
 		let remainedSkills = newSkills.filter((skill)=>skill!==e.target.value);
 		setNewSkills(remainedSkills);
 	};
+
 	const handleValidate =async(e,setFieldValue)=>{
 		e.persist();
 		const res = await skills();
@@ -49,6 +51,7 @@ const GraduateForm = () => {
 
 	return (
 		<Container >
+			{console.log('initial', initialValue)}
 			<Formik
 				initialValues={initialValue}
 				onSubmit={(values) => handleSubmit(values)}
@@ -56,7 +59,6 @@ const GraduateForm = () => {
 				onReset = {handleReset}
 			>
 				{(props) => (
-
 					<>
 						<StyledForm id='formLogin' noValidate>
 							<FormField

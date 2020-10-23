@@ -22,15 +22,15 @@ const Home = () => {
 		fetchUserName(accessCode);
 	}
 
-	// useEffect(()=>{
-	// 	userName&&history.push('/viewprofile')
-	// },[userName])
+	useEffect(()=>{
+		userName&&history.push('/viewprofile')
+	},[userName])
 
 
-	// useEffect(()=>{
-	// 	isAuthenticated&&history.push('/createprofile')
-	// 	!isGraduate&&history.push('/notfound')
-	// },[isAuthenticated, isGraduate])
+	useEffect(()=>{
+		isAuthenticated&&history.push('/createprofile')
+		!isGraduate&&history.push('/notfound')
+	},[isAuthenticated, isGraduate])
 
     const onFailure = response => console.error(response);  
 
