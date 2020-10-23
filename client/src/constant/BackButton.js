@@ -17,10 +17,15 @@ const Container =styled.div`
 `
 
 const Arrow =styled.div`
-  height: 9px;
   width: 24px;
   border: 1px solid #0090FF;
   background-color: #0090FF;
+  &::before{
+      right:0;
+      width:10px;
+      height:10px;
+      background-color:red;
+  }
 `
 
 const Text=styled.p`

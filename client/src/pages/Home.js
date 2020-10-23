@@ -15,7 +15,7 @@ const Home = () => {
 	let history = useHistory();
 
 	const { getAllProfiles, getProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, isAuthenticated, userName, isGraduate }= useContext(AuthContext);
+	const { fetchUserName, isAuthenticated, userName, isGraduate} = useContext(AuthContext);
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;

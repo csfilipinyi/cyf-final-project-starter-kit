@@ -18,7 +18,7 @@ const ViewMyProfile = () => {
 		<Container>
 			<Circle/>
 			<SubCon>
-				<Name>{profile.name||'Emily Bradford'}</Name>
+				<Name>{'Emily Bradford'}</Name>
 				{isAuthenticated&&<StyledButton/>}
 				<Description>
 				Dolorem ipsum quia dolor sit amet, excepturi sint  quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,.
@@ -58,6 +58,7 @@ const Container = styled.div`
 	display:flex;
 	width:70%;
 	margin-top:40px;
+	margin-left:15%;
 `;
 
 
