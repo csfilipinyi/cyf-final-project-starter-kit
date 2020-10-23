@@ -18,19 +18,20 @@ const ViewMyProfile = () => {
 		<Container>
 			<Circle/>
 			<SubCon>
-				<Name>{'Emily Bradford'}</Name>
+				<Name>{profile.first_name, profile.last_name} </Name>
 				{isAuthenticated&&<StyledButton name='Edit profile' handleClick={handleClick} className='lg'/>}
 				<Description>
 				Dolorem ipsum quia dolor sit amet, excepturi sint  quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,.
 				</Description>
-				<SubHeads>Emily’s skills</SubHeads>
+				<SubHeads>{profile.first_name}’s skills</SubHeads>
 					<SkillsContainer>
-						<SkillBox>HTML</SkillBox>
-						<SkillBox>CSS</SkillBox>
-						<SkillBox>JavaScript</SkillBox>
-						<SkillBox>jQuery</SkillBox>
+						{profile.skills.map((skill)=>{
+							return (
+								<SkillBox>{skill}</SkillBox>	
+							)
+						})}
 					</SkillsContainer>
-				<SubHeads>Find Emily</SubHeads>
+					<SubHeads>Find {profile.first_name}</SubHeads>
 				<SocialCon>
 					<SocialSubCon>
 						<SocialIcon/>
