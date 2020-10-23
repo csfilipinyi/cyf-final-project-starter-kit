@@ -8,8 +8,6 @@ import avatar from '../assets/icons/avatar.svg';
 
 const OverviewProfileCard = ({ profile, getProfile }) => {
 
-	const skills = ['HTML', 'CSS', 'JavaScript', 'React.Js'];
-
 	const handleClick = (name)=>{
 		getProfile(name);
 	};
