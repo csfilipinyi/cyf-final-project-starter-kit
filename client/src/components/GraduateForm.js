@@ -86,7 +86,7 @@ const GraduateForm = () => {
 							/>
 						</StyledForm>
 						<ButtonContainer>
-							<StyledButton name='Cancel' className='lg' handleClick={props.handleReset} />
+							<StyledButton name='Cancel' className='md' handleClick={props.handleReset} />
 							<StyledButton name='Save' className='sm' handleClick={ props.handleSubmit}  />
 						</ButtonContainer>
 					</>
