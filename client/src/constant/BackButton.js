@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import IconArrow from '../assets/icons/IconArrowLeft.svg'
 import styled from 'styled-components'
 
@@ -14,7 +15,7 @@ const BackButton = ({handleClick}) => {
 
 export default BackButton
 
-const Container =styled.div`
+const Container =styled(Link)`
     display:flex;
     justify-content:center;
     align-items:center;
@@ -24,7 +25,8 @@ const Container =styled.div`
 `
 
 const Arrow =styled.img`
-
+    width:24px;
+    height:9px;
 `
 
 const Text=styled.p`
