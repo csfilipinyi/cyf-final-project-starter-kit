@@ -1,19 +1,13 @@
 import React from 'react'
-import {Redirect, useHistory} from 'react-router-dom'
 import IconArrow from '../assets/icons/IconArrowLeft.svg'
 import styled from 'styled-components'
 
-const BackButton = ({isAuthenticated}) => {
-    const history = useHistory()
-    const handleClick = () =>{
-        console.log('clicked arrow', isAuthenticated);
-        isAuthenticated?history.push('/viewallprofiles'):history.push('/')
-    }
-
+const BackButton = (props) => {
+  
     return (
-        <Container>
-            <Arrow src={IconArrow} alt='arrow' onClick={handleClick}/>
-            <Text onClick={handleClick}>Back</Text>
+        <Container onClick={props.handleClick}>
+            <Arrow src={IconArrow} alt='arrow' />
+            <Text>Back</Text>
         </Container>
     )
 }
@@ -26,6 +20,7 @@ const Container =styled.div`
     align-items:center;
     margin-left:15%;
     margin-top:55px;
+    cursor:pointer;
 `
 
 const Arrow =styled.img`
