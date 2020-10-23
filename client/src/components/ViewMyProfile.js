@@ -30,7 +30,7 @@ const ViewMyProfile = () => {
 						<SkillBox>JavaScript</SkillBox>
 						<SkillBox>jQuery</SkillBox>
 					</SkillsContainer>
-				<SubHead>Find Emily</SubHead>
+				<SubHeads>Find Emily</SubHeads>
 				<SocialCon>
 					<SocialSubCon>
 						<SocialIcon/>
