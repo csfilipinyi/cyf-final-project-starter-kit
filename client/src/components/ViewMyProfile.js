@@ -18,14 +18,14 @@ const ViewMyProfile = () => {
 		<Container>
 			<Circle/>
 			<SubCon>
-				<Name>{profile.first_name, profile.last_name} </Name>
+				<Name>{profile.first_name} {profile.last_name}</Name>
 				{isAuthenticated&&<StyledButton name='Edit profile' handleClick={handleClick} className='lg'/>}
 				<Description>
 				Dolorem ipsum quia dolor sit amet, excepturi sint  quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,.
 				</Description>
 				<SubHeads>{profile.first_name}’s skills</SubHeads>
 					<SkillsContainer>
-						{profile.skills.map((skill)=>{
+						{profile.skills&&profile.skills.map((skill)=>{
 							return (
 								<SkillBox>{skill}</SkillBox>	
 							)
