@@ -53,6 +53,7 @@ const GraduateForm = () => {
 				initialValues={initialValue}
 				onSubmit={(values) => handleSubmit(values)}
 				// validationSchema={ValidationSchema}
+				onReset = {handleReset}
 			>
 				{(props) => (
 
@@ -85,7 +86,7 @@ const GraduateForm = () => {
 							/>
 						</StyledForm>
 						<ButtonContainer>
-							<StyledButton name='Cancel' handleClick={props.handleReset} />
+							<StyledButton name='Cancel' className='lg' handleClick={props.handleReset} />
 							<StyledButton name='Save' className='sm' handleClick={ props.handleSubmit}  />
 						</ButtonContainer>
 					</>
