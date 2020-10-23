@@ -84,32 +84,31 @@ router.get("/graduates", (_, res, next) => {
   });
 });
 // create new profile
-router.post("/graduates", (req, res, next) => {
+router.post("/graduates", function (req, res) {
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const github_name = req.body.githubName;
+  console.log(newFirstName, newSurname, github_name);
   Connection.query(
-    "SELECT id FROM github_accounts WHERE account_name=$1",
+    `SELECT id FROM github_accounts WHERE account_name = $1`,
     [github_name],
     (err, result) => {
       console.log(result.rowCount);
       if (result.rowCount > 0) {
-        const github_id = parsInt(result.rows[0].id);
+        const github_id = parsInt(result.rows[0]);
         console.log(github_id);
         Connection.query(
-          "insert into graduates (first_name, surname, github_id) values" +
-            "($1,$2,$3)",
+          `insert into graduates (first_name, surname, github_id) values` +
+            `($1,$2,$3)`,
           [newFirstName, newSurname, github_id],
           (error, result) => {
             res.json(result.rows);
           }
         );
-        Connection.connect((err) => {
-          if (err) {
-            return next(err);
-          }
+      } else
+        res.send({
+          message: "this is  github account does not belong to a CYF graduates",
         });
-      }
     }
   );
 });
