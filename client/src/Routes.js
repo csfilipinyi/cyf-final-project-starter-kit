@@ -9,8 +9,6 @@ import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
 import NotEligible from './pages/NotEligible'
 
-import { ProtectedRoute } from './authentication/ProtectedRoute'
-
 const Routes = () => {
 	return (
 		<BrowserRouter>
