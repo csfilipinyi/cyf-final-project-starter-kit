@@ -27,6 +27,7 @@ const GraduateForm = () => {
 	const cancelChanges = ()=>{
 		history.push("/viewprofile")
 	} 
+	
 	const deleteSkill = (e)=>{
 		e.preventDefault();
 		let remainedSkills = newSkills.filter((skill)=>skill!==e.target.value);
