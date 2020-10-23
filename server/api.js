@@ -63,8 +63,6 @@ router.get("/callback", async (req, res) => {
   }
 });
 
-//const githubName = "Buchrateka1984";
-
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
     if (err) {
@@ -88,11 +86,13 @@ router.post("/graduates", function (req, res) {
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const github_name = req.body.githubName;
+  //checking if the user is existed in our github table
   Connection.query(
     `SELECT * FROM github_accounts WHERE account_name = $1`,
     [github_name],
     (err, result) => {
       console.log(result.rowCount);
+      //if exists so he can create profile
       if (result.rowCount > 0) {
         const github_id = result.rows[0].id;
         console.log(github_id);
@@ -104,6 +104,7 @@ router.post("/graduates", function (req, res) {
             res.json(result.rows);
           }
         );
+        //otherwise he can not
       } else
         res.send({
           message: "this is  github account does not belong to a CYF graduates",
@@ -133,16 +134,15 @@ router.get("/accounts/:name", (req, res, next) => {
             }
           );
         } else
-          res.send({
-            message:
-              "this is  github account does not belong to a CYF graduates",
-          });
+          res
+            .status(404)
+            .send("this is  github account does not belong to a CYF graduates");
       }
     );
   });
 });
 
-router.get("/graduate/:id", (req, res, next) => {
+router.get("/graduates/:id", (req, res, next) => {
   const github_id = parseInt(req.params.id);
   Connection.connect((err) => {
     if (err) {
@@ -155,7 +155,7 @@ router.get("/graduate/:id", (req, res, next) => {
         if (result.rowCount > 0) res.json(result.rows);
         else
           res
-            .status(400)
+            .status(404)
             .send("It has not been added to the graduate table yet");
       }
     );
@@ -185,7 +185,7 @@ router.delete("/graduates/:id", function (req, res) {
     "SELECT * FROM graduates where github_id=$1 ",
     [github_id],
     (error, result) => {
-      if (result.rowCount > 0) graduateId = result.rows.id;
+      if (result.rowCount > 0) const graduateId = result.rows.id;
       Connection.query(
         "delete from graduate_skill  where  graduate_id=$1",
         [graduateId],
@@ -196,7 +196,7 @@ router.delete("/graduates/:id", function (req, res) {
               [github_id],
               (error) => {
                 if (error == undefined) {
-                  res.send("graduat " + github_id + " deleted.");
+                  res.send("graduate" + github_id + " deleted.");
                 }
               }
             );
