@@ -89,7 +89,8 @@ const AuthState = (props) =>{
                 isGraduate:state.isGraduate,
                 error:state.error,
                 checkGraduate,
-                fetchUserName
+                fetchUserName, 
+                logOut
 			}}
 		>
 			{props.children}
