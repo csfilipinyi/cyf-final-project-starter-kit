@@ -24,7 +24,8 @@ const Home = () => {
 	}
 
 	useEffect(()=>{
-		userName&&<Redirect to='/viewprofile'/>&&getProfile()
+		userName&&history.push('viewprofile')
+		getProfile()
 		console.log('effect1', userName)
 	},[userName])
 
