@@ -24,12 +24,14 @@ const Home = () => {
 	}
 
 	useEffect(()=>{
-		userName&&<Redirect to='/viewprofile'/>;
+		userName&&<Redirect to='/viewprofile'/>&&getProfile()
+		console.log('effect1', userName)
+	},[userName])
+
+	useEffect (()=>{
 		!userName&&isAuthenticated&&history.push('/createprofile')
 		!isGraduate&&history.push('/notfound')
-		console.log('effect1', userName)
-	},[userName, isAuthenticated, isGraduate])
-
+	},[ userName, isAuthenticated, isGraduate])
 
     const onFailure = response => console.error(response);  
 
@@ -56,7 +58,7 @@ const Home = () => {
 						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
 					})}
 				{error && <Text>{error}</Text>}
-				{profile&&<Redirect to='/viewdetail'/>}
+				{/* {profile&&<Redirect to='/viewdetail'/>} */}
 			</Container>
 		</Screen>
 	)}
