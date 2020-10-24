@@ -19,7 +19,7 @@ const ViewProfile = () => {
 	return (
 		<Screen>
             <Header isAuthenticated={isAuthenticated}/>
-            <BackButton isAuthenticated={isAuthenticated}/>
+            {/* <BackButton isAuthenticated={isAuthenticated}/> */}
             <ViewMyProfile isAuthenticated={isAuthenticated}/>
 		</Screen>
 	);

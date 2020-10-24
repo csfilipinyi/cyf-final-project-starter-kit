@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const GraduateForm = () => {
 	let history = useHistory()
-	const [newSkills, setNewSkills] = useState([]);
+	const [newSkills, setNewSkills] = useState(profile.skills);
 	const { profiles, addProfile, profile}  = useContext(ProfileContext);
 	console.log('profile', profile)
 	
@@ -47,7 +47,7 @@ const GraduateForm = () => {
 		}
 	};
 
-	const initialValue = profile || { firstName:'', lastName:'', skills:'' };
+	const initialValue = {firstName:profile.first_name, lastName:profile.last_name, skills:'' } || { firstName:'', lastName:'', skills:'' };
 
 	return (
 		<Container >
