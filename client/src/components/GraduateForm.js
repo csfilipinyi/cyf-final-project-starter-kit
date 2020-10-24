@@ -11,9 +11,10 @@ import styled from 'styled-components';
 
 const GraduateForm = () => {
 	let history = useHistory()
-	const [newSkills, setNewSkills] = useState(profile.skills);
 	const { profiles, addProfile, profile}  = useContext(ProfileContext);
 	console.log('profile', profile)
+	
+	const [newSkills, setNewSkills] = useState(profile.skills);
 	
 	const handleSubmit = (values) => {
 		const { firstName, lastName, skills } = values;
