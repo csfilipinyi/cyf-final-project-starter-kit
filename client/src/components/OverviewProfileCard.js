@@ -4,13 +4,15 @@ import styled from 'styled-components';
 import ViewSkills from '../components/ViewSkills';
 import StyledButton from '../constant/StyledButton';
 import avatar from '../assets/icons/avatar.svg';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 const OverviewProfileCard = ({ profile, getProfile }) => {
+	let history = useHistory()
 
 	const handleClick = (name)=>{
-		getProfile(name)&&<Redirect to='/viewdetail'/>
+		getProfile(name)
+		history.push('/viewdetail')
 	};
 
 	return (

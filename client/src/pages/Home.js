@@ -24,7 +24,7 @@ const Home = () => {
 	}
 
 	useEffect(()=>{
-		userName&&history.push('viewprofile')
+		userName&&history.push('/viewprofile')
 		getProfile()
 		console.log('effect1', userName)
 	},[userName])
