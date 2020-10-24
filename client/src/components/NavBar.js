@@ -6,12 +6,12 @@ import styled from 'styled-components';
 
 const NavBar = ({ open }) => {
     const history = useHistory()
-    const { logOut }= useContext(AuthContext);
+    const { logOut, isAuthenticated }= useContext(AuthContext);
 
 
     const handleClick = ()=>{
         logOut()
-        history.push('/')
+        console.log('logout', logOut, isAuthenticated)
     }    
 
 	return (
