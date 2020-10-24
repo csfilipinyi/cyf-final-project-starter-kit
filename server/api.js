@@ -130,7 +130,7 @@ router.get("/accounts/:name", (req, res, next) => {
             (error, result) => {
               if (result.rowCount > 0) res.json(result.rows);
               else
-                res.send({ account_name: githubName, profile_status: false });
+                res.status(200).send({ account_name: githubName, profile_status: false });
             }
           );
         } else
