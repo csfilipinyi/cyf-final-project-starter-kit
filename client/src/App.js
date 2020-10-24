@@ -27,7 +27,7 @@ export function App() {
          
 
             <Route exact path="/" component={LoginForm} />
-            <Route path="/signupform" component={SignupForm} />
+            <Route path="/signup" component={SignupForm} />
 
             {/* <LoginForm /> */}
             <Route path="/skills" component={SkillsNav} />

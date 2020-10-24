@@ -18,7 +18,7 @@ const SignupForm = () => {
     githubName: "",
     slackHandler: "",
   };
-  const { handleChange, input, handleSubmit, errors, submit } = UseForm(
+  const { handleChange, input, handleSubmit, errors, submit } = useForm(
     validate,
     intialState
   );
