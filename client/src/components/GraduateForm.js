@@ -47,7 +47,7 @@ const GraduateForm = () => {
 		let event = e.key;
 		let word = e.target.value.trim().toUpperCase();
 		if(event==' '){
-			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills, ...profile.skills, word ]);
+			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills, word ]);
 			setFieldValue('skills', '');
 		}
 	};
