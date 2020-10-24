@@ -180,12 +180,14 @@ router.put("/graduates/:id", function (req, res) {
 });
 
 router.delete("/graduates/:id", function (req, res) {
+  let graduateId;
   const github_id = parseInt(req.params.id);
   Connection.query(
     "SELECT * FROM graduates where github_id=$1 ",
     [github_id],
     (error, result) => {
-      if (result.rowCount > 0) const graduateId = result.rows.id;
+      if (result.rowCount > 0) 
+      graduateId=result.rows[0].id;
       Connection.query(
         "delete from graduate_skill  where  graduate_id=$1",
         [graduateId],
