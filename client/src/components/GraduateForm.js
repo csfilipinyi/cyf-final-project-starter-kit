@@ -16,6 +16,10 @@ const GraduateForm = () => {
 	
 	const [newSkills, setNewSkills] = useState('');
 	
+	useEffect(()=>{
+		setNewSkills(profile.skills)
+	},[profile])
+
 	const handleSubmit = (values) => {
 		const { firstName, lastName, skills } = values;
 		const newProfile ={
@@ -79,7 +83,7 @@ const GraduateForm = () => {
 								info = 'Type your skills and press ‘Space’'
 								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
 							/>
-							<ViewSkills>{(profile.skills||newSkills).map((skill, i)=>{
+							<ViewSkills>{newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
 							<FormField
