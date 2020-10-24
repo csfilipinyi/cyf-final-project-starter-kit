@@ -14,7 +14,7 @@ const GraduateForm = () => {
 	const { profiles, addProfile, profile}  = useContext(ProfileContext);
 	console.log('profile', profile)
 	
-	const [newSkills, setNewSkills] = useState('');
+	const [newSkills, setNewSkills] = useState([]);
 	
 	useEffect(()=>{
 		setNewSkills(profile.skills)
