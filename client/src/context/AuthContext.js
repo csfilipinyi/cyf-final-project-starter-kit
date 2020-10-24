@@ -58,7 +58,7 @@ const AuthState = (props) =>{
 
     const checkGraduate = (userName)=>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
-        fetch('https://gist.githubusercontent.com/OBakir90/f8e29b4cafda937e884723470983c777/raw/cae9b089479675643d616022a3db2cc5dafecf35/status')
+        fetch('https://gist.githubusercontent.com/OBakir90/f8e29b4cafda937e884723470983c777/raw/78fde67c93d4a539b3aec4de1ba3fd4e13a2b626/status')
             .then(response=>response.json())
             .then(profile=>{     
                     console.log('profile', profile)
