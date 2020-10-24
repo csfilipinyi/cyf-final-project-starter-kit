@@ -49,12 +49,13 @@ const ProfileState = (props) =>{
 		isLoading:false,
 		error:null,
 	};
+	const baseUrl = 'https://graduate-database1.herokuapp.com/api'
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
 	const getAllProfiles = ()=>{
 		dispatch({ type: types.Set_Is_Loading }),
-		axios.get(`https://gist.githubusercontent.com/OBakir90/9cf219c42e4d5794988e06b7ff5c3c8e/raw/319814850d688fb126d610b858a970cf8a53858b/graduateprofile.json`)
+		axios.get(`${baseUrl}/graduates`)
 			.then((response)=>{
 				dispatch({ type: types.Set_All_Profiles, payload:response.data });
 			})

@@ -28,7 +28,7 @@ const authReducer = (state, action) => {
         return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
     case types.Set_Is_Graduate:
         return { ...state, isGraduate:action.payload, isLoading: false }; 
-    case types.Set_Logout:
+    case types.Logout:
         return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
     default:
 		return state;
@@ -75,7 +75,7 @@ const AuthState = (props) =>{
 
     const logOut = ()=>{
         console.log('auth logout');
-        dispatch({ type:types.Set_LogOut});
+        dispatch({ type:types.Logout});
     }
 
     return (
