@@ -4,15 +4,15 @@ import styled from "styled-components";
 // import PropTypes from "prop-types";
 
 const FormField = (props) => {
-	const [field, meta] = useField(props);
-	return (
-		<Container>
-			{props.label && <FormLabel>{props.label}</FormLabel>}
-			{props.info&& <FormInfo>{props.info}</FormInfo>}
-			<InputField  {...field}  {...props} className={meta.touched && meta.error ? "has-error" : "input"} />
-			{meta.error && meta.touched && <Error>{meta.error}</Error>}
-		</Container>
-	);
+    const [field, meta] = useField(props);
+    return (
+        <Container>
+            {props.label && <FormLabel>{props.label}</FormLabel>}
+            {props.info&& <FormInfo>{props.info}</FormInfo>}
+            <InputField  {...field}  {...props} className={meta.touched && meta.error ? "has-error" : "input"} />
+            {meta.error && meta.touched && <Error>{meta.error}</Error>}
+        </Container>
+    );
 };
 
 

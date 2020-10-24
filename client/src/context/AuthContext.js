@@ -9,8 +9,8 @@ export const AuthContext = React.createContext();
 const types = {
     Set_Is_Loading: "Set_Is_Loading",
 	Set_Logged_In: "Set_Logged_In",
-    Set_User: "Set_User",
-    Set_Isnot_Graduate:'Set_Isnot_Graduate',
+    Set_UserName: "Set_UserName",
+    Set_Is_Graduate:'Set_Is_Graduate',
     Set_Error: "Set_Error",
     Set_Logout:"Set_Logout"
 };
@@ -24,11 +24,11 @@ const authReducer = (state, action) => {
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_Logged_In:
 		return { ...state, isAuthenticated:true, isLoading: false };
-    case types.Set_User:
+    case types.Set_UserName:
         return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
-    case types.Set_Isnot_Graduate:
-        return { ...state, isGraduate:false, isLoading: false }; 
-    case types.Set_Logout:
+    case types.Set_Is_Graduate:
+        return { ...state, isGraduate:action.payload, isLoading: false }; 
+    case types.Logout:
         return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
     default:
 		return state;
@@ -58,26 +58,24 @@ const AuthState = (props) =>{
 
     const checkGraduate = (userName)=>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
-        fetch('https://gist.githubusercontent.com/OBakir90/ecab122e19b0292737d85699dab2696c/raw/ed9e2fa9066cd1c67d7248db75eb9912804b9ec3/graduates.json')
+        fetch('https://gist.githubusercontent.com/OBakir90/f8e29b4cafda937e884723470983c777/raw/78fde67c93d4a539b3aec4de1ba3fd4e13a2b626/status')
             .then(response=>response.json())
-            .then(data=>{     
-                const graduatesObject =data[0];  
-                if(userName in graduatesObject){
-                    (graduatesObject[userName])?
-                        dispatch({ type: types.Set_User, payload:data})
-                        :     
-                        dispatch({ type: types.Set_Logged_In, payload:userName});   
-                }else{
-                   dispatch({ type: types.Set_Isnot_Graduate})
-                }
+            .then(profile=>{     
+                    console.log('profile', profile)
+                    profile[0].status?
+                    dispatch({ type: types.Set_UserName, payload:userName})
+                    :     
+                    dispatch({ type: types.Set_Logged_In});   
             })
             .catch((error)=>{
-				dispatch({ type:types.Set_Error, payload:error });
+                console.log(error);
+				dispatch({ type:types.Set_Is_Graduate, payload:false });
 			});
     }
 
     const logOut = ()=>{
-        dispatch({ type:types.Set_LogOut});
+        console.log('auth logout');
+        dispatch({ type:types.Logout});
     }
 
     return (
@@ -89,7 +87,8 @@ const AuthState = (props) =>{
                 isGraduate:state.isGraduate,
                 error:state.error,
                 checkGraduate,
-                fetchUserName
+                fetchUserName, 
+                logOut
 			}}
 		>
 			{props.children}

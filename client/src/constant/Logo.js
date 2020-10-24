@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import logo from '../assets/images/logo.png';
 
 const LogoName = () => {
-	return (
-		<Logo src={logo} />
-	);
+    return (
+      <Logo src={logo} />
+    );
 };
 
 export default LogoName;

@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import {Redirect, useHistory} from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from "yup";
 import FormField from "../constant/FormField";
@@ -9,8 +10,15 @@ import styled from 'styled-components';
 
 
 const GraduateForm = () => {
+	let history = useHistory()
+	const { profiles, addProfile, profile}  = useContext(ProfileContext);
+	console.log('profile', profile)
+	
 	const [newSkills, setNewSkills] = useState([]);
-	const { profiles, addProfile, profile, editProfile }  = useContext(ProfileContext);
+	
+	useEffect(()=>{
+		setNewSkills(profile.skills)
+	},[profile])
 
 	const handleSubmit = (values) => {
 		const { firstName, lastName, skills } = values;
@@ -22,36 +30,40 @@ const GraduateForm = () => {
 		addProfile(newProfile);
 	};
 
+	const handleReset = ()=>{
+		history.push('/viewprofile');
+	};
+
 	const deleteSkill = (e)=>{
 		e.preventDefault();
 		let remainedSkills = newSkills.filter((skill)=>skill!==e.target.value);
 		setNewSkills(remainedSkills);
 	};
-	const handleValidate =async (e,setFieldValue)=>{
+
+	const handleValidate =async(e,setFieldValue)=>{
 		e.persist();
 		const res = await skills();
 		const response= res.map((x)=>x.toUpperCase());
 		let event = e.key;
 		let word = e.target.value.trim().toUpperCase();
 		if(event==' '){
-			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills, word]);
+			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills, word ]);
 			setFieldValue('skills', '');
 		}
 	};
 
-
-
-	const initialValue = profile || { firstName:'', lastName:'', skills:'' };
+	const initialValue = {firstName:profile.first_name, lastName:profile.last_name, skills:'' } || { firstName:'', lastName:'', skills:'' };
 
 	return (
 		<Container >
+			{console.log('initial', initialValue)}
 			<Formik
 				initialValues={initialValue}
 				onSubmit={(values) => handleSubmit(values)}
 				// validationSchema={ValidationSchema}
+				onReset = {handleReset}
 			>
 				{(props) => (
-
 					<>
 						<StyledForm id='formLogin' noValidate>
 							<FormField
@@ -81,7 +93,7 @@ const GraduateForm = () => {
 							/>
 						</StyledForm>
 						<ButtonContainer>
-							<StyledButton name='Cancel' className='md' handleClick={ props.handleSubmit}  />
+							<StyledButton name='Cancel' className='md' handleClick={props.handleReset} />
 							<StyledButton name='Save' className='sm' handleClick={ props.handleSubmit}  />
 						</ButtonContainer>
 					</>

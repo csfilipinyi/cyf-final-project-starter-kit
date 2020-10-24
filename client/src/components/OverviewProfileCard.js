@@ -4,14 +4,15 @@ import styled from 'styled-components';
 import ViewSkills from '../components/ViewSkills';
 import StyledButton from '../constant/StyledButton';
 import avatar from '../assets/icons/avatar.svg';
+import { useHistory } from 'react-router-dom';
 
 
 const OverviewProfileCard = ({ profile, getProfile }) => {
+	let history = useHistory()
 
-	const skills = ['HTML', 'CSS', 'JavaScript', 'React.Js'];
-
-	const handleClick = (id)=>{
-		getProfile(id);
+	const handleClick = (name)=>{
+		getProfile(name)
+		history.push('/viewdetail')
 	};
 
 	return (
@@ -19,12 +20,12 @@ const OverviewProfileCard = ({ profile, getProfile }) => {
 			{/* <Img variant="top" src={profile.img||avatar} /> */}
 			<Img />
 			<CardBody>
-				<CardTitle>{profile.name}</CardTitle>
+				<CardTitle>{profile.first_name} {profile.last_name}</CardTitle>
 				<CardText>
-					{profile.email}
+				Dolorem ipsum quia dolor sit amet, excepturi sint occaecati
 				</CardText>
-				<ViewSkills skills={skills} />
-				<StyledButton name='View Profile' handleClick={()=>handleClick(`${profile.id}`)} />
+				{/* <ViewSkills skills={profile.skills} /> */}
+				<StyledButton name='View Profile' handleClick={()=>handleClick(`${profile.user_name}`)} />
 			</CardBody>
 		</CardContainer>
 	);

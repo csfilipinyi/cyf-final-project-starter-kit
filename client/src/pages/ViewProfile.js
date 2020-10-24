@@ -1,17 +1,26 @@
-import React, { useContext } from "react";
+import React, {useContext, useEffect} from "react";
 import styled from "styled-components";
-import { ProfileContext } from '../context/ProfileContext';
-import BasicDropDown from '../constant/BasicDropdown';
-import ViewMyProfile from '../components/ViewMyProfile';
+import {AuthContext} from '../context/AuthContext'
+import {ProfileContext} from '../context/ProfileContext'
+import Header from '../components/Header'
+import BackButton from '../constant/BackButton'
+import ViewMyProfile from '../components/ViewMyProfile'
 
 
 const ViewProfile = () => {
-	const { profile }= useContext(ProfileContext);
+    const {isAuthenticated} = useContext(AuthContext)
+    const {getProfile, profile} = useContext(ProfileContext)
 
+    useEffect(()=>{
+        console.log('viewprofile')
+        getProfile()
+    },[])
 
 	return (
 		<Screen>
-            <ViewMyProfile profile={profile} />
+            <Header isAuthenticated={isAuthenticated}/>
+            {/* <BackButton isAuthenticated={isAuthenticated}/> */}
+            <ViewMyProfile isAuthenticated={isAuthenticated}/>
 		</Screen>
 	);
 };
@@ -21,8 +30,7 @@ export default ViewProfile;
 const Screen =styled.div`
     width:100%;
     min-height:100vh;
-    background-color:#DFEDFA;
     display:flex;
     flex-direction:column;
-    align-items:center;
+    align-items:flex-start;
 `;

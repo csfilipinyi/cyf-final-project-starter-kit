@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import {Redirect, useHistory} from 'react-router-dom';
+import {NavLink, Redirect, useHistory} from 'react-router-dom';
 import OverviewProfileCard from '../components/OverviewProfileCard';
 import ViewProfileDetail from '../components/ViewProfileDetail';
 import Introducing from '../components/Introducing';
@@ -14,8 +14,9 @@ import {graduates, graduateProfile} from '../api/graduates'
 const Home = () => {
 	let history = useHistory();
 
-	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, isAuthenticated, userName, isGraduate }= useContext(AuthContext);
+	const { getAllProfiles, getProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
+	const { fetchUserName, isAuthenticated, userName, isGraduate} = useContext(AuthContext);
+
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
@@ -24,12 +25,14 @@ const Home = () => {
 
 	useEffect(()=>{
 		userName&&history.push('/viewprofile')
+		getProfile()
+		console.log('effect1', userName)
 	},[userName])
 
-	useEffect(()=>{
-		isAuthenticated&&history.push('/createprofile')
+	useEffect (()=>{
+		!userName&&isAuthenticated&&history.push('/createprofile')
 		!isGraduate&&history.push('/notfound')
-	},[isAuthenticated, isGraduate])
+	},[ userName, isAuthenticated, isGraduate])
 
     const onFailure = response => console.error(response);  
 
@@ -42,7 +45,7 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				redirectUri={'https://gd-auth-test.herokuapp.com/createprofile'}
+				redirectUri={'https://designed-gd.herokuapp.com/login'}
 				buttonText='Log in'
 				/>
 			</Header>
@@ -56,7 +59,7 @@ const Home = () => {
 						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
 					})}
 				{error && <Text>{error}</Text>}
-				{profile&&<Redirect to='/viewdetail'/>}
+				{/* {profile&&<Redirect to='/viewdetail'/>} */}
 			</Container>
 		</Screen>
 	)}

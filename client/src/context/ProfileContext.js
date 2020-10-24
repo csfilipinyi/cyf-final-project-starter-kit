@@ -49,14 +49,14 @@ const ProfileState = (props) =>{
 		isLoading:false,
 		error:null,
 	};
+	const baseUrl = 'https://graduate-database1.herokuapp.com/api'
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
-	const baseUrl ='https://jsonplaceholder.typicode.com/users';
+
 	const getAllProfiles = ()=>{
 		dispatch({ type: types.Set_Is_Loading }),
-		axios.get(`${baseUrl}`)
+		axios.get(`${baseUrl}/graduates`)
 			.then((response)=>{
-				console.log(response);
 				dispatch({ type: types.Set_All_Profiles, payload:response.data });
 			})
 			.catch((error)=>{
@@ -66,10 +66,12 @@ const ProfileState = (props) =>{
 
 
 	const getProfile =  (id) => {
+		console.log('get profile called')
 		dispatch({ type: types.Set_Is_Loading });
-		axios.get(`${baseUrl}/${id}`)
+		axios.get(`https://gist.githubusercontent.com/OBakir90/46c0de835cb3db4c42f655e5f467825a/raw/d16c488a33cc1ebbceea866fe988591c3683bf0c/myprofile.json`)
 			.then((response)=>{
-				dispatch({ type: types.Set_Profile, payload:response.data });
+				console.log('response', response);
+				dispatch({ type: types.Set_Profile, payload:response.data[0] });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
