@@ -12,6 +12,7 @@ const Home = () => {
 	
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
+		console.log('acces', accessCode)
 	  fetch(`https://dev-graduate-directory.herokuapp.com/api/callback?code=${accessCode}`)
       .then(res => res.json())
       .then(data => {
@@ -30,10 +31,10 @@ const Home = () => {
 				header = 'Lorem ipsum dolor sit amet'
 				text = 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi'
 		  />	
-      	<GitHubLogin clientId= 'd46845e5f1d464b34454' //this needs to change according to heroku app configs
+      	<GitHubLogin clientId='3924454def52d1ff67f8' //this needs to change according to heroku app configs
 			onSuccess={onSuccess}
 			onFailure={onFailure}
-			redirect_uri={"https://dev-graduate-directory.herokuapp.com/createprofile"}
+			redirectUri={'https://dev-graduate-directory.herokuapp.com/createprofile'}
 			/>
 			<Container>
 				{isLoading ? <Text>Loading...</Text>
