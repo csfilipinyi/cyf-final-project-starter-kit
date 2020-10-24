@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {Redirect, useHistory} from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from "yup";
@@ -14,7 +14,7 @@ const GraduateForm = () => {
 	const { profiles, addProfile, profile}  = useContext(ProfileContext);
 	console.log('profile', profile)
 	
-	const [newSkills, setNewSkills] = useState(profile.skills);
+	const [newSkills, setNewSkills] = useState('');
 	
 	const handleSubmit = (values) => {
 		const { firstName, lastName, skills } = values;
@@ -43,7 +43,7 @@ const GraduateForm = () => {
 		let event = e.key;
 		let word = e.target.value.trim().toUpperCase();
 		if(event==' '){
-			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills, word ]);
+			response.includes(word) && !newSkills.includes(word) && setNewSkills([...newSkills, ...profile.skills, word ]);
 			setFieldValue('skills', '');
 		}
 	};
@@ -79,7 +79,7 @@ const GraduateForm = () => {
 								info = 'Type your skills and press ‘Space’'
 								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
 							/>
-							<ViewSkills>{newSkills.map((skill, i)=>{
+							<ViewSkills>{(profile.skills||newSkills).map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
 							<FormField
