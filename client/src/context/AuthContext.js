@@ -74,6 +74,7 @@ const AuthState = (props) =>{
     }
 
     const logOut = ()=>{
+        console.log('auth logout');
         dispatch({ type:types.Set_LogOut});
     }
 
