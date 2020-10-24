@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import LogoName from '../constant/Logo';
-import NavBar from './NavBar';
+import UserNav from '../constant/UserNav'
+// import NavBar from './NavBar';
 import styled from 'styled-components';
-import Burger from '../constant/Burger';
-import useMediaQuery from '../helpers/useMediaQuery';
+// import useMediaQuery from '../helpers/useMediaQuery';
 
 const Header = ({ nav }) => {
 	const [open, setOpen] = useState(false);
-	const media = useMediaQuery();
+	// const media = useMediaQuery();
 
-	useEffect (()=>{
-		media&&!media.isTablet&&setOpen(false);
-	},[media]);
+	// useEffect (()=>{
+	// 	media&&!media.isTablet&&setOpen(false);
+	// },[media]);
 
 	return (
 		<Container>
 			<LogoName />
-			{nav&&media && media.isTablet && <Burger open={open} setOpen={setOpen} />}
-			{nav&&media && !media.isTablet && <NavBar open={open} />}
+			<UserNav open={open} setOpen={setOpen}/>
 		</Container>
 	);
 };
