@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dataTesting from "../dataTesting.json";
 import BoxDisplay from "../components/BoxDisplay";
-//import { useParams } from "react-router";
 import { useLocation } from "react-router-dom";
 
 function useQuery() {
@@ -17,7 +16,6 @@ function MentorsView() {
       <h2>Welcome Mentor</h2>
       <ul>
         {dataTesting.map((person, index) => {
-          //console.log(person);
           return (
             <li id={index}>
               <a href={`./MentorsView?studentId=${index}`}>{person.name}</a>
@@ -25,15 +23,6 @@ function MentorsView() {
           );
         })}
       </ul>
-      {/* <button
-        to="/MentorsEdit"
-        className="submit"
-        type="submit"
-        value="Submit"
-        className="submit"
-      >
-        Edit
-      </button> */}
       {studentId && (
         <div className="skills-container">
           <BoxDisplay studentData={dataTesting} studentId={studentId} />
