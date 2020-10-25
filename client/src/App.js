@@ -22,8 +22,13 @@ export function App() {
         <main role="main">
           <div>
             {/* <SignupForm /> */}
+
+         
+         
+
             <Route exact path="/" component={LoginForm} />
             <Route path="/signup" component={SignupForm} />
+
             {/* <LoginForm /> */}
             <Route path="/skills" component={SkillsNav} />
             <Route path="/modal" component={Modal} />
