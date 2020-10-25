@@ -26,9 +26,14 @@ function MentorsView() {
 
         })}
       </ul>
-      <div className="skills-container">
-        <BoxDisplay studentData={dataTesting} studentId={studentId} />
-      </div>
+      {studentId && (
+        <div className="skills-container">
+          <BoxDisplay studentData={dataTesting} studentId={studentId} />
+        </div>
+      )}
+      <a href="/mentorsedit" className="signup-link">
+        Edit Learning Objectives
+      </a>
     </div>
   );
 }
