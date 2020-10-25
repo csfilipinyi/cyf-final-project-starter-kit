@@ -6,13 +6,11 @@ import "../App.css";
 import loginValidation from "./loginValidation";
 import { Link, useHistory } from "react-router-dom";
 
-
 export default function LoginForm() {
   let history = useHistory();
   const intialState = {
     email: "",
     password: "",
-
   };
   const { handleChange, input, handleSubmit, errors, submit } = useForm(
     loginValidation,
@@ -21,7 +19,6 @@ export default function LoginForm() {
   console.log(errors);
 
   if (submit) {
-
     history.push("/skills");
   }
   return (
@@ -48,7 +45,6 @@ export default function LoginForm() {
           {errors.password && <p className="error">*{errors.password} </p>}
           {/* <Link to="/Skills"> */}
 
-
           <button
             className="sumbit"
             type="submit"
@@ -61,7 +57,6 @@ export default function LoginForm() {
           </button>
 
           <Link to="/signup" className="signup-link">
-
             signup
           </Link>
         </Form>
