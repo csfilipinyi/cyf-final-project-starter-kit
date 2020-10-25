@@ -21,7 +21,7 @@ CREATE TABLE users
 
 CREATE TABLE learning_objective
 (
-   id uuid DEFAULT uuid_generate_v4()  PRIMARY KEY,
+   id SERIAL  PRIMARY KEY,
    skill VARCHAR(255) NOT NULL,
    description VARCHAR(500) NOT NULL
 );
@@ -29,9 +29,9 @@ CREATE TABLE learning_objective
 CREATE TABLE achievements
 
 (
-   id uuid DEFAULT uuid_generate_v4()  PRIMARY KEY,
+   id SERIAL  PRIMARY KEY,
    student_id      uuid REFERENCES users(user_id),
-   learning_obj_id uuid REFERENCES learning_objective(id),
+   learning_obj_id SERIAL REFERENCES learning_objective(id),
    ability INT,
    date_added DATE NOT NULL DEFAULT CURRENT_DATE
 
