@@ -63,12 +63,12 @@ const AuthState = (props) =>{
             .then(res=>res.json())
             .then(response=>{
                     console.log('res', response)
-                    if(response.status==200){
+                    if(res.status==200){
                         const user = {...response.data[0], "userName":userName}
                         console.log('200', response.data, user)
                       return  dispatch({ type: types.Set_UserName, payload:user})
                     }
-                    if (response.status==206){
+                    if (res.status==206){
                         console.log('206', response.data)
                       return  dispatch({ type: types.Set_Logged_In, payload:response.data});   
                     }
