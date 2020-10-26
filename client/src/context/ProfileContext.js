@@ -20,7 +20,7 @@ const types = {
 //Stored actions in a reducer
 
 const profileReducer = (state, action) => {
-	console.log('action', action)
+	console.log('action', action, state)
 	switch (action.type) {
 	case types.Set_Is_Loading:
 		return { ...state, isLoading: true };
@@ -71,7 +71,7 @@ const ProfileState = (props) =>{
 		dispatch({ type: types.Set_Is_Loading });
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
-				dispatch({ type: types.Set_Profile, payload:response.data[0]});
+				dispatch({ type:types.Set_Profile, payload: response.data[0] });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
@@ -87,7 +87,7 @@ const ProfileState = (props) =>{
 			},
 		};
 
-		axios.post(`${baseUrl}`, profile, config)
+		axios.post(`${baseUrl}/graduates`, profile, config)
 			.then((response)=>{
 				dispatch({ type: types.Set_Profile, payload:response.data });
 			})
