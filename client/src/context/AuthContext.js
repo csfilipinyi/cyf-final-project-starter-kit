@@ -60,17 +60,14 @@ const AuthState = (props) =>{
     const checkGraduate = (userName)=>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
         axios.get(`${baseUrl}/accounts/${userName}`)
-            .then(res=>{res.json()
-                console.log('res', res)
-            })
             .then(response=>{
                     console.log('response', response)
-                    if(res.status==200){
+                    if(response.status==200){
                         const user = {...response.data[0], "userName":userName}
                         console.log('200', response.data, user)
                       return  dispatch({ type: types.Set_UserName, payload:user})
                     }
-                    if (res.status==206){
+                    if (response.status==206){
                         console.log('206', response.data)
                       return  dispatch({ type: types.Set_Logged_In, payload:response.data});   
                     }
