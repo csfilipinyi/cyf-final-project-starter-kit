@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import FormField from "../constant/FormField";
 import StyledButton from '../constant/StyledButton';
 import { ProfileContext } from '../context/ProfileContext';
+import { AuthContext } from '../context/AuthContext';
 import { skills } from '../api/skills';
 import styled from 'styled-components';
 
@@ -12,22 +13,26 @@ import styled from 'styled-components';
 const GraduateForm = () => {
 	let history = useHistory()
 	const { profiles, addProfile, profile}  = useContext(ProfileContext);
+	const { github_id}  = useContext(AuthContext);
+
 	console.log('profile', profile)
 	
 	const [newSkills, setNewSkills] = useState([]);
 	
 	useEffect(()=>{
-		setNewSkills(profile.skills)
+		setNewSkills()
 	},[profile])
 
 	const handleSubmit = (values) => {
 		const { firstName, lastName, skills } = values;
 		const newProfile ={
 			'first_name':firstName,
-			'last_name':lastName,
-			'skills':skills,
+			'surname':lastName,
+			'github_id':github_id
+			// 'skills':skills,
 		};
 		addProfile(newProfile);
+		history.push('/viewprofile');
 	};
 
 	const handleReset = ()=>{
@@ -52,7 +57,7 @@ const GraduateForm = () => {
 		}
 	};
 
-	const initialValue = {firstName:profile.first_name, lastName:profile.last_name, skills:'' } || { firstName:'', lastName:'', skills:'' };
+	const initialValue = profile || {firstName:'', lastName:'', skills:'' };
 
 	return (
 		<Container >
@@ -76,21 +81,21 @@ const GraduateForm = () => {
 								// placeholder='Last Name'
 								label='Your last name'
 							/>
-							<FormField
+							{/* <FormField
 								name='skills'
 								// placeholder='Email'
 								label='Your key skills'
 								info = 'Type your skills and press ‘Space’'
 								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
-							/>
-							<ViewSkills>{newSkills.map((skill, i)=>{
+							/> */}
+							{/* <ViewSkills>{newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
-							})}</ViewSkills>
-							<FormField
+							})}</ViewSkills> */}
+							{/* <FormField
 								name='desciprtion'
 								// placeholder='Phone Number'
 								label='Description'
-							/>
+							/> */}
 						</StyledForm>
 						<ButtonContainer>
 							<StyledButton name='Cancel' className='md' handleClick={props.handleReset} />

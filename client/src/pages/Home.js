@@ -15,7 +15,7 @@ const Home = () => {
 	let history = useHistory();
 
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, isAuthenticated, user, isGraduate} = useContext(AuthContext);
+	const { fetchUserName, isAuthenticated, github_id, userName, isGraduate} = useContext(AuthContext);
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
@@ -23,15 +23,22 @@ const Home = () => {
 		clearProfile()
 	}
 
+	const getViewDetail = async ()=>{
+		await getProfile(github_id)
+		history.push('/viewprofile')
+	}
+
+	console.log('isauth', isAuthenticated, profile, github_id)
 	useEffect(()=>{
-		user&&user.userName&&history.push('/viewprofile')
-		user&&getProfile(user.github_Id)
-	},[user])
+		if(userName){
+			getViewDetail()
+		}
+	},[userName, github_id])
 
 	useEffect (()=>{
-		user&&!user.userName&&isAuthenticated&&history.push('/createprofile')
+		!userName&&isAuthenticated&&history.push('/createprofile')
 		!isGraduate&&history.push('/notfound')
-	},[ user, isAuthenticated, isGraduate])
+	},[ isAuthenticated, isGraduate])
 
     const onFailure = response => console.error(response);  
 
@@ -44,7 +51,8 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				redirectUri={'https://designed-gd.herokuapp.com/login'||'http://localhost:3000/login'}
+				redirectUri={'http://localhost:3000/login'}
+				// 'https://designed-gd.herokuapp.com/login'||
 				buttonText='Log in'
 				/>
 			</Header>

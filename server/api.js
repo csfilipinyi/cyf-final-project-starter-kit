@@ -1,3 +1,5 @@
+var bodyParser = require('body-parser')
+
 import { Router } from "express";
 
 import { Connection } from "./db";
@@ -7,6 +9,7 @@ import { AuthorizationCode } from "simple-oauth2";
 const router = new Router();
 var cors = require("cors");
 router.use(cors());
+router.use(bodyParser.json())
 
 const { Octokit } = require("@octokit/core");
 
@@ -83,34 +86,25 @@ router.get("/graduates", (_, res, next) => {
 });
 // create new profile
 router.post("/graduates", function (req, res) {
+  console.log(req.body)
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
-  const github_name = req.body.githubName;
+  const github_id = req.body.github_id;
+  // const github_name = req.body.githubName;
   //checking if the user is existed in our github table
   Connection.query(
-    `SELECT * FROM github_accounts WHERE account_name = $1`,
-    [github_name],
-    (err, result) => {
-      console.log(result.rowCount);
-      //if exists so he can create profile
-      if (result.rowCount > 0) {
-        const github_id = result.rows[0].id;
-        console.log(github_id);
-        Connection.query(
           `insert into graduates (first_name, surname, github_id) values` +
             `($1,$2,$3)`,
           [newFirstName, newSurname, github_id],
           (error, result) => {
-            res.json(result.rows);
+            if(result){
+              res.status(200).send(result.rows);
+            } else {
+              res.status(404).send(error)
+            } 
           }
+          
         );
-        //otherwise he can not
-      } else
-        res.send({
-          message: "this is  github account does not belong to a CYF graduates",
-        });
-    }
-  );
 });
 //checking the github username exist in our database
 router.get("/accounts/:name", (req, res, next) => {
@@ -124,13 +118,15 @@ router.get("/accounts/:name", (req, res, next) => {
       [githubName],
       (error, result) => {
         if (result.rowCount > 0) {
+          let id = result.rows[0].id;
           Connection.query(
             "SELECT * FROM github_accounts GA join graduates G on(GA.id=G.github_id) where GA.account_name=$1 ",
             [githubName],
             (error, result) => {
               if (result.rowCount > 0) res.status(200).json(result.rows);
-              else
-                res.status(206).send({ account_name: githubName, profile_status: false });
+              else{
+                res.status(206).send({ "account_name": githubName, "github_id":id });
+              }
             }
           );
         } else

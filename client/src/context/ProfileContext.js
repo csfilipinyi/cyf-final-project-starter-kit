@@ -29,10 +29,8 @@ const profileReducer = (state, action) => {
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_All_Profiles:
 		return { ...state, allProfiles: action.payload, isLoading: false };
-	case types.Set_NewProfile:
-		return {...state, profile:action.payload, loading}	
 	case types.Set_Profile:
-		return { ...state, profile: action.payload, isLoading: false };
+		return { ...state, profile:action.payload, isLoading: false };
 	case types.Clear_Profile:
 		return { ...state, profile: null, isLoading: false };
 	// case types.Delete_Profile:
@@ -49,11 +47,13 @@ const ProfileState = (props) =>{
 
 	const initialState ={
 		allProfiles:[],
-		profile:null,
+		profile:[],
 		isLoading:false,
 		error:null,
 	};
-	const baseUrl = 'https://designed-gd.herokuapp.com/api'
+	// const baseUrl = 'https://designed-gd.herokuapp.com/api'
+
+	const baseUrl ='http://localhost:3100/api'
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
@@ -80,7 +80,9 @@ const ProfileState = (props) =>{
 		dispatch({ type: types.Set_Is_Loading });
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
-				dispatch({ type: types.Set_NewProfile, payload:response.data });
+				const graduate = response.data[0];
+				console.log('graduate', graduate)
+				dispatch({ type: types.Set_Profile, payload:graduate });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
@@ -89,6 +91,7 @@ const ProfileState = (props) =>{
 
 
 	const addProfile = (profile) => {
+		console.log('profile post', profile)
 		dispatch({ type: types.Set_Is_Loading });
 		const config = {
 			headers: {
@@ -98,6 +101,7 @@ const ProfileState = (props) =>{
 
 		axios.post(`${baseUrl}/graduates`, profile, config)
 			.then((response)=>{
+				console.log('post', response)
 				dispatch({ type: types.Set_Profile, payload:response.data });
 			})
 			.catch((error)=>{

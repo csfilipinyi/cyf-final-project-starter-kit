@@ -17,8 +17,8 @@ if (process.env.DATABASE_URL) {
   //default local config
   config = {
     host: "localhost",
-    database: "cyf_graduates",
-    password: "allatif977A",
+    database: "cyf_graduate_directory",
+    password: "Hakan.2015",
     port: 5432,
   };
 }
