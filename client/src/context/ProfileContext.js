@@ -29,8 +29,6 @@ const profileReducer = (state, action) => {
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_All_Profiles:
 		return { ...state, allProfiles: action.payload, isLoading: false };
-	case types.Set_User:
-		return {...state, profile:action.payload, isLoading:false};
 	case types.Set_Profile:
 		return { ...state, profile: action.payload, isLoading: false };
 	case types.Clear_Profile:
@@ -76,8 +74,7 @@ const ProfileState = (props) =>{
 			.then((response)=>{
 				const graduate = response.data[0];
 				console.log('graduate', graduate, types.Set_User, types.Set_Profile),
-				dispatch({ type: types.Set_User, payload:graduate });
-				// dispatch({ type:types.Set_Profile, payload: response.data[0] });
+				dispatch({ type:types.Set_Profile, payload: graduate });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
