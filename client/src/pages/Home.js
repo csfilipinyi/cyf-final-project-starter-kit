@@ -27,12 +27,12 @@ const Home = () => {
 		user.userName&&history.push('/viewprofile')
 		getProfile(user.github_Id)
 		console.log('effect1', user.userName)
-	},[user.userName])
+	},[user])
 
 	useEffect (()=>{
 		!user.userName&&isAuthenticated&&history.push('/createprofile')
 		!isGraduate&&history.push('/notfound')
-	},[ user.userName, isAuthenticated, isGraduate])
+	},[ user, isAuthenticated, isGraduate])
 
     const onFailure = response => console.error(response);  
 
