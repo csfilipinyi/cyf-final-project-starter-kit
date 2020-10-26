@@ -16,7 +16,6 @@ const Home = () => {
 
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
 	const { fetchUserName, isAuthenticated, user, isGraduate} = useContext(AuthContext);
-	const {github_Id, userName} = user
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
@@ -25,15 +24,15 @@ const Home = () => {
 	}
 
 	useEffect(()=>{
-		userName&&history.push('/viewprofile')
-		getProfile(github_Id)
-		console.log('effect1', userName)
-	},[userName])
+		user.userName&&history.push('/viewprofile')
+		getProfile(user.github_Id)
+		console.log('effect1', user.userName)
+	},[user.userName])
 
 	useEffect (()=>{
-		!userName&&isAuthenticated&&history.push('/createprofile')
+		!user.userName&&isAuthenticated&&history.push('/createprofile')
 		!isGraduate&&history.push('/notfound')
-	},[ userName, isAuthenticated, isGraduate])
+	},[ user.userName, isAuthenticated, isGraduate])
 
     const onFailure = response => console.error(response);  
 
