@@ -52,7 +52,8 @@ input {
   color: #ff0033;
 }
 .signup-link {
-  margin-top: 2vh;
+  font-size: large;
+  float: right;
 }
 
 li {
@@ -75,7 +76,6 @@ li {
 }
 
 .skills-container h2 A {
-  margin-bottom: 5vh;
   color: #d12f2f;
 }
 
@@ -88,6 +88,11 @@ li {
 }
 
 .delete-btn {
+  float: right;
+  border-radius: 5%;
+}
+
+.expand-btn {
   float: right;
   border-radius: 5%;
 }
@@ -118,4 +123,18 @@ li {
 
 .skill-name {
   margin-bottom: 10%;
+}
+
+.mentorsview-header-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+}
+
+.name-list {
+  font-size: larger;
+}
+
+.students-name {
+  margin-top: 10%;
 }

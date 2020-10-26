@@ -13,24 +13,31 @@ function MentorsView() {
 
   return (
     <div className="skills-container">
-      <h2>Welcome Mentor</h2>
-      <ul>
-        {dataTesting.map((person, index) => {
-          return (
-            <li id={index}>
-              <a href={`./MentorsView?studentId=${index}`}>{person.name}</a>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="mentorsview-header-container">
+        <h2>Welcome Mentor</h2>
+        <a href="/mentorsedit" className="signup-link">
+          Edit Learning Objectives
+        </a>
+      </div>
       {studentId && (
         <div className="skills-container">
           <BoxDisplay studentData={dataTesting} studentId={studentId} />
         </div>
       )}
-      <a href="/mentorsedit" className="signup-link">
-        Edit Learning Objectives
-      </a>
+      <ul>
+        {dataTesting.map((person, index) => {
+          return (
+            <li id={index} className="students-name">
+              <a
+                href={`./MentorsView?studentId=${index}`}
+                className="name-list"
+              >
+                {person.name}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

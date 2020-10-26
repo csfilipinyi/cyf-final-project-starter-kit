@@ -26,7 +26,7 @@ function BoxDisplay({ studentId, studentData }) {
 
   return (
     <div className="learning-objective-container">
-      <h2>{studentData[studentId].achievement[0].skill}</h2>
+      <h2>{studentData[studentId].name}</h2>
 
       <ul>
         <li>
@@ -41,6 +41,9 @@ function BoxDisplay({ studentId, studentData }) {
         <li>Node:{progress(studentData[studentId].achievement[9].ability)}</li>
         <li>SQL:{progress(studentData[studentId].achievement[11].ability)}</li>
       </ul>
+      <button className="sumbit expand-btn" type="submit" variant="secondary">
+        Expand
+      </button>
     </div>
   );
 }

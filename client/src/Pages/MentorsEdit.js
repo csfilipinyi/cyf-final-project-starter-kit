@@ -17,7 +17,6 @@ export default function MentorsEdit() {
   return (
     <div className="skills-container">
       {routeResult}
-      {/* <EditBox skill="html" /> */}
       <h2>
         <A href="/mentorsedit/html">html</A>
       </h2>
