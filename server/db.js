@@ -14,11 +14,12 @@ if (process.env.DATABASE_URL) { //it's set in Heroku
   }
 } else { //default local config
   config = {
-  user: 'Altom',
+  user: 'nawal',
   host: 'localhost',
   database: 'cyf_knowledge_checklist',
   password: '',
   port: 5432,
+
   }
 }
 pool = new Pool(config)  
