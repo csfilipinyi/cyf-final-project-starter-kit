@@ -20,6 +20,7 @@ const types = {
 //Stored actions in a reducer
 
 const profileReducer = (state, action) => {
+	console.log('action', action)
 	switch (action.type) {
 	case types.Set_Is_Loading:
 		return { ...state, isLoading: true };

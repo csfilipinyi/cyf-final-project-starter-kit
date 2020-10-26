@@ -50,9 +50,9 @@ const AuthState = (props) =>{
 
     const fetchUserName = (code)=>{
         axios.get(`https://gd-auth-test.herokuapp.com/api/callback?code=${code}`)
-        .then(res => res.json())
-        .then(username => {
-            checkGraduate(username)
+        .then(response => {
+            console.log(response, 'auth code')
+            checkGraduate(response.data)
          })
     }
     const baseUrl = 'https://dev-graduate-directory.herokuapp.com/api/'
