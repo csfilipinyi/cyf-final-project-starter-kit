@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Jumbotron, Container, Form, Col, Row } from "react-bootstrap";
 
-import useForm from "./useForm";
+import useFormValidation from "./useFormValidation";
 import "../App.css";
 import loginValidation from "./loginValidation";
 import { Link, useHistory } from "react-router-dom";
@@ -12,13 +12,13 @@ export default function LoginForm() {
     email: "",
     password: "",
   };
-  const { handleChange, input, handleSubmit, errors, submit } = useForm(
+  const { handleChange, input, handleSubmit, errors, isValid } = useFormValidation(
     loginValidation,
     intialState
   );
   console.log(errors);
 
-  if (submit) {
+  if (isValid) {
     history.push("/skills");
   }
   return (

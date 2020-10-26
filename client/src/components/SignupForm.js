@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Modal from "./Modal";
-import useForm from "./useForm";
+import useFormValidation from "./useFormValidation";
 import "../App.css";
 import validate from "./SignupValidation";
 
@@ -18,7 +18,7 @@ const SignupForm = () => {
     githubName: "",
     slackHandler: "",
   };
-  const { handleChange, input, handleSubmit, errors, submit } = useForm(
+  const { handleChange, input, handleSubmit, errors, isValid } = useFormValidation(
     validate,
     intialState
   );
@@ -26,7 +26,7 @@ const SignupForm = () => {
 
   return (
     <div>
-      {submit ? (
+      {isValid ? (
         <Modal />
       ) : (
         <form onSubmit={handleSubmit}>
