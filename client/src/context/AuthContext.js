@@ -61,6 +61,7 @@ const AuthState = (props) =>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
         fetch(`${baseUrl}/accounts/${userName}`)
             .then(response=>{
+                    console.log('res', response)
                     if(response.status==200){
                         const res = {...response.data[0], "userName":userName}
                         console.log('200', response.data, res)
@@ -72,7 +73,6 @@ const AuthState = (props) =>{
                     }
             })
             .catch((error)=>{
-                console.log(error);
 				dispatch({ type:types.Set_Is_Graduate });
 			});
     }
