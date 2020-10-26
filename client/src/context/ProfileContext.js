@@ -75,7 +75,8 @@ const ProfileState = (props) =>{
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
 				console.log('response data', response.data[0]);
-				dispatch({ type: types.Set_User, payload:response.data[0] });
+				const graduate = response.data[0]
+				dispatch({ type: types.Set_User, payload:graduate });
 				// dispatch({ type:types.Set_Profile, payload: response.data[0] });
 			})
 			.catch((error)=>{
