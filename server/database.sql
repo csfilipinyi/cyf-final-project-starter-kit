@@ -39,12 +39,12 @@ CREATE TABLE achievements
 );
 
 INSERT into learning_objective(skill, description)
-VALUES('Html', 'Understand what ''parent'' and ''child'' is');
+VALUES('Html', 'Understand what ''parent'' and ''child'' is'),
       ('Html', 'Can create and link a stylesheet is'),
       ('Html', 'Understand what semantic tags are and how to use them'),
       ('Html', 'Be able to include a form in a web page'),
       ('Html', 'Be able to create a button'),
-      ('CSS', 'Understand what a selector is in CSS');
+      ('CSS', 'Understand what a selector is in CSS'),
       ('CSS', 'Understand the difference between a tag, class and ID'),
       ('CSS', 'Understand what prefixes are'),
       ('CSS', 'Understand what pseudo classes are'),
