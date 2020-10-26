@@ -26,7 +26,6 @@ const Home = () => {
 	useEffect(()=>{
 		user&&user.userName&&history.push('/viewprofile')
 		user&&getProfile(user.github_Id)
-		console.log('effect1', user.userName)
 	},[user])
 
 	useEffect (()=>{
