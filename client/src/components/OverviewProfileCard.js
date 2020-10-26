@@ -10,8 +10,8 @@ import { useHistory } from 'react-router-dom';
 const OverviewProfileCard = ({ profile, getProfile }) => {
 	let history = useHistory()
 
-	const handleClick = (id)=>{
-		getProfile(id)
+	const handleClick = async(id)=>{
+		await getProfile(id)
 		history.push('/viewdetail')
 	};
 

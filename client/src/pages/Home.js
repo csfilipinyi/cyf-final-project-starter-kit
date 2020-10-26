@@ -1,29 +1,29 @@
 import React, { useContext, useEffect } from "react";
-import {NavLink, Redirect, useHistory} from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import OverviewProfileCard from '../components/OverviewProfileCard';
-import ViewProfileDetail from '../components/ViewProfileDetail';
 import Introducing from '../components/Introducing';
 import Logo from '../constant/Logo'
 import { ProfileContext } from '../context/ProfileContext';
 import { AuthContext } from '../context/AuthContext';
 import styled from 'styled-components';
 import GitHubLogin from "react-github-login";
-import {graduates, graduateProfile} from '../api/graduates'
 
 
 const Home = () => {
 	let history = useHistory();
 
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, isAuthenticated, github_id, userName, isGraduate} = useContext(AuthContext);
+	const { fetchUserName, checkGraduate, isAuthenticated, github_id, userName, isGraduate} = useContext(AuthContext);
 
-	const onSuccess =  (response) =>{
+	const onSuccess = async (response) =>{
 		const accessCode = response.code;
-		fetchUserName(accessCode);
-		clearProfile()
+		const githubname = await fetchUserName(accessCode);
+		console.log('name', githubname);
+		await checkGraduate(githubname);
+		clearProfile();
 	}
 
-	const getViewDetail = async ()=>{
+	const navigateToProfile = async ()=>{
 		await getProfile(github_id)
 		history.push('/viewprofile')
 	}
@@ -31,7 +31,7 @@ const Home = () => {
 	console.log('isauth', isAuthenticated, profile, github_id)
 	useEffect(()=>{
 		if(userName){
-			getViewDetail()
+			navigateToProfile()
 		}
 	},[userName, github_id])
 
@@ -51,8 +51,8 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				redirectUri={'http://localhost:3000/login'}
-				// 'https://designed-gd.herokuapp.com/login'||
+				redirectUri={'https://designed-gd.herokuapp.com/login'}
+				// 'http://localhost:3000/login'||
 				buttonText='Log in'
 				/>
 			</Header>

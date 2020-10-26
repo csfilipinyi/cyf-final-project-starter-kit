@@ -5,10 +5,10 @@ import {ProfileContext} from '../context/ProfileContext'
 import styled from 'styled-components';
 import StyledButton from '../constant/StyledButton';
 
-const ViewMyProfile = () => {
+const ViewMyProfile = ({profile}) => {
 	let history = useHistory();
 	const {isAuthenticated} = useContext(AuthContext)
-	const {profile} = useContext(ProfileContext)
+
 	console.log('pro', profile)
 
 	const handleClick = ()=>{

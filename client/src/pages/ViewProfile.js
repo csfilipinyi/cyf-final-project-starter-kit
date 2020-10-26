@@ -9,7 +9,7 @@ import ViewMyProfile from '../components/ViewMyProfile'
 
 const ViewProfile = () => {
     const {isAuthenticated} = useContext(AuthContext)
-    const {getProfile, profile} = useContext(ProfileContext)
+    const {profile} = useContext(ProfileContext)
 
     console.log('view', profile)
 
@@ -17,7 +17,7 @@ const ViewProfile = () => {
 		<Screen>
             <Header isAuthenticated={isAuthenticated}/>
             {/* <BackButton isAuthenticated={isAuthenticated}/> */}
-            <ViewMyProfile isAuthenticated={isAuthenticated}/>
+            {profile&&<ViewMyProfile isAuthenticated={isAuthenticated} profile={profile}/>}
 		</Screen>
 	);
 };

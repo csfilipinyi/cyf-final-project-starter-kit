@@ -50,18 +50,19 @@ const AuthState = (props) =>{
 
 
     const fetchUserName = (code)=>{
-        axios.get(`https://designed-gd.herokuapp.com/api/callback?code=${code}`)
+        return axios.get(`https://designed-gd.herokuapp.com/api/callback?code=${code}`)
         .then(response => {
-            checkGraduate(response.data)
-         })
+            console.log('code', response.data)
+            return response.data
+        })
     }
-    const baseUrl = 'http://localhost:3100/api'
+    const baseUrl = 'https://designed-gd.herokuapp.com/api'
     
     const checkGraduate = (userName)=>{
+        console.log('auth', userName)
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
         axios.get(`${baseUrl}/accounts/${userName}`)
             .then(response=>{
-                    console.log('response', response)
                     if(response.status==200){
                         console.log('200', response.data)
                         let name=response.data[0].account_name;
