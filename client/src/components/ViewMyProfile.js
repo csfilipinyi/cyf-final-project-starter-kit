@@ -19,7 +19,7 @@ const ViewMyProfile = ({profile}) => {
 		<Container>
 			<Circle/>
 			<SubCon>
-				<Name>{profile.first_name} {profile.last_name}</Name>
+				<Name>{profile.first_name} {profile.surname}</Name>
 				{isAuthenticated&&<StyledButton name='Edit profile' handleClick={handleClick} className='lg'/>}
 				<Description>
 				Dolorem ipsum quia dolor sit amet, excepturi sint  quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,.
