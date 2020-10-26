@@ -23,11 +23,26 @@ router.get("/learningobjectives", (req, res)=>{
 
   
 	Connection.query('select * from learning_objective ', (error, results)=>{
-		res.send(results.rows)
+		res.json(results.rows)
 	})
 
 })
+//Edit end point from learning objective 
+router.put("/learningobjectives/:id", (req, res)=>{
+  let id = req.params.id;
+  let description = req.body.description;
+  Connection.query('update learning_objective set description = $1 where id = $2 ', [description, id], 
+  function(err, results){
+      if (!err) {
+        if (results.rowCount == 0) {
+          res.status(404).json(`Learning objective with the id: ${id} does not exist`)
+        }else{
+          res.json("Learing objective has been updated")
+        }
+      }
 
+  } )
+})
 //Post request for signup form
 router.post("/register",validInfo, async (req, res) => {
     const { firstName, lastName, userRole, userEmail, userSlack, userPassword, userGithub, userClassId, cyfCity} = req.body;
