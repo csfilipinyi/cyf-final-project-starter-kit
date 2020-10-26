@@ -49,7 +49,7 @@ const ProfileState = (props) =>{
 		isLoading:false,
 		error:null,
 	};
-	const baseUrl = 'https://designed-gd.herokuapp.com/'
+	const baseUrl = 'https://designed-gd.herokuapp.com/api/'
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
