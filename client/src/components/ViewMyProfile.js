@@ -9,7 +9,8 @@ const ViewMyProfile = () => {
 	let history = useHistory();
 	const {isAuthenticated} = useContext(AuthContext)
 	const {profile} = useContext(ProfileContext)
-
+	console.log('pro', profile)
+	
 	const handleClick = ()=>{
 		history.push('/editprofile');
 	};

@@ -25,7 +25,6 @@ const OverviewProfileCard = ({ profile, getProfile }) => {
 				Dolorem ipsum quia dolor sit amet, excepturi sint occaecati
 				</CardText>
 				{/* <ViewSkills skills={profile.skills} /> */}
-				{console.log('profile', profile)}
 				<StyledButton name='View Profile' handleClick={()=>handleClick(`${profile.github_id}`)} />
 			</CardBody>
 		</CardContainer>
