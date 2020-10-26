@@ -24,13 +24,14 @@ const Home = () => {
 	}
 
 	useEffect(()=>{
-		user.userName&&history.push('/viewprofile')
-		getProfile(user.github_Id)
-		console.log('effect1', user.userName)
+		const {userName, github_Id} = user
+		userName&&history.push('/viewprofile')
+		getProfile(github_Id)
+		console.log('effect1', userName)
 	},[user])
 
 	useEffect (()=>{
-		!user.userName&&isAuthenticated&&history.push('/createprofile')
+		user&&!user.userName&&isAuthenticated&&history.push('/createprofile')
 		!isGraduate&&history.push('/notfound')
 	},[ user, isAuthenticated, isGraduate])
 
