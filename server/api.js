@@ -20,7 +20,9 @@ router.get("/", (_, res, next) => {
 	});
 });
 router.get("/learningobjectives", (req, res)=>{
-	Connection.query('select * from learning_objective', (error, results)=>{
+
+  
+	Connection.query('select * from learning_objective ', (error, results)=>{
 		res.send(results.rows)
 	})
 
@@ -55,6 +57,30 @@ router.post("/register",validInfo, async (req, res) => {
     }
     });
 
+//login route
+
+router.post("/login",validInfo, async (req, res) => {
+     
+    const { userEmail, userPassword } = req.body;
+  try{
+
+const user = await Connection.query("select * from users where user_email=$1", [userEmail]);
+if (user.rows.length === 0) {
+return res.status(401).json("Email is not registered");
+}
+    const validPassword = await bcrypt.compare(userPassword, user.rows[0].user_password);
+    if (!validPassword) {
+      return res.status(401).json("password or email is incorrect");
+    }
+    const token = jwtGenerator(user.rows[0].user_id);
+    res.json({ token: token, 'message': 'login successful' })  
+}
+catch (err) {
+console.error(err.message);
+res.status(500).send("server error");
+
+}
+})
 
 
 export default router;
