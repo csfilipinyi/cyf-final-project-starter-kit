@@ -60,12 +60,13 @@ const AuthState = (props) =>{
     const checkGraduate = (userName)=>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
         fetch(`${baseUrl}/accounts/${userName}`)
+            .then(res=>res.json())
             .then(response=>{
                     console.log('res', response)
                     if(response.status==200){
-                        const res = {...response.data[0], "userName":userName}
-                        console.log('200', response.data, res)
-                      return  dispatch({ type: types.Set_UserName, payload:res})
+                        const user = {...response.data[0], "userName":userName}
+                        console.log('200', response.data, user)
+                      return  dispatch({ type: types.Set_UserName, payload:user})
                     }
                     if (response.status==206){
                         console.log('206', response.data)

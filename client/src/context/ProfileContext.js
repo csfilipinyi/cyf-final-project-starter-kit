@@ -49,7 +49,7 @@ const ProfileState = (props) =>{
 		isLoading:false,
 		error:null,
 	};
-	const baseUrl = 'https://graduate-database1.herokuapp.com/api'
+	const baseUrl = 'https://designed-gd.herokuapp.com/'
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
@@ -66,7 +66,7 @@ const ProfileState = (props) =>{
 
 
 	const getProfile =  (id) => {
-		console.log('get profile called')
+		console.log('get profile called',`${baseUrl}/graduates/${id}`)
 		dispatch({ type: types.Set_Is_Loading });
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
