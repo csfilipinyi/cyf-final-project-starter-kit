@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Modal from "./Modal";
 import useFormValidation from "./useFormValidation";
 import "../App.css";
 import validate from "./SignupValidation";
+import { token } from "morgan";
 
 const SignupForm = () => {
   const intialState = {
@@ -18,11 +19,49 @@ const SignupForm = () => {
     githubName: "",
     slackHandler: "",
   };
-  const { handleChange, input, handleSubmit, errors, isValid } = useFormValidation(
-    validate,
-    intialState
-  );
+  const {
+    handleChange,
+    input,
+    handleSubmit,
+    errors,
+    isValid,
+  } = useFormValidation(validate, intialState);
   console.log(errors);
+
+  useEffect(() => {
+    if (isValid) {
+      fetch(`/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: input.firstName,
+          lastName: input.surname,
+          userRole: input.role,
+          userEmail: input.email,
+          userSlack: input.slackHandler,
+          userPassword: input.password,
+          userGithub: input.githubName,
+          userClassId: input.classId,
+          cyfCity: input.city,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            throw data;
+          }
+          console.log(data);
+
+          window.localStorage.setItem("token", data.token)
+          // setBookings(data);
+          // setLoading(false);
+        })
+        .catch((error) => console.log(error));
+     
+    }
+  }, [isValid]);
 
   return (
     <div>

@@ -21,7 +21,7 @@ function useFormValidation(validate, intialState)  {
     setErrors(newError);
     console.log(errors, newError);
     if (JSON.stringify(newError) == JSON.stringify({})) {
-      setInput(intialState);
+      //setInput(intialState);
       setIsValid(true);
     }
   }
