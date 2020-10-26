@@ -72,7 +72,8 @@ const ProfileState = (props) =>{
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
 				console.log('response data', response.data[0]);
-				dispatch({ type:types.Set_Profile, payload: response.data[0] });
+				dispatch({ type: types.Set_Is_Loading, payload:response.data[0] });
+				// dispatch({ type:types.Set_Profile, payload: response.data[0] });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
