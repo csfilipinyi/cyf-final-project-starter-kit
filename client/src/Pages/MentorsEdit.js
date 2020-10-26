@@ -3,12 +3,12 @@ import { useRoutes, A } from "hookrouter";
 import EditBox from "../components/EditBox";
 
 const routes = {
-  "mentorsedit/html": () => <EditBox skill="html" />,
-  "mentorsedit/css": () => <EditBox skill="css" />,
-  "mentorsedit/javascript": () => <EditBox skill="javascript" />,
-  "mentorsedit/react": () => <EditBox skill="reactLib" />,
-  "mentorsedit/node": () => <EditBox skill="node" />,
-  "mentorsedit/sql": () => <EditBox skill="sql" />,
+  "/mentorsedit/html": () => <EditBox skill="html" />,
+  "/mentorsedit/css": () => <EditBox skill="css" />,
+  "/mentorsedit/javascript": () => <EditBox skill="javascript" />,
+  "/mentorsedit/react": () => <EditBox skill="reactLib" />,
+  "/mentorsedit/node": () => <EditBox skill="node" />,
+  "/mentorsedit/sql": () => <EditBox skill="sql" />,
 };
 
 export default function MentorsEdit() {
