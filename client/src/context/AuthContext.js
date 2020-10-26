@@ -25,9 +25,9 @@ const authReducer = (state, action) => {
 	case types.Set_Logged_In:
 		return { ...state, isAuthenticated:true, isLoading: false };
     case types.Set_UserName:
-        return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
+        return { ...state, user: action.payload, isAuthenticated:true, isLoading: false };
     case types.Set_Is_Graduate:
-        return { ...state, isGraduate:action.payload, isLoading: false }; 
+        return { ...state, isGraduate:false, isLoading: false }; 
     case types.Logout:
         return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
     default:
@@ -60,17 +60,20 @@ const AuthState = (props) =>{
     const checkGraduate = (userName)=>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
         fetch(`${baseUrl}/accounts/${userName}`)
-            .then(response=>response.json())
-            .then(profile=>{     
-                    console.log('profile', profile)
-                    profile[0].status?
-                    dispatch({ type: types.Set_UserName, payload:userName})
-                    :     
-                    dispatch({ type: types.Set_Logged_In});   
+            .then(response=>{
+                    if(response.status==200){
+                        const res = {...response.data[0], "userName":userName}
+                        console.log('200', response.data, res)
+                      return  dispatch({ type: types.Set_UserName, payload:res})
+                    }
+                    if (response.status==206){
+                        console.log('206', response.data)
+                      return  dispatch({ type: types.Set_Logged_In, payload:response.data});   
+                    }
             })
             .catch((error)=>{
                 console.log(error);
-				dispatch({ type:types.Set_Is_Graduate, payload:false });
+				dispatch({ type:types.Set_Is_Graduate });
 			});
     }
 
@@ -82,7 +85,7 @@ const AuthState = (props) =>{
     return (
 		<AuthContext.Provider
 			value={{
-				userName :state.userName,
+                user:state.user,
                 isAuthenticated: state.isAuthenticated,
                 isLoading:state.isLoading,
                 isGraduate:state.isGraduate,

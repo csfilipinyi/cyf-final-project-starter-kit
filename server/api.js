@@ -25,7 +25,7 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  redirect_uri: "https://dev-graduate-directory.herokuapp.com/createprofile",
+  redirect_uri: "https://dev-graduate-directory.herokuapp.com/login",
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',
@@ -128,9 +128,9 @@ router.get("/accounts/:name", (req, res, next) => {
             "SELECT * FROM github_accounts GA join graduates G on(GA.id=G.github_id) where GA.account_name=$1 ",
             [githubName],
             (error, result) => {
-              if (result.rowCount > 0) res.json(result.rows);
+              if (result.rowCount > 0) res.status(200).json(result.rows);
               else
-                res.status(200).send({ account_name: githubName, profile_status: false });
+                res.status(206).send({ account_name: githubName, profile_status: false });
             }
           );
         } else

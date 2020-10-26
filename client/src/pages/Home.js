@@ -14,18 +14,19 @@ import {graduates, graduateProfile} from '../api/graduates'
 const Home = () => {
 	let history = useHistory();
 
-	const { getAllProfiles, getProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, isAuthenticated, userName, isGraduate} = useContext(AuthContext);
-
+	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
+	const { fetchUserName, isAuthenticated, user, isGraduate} = useContext(AuthContext);
+	const {github_Id, userName} = user
 
 	const onSuccess =  (response) =>{
 		const accessCode = response.code;
 		fetchUserName(accessCode);
+		clearProfile()
 	}
 
 	useEffect(()=>{
 		userName&&history.push('/viewprofile')
-		getProfile()
+		getProfile(github_Id)
 		console.log('effect1', userName)
 	},[userName])
 
@@ -45,7 +46,7 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				redirectUri={'https://designed-gd.herokuapp.com/login'}
+				redirectUri={'https://designed-gd.herokuapp.com/login'||'http://localhost:3000/login'}
 				buttonText='Log in'
 				/>
 			</Header>
