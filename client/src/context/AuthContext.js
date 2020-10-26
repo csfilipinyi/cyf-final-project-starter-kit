@@ -49,7 +49,7 @@ const AuthState = (props) =>{
 
 
     const fetchUserName = (code)=>{
-        fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${code}`)
+        axios.get(`https://gd-auth-test.herokuapp.com/api/callback?code=${code}`)
         .then(res => res.json())
         .then(username => {
             checkGraduate(username)
@@ -59,7 +59,7 @@ const AuthState = (props) =>{
     
     const checkGraduate = (userName)=>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
-        fetch(`${baseUrl}/accounts/${userName}`)
+        axios.get(`${baseUrl}/accounts/${userName}`)
             .then(res=>{res.json()
                 console.log('res', res)
             })
