@@ -11,7 +11,7 @@ export const ProfileContext = React.createContext();
 const types = {
 	Set_All_Profiles: "Set_All_Profiles",
 	Set_Is_Loading: "Set_Is_Loading",
-	Set_User:"Set_User",
+	Set_NewProfile:"Set_NewProfile",
 	Set_Error: "Set_Error",
 	Set_Profile: "Set_Profile",
 	Clear_Profile :"Clear_Profile",
@@ -29,6 +29,8 @@ const profileReducer = (state, action) => {
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_All_Profiles:
 		return { ...state, allProfiles: action.payload, isLoading: false };
+	case types.Set_NewProfile:
+		return {...state, profile:action.payload, loading}	
 	case types.Set_Profile:
 		return { ...state, profile: action.payload, isLoading: false };
 	case types.Clear_Profile:
@@ -67,14 +69,18 @@ const ProfileState = (props) =>{
 	};
 
 
+	// .then((response)=>{
+	// 	// 	const graduate = response.data[0];
+	// 	// 	console.log('graduate', graduate),
+	// 	// 	dispatch({ type:types.Set_Profile, payload: graduate });
+	// 	// })
+
 	const getProfile =  (id) => {
 		console.log('get profile called',`${baseUrl}/graduates/${id}`)
 		dispatch({ type: types.Set_Is_Loading });
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
-				const graduate = response.data[0];
-				console.log('graduate', graduate),
-				dispatch({ type:types.Set_Profile, payload: graduate });
+				dispatch({ type: types.Set_NewProfile, payload:response.data });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
