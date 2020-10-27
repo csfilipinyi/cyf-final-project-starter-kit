@@ -17,8 +17,8 @@ if (process.env.DATABASE_URL) { //it's set in Heroku
   user: process.env.database_user,
   host: 'localhost',
   database: 'cyf_knowledge_checklist',
-  password: 123,
-  port: 5432,
+  password: process.env.database_password,
+  port: 5433,
 
   }
 }

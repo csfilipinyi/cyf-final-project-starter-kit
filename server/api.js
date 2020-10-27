@@ -111,5 +111,26 @@ res.status(500).send("server error");
 }
 })
 
+// router.get("/verify",authorization, async (req, res) => {
+//   try {
+//     console.log("passed the authorization");
+//    res.json(true);
+// } catch (err) {
+//   console.error(err.message);
+//   res.status(500).send("Server error");
+// }
+// });
+
+// router.get("/dashboard",authorization , async (req, res) => {
+//   try {
+//       const user = await Connection.query("select * from users where user_id=1", [req.user.id]);
+//       res.json(user.rows[0]);
+//   }
+//   catch (err) {
+//       console.error(err.message);
+//       res.status(500).json("server error");
+//   }
+// })
+
 
 export default router;
