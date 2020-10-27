@@ -5,33 +5,33 @@ export default function SignupValidation(input){
           errors.firstName = "name required"
       }
     //emial
-    if(!input.email){
-        errors.email = "Email required"
-    }else if(!/\S+@\S+\.\S+/.test(input.email)){
-        errors.email = "Email address is invalid"
+    if(!input.userEmail){
+        errors.userEmail = "userEmail required"
+    }else if(!/\S+@\S+\.\S+/.test(input.userEmail)){
+        errors.userEmail = "Email address is invalid"
     }
 
-    if(!input.password){
-        errors.password = "Password id required"
-    }else if(input.password.length <2){
-        errors.password = "Password need to be 6 characters or more"
+    if(!input.userPassword){
+        errors.userPassword = "Password id required"
+    }else if(input.userPassword.length <2){
+        errors.userPassword = "Password need to be 6 characters or more"
     }
      if(!input.confirmPassword){
         errors.confirmPassword = "Password is required"
      }
-     else if(input.confirmPassword !== input.password){
+     else if(input.confirmPassword !== input.userPassword){
         errors.confirmPassword = "Password do not match"
     }
 
-    if(!input.city.trim()){
-        errors.city = "city required"
+    if(!input.cyfCity.trim()){
+        errors.cyfCity = "city required"
     }
 
-    if(!input.classId.trim()){
-        errors.classId = "Please enter your class"
+    if(!input.userClassId.trim()){
+        errors.userClassId = "Please enter your class"
     }
-    if(!input.role.trim()){
-        errors.role = "Please select your role"
+    if(!input.userRole.trim()){
+        errors.userRole = "Please select your role"
     }
 
 return errors
