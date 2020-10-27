@@ -52,7 +52,7 @@ const Home = () => {
 				onSuccess={onSuccess}
 				onFailure={onFailure}
 				redirectUri={'https://designed-gd.herokuapp.com/login'}
-				// 'http://localhost:3000/login'||
+				// redirectUri={'http://localhost:3000/login'}
 				buttonText='Log in'
 				/>
 			</Header>

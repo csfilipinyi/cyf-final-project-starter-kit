@@ -28,7 +28,8 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  redirect_uri: "http://localhost:3000/login",
+  redirect_uri: "https://designed-gd.herokuapp.com/login",
+  // redirect_uri:"http://localhost:3000/login",
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',
@@ -66,12 +67,12 @@ router.get("/callback", async (req, res) => {
   }
 });
 
-router.get("/graduates", (_, res, next) => {
+router.get("/graduates", (req, res) => {
   console.log('get graduates called')
-  Connection.connect((err) => {
-    if (err) {
-      return next(err);
-    }
+  // Connection.connect((err) => {
+  //   if (err) {
+  //     return next(err);
+  //   }
     Connection.query("SELECT * FROM graduates", (error, result) => {
       console.log('got query')
       if(result){
@@ -80,7 +81,7 @@ router.get("/graduates", (_, res, next) => {
           res.send(error)
         };    
     });
-  });
+  // });
 });
 
 // create new profile
@@ -89,7 +90,7 @@ router.post("/graduates", function (req, res) {
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const github_id = req.body.github_id;
-  // const github_name = req.body.githubName;
+  //const github_name = req.body.githubName;
   //checking if the user is existed in our github table
   Connection.query(
           `insert into graduates (first_name, surname, github_id) values` +
@@ -106,7 +107,7 @@ router.post("/graduates", function (req, res) {
         );
 });
 //checking the github username exist in our database
-router.get("/accounts/:name", (req, res, next) => {
+router.get("/accounts/:name", (req, res) => {
   const githubName = req.params.name;
       Connection.query(
       "SELECT * FROM github_accounts where account_name=$1 ",
@@ -132,13 +133,13 @@ router.get("/accounts/:name", (req, res, next) => {
     );
 });
 
-router.get("/graduates/:id", (req, res, next) => {
+router.get("/graduates/:id", (req, res) => {
   const github_id = parseInt(req.params.id);
-  Connection.connect((err) => {
-    if (err) {
-      return next(err);
-    }
-  });
+  // Connection.connect((err) => {
+  //   if (err) {
+  //     return next(err);
+  //   }
+  // });
   Connection.query(
     "SELECT * FROM graduates where github_id=$1 ",
     [github_id],
