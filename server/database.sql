@@ -30,7 +30,7 @@ CREATE TABLE achievements
 
 (
    id SERIAL  PRIMARY KEY,
-   student_id      SERIAL REFERENCES users(user_id),
+   student_id      INTEGER REFERENCES users(user_id),
    learning_obj_id INTEGER REFERENCES learning_objective(id),
    ability INT,
    date_added DATE NOT NULL DEFAULT CURRENT_DATE
@@ -39,11 +39,11 @@ CREATE TABLE achievements
 );
 
 INSERT into learning_objective(skill, description)
-VALUES('Html', 'Understand what ''parent'' and ''child'' is'),
-      ('Html', 'Can create and link a stylesheet is'),
-      ('Html', 'Understand what semantic tags are and how to use them'),
-      ('Html', 'Be able to include a form in a web page'),
-      ('Html', 'Be able to create a button'),
+VALUES('html', 'Understand what ''parent'' and ''child'' is'),
+      ('html', 'Can create and link a stylesheet is'),
+      ('html', 'Understand what semantic tags are and how to use them'),
+      ('html', 'Be able to include a form in a web page'),
+      ('html', 'Be able to create a button'),
       ('CSS', 'Understand what a selector is in CSS'),
       ('CSS', 'Understand the difference between a tag, class and ID'),
       ('CSS', 'Understand what prefixes are'),
