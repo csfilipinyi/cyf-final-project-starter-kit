@@ -28,14 +28,14 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  redirect_uri: "https://designed-gd.herokuapp.com/login",
+  redirect_uri: "http://localhost:3000/login",
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',
 });
 
 router.get("/login", (req, res) => {
-  console.log(authorizationUri);
+  console.log('login endpoint', req);
   res.redirect(authorizationUri);
 });
 
@@ -66,31 +66,17 @@ router.get("/callback", async (req, res) => {
   }
 });
 
-router.get("/", (_, res, next) => {
-  Connection.connect((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.json({ message: "Hello, world!" });
-  });
-});
 router.get("/graduates", (_, res, next) => {
   console.log('get graduates called')
-  Connection.connect((err) => {
-    if (err) {
-      return next(err);
-    }
     Connection.query("SELECT * FROM graduates", (error, result) => {
       console.log('got query')
       if(result){
         res.json(result.rows)}else{
           console.log('got error')
           res.send(error)
-        };
-      
-    } 
-    );
-  });
+        };    
+    });
+  // });
 });
 
 // create new profile
@@ -118,11 +104,7 @@ router.post("/graduates", function (req, res) {
 //checking the github username exist in our database
 router.get("/accounts/:name", (req, res, next) => {
   const githubName = req.params.name;
-  Connection.connect((err) => {
-    if (err) {
-      return next(err);
-    }
-    Connection.query(
+      Connection.query(
       "SELECT * FROM github_accounts where account_name=$1 ",
       [githubName],
       (error, result) => {
@@ -144,15 +126,10 @@ router.get("/accounts/:name", (req, res, next) => {
             .send("this is  github account does not belong to a CYF graduates");
       }
     );
-  });
 });
 
 router.get("/graduates/:id", (req, res, next) => {
   const github_id = parseInt(req.params.id);
-  Connection.connect((err) => {
-    if (err) {
-      return next(err);
-    }
     Connection.query(
       "SELECT * FROM graduates where github_id=$1 ",
       [github_id],
@@ -164,7 +141,6 @@ router.get("/graduates/:id", (req, res, next) => {
             .send("It has not been added to the graduate table yet");
       }
     );
-  });
 });
 
 //editing existing graduate
@@ -172,7 +148,6 @@ router.put("/graduates/:id", function (req, res) {
   const github_id = parseInt(req.params.id);
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
-
   Connection.query(
     "update graduates set first_name=$1 ,surname=$2" + "where github_id =$3",
     [newFirstName, newSurname, github_id],
