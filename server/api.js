@@ -72,7 +72,6 @@ router.get("/graduates", (_, res, next) => {
     if (err) {
       return next(err);
     }
-  });
     Connection.query("SELECT * FROM graduates", (error, result) => {
       console.log('got query')
       if(result){
@@ -81,7 +80,7 @@ router.get("/graduates", (_, res, next) => {
           res.send(error)
         };    
     });
-  // });
+  });
 });
 
 // create new profile
