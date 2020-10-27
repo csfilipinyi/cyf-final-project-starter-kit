@@ -11,13 +11,13 @@ export default function Modal() {
           <p>Your account has been created successfully</p>
         </div>
         <div className="modal-footer">
-          <Link to="/">
+          <Link to="/skills">
             <button
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
             >
-              Login
+              Dashboard
             </button>
           </Link>
         </div>
