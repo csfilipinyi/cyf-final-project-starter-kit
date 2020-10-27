@@ -64,7 +64,7 @@ router.post("/register",validInfo, async (req, res) => {
       
       const user = await Connection.query("SELECT * FROM users WHERE user_email = $1", [userEmail]);
        if (user.rows.length !== 0) {
-       return res.status(401).json("User already exist!");
+       return res.status(401).json({error : "User already exist!"});
       }
       
       const salt = await bcrypt.genSalt(10);
@@ -82,7 +82,7 @@ router.post("/register",validInfo, async (req, res) => {
 
     catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send({error :"Server error"});
     }
     });
 

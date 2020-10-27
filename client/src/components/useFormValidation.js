@@ -11,7 +11,8 @@ function useFormValidation(validate, intialState)  {
       ...input,
       [event.target.name]: event.target.value,
     };
-    setInput(updateInput);
+    setInput(updateInput)
+    setIsValid(false)
   }
 
   function handleSubmit(event) {
