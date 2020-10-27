@@ -54,19 +54,16 @@ const SignupForm = () => {
           }
           console.log(data);
 
-          window.localStorage.setItem("token", data.token)
-          // setBookings(data);
-          // setLoading(false);
+          window.localStorage.setItem("token", data.token);
         })
         .catch((error) => console.log(error));
-     
     }
   }, [isValid]);
 
   return (
     <div>
       {isValid ? (
-        <Modal />
+        <Modal role={input.userRole} />
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="sign-form">
@@ -105,7 +102,9 @@ const SignupForm = () => {
               onChange={handleChange}
               name="userPassword"
             />
-            {errors.userPassword && <p className="error">*{errors.userPassword} </p>}
+            {errors.userPassword && (
+              <p className="error">*{errors.userPassword} </p>
+            )}
             <label for="">Confirm Password</label>
             <input
               type="password"
@@ -125,7 +124,7 @@ const SignupForm = () => {
               onChange={handleChange}
               name="cyfCity"
             />
-            {errors.cyfCity && <p>{errors.cyfCity} </p>}
+            {errors.cyfCity && <p className="error">*{errors.cyfCity} </p>}
             <label for="userClassId">Class</label>
             <input
               type="number"
@@ -134,7 +133,7 @@ const SignupForm = () => {
               onChange={handleChange}
               name="userClassId"
             />
-            {errors.userClassId && <p>{errors.userClassId} </p>}
+            {errors.userClassId && <p className="error">*{errors.userClassId} </p>}
             <label for="userGithub">Github Name</label>
             <input
               type="text"

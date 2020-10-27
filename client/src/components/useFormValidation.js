@@ -17,7 +17,7 @@ function useFormValidation(validate, intialState)  {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const newError = validate(input);
+    const newError = validate(input, isValid);
     setErrors(newError);
     console.log(errors, newError);
     if (JSON.stringify(newError) == JSON.stringify({})) {
