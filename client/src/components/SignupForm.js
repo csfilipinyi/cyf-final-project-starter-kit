@@ -79,28 +79,28 @@ const SignupForm = () => {
               name="firstName"
             />
             {errors.firstName && <p className="error">*{errors.firstName} </p>}
-            <label for="lastName">lastName</label>
+            <label for="lastName">Surname</label>
             <input
               type="text"
-              placeholder="lastName"
+              placeholder="Surname"
               value={input.lastName}
               onChange={handleChange}
               name="lastName"
             />
             {errors.lastName && <p className="error">*{errors.lastName} </p>}
-            <label for="userEmail">userEmail</label>
+            <label for="userEmail">Email</label>
             <input
               type="userEmail"
-              placeholder="userEmail"
+              placeholder="Email"
               value={input.userEmail}
               onChange={handleChange}
               name="userEmail"
             />
             {errors.userEmail && <p className="error">*{errors.userEmail} </p>}
-            <label for="userPassword">userPassword</label>
+            <label for="userPassword">Password</label>
             <input
               type="password"
-              placeholder="userPassword"
+              placeholder="Password"
               value={input.userPassword}
               onChange={handleChange}
               name="userPassword"
@@ -117,10 +117,10 @@ const SignupForm = () => {
             {errors.confirmPassword && (
               <p className="error">*{errors.confirmPassword} </p>
             )}
-            <label for="cyfCity">cyfCity</label>
+            <label for="cyfCity">City</label>
             <input
               type="text"
-              placeholder="cyfCity"
+              placeholder="City"
               value={input.cyfCity}
               onChange={handleChange}
               name="cyfCity"
@@ -129,7 +129,7 @@ const SignupForm = () => {
             <label for="userClassId">Class</label>
             <input
               type="number"
-              placeholder="Class-id"
+              placeholder="Class"
               value={input.userClassId}
               onChange={handleChange}
               name="userClassId"
