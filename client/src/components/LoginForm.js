@@ -9,8 +9,8 @@ import { Link, useHistory } from "react-router-dom";
 export default function LoginForm() {
   let history = useHistory();
   const intialState = {
-    email: "",
-    password: "",
+    userEmail: "",
+    userPassword: "",
   };
   const { handleChange, input, handleSubmit, errors, isValid } = useFormValidation(
     loginValidation,
@@ -25,24 +25,24 @@ export default function LoginForm() {
     <Jumbotron fluid>
       <Container>
         <Form onSubmit={handleSubmit} className="login-page">
-          <label>Email</label>
+          <label>userEmail</label>
           <input
             type="email"
             placeholder="Enter email"
-            name="email"
+            name="userEmail"
             onChange={handleChange}
-            value={input.email}
+            value={input.userEmail}
           />
-          {errors.email && <p className="error">*{errors.email} </p>}
-          <label>Password</label>
+          {errors.userEmail && <p className="error">*{errors.userEmail} </p>}
+          <label>userPassword</label>
           <input
             type="password"
             placeholder="Enter password"
-            name="password"
+            name="userPassword"
             onChange={handleChange}
-            value={input.password}
+            value={input.userPassword}
           />
-          {errors.password && <p className="error">*{errors.password} </p>}
+          {errors.userPassword && <p className="error">*{errors.userPassword} </p>}
           {/* <Link to="/Skills"> */}
 
           <button
