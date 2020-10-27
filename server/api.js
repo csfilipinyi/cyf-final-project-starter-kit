@@ -28,7 +28,7 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
     if (err) {
       console.log(err);
     }
-    console.log(results.rows);
+    //console.log(results.rows);
     res.json(results.rows);
   });
 });

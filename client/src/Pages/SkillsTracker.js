@@ -12,6 +12,7 @@ function getAbility(achievements,  skill, objective){
 export default function Html({skill}) {
   const [xyz, setXyz] = useState([])
   console.log();
+  
   useEffect(() => {
 
 fetch(`/api/learningobjectives/${localStorage.getItem('userId')}/${skill}`)
