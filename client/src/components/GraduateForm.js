@@ -24,7 +24,7 @@ const GraduateForm = () => {
 	},[profile])
 
 	const handleSubmit = (values) => {
-		const { firstName, lastName, skills } = values;
+		const { firstName, lastName } = values;
 		const newProfile ={
 			'first_name':firstName,
 			'surname':lastName,
@@ -57,7 +57,7 @@ const GraduateForm = () => {
 		}
 	};
 
-	const initialValue = profile || {firstName:'', lastName:'', skills:'' };
+	const initialValue = {firstName:profile.first_name, lastName:profile.surname } || {firstName:'', lastName:'' };
 
 	return (
 		<Container >

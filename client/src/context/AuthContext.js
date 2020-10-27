@@ -56,8 +56,9 @@ const AuthState = (props) =>{
             return response.data
         })
     }
+    // const baseUrl = 'https://designed-gd.herokuapp.com/api'
     const baseUrl = 'https://designed-gd.herokuapp.com/api'
-    
+
     const checkGraduate = (userName)=>{
         console.log('auth', userName)
         dispatch({ type: types.Set_Is_Loading, payload:true }),       

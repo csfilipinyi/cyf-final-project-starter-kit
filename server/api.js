@@ -28,7 +28,7 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  redirect_uri: "https://dev-graduate-directory.herokuapp.com/login",
+  redirect_uri: "https://designed-gd.herokuapp.com/login",
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',
@@ -75,15 +75,24 @@ router.get("/", (_, res, next) => {
   });
 });
 router.get("/graduates", (_, res, next) => {
+  console.log('get graduates called')
   Connection.connect((err) => {
     if (err) {
       return next(err);
     }
     Connection.query("SELECT * FROM graduates", (error, result) => {
-      res.json(result.rows);
-    });
+      console.log('got query')
+      if(result){
+        res.json(result.rows)}else{
+          console.log('got error')
+          res.send(error)
+        };
+      
+    } 
+    );
   });
 });
+
 // create new profile
 router.post("/graduates", function (req, res) {
   console.log(req.body)
