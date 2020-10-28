@@ -27,7 +27,7 @@ input {
   border-radius: 10%;
 }
 
-.sumbit{
+.sumbit {
   background-color: #d12f2f;
   margin-top: 3vh;
 }
@@ -48,11 +48,12 @@ input {
 .login-page label {
   margin-top: 2vh;
 }
-.error{
+.error {
   color: #ff0033;
 }
 .signup-link {
-  margin-top: 2vh;
+  font-size: large;
+  float: right;
 }
 
 li {
@@ -75,7 +76,6 @@ li {
 }
 
 .skills-container h2 A {
-  margin-bottom: 5vh;
   color: #d12f2f;
 }
 
@@ -85,4 +85,56 @@ li {
 
 .modal-footer button {
   background-color: #d12f2f;
+}
+
+.delete-btn {
+  float: right;
+  border-radius: 5%;
+}
+
+.expand-btn {
+  float: right;
+  border-radius: 5%;
+}
+
+.edit-btn {
+  width: 100px;
+  height: 35px;
+  border-radius: 5%;
+}
+
+.edit-delete-buttons {
+  margin-bottom: 10%;
+}
+
+.add-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn {
+  width: 100px;
+  height: 40px;
+  /* text-align: center; */
+  text-overflow: -50% -50%;
+  border-radius: 5px;
+}
+
+.skill-name {
+  margin-bottom: 10%;
+}
+
+.mentorsview-header-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+}
+
+.name-list {
+  font-size: larger;
+}
+
+.students-name {
+  margin-top: 10%;
 }
