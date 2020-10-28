@@ -43,7 +43,11 @@ export default function LoginForm() {
           console.log(data);
 
           window.localStorage.setItem("token", data.token);
-          window.localStorage.setItem("userId", data.user)
+
+          window.localStorage.setItem("user", data.id)
+          window.localStorage.setItem("role", data.role)
+
+     
           history.push("/skills")
         
         })

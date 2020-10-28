@@ -6,7 +6,11 @@ import "../App.css";
 import validate from "./SignupValidation";
 import { token } from "morgan";
 
+
 const SignupForm = () => {
+  const [hasRegistered, setHasRegistered]= useState(false)
+  const [serverError , setServerError] = useState("")
+
   const intialState = {
     firstName: "",
     lastName: "",
@@ -50,19 +54,24 @@ const SignupForm = () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.error) {
-            throw data;
+            throw new Error(data.error);
+            
           }
           console.log(data);
 
           window.localStorage.setItem("token", data.token);
+          setHasRegistered(true)
         })
-        .catch((error) => console.log(error));
+        .catch(error=> {
+          setServerError(error.message)
+        
+        }) 
     }
   }, [isValid]);
 
   return (
     <div>
-      {isValid ? (
+      {hasRegistered ? (
         <Modal role={input.userRole} />
       ) : (
         <form onSubmit={handleSubmit}>
@@ -170,6 +179,7 @@ const SignupForm = () => {
             >
               Submit
             </button>
+            {serverError}
           </div>
         </form>
       )}

@@ -6,6 +6,23 @@ const jwtGenerator = require("./utils/jwtGenerator");
 const validInfo = require("./middleware/validInfo");
 const authorization = require("./middleware/authorization");
 
+
+router.get("/", (_, res, next) => {
+  Connection.connect((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ message: "Hello, world!" });
+  });
+});
+router.get("/learningobjectives", (req, res) => {
+  Connection.query("select * from learning_objective ", (error, results) => {
+    res.json(results.rows);
+  });
+});
+//Edit end point from learning objective
+
+
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
     if (err) {
@@ -35,6 +52,7 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
 
 //-----------------------------------------Edit end point from learning objective----------------------------------------
 
+
 router.put("/learningobjectives/:id", (req, res) => {
   let id = req.params.id;
   let description = req.body.description;
@@ -51,6 +69,50 @@ router.put("/learningobjectives/:id", (req, res) => {
           res.json("Learing objective has been updated");
         }
       }
+
+    }
+  );
+});
+//post endpoint for learning objective
+router.post("/learningobjectives", (req, res) => {
+  const { skill, description } = req.body;
+  Connection.query(
+    "INSERT INTO learning_objective (skill, description)" + "values($1, $2)",
+    [skill, description],
+    (err, results) => {
+      if (!err) {
+        res.json({
+          message: "your data has been inserted",
+          table: "Into the learning objective table",
+        });
+      }
+    }
+  );
+});
+//Post request for signup form
+
+var middleware = [validInfo];
+router.post("/register", middleware, async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    userRole,
+    userEmail,
+    userSlack,
+    userPassword,
+    userGithub,
+    userClassId,
+    cyfCity,
+  } = req.body;
+  try {
+    const user = await Connection.query(
+      "SELECT * FROM users WHERE user_email = $1",
+      [userEmail]
+    );
+    if (user.rows.length !== 0) {
+      return res.status(401).json({ error: "User already exist!" });
+    }
+
     }
   );
 });
@@ -96,6 +158,7 @@ router.post("/register", validInfo, async (req, res) => {
       return res.status(401).json("User already exist!");
     }
 
+
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(userPassword, salt);
 
@@ -118,13 +181,21 @@ router.post("/register", validInfo, async (req, res) => {
     res.json({ token });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+
+    res.status(500).send({ error: "Server error" });
+
+   
+
   }
 });
 
 //login route
 
+
+
+
 router.post("/login", validInfo, async (req, res) => {
+
   const { userEmail, userPassword } = req.body;
   try {
     const user = await Connection.query(
@@ -141,27 +212,26 @@ router.post("/login", validInfo, async (req, res) => {
     if (!validPassword) {
       return res.status(401).json("password or email is incorrect");
     }
-    const token = jwtGenerator(user.rows[0].user_id);
-    res.json({
-      token: token,
-      message: "login successful",
-      user: user.rows[0].user_id,
-    });
+
+    const token = jwtGenerator(user.rows[0].user_id, user.rows[0].user_role);
+    res.json({ token: token, message: "login successful", id :user.rows[0].user_id, role : user.rows[0].user_role  });
+
+  
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
   }
 });
 
-// router.get("/verify",authorization, async (req, res) => {
-//   try {
-//     console.log("passed the authorization");
-//    res.json(true);
-// } catch (err) {
-//   console.error(err.message);
-//   res.status(500).send("Server error");
-// }
-// });
+router.get("/verify", authorization, async (req, res) => {
+  try {
+    console.log("passed the authorization");
+    res.json(req.user.id);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
 
 // router.get("/dashboard",authorization , async (req, res) => {
 //   try {
