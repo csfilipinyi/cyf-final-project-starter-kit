@@ -246,7 +246,7 @@ router.post("/login", validInfo, async (req, res) => {
 router.get("/verify", authorization, async (req, res) => {
   try {
     console.log("passed the authorization");
-    res.json(req.user.id);
+    res.json({id: req.user.id, role:  user.rows[0].user_role});
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

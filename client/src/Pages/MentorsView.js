@@ -11,11 +11,27 @@ function MentorsView() {
   let history = useHistory();
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-
+ 
+console.log(token)
     if (!token) {
       history.push("/");
     }
     fetch(`/api/verify`, {headers: {token}})
+    .then(res =>{
+      res.json()
+      if(res.status !==200){
+        history.push("/");
+      }
+    }) 
+    .then(data =>{
+       console.log(data)
+       window.localStorage.setItem("role", data.role)
+      if( data == "not authorized"||data.role == "Student"){
+       history.push("/");
+      }
+    } 
+    )
+    .catch(error =>console.log(error))
   }, []);
 
   const studentId = useQuery().get("studentId");
