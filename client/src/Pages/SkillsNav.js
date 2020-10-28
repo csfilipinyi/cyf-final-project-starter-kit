@@ -19,8 +19,8 @@ export default function SkillsNav() {
   return (
     <div className="skills-container">
      {routeResult}
-     <h2> <A href="/skills/html">html</A></h2>
-     <h2><A href="/skills/css">Css</A></h2> 
+     <h2> <A href="/skills/html">Html</A></h2>
+     <h2><A href="/skills/css">CSS</A></h2> 
      <h2><A href="/skills/javascript">Javascript</A></h2> 
       <h2><A href="/skills/react">React</A></h2>
       <h2><A href="/skills/node">Node JS</A></h2>

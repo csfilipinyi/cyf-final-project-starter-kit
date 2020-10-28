@@ -6,6 +6,7 @@ const jwtGenerator = require("./utils/jwtGenerator");
 const validInfo = require("./middleware/validInfo");
 const authorization = require("./middleware/authorization");
 
+
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
     if (err) {
@@ -20,6 +21,38 @@ router.get("/learningobjectives", (req, res) => {
   });
 });
 //Edit end point from learning objective
+
+
+router.get("/", (_, res, next) => {
+  Connection.connect((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ message: "Welcome to Knowledge Checklist" });
+  });
+});
+
+//--------------------------------------Get endpoint for learning objectives--------------------------------------------------
+
+router.get("/learningobjectives/:id/:skill", (req, res) => {
+  const userId = Number(req.params.id);
+  const skill = req.params.skill;
+  const queryLo = `select * from learning_objective lo 
+  left join achievements a on lo.id = a.learning_obj_id 
+  where lo.skill = $1 and (a.student_id = $2 or a.student_id is null);`;
+
+  Connection.query(queryLo, [skill, userId] , (err, results) => {
+    if (err) {
+      console.log(err);
+    }
+    //console.log(results.rows);
+    res.json(results.rows);
+  });
+});
+
+//-----------------------------------------Edit end point from learning objective----------------------------------------
+
+
 router.put("/learningobjectives/:id", (req, res) => {
   let id = req.params.id;
   let description = req.body.description;
@@ -36,6 +69,7 @@ router.put("/learningobjectives/:id", (req, res) => {
           res.json("Learing objective has been updated");
         }
       }
+
     }
   );
 });
@@ -79,6 +113,52 @@ router.post("/register", middleware, async (req, res) => {
       return res.status(401).json({ error: "User already exist!" });
     }
 
+    }
+  );
+});
+
+//-------------------------------post endpoint for learning objective---------------------------------------------------
+
+router.post("/learningobjectives", (req, res) => {
+  const { skill, description } = req.body;
+  Connection.query(
+    "INSERT INTO learning_objective (skill, description)" + "values($1, $2)",
+    [skill, description],
+    (err, results) => {
+      if (!err) {
+        res.json({
+          message: "your data has been inserted",
+          table: "Into the learning objective table",
+        });
+      }
+    }
+  );
+});
+
+//------------------------------------------Post request for signup form-------------------------------------------------------
+
+router.post("/register", validInfo, async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    userRole,
+    userEmail,
+    userSlack,
+    userPassword,
+    userGithub,
+    userClassId,
+    cyfCity,
+  } = req.body;
+  try {
+    const user = await Connection.query(
+      "SELECT * FROM users WHERE user_email = $1",
+      [userEmail]
+    );
+    if (user.rows.length !== 0) {
+      return res.status(401).json("User already exist!");
+    }
+
+
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(userPassword, salt);
 
@@ -101,13 +181,21 @@ router.post("/register", middleware, async (req, res) => {
     res.json({ token });
   } catch (err) {
     console.error(err.message);
+
     res.status(500).send({ error: "Server error" });
+
+   
+
   }
 });
 
 //login route
 
-router.post("/login", middleware, async (req, res) => {
+
+
+
+router.post("/login", validInfo, async (req, res) => {
+
   const { userEmail, userPassword } = req.body;
   try {
     const user = await Connection.query(
@@ -124,8 +212,11 @@ router.post("/login", middleware, async (req, res) => {
     if (!validPassword) {
       return res.status(401).json("password or email is incorrect");
     }
+
     const token = jwtGenerator(user.rows[0].user_id, user.rows[0].user_role);
     res.json({ token: token, message: "login successful", id :user.rows[0].user_id, role : user.rows[0].user_role  });
+
+  
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
