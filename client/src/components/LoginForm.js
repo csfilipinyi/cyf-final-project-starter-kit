@@ -40,16 +40,14 @@ export default function LoginForm() {
           if (data.error) {
             throw data;
           }
-          console.log(data);
+         
 
           window.localStorage.setItem("token", data.token);
 
           window.localStorage.setItem("user", data.id)
-          window.localStorage.setItem("role", data.role)
-
-     
-          history.push("/skills")
-        
+         window.localStorage.setItem("role", data.role)
+          let role = data.role;
+          role === "Student" ?  history.push("/skills") : history.push("/MentorsView")
         })
         .catch((error) => console.log(error));
     }
