@@ -6,7 +6,6 @@ const jwtGenerator = require("./utils/jwtGenerator");
 const validInfo = require("./middleware/validInfo");
 const authorization = require("./middleware/authorization");
 
-
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
     if (err) {
@@ -21,7 +20,6 @@ router.get("/learningobjectives", (req, res) => {
   });
 });
 //Edit end point from learning objective
-
 
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
@@ -41,7 +39,7 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
   left join achievements a on lo.id = a.learning_obj_id 
   where lo.skill = $1 and (a.student_id = $2 or a.student_id is null);`;
 
-  Connection.query(queryLo, [skill, userId] , (err, results) => {
+  Connection.query(queryLo, [skill, userId], (err, results) => {
     if (err) {
       console.log(err);
     }
@@ -51,7 +49,6 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
 });
 
 //-----------------------------------------Edit end point from learning objective----------------------------------------
-
 
 router.put("/learningobjectives/:id", (req, res) => {
   let id = req.params.id;
@@ -69,7 +66,6 @@ router.put("/learningobjectives/:id", (req, res) => {
           res.json("Learing objective has been updated");
         }
       }
-
     }
   );
 });
@@ -155,6 +151,23 @@ router.post("/learningobjectives", (req, res) => {
   );
 });
 
+//<------Delete end point from learning objective------>
+router.delete("/learningobjective/:id", (req, res) => {
+  const id = Number(req.params.id);
+  Connection.query(
+    "delete from learning_objective where id = $1",
+    [id],
+    (err, results) => {
+      if (!err) {
+        res.json({
+          message: `The learning objective with the id: ${id} has been deleted`,
+          table: "From learning objective",
+        });
+      }
+    }
+  );
+});
+
 //------------------------------------------Post request for signup form-------------------------------------------------------
 
 router.post("/register", validInfo, async (req, res) => {
@@ -177,7 +190,6 @@ router.post("/register", validInfo, async (req, res) => {
     if (user.rows.length !== 0) {
       return res.status(401).json("User already exist!");
     }
-
 
     const salt = await bcrypt.genSalt(10);
     const bcryptPassword = await bcrypt.hash(userPassword, salt);
@@ -203,19 +215,12 @@ router.post("/register", validInfo, async (req, res) => {
     console.error(err.message);
 
     res.status(500).send({ error: "Server error" });
-
-   
-
   }
 });
 
 //login route
 
-
-
-
 router.post("/login", validInfo, async (req, res) => {
-
   const { userEmail, userPassword } = req.body;
   try {
     const user = await Connection.query(
@@ -234,9 +239,12 @@ router.post("/login", validInfo, async (req, res) => {
     }
 
     const token = jwtGenerator(user.rows[0].user_id, user.rows[0].user_role);
-    res.json({ token: token, message: "login successful", id :user.rows[0].user_id, role : user.rows[0].user_role  });
-
-  
+    res.json({
+      token: token,
+      message: "login successful",
+      id: user.rows[0].user_id,
+      role: user.rows[0].user_role,
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
