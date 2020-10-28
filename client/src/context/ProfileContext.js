@@ -47,7 +47,7 @@ const ProfileState = (props) =>{
 
 	const initialState ={
 		allProfiles:[],
-		profile:null,
+		profile:[],
 		isLoading:false,
 		error:null,
 	};
