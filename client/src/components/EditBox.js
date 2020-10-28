@@ -1,8 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import fakeData from "../fakeData.json";
+import AddForm from "./AddForm";
 
 export default function EditBox({ skill }) {
-  console.log(skill);
+
+ const skills = fakeData[skill]
+  const [learningObjective, setLearningObjective] = useState(skills)
+ 
+  const addLearningObjective = (description) => {
+  setLearningObjective(skills.push(description))
+  }
+ 
   return (
     <div className="learning-objective-container">
       <h2 className="skill-name">{skill}</h2>
@@ -35,11 +43,7 @@ export default function EditBox({ skill }) {
             );
           })}
         </ul>
-        <div className="add-btn-container">
-          <button className="sumbit add-btn" type="submit" variant="secondary">
-            ADD
-          </button>
-        </div>
+        <AddForm addLearningObjective={addLearningObjective}/>
       </div>
     </div>
   );
