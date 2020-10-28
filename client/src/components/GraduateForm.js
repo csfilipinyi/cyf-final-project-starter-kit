@@ -10,28 +10,28 @@ import { skills } from '../api/skills';
 import styled from 'styled-components';
 
 
-const GraduateForm = () => {
+const GraduateForm = ({profile, handleClick}) => {
 	let history = useHistory()
-	const { profiles, addProfile, profile}  = useContext(ProfileContext);
 	const { github_id}  = useContext(AuthContext);
 
 	console.log('profile', profile)
 	
 	const [newSkills, setNewSkills] = useState([]);
 	
-	useEffect(()=>{
-		setNewSkills()
-	},[profile])
+	// useEffect(()=>{
+	// 	setNewSkills()
+	// },[profile])
 
-	const handleSubmit = (values) => {
-		const { firstName, lastName } = values;
+	const handleSubmit =async (values) => {
+		const { firstName, lastName, aboutMe } = values;
 		const newProfile ={
 			'first_name':firstName,
 			'surname':lastName,
-			'github_id':github_id
+			'github_id':github_id,
+			'about_me':aboutMe
 			// 'skills':skills,
 		};
-		addProfile(newProfile);
+		await handleClick(newProfile);
 		history.push('/viewprofile');
 	};
 
@@ -57,7 +57,7 @@ const GraduateForm = () => {
 		}
 	};
 
-	const initialValue = {firstName:profile.first_name, lastName:profile.surname } || {firstName:'', lastName:'' };
+	const initialValue = profile ? {firstName:profile.first_name, lastName:profile.surname, aboutMe:profile.aboutMe } : {firstName:'', lastName:'', aboutMe:'' };
 
 	return (
 		<Container >
@@ -91,11 +91,11 @@ const GraduateForm = () => {
 							{/* <ViewSkills>{newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills> */}
-							{/* <FormField
-								name='desciprtion'
-								// placeholder='Phone Number'
-								label='Description'
-							/> */}
+							<FormField
+								name='aboutMe'
+								// placeholder='About Me'
+								label='About Me'
+							/>
 						</StyledForm>
 						<ButtonContainer>
 							<StyledButton name='Cancel' className='md' handleClick={props.handleReset} />

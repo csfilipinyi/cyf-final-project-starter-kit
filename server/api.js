@@ -28,8 +28,8 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  redirect_uri: "https://designed-gd.herokuapp.com/login",
-  // redirect_uri:"http://localhost:3000/login",
+  // redirect_uri: "https://designed-gd.herokuapp.com/login",
+  redirect_uri:"http://localhost:3000/login",
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',
@@ -89,13 +89,14 @@ router.post("/graduates", function (req, res) {
   console.log(req.body)
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
+  const aboutMe = req.body.aboutMe;
   const github_id = req.body.github_id;
   //const github_name = req.body.githubName;
   //checking if the user is existed in our github table
   Connection.query(
-          `insert into graduates (first_name, surname, github_id) values` +
-            `($1,$2,$3)`,
-          [newFirstName, newSurname, github_id],
+          `insert into graduates (first_name, surname, about_me, github_id) values` +
+            `($1,$2,$3, $4)`,
+          [newFirstName, newSurname, aboutMe, github_id],
           (error, result) => {
             if(result){
               res.status(200).send(result.rows);
@@ -155,17 +156,22 @@ router.get("/graduates/:id", (req, res) => {
 
 //editing existing graduate
 router.put("/graduates/:id", function (req, res) {
-  const github_id = parseInt(req.params.id);
+  console.log('put request called', req.body)
+  const github_id = req.params.id;
   const newFirstName = req.body.first_name;
+  const aboutMe = req.body.aboutMe;
   const newSurname = req.body.surname;
 
   Connection.query(
-    "update graduates set first_name=$1 ,surname=$2" + "where github_id =$3",
-    [newFirstName, newSurname, github_id],
-    (error) => {
-      if (error == undefined) {
-        res.send("graduate " + github_id + " updated.");
-      }
+    "update graduates set first_name=$1, surname=$2, about_me=$3 where github_id =$4",
+    [newFirstName, newSurname, aboutMe, github_id],
+    (error, result) => {
+      if(result){
+        console.log('put request response', result)
+        res.status(200).send(result.rows);
+      } else {
+        res.status(404).send(error)
+      } 
     }
   );
 });

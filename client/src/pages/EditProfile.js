@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from "styled-components";
 import GraduateForm from "../components/GraduateForm";
 import Header from '../components/Header';
 import Introducing from '../components/Introducing';
+import { ProfileContext } from '../context/ProfileContext';
 
 const EditProfile = () => {
+	const { editProfile, profile}  = useContext(ProfileContext);
+	const handleClick =(profile)=>{
+		editProfile(profile);
+	}
 	return (
 		<Screen>
 			<Header />
@@ -12,7 +17,7 @@ const EditProfile = () => {
 				<Introducing
 					header = 'Edit your profile'
 				/>
-				<GraduateForm />
+				<GraduateForm handleClick={handleClick} profile={profile}/>
 			</Container>
 		</Screen>
 	);

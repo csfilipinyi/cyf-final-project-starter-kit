@@ -51,6 +51,7 @@ const ProfileState = (props) =>{
 		isLoading:false,
 		error:null,
 	};
+
 	const baseUrl = 'https://designed-gd.herokuapp.com/api'
 
 	// const baseUrl ='http://localhost:3100/api'
@@ -130,8 +131,9 @@ const ProfileState = (props) =>{
 			},
 		};
 
-		axios.put(`${baseUrl}/${profile.id}`, profile, config)
+		axios.put(`${baseUrl}/graduates/${profile.github_id}`, profile, config)
 			.then((response)=>{
+				console.log("edit profile", response)
 				dispatch({ type: types.Set_Profile, payload:response.data });
 			})
 			.catch((error)=>{
