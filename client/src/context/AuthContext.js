@@ -52,7 +52,6 @@ const AuthState = (props) =>{
     const fetchUserName = (code)=>{
         return axios.get(`https://designed-gd.herokuapp.com/api/callback?code=${code}`)
         .then(response => {
-            console.log('code', response.data)
             return response.data
         })
     }
@@ -61,7 +60,6 @@ const AuthState = (props) =>{
     // const baseUrl = 'http://localhost:3100/api'
 
     const checkGraduate = (userName)=>{
-        console.log('auth', userName)
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
         axios.get(`${baseUrl}/accounts/${userName}`)
             .then(response=>{

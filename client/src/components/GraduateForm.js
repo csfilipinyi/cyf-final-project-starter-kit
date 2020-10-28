@@ -11,24 +11,44 @@ import styled from 'styled-components';
 
 
 const GraduateForm = ({profile, handleClick}) => {
+	const [interest, setInterest] =  useState([]) 
+
+	const addInterest=(e)=>{
+		const num = Number(e.target.value)
+		setInterest([...interest, num])
+	}
+
+	const removeInterest=(e)=>{
+		const num = Number(e.target.value)
+		let filteredInt = interest.filter(x=>x!==num)
+		setInterest(filteredInt)
+	}
+
 	let history = useHistory()
 	const { github_id}  = useContext(AuthContext);
 
 	console.log('profile', profile)
 	
-	const [newSkills, setNewSkills] = useState([]);
+	// const [newSkills, setNewSkills] = useState([]);
 	
 	// useEffect(()=>{
 	// 	setNewSkills()
 	// },[profile])
 
 	const handleSubmit =async (values) => {
-		const { firstName, lastName, aboutMe } = values;
+		const { firstName, surname, aboutMe, location, interest1, interest2, interest3, github, linkedin, portfolio, skills } = values;
 		const newProfile ={
 			'first_name':firstName,
-			'surname':lastName,
+			'surname':surname,
 			'github_id':github_id,
-			'about_me':aboutMe
+			'about_me':aboutMe,
+			'location':location,
+			'interest1':interest1,
+			'interest2':interest2,
+			'interest3':interest3,
+			'github_link':github,
+			'linkedin_link': linkedin,
+			'portfolio_link':portfolio,
 			// 'skills':skills,
 		};
 		await handleClick(newProfile);
@@ -57,7 +77,10 @@ const GraduateForm = ({profile, handleClick}) => {
 		}
 	};
 
-	const initialValue = profile.first_name ? {firstName:profile.first_name, lastName:profile.surname, aboutMe:profile.aboutMe } : {firstName:'', lastName:'', aboutMe:'' };
+	const initialValue = profile ? 
+							{firstName:profile.first_name, surname:profile.surname, aboutMe:profile.about_me, location:profile.location, interest1:profile.interest1,interest2:profile.interest2,interest3:profile.interest3, github:profile.github_link, linkedin:profile.linkedin_link, portfolio:profile.portfolio_link } 
+							:
+							{firstName:'', surname:'', aboutMe:'', location:'', interest1:'', interest2:'',interest3:'', github:'', linkedin:'', portfolio:'' };
 
 	return (
 		<Container >
@@ -67,6 +90,7 @@ const GraduateForm = ({profile, handleClick}) => {
 				onSubmit={(values) => handleSubmit(values)}
 				// validationSchema={ValidationSchema}
 				onReset = {handleReset}
+				onInterest = {addInterest}
 			>
 				{(props) => (
 					<>
@@ -77,29 +101,78 @@ const GraduateForm = ({profile, handleClick}) => {
 								label='Your first name'
 							/>
 							<FormField
-								name='lastName'
+								name='surname'
 								// placeholder='Last Name'
 								label='Your last name'
 							/>
+							<FormField
+								name='aboutMe'
+								// placeholder='About Me'
+								label='About Me'
+								// label1='Provide one sentence summary of what makes you tick. This will also be shown on the main page'
+							/>
+							<FormField
+								name='location'
+								// placeholder='About Me'
+								label='Your Location'
+							/>
+							<FormField
+								name='interest1'
+								// placeholder='Last Name'
+								label='Your Interest'
+							/>
+							<button value={2} type='button' onClick={addInterest}>Add another interest</button>
+							{interest.includes(2)&&
+								<>
+									<FormField
+										name='interest2'
+										// placeholder='Last Name'
+										label='Your Interest'
+									/>
+									<button value={3} type='button' onClick={addInterest}>Add Another Interest</button>
+									<button value={2} type='button' onClick={removeInterest}>Remove Interest</button>
+								</>
+							}
+							{interest.includes(3)&&
+								<>
+									<FormField
+										name='interest3'
+										// placeholder='Last Name'
+										label='Your Interest'
+									/>
+									<button value={3} type='button' onClick={removeInterest}>Remove Interest</button>
+								</>
+							}	
+							<FormField
+								name='github'
+								// placeholder='Last Name'
+								label='Github'
+							/>
+							<FormField
+								name='linkedin'
+								// placeholder='Last Name'
+								label='Linked In'
+							/>
+							<FormField
+								name='portfolio'
+								// placeholder='Last Name'
+								label='Your Portfolio/Project'
+							/>				
 							{/* <FormField
 								name='skills'
 								// placeholder='Email'
 								label='Your key skills'
 								info = 'Type your skills and press ‘Space’'
 								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
-							/> */}
-							{/* <ViewSkills>{newSkills.map((skill, i)=>{
+							/> 
+							<ViewSkills>{newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills> */}
-							<FormField
-								name='aboutMe'
-								// placeholder='About Me'
-								label='About Me'
-							/>
+							
 						</StyledForm>
 						<ButtonContainer>
 							<StyledButton name='Cancel' className='md' handleClick={props.handleReset} />
-							<StyledButton name='Save' className='sm' handleClick={ props.handleSubmit}  />
+							<StyledButton name='Save' className='sm' type='submit' handleClick={ props.handleSubmit}  />
 						</ButtonContainer>
 					</>
 				)}

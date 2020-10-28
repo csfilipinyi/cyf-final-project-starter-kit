@@ -11,7 +11,6 @@ const NavBar = ({ open }) => {
 
     const handleClick = ()=>{
         logOut()
-        console.log('logout', logOut, isAuthenticated)
     }    
 
 	return (

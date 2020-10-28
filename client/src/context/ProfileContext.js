@@ -103,7 +103,7 @@ const ProfileState = (props) =>{
 		axios.post(`${baseUrl}/graduates`, profile, config)
 			.then((response)=>{
 				console.log('post', response)
-				dispatch({ type: types.Set_Profile, payload:response.data });
+				dispatch({ type: types.Set_Profile, payload:profile });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
@@ -134,7 +134,7 @@ const ProfileState = (props) =>{
 		axios.put(`${baseUrl}/graduates/${profile.github_id}`, profile, config)
 			.then((response)=>{
 				console.log("edit profile", response)
-				dispatch({ type: types.Set_Profile, payload:response.data });
+				dispatch({ type: types.Set_Profile, payload:profile });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });

@@ -20,9 +20,15 @@ const ViewMyProfile = ({profile}) => {
 			<Circle/>
 			<SubCon>
 				<Name>{profile.first_name} {profile.surname}</Name>
+				<Description>
+					{profile.location}	
+				</Description>
 				{isAuthenticated&&<StyledButton name='Edit profile' handleClick={handleClick} className='lg'/>}
 				<Description>
-					{profile.aboutMe}	
+					{profile.about_me}	
+				</Description>
+				<Description>
+					{profile.interest1}{profile.interest2&& `, ${profile.interest2}`}{profile.interest3&& `, ${profile.interest3}`}
 				</Description>
 				<SubHeads>{profile.first_name}’s skills</SubHeads>
 					<SkillsContainer>
@@ -36,15 +42,15 @@ const ViewMyProfile = ({profile}) => {
 				<SocialCon>
 					<SocialSubCon>
 						<SocialIcon/>
-						<SocialText>LinkedIn</SocialText>
+						<SocialText href={profile.linkedin_link} target='blank'>LinkedIn</SocialText>
 					</SocialSubCon>
 					<SocialSubCon>
 						<SocialIcon/>
-						<SocialText>GitHub</SocialText>
+						<SocialText href={profile.github_link} target='blank'>GitHub</SocialText>
 					</SocialSubCon>
 					<SocialSubCon>
 						<SocialIcon/>
-						<SocialText>CV</SocialText>
+						<SocialText href={profile.portfolio_link} target='blank'>Portfolio</SocialText>
 					</SocialSubCon>
 				</SocialCon>
 			</SubCon>
@@ -127,7 +133,7 @@ const SocialIcon =styled.div`
 	border-radius:50%;
 `
 
-const SocialText =styled.p`
+const SocialText =styled.a`
 	color: #0090FF;
 	font-family: Lato;
 	font-size: 20px;

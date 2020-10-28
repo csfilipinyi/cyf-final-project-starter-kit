@@ -20,9 +20,15 @@ const OverviewProfileCard = ({ profile, getProfile }) => {
 			{/* <Img variant="top" src={profile.img||avatar} /> */}
 			<Img />
 			<CardBody>
-				<CardTitle>{profile.first_name} {profile.last_name}</CardTitle>
+				<CardTitle>{profile.first_name} {profile.surname}</CardTitle>
 				<CardText>
-				{profile.aboutMe}
+				{profile.location}
+				</CardText>
+				<CardText>
+				{profile.about_me}
+				</CardText>
+				<CardText>
+				{profile.interest1}{profile.interest2&& `, ${profile.interest2}`}{profile.interest3&& `, ${profile.interest3}`}
 				</CardText>
 				{/* <ViewSkills skills={profile.skills} /> */}
 				<StyledButton name='View Profile' handleClick={()=>handleClick(`${profile.github_id}`)} />
