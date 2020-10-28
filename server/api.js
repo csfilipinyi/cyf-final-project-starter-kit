@@ -91,8 +91,7 @@ router.post("/learningobjectives", (req, res) => {
 });
 //Post request for signup form
 
-var middleware = [validInfo];
-router.post("/register", middleware, async (req, res) => {
+router.post("/register", validInfo, async (req, res) => {
   const {
     firstName,
     lastName,
@@ -110,13 +109,34 @@ router.post("/register", middleware, async (req, res) => {
       [userEmail]
     );
     if (user.rows.length !== 0) {
-      return res.status(401).json({ error: "User already exist!" });
+      return res.status(401).json("User already exist!");
     }
 
-    }
-  );
+    const salt = await bcrypt.genSalt(10);
+    const bcryptPassword = await bcrypt.hash(userPassword, salt);
+
+    let newUser = await Connection.query(
+      "INSERT INTO users (first_name, last_name, user_role,user_email,user_slack,user_password,user_github,class_id, cyf_city)" +
+        " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *",
+      [
+        firstName,
+        lastName,
+        userRole,
+        userEmail,
+        userSlack,
+        bcryptPassword,
+        userGithub,
+        userClassId,
+        cyfCity,
+      ]
+    );
+    const token = jwtGenerator(newUser.rows[0].user_id);
+    res.json({ token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send({ error: "Server error" });
+  }
 });
-
 //-------------------------------post endpoint for learning objective---------------------------------------------------
 
 router.post("/learningobjectives", (req, res) => {
