@@ -57,7 +57,7 @@ const GraduateForm = ({profile, handleClick}) => {
 		}
 	};
 
-	const initialValue = profile ? {firstName:profile.first_name, lastName:profile.surname, aboutMe:profile.aboutMe } : {firstName:'', lastName:'', aboutMe:'' };
+	const initialValue = profile.first_name ? {firstName:profile.first_name, lastName:profile.surname, aboutMe:profile.aboutMe } : {firstName:'', lastName:'', aboutMe:'' };
 
 	return (
 		<Container >
