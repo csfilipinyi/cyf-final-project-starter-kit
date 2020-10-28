@@ -1,16 +1,24 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import fakeData from "../fakeData.json";
 import AddForm from "./AddForm";
 
 export default function EditBox({ skill }) {
+  const skills = fakeData[skill];
+  console.log(skills.length);
+  const [deleted, setDeleted] = useState(skills);
+  const [learningObjective, setLearningObjective] = useState(skills);
 
- const skills = fakeData[skill]
-  const [learningObjective, setLearningObjective] = useState(skills)
- 
   const addLearningObjective = (description) => {
-  setLearningObjective(skills.push(description))
-  }
- 
+    setLearningObjective(skills.push(description));
+  };
+
+  const deleteLearningObjective = (objective) => {
+    let index = skills.indexOf(objective);
+    if (index > -1) {
+      setDeleted(skills.splice(index, 1));
+    }
+  };
+
   return (
     <div className="learning-objective-container">
       <h2 className="skill-name">{skill}</h2>
@@ -31,7 +39,9 @@ export default function EditBox({ skill }) {
                   >
                     Edit
                   </button>
+
                   <button
+                    onClick={() => deleteLearningObjective(objective)}
                     className="sumbit delete-btn"
                     type="submit"
                     variant="secondary"
@@ -43,7 +53,7 @@ export default function EditBox({ skill }) {
             );
           })}
         </ul>
-        <AddForm addLearningObjective={addLearningObjective}/>
+        <AddForm addLearningObjective={addLearningObjective} />
       </div>
     </div>
   );
