@@ -43,6 +43,7 @@ export default function LoginForm() {
           console.log(data);
 
           window.localStorage.setItem("token", data.token);
+          window.localStorage.setItem("userId", data.user)
           history.push("/skills")
         
         })
