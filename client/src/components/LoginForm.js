@@ -1,26 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Jumbotron, Container, Form, Col, Row } from "react-bootstrap";
 
-import useForm from "./useForm";
+import useFormValidation from "./useFormValidation";
 import "../App.css";
 import loginValidation from "./loginValidation";
 import { Link, useHistory } from "react-router-dom";
 
 export default function LoginForm() {
   let history = useHistory();
+  
   const intialState = {
-    email: "",
-    password: "",
+    userEmail: "",
+    userPassword: "",
   };
-  const { handleChange, input, handleSubmit, errors, submit } = useForm(
-    loginValidation,
-    intialState
-  );
+  const {
+    handleChange,
+    input,
+    handleSubmit,
+    errors,
+    isValid,
+  } = useFormValidation(loginValidation, intialState);
   console.log(errors);
 
-  if (submit) {
-    history.push("/skills");
-  }
+  useEffect(() => {
+   
+    if (isValid) {
+      fetch(`/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userEmail: input.userEmail,
+          userPassword: input.userPassword,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            throw data;
+          }
+         
+
+          window.localStorage.setItem("token", data.token);
+
+          window.localStorage.setItem("user", data.id)
+         window.localStorage.setItem("role", data.role)
+          let role = data.role;
+          role === "Student" ?  history.push("/skills") : history.push("/MentorsView")
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [isValid]);
+
+  
   return (
     <Jumbotron fluid>
       <Container>
@@ -28,21 +61,23 @@ export default function LoginForm() {
           <label>Email</label>
           <input
             type="email"
-            placeholder="Enter email"
-            name="email"
+            placeholder="Email"
+            name="userEmail"
             onChange={handleChange}
-            value={input.email}
+            value={input.userEmail}
           />
-          {errors.email && <p className="error">*{errors.email} </p>}
+          {errors.userEmail && <p className="error">*{errors.userEmail} </p>}
           <label>Password</label>
           <input
             type="password"
-            placeholder="Enter password"
-            name="password"
+            placeholder="Password"
+            name="userPassword"
             onChange={handleChange}
-            value={input.password}
+            value={input.userPassword}
           />
-          {errors.password && <p className="error">*{errors.password} </p>}
+          {errors.userPassword && (
+            <p className="error">*{errors.userPassword} </p>
+          )}
           {/* <Link to="/Skills"> */}
 
           <button

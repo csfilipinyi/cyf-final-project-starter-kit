@@ -1,33 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Modal from "./Modal";
-import useForm from "./useForm";
+import useFormValidation from "./useFormValidation";
 import "../App.css";
 import validate from "./SignupValidation";
+import { token } from "morgan";
+
 
 const SignupForm = () => {
+  const [hasRegistered, setHasRegistered]= useState(false)
+  const [serverError , setServerError] = useState("")
+
   const intialState = {
     firstName: "",
-    surname: "",
-    role: "",
-    email: "",
-    password: "",
+    lastName: "",
+    userRole: "",
+    userEmail: "",
+    userPassword: "",
     confirmPassword: "",
-    city: "",
-    classId: "",
-    githubName: "",
-    slackHandler: "",
+    cyfCity: "",
+    userClassId: "",
+    userGithub: "",
+    userSlack: "",
   };
-  const { handleChange, input, handleSubmit, errors, submit } = useForm(
-    validate,
-    intialState
-  );
+  const {
+    handleChange,
+    input,
+    handleSubmit,
+    errors,
+    isValid,
+  } = useFormValidation(validate, intialState);
   console.log(errors);
+
+  useEffect(() => {
+    if (isValid) {
+      fetch(`/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: input.firstName,
+          lastName: input.lastName,
+          userRole: input.userRole,
+          userEmail: input.userEmail,
+          userSlack: input.userSlack,
+          userPassword: input.userPassword,
+          userGithub: input.userGithub,
+          userClassId: input.userClassId,
+          cyfCity: input.cyfCity,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            throw new Error(data.error);
+            
+          }
+          console.log(data);
+
+          window.localStorage.setItem("token", data.token);
+          setHasRegistered(true)
+        })
+        .catch(error=> {
+          setServerError(error.message)
+        
+        }) 
+    }
+  }, [isValid]);
 
   return (
     <div>
-      {submit ? (
-        <Modal />
+      {hasRegistered ? (
+        <Modal role={input.userRole} />
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="sign-form">
@@ -40,33 +85,35 @@ const SignupForm = () => {
               name="firstName"
             />
             {errors.firstName && <p className="error">*{errors.firstName} </p>}
-            <label for="surname">Surname</label>
+            <label for="lastName">Surname</label>
             <input
               type="text"
               placeholder="Surname"
-              value={input.surname}
+              value={input.lastName}
               onChange={handleChange}
-              name="surname"
+              name="lastName"
             />
-            {errors.surname && <p className="error">*{errors.surname} </p>}
-            <label for="email">Email</label>
+            {errors.lastName && <p className="error">*{errors.lastName} </p>}
+            <label for="userEmail">Email</label>
             <input
-              type="email"
+              type="userEmail"
               placeholder="Email"
-              value={input.email}
+              value={input.userEmail}
               onChange={handleChange}
-              name="email"
+              name="userEmail"
             />
-            {errors.email && <p className="error">*{errors.email} </p>}
-            <label for="password">password</label>
+            {errors.userEmail && <p className="error">*{errors.userEmail} </p>}
+            <label for="userPassword">Password</label>
             <input
               type="password"
               placeholder="Password"
-              value={input.password}
+              value={input.userPassword}
               onChange={handleChange}
-              name="password"
+              name="userPassword"
             />
-            {errors.password && <p className="error">*{errors.password} </p>}
+            {errors.userPassword && (
+              <p className="error">*{errors.userPassword} </p>
+            )}
             <label for="">Confirm Password</label>
             <input
               type="password"
@@ -78,48 +125,48 @@ const SignupForm = () => {
             {errors.confirmPassword && (
               <p className="error">*{errors.confirmPassword} </p>
             )}
-            <label for="city">City</label>
+            <label for="cyfCity">City</label>
             <input
               type="text"
-              placeholder="city"
-              value={input.city}
+              placeholder="City"
+              value={input.cyfCity}
               onChange={handleChange}
-              name="city"
+              name="cyfCity"
             />
-            {errors.city && <p>{errors.city} </p>}
-            <label for="classId">Class</label>
+            {errors.cyfCity && <p className="error">*{errors.cyfCity} </p>}
+            <label for="userClassId">Class</label>
             <input
               type="number"
-              placeholder="Class-id"
-              value={input.classId}
+              placeholder="Class"
+              value={input.userClassId}
               onChange={handleChange}
-              name="classId"
+              name="userClassId"
             />
-            {errors.classId && <p>{errors.classId} </p>}
-            <label for="githubName">Github Name</label>
+            {errors.userClassId && <p className="error">*{errors.userClassId} </p>}
+            <label for="userGithub">Github Name</label>
             <input
               type="text"
               placeholder="Github Name"
-              value={input.githubName}
+              value={input.userGithub}
               onChange={handleChange}
-              name="githubName"
+              name="userGithub"
             />
-            <label for="slackHandler">Slack Handler</label>
+            <label for="userSlack">Slack Handler</label>
             <input
               type="text"
               placeholder="Slack Handler"
-              value={input.slackHandler}
+              value={input.userSlack}
               onChange={handleChange}
-              name="slackHandler"
+              name="userSlack"
             />
 
-            <label for="role">Please select a role</label>
-            <select name="role" onChange={handleChange}>
+            <label for="userRole">Please select a role</label>
+            <select name="userRole" onChange={handleChange}>
               <option value="select">Select</option>
               <option value="Student">Student</option>
               <option value="Mentor">Mentor</option>
             </select>
-            {errors.role && <p className="error">*{errors.role} </p>}
+            {errors.userRole && <p className="error">*{errors.userRole} </p>}
             {/* <Link> */}
             {/* <input  to="/modal" type="submit" value="Submit" className="submit" /> */}
             {/* </Link> */}
@@ -132,6 +179,7 @@ const SignupForm = () => {
             >
               Submit
             </button>
+            {serverError}
           </div>
         </form>
       )}

@@ -1,19 +1,17 @@
-export default function LoginValidation(input){
-    let errors = {};
+export default function LoginValidation(input) {
+  let errors = {};
 
-   
-    if(!input.email){
-        errors.email = "Email required"
-    }else if(!/\S+@\S+\.\S+/.test(input.email)){
-        errors.email = "Email address is invalid"
-    }
+  if (!input.userEmail) {
+    errors.userEmail = "Email required";
+  } else if (!/\S+@\S+\.\S+/.test(input.userEmail)) {
+    errors.userEmail = "Email address is invalid";
+  }
 
-    if(!input.password){
-        errors.password = "Password id required"
-    }else if(input.password.length <2){
-        errors.password = "Password need to be 6 characters or more"
-    }
-     
-return errors
+  if (!input.userPassword) {
+    errors.userPassword = "Password id required";
+  } else if (input.userPassword.length < 2) {
+    errors.userPassword = "Password need to be 6 characters or more";
+  }
 
+  return errors;
 }
