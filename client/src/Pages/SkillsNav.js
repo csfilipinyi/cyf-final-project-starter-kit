@@ -1,8 +1,7 @@
-import React from "react";
-//import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import React, {useEffect} from "react";
 import {useRoutes, A} from 'hookrouter';
 import SkillTracker from "./SkillsTracker";
-
+import { useHistory } from "react-router-dom";
 
 const routes = {
   
@@ -15,6 +14,32 @@ const routes = {
 };
 
 export default function SkillsNav() {
+  
+  let history = useHistory();
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+ 
+console.log(token)
+    if (!token) {
+      history.push("/");
+    }
+    fetch(`/api/verify`, {headers: {token}})
+    .then(res =>{
+      if(res.status !==200){
+        history.push("/");
+      }
+      return res.json()
+    }) 
+    .then(data =>{
+       console.log(data)
+       window.localStorage.setItem("role", data.role)
+      if( data == "not authorized"||data.role == "Mentor"){
+       history.push("/");
+      }
+    } 
+    )
+    .catch(error =>console.log(error))
+  }, []);
   const routeResult = useRoutes(routes);
   return (
     <div className="skills-container">
