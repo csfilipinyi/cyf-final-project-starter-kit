@@ -1,5 +1,4 @@
 import http from "http";
-require("dotenv").config();
 import app from "./app";
 
 

@@ -11,7 +11,7 @@
     "cleanup": "rimraf ./dist/*",
     "dev": "concurrently -k -n \"client,server\" \"npm run dev:client\" \"npm run dev:server\"",
     "dev:client": "webpack-dev-server --config client/webpack/dev.config.js",
-    "dev:server": "cross-env PORT=3100 nodemon --inspect --watch server --exec babel-node server/server.js",
+    "dev:server": "cross-env PORT=3100 nodemon --inspect --watch server --exec babel-node -r dotenv/config server/server.js",
     "lint": "eslint .",
     "preserve": "npm run build",
     "serve": "npm start",

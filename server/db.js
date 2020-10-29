@@ -14,8 +14,8 @@ if (process.env.DATABASE_URL) {
     },
   };
 } else {
-  //default local config
-  config = {
+  
+    config = {
 
     user: process.env.db_user,
     host: "localhost",
