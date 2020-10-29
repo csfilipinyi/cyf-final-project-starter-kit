@@ -33,7 +33,7 @@ export function App() {
             <Route path="/skills" component={SkillsNav} />
             <Route path="/modal" component={Modal} />
             <Route path="/MentorsView" component={MentorsView} />
-            <Route path="/MentorsEdit" component={MentorsEdit} />
+            <Route path="/MentorsEdit/:id?" component={MentorsEdit} />
           </div>
         </main>
       </Switch>

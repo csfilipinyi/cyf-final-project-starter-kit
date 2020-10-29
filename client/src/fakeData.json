@@ -31,7 +31,7 @@
     "Be able to write a function"
   ],
 
-  "reactLib": [
+  "react": [
     "Understand the difference between class and functional components",
     "Be able to create a React application with create-react-app",
     "Understand what JSX is and how it's different to HTML and Javascript",

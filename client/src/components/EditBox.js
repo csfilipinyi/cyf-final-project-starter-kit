@@ -1,5 +1,12 @@
 import React from "react";
 import fakeData from "../fakeData.json";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 
 // function Child() {
 //   // We can use the `useParams` hook here to access
@@ -13,15 +20,17 @@ import fakeData from "../fakeData.json";
 //   );
 // }
 
-export default function EditBox({ skill }) {
-  console.log(skill);
+export default function EditBox() {
+  
 
+  let { id } = useParams();
+  console.log(id);
   //let skill = "css";
   return (
     <div className="learning-objective-container">
-      <h2>{skill}</h2>
+      <h2>{id}</h2>
       <ul>
-        {fakeData[skill].map((objective, index) => {
+        {fakeData[id].map((objective, index) => {
           return (
             <li key={index}>
               {objective}
