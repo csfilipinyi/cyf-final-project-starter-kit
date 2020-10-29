@@ -50,18 +50,16 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
 
 //----------------------------------------------Get mentors endpoint fo learning objectives----------------------------------
 
-router.put("/learningobjectives/:skill", (req, res) =>{
-  let skill = re.body.skill;
-  const queryLearningOb= `SELECT * FROM learning_objective`
+router.get("/mentor/:skill", (req, res) =>{
+  let skill = req.params.skill;
+  const queryLearningOb= `SELECT * FROM learning_objective  where skill = $1`
+  Connection.query(queryLearningOb, [skill], (err, results)=>{
+   if(!err){
+     res.json(results.rows)
+   }
+  } )
 
 })
-
-
-
-
-
-
-
 
 
 //-----------------------------------------Edit end point from learning objective----------------------------------------
