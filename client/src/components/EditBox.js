@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import fakeData from "../fakeData.json";
-import AddForm from "./AddForm";
 
-export default function EditBox({ skill }) {
-  const skills = fakeData[skill];
+import AddForm from "./AddForm";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
+
+export default function EditBox() {
+  let { id } = useParams();
+  const skills = fakeData[id];
   console.log(skills.length);
   const [deleted, setDeleted] = useState(skills);
   const [learningObjective, setLearningObjective] = useState(skills);
@@ -21,10 +30,10 @@ export default function EditBox({ skill }) {
 
   return (
     <div className="learning-objective-container">
-      <h2 className="skill-name">{skill}</h2>
+      <h2 className="skill-name">{id}</h2>
       <div>
         <ul>
-          {fakeData[skill].map((objective, index) => {
+          {fakeData[id].map((objective, index) => {
             return (
               <li key={index}>
                 <div>{objective}</div>
@@ -55,6 +64,7 @@ export default function EditBox({ skill }) {
         </ul>
         <AddForm addLearningObjective={addLearningObjective} />
       </div>
+
     </div>
   );
 }

@@ -1,40 +1,49 @@
 import React from "react";
-import { useRoutes, A } from "hookrouter";
+//import { useRoutes, A } from "hookrouter";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import EditBox from "../components/EditBox";
 
-const routes = {
-  "/mentorsedit/html": () => <EditBox skill="html" />,
-  "/mentorsedit/css": () => <EditBox skill="css" />,
-  "/mentorsedit/javascript": () => <EditBox skill="javascript" />,
-  "/mentorsedit/react": () => <EditBox skill="reactLib" />,
-  "/mentorsedit/node": () => <EditBox skill="node" />,
-  "/mentorsedit/sql": () => <EditBox skill="sql" />,
-};
+
 
 export default function MentorsEdit() {
-  const routeResult = useRoutes(routes);
-  console.log(routeResult);
-  return (
-    <div className="skills-container">
-      {routeResult}
-      <h2>
-        <A href="/mentorsedit/html">html</A>
-      </h2>
-      <h2>
-        <A href="/mentorsedit/css">Css</A>
-      </h2>
-      <h2>
-        <A href="/mentorsedit/javascript">Javascript</A>
-      </h2>
-      <h2>
-        <A href="/mentorsedit/react">React</A>
-      </h2>
-      <h2>
-        <A href="/mentorsedit/node">Node JS</A>
-      </h2>
-      <h2>
-        <A href="/mentorsedit/sql">SQL</A>
-      </h2>
-    </div>
-  );
+ 
+return(
+    <Router>
+      <div>
+        <h2>Skills</h2>
+
+        <ul>
+          <li>
+            <Link to="/mentorsedit/html">HTML</Link>
+          </li>
+          <li>
+            <Link to="/mentorsedit/css">CSS</Link>
+          </li>
+          <li>
+            <Link to="/mentorsedit/javascript">JavaScript</Link>
+          </li>
+          <li>
+            <Link to="/mentorsedit/react">React.js</Link>
+          </li>
+          <li>
+            <Link to="/mentorsedit/node">Node</Link>
+          </li>
+          <li>
+            <Link to="/mentorsedit/sql">SQL</Link>
+          </li>
+        </ul>
+
+        <Switch>
+          <Route path="/mentorsedit/:id" children={<EditBox />} />
+        </Switch>
+      </div>
+    </Router>
+    )
+
 }

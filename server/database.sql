@@ -32,14 +32,18 @@ CREATE TABLE achievements
    id SERIAL  PRIMARY KEY,
    student_id      INTEGER REFERENCES users(user_id),
    learning_obj_id INTEGER REFERENCES learning_objective(id),
-   ability INTEGER,
-   date_added DATE NOT NULL DEFAULT CURRENT_DATE
+
+   ability INT,
+   date_added DATE NOT NULL DEFAULT 'CURRENT_DATE'
+
+
+
 
    
 );
 
 INSERT into learning_objective(skill, description)
-VALUES('html', 'Understand what ''parent'' and ''child'' is'),
+      VALUES('html', 'Understand what ''parent'' and ''child'' is'),
       ('html', 'Can create and link a stylesheet is'),
       ('html', 'Understand what semantic tags are and how to use them'),
       ('html', 'Be able to include a form in a web page'),
@@ -58,7 +62,8 @@ VALUES('html', 'Understand what ''parent'' and ''child'' is'),
       ('javascript', 'Be able to link a Javascript file in your project'),
       ('javascript', 'Be able to do a console.log()'),
       ('javascript', 'Understand what a console.log is used for'),
-      ('Javascript', 'Understand the different types of data in Javascript e.g. string, integer, etc.'),
+
+      ('javascript', 'Understand the different types of data in Javascript e.g. string, integer, etc.'),
       ('javascript', 'Be able to assign a variable with const and let'),
       ('javascript', 'Understand the difference between const and let'),
       ('javascript', 'Be able to write a function'),
