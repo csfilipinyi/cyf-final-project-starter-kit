@@ -17,11 +17,11 @@ if (process.env.DATABASE_URL) {
   //default local config
   config = {
 
-    user: 'nawal',
+    user: process.env.db_user,
     host: "localhost",
     database: "cyf_knowledge_checklist",
-    password: 123456,
-    port: 5433,
+    password: process.env.db_password,
+    port: process.env.db_port,
   };
 
 }
