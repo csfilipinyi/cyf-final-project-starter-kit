@@ -164,43 +164,30 @@ router.post("/learningobjectives", (req, res) => {
 
 //<---------------------------------------Endpoint abilities ---------------------------------------------->
 
-router.post("/ablitiy", authorization, (req, res) => {
+router.post("/ablitiy", authorization, async (req, res) => {
   const learning_obj_id = Number(req.body.learning_obj_id);
   const ability = Number(req.body.ability);
   const student_id = req.user.id;
   const querySelect = `SELECT * from achievements where learning_obj_id = $1 
                        and student_id = $2  `;
   const queryPost = `INSERT INTO achievements (ability, learning_obj_id, student_id)
-                     values($1, $2, $3)`
+                     values($1, $2, $3)`;
   const queryUpdate = `update achievements set  ability= $1
                       where learning_obj_id = $2 and student_id =$3`;
 
-  Connection.query(
-    querySelect,
-    [learning_obj_id, student_id],
-    (err, results) => {
-      if (!err) {
-        if (results.rowCount > 0) {
-          Connection.query(
-            queryUpdate,
-            [ability, learning_obj_id, student_id],
-            (err, results) => {
-              if (!err) {
-                res.json("updated")
-              }
+  const results = await Connection.query(querySelect, [
+    learning_obj_id,
+    student_id,
+  ]);
 
-            }
-          );
-        }else{
-          Connection.query(queryPost, [ability, learning_obj_id, student_id], (err, results)=>{
-            if(!err){
-              res.json("inserted")
-            }
-          });
-        }
-      }
-    }
-  );
+  if (results.rowCount > 0) {
+    await Connection.query(queryUpdate, [ability, learning_obj_id, student_id]);
+
+    res.json("updated");
+  } else {
+    await Connection.query(queryPost, [ability, learning_obj_id, student_id]);
+    res.json("inserted");
+  }
 });
 //<------Delete end point from learning objective------>
 router.delete("/learningobjective/:id", (req, res) => {
