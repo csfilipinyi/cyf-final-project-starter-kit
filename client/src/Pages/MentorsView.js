@@ -17,11 +17,11 @@ console.log(token)
       history.push("/");
     }
     fetch(`/api/verify`, {headers: {token}})
-    .then(res =>{
-      res.json()
+    .then(res => {
       if(res.status !==200){
         history.push("/");
       }
+      return res.json()
     }) 
     .then(data =>{
        console.log(data)

@@ -48,8 +48,23 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
   });
 });
 
-//-----------------------------------------Edit end point from learning objective----------------------------------------
+//----------------------------------------------Get mentors endpoint fo learning objectives----------------------------------
 
+router.put("/learningobjectives/:skill", (req, res) =>{
+  let skill = re.body.skill;
+  const queryLearningOb= `SELECT * FROM learning_objective`
+
+})
+
+
+
+
+
+
+
+
+
+//-----------------------------------------Edit end point from learning objective----------------------------------------
 router.put("/learningobjectives/:id", (req, res) => {
   let id = req.params.id;
   let description = req.body.description;
@@ -254,9 +269,10 @@ router.post("/login", validInfo, async (req, res) => {
 router.get("/verify", authorization, async (req, res) => {
   try {
     console.log("passed the authorization");
-    res.json({id: req.user.id, role:  user.rows[0].user_role});
+    res.json({id: req.user.id, role:  req.user.role});
+   
   } catch (err) {
-    console.error(err.message);
+    console.error("error", err.message);
     res.status(500).send("Server error");
   }
 });
