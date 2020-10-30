@@ -35,7 +35,7 @@ const OverviewProfileCard = ({ profile, getProfile }) => {
         <SubContainer>
          {profile.about_me&&<CardText>{profile.interest}</CardText>}
         </SubContainer>
-        <ViewSkills skills={profile.skills} />
+        {/* {profile.skills&&<ViewSkills skills={profile.skills} />} */}
         <IconContainer>
           <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
           <LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>

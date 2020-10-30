@@ -10,29 +10,16 @@ import { skills } from "../api/skills";
 import styled from "styled-components";
 
 const GraduateForm = ({ profile, handleClick }) => {
-  const [interest, setInterest] = useState([]);
-
-  const addInterest = (e) => {
-    const num = Number(e.target.value);
-    setInterest([...interest, num]);
-  };
-
-  const removeInterest = (e) => {
-    const num = Number(e.target.value);
-    let filteredInt = interest.filter((x) => x !== num);
-    setInterest(filteredInt);
-  };
-
   let history = useHistory();
   const { github_id } = useContext(AuthContext);
 
   console.log("profile", profile);
 
-  // const [newSkills, setNewSkills] = useState([]);
+  const [newSkills, setNewSkills] = useState([]);
 
-  // useEffect(()=>{
-  // 	setNewSkills()
-  // },[profile])
+  useEffect(()=>{
+  	setNewSkills(profile.skills)
+  },[])
 
   const handleSubmit = async (values) => {
     const {
@@ -53,11 +40,10 @@ const GraduateForm = ({ profile, handleClick }) => {
       about_me: aboutMe,
       location: location,
       interest: interest,
-
       github_link: github,
       linkedin_link: linkedin,
       portfolio_link: portfolio,
-      // 'skills':skills,
+      skills:skills
     };
     await handleClick(newProfile);
     history.push("/viewprofile");
@@ -81,8 +67,8 @@ const GraduateForm = ({ profile, handleClick }) => {
     let word = e.target.value.trim().toUpperCase();
     if (event == " ") {
       response.includes(word) &&
-        !newSkills.includes(word) &&
-        setNewSkills([...newSkills, word]);
+      !newSkills.includes(word) &&
+      setNewSkills([...newSkills, word]);
       setFieldValue("skills", "");
     }
   };
@@ -97,6 +83,7 @@ const GraduateForm = ({ profile, handleClick }) => {
         github: profile.github_link,
         linkedin: profile.linkedin_link,
         portfolio: profile.portfolio_link,
+        skills:profile.skills
       }
     : {
         firstName: "",
@@ -107,6 +94,7 @@ const GraduateForm = ({ profile, handleClick }) => {
         github: "",
         linkedin: "",
         portfolio: "",
+        skills:""
       };
 
   return (
@@ -135,47 +123,40 @@ const GraduateForm = ({ profile, handleClick }) => {
               <FormField
                 name="aboutMe"
                 height="150px"
-                // placeholder='About Me'
                 description="Provide one sentence summary of what makes you tick. This will also be shown on the main page"
                 label="About Me"
               />
               <FormField
                 name="location"
-                // placeholder='About Me'
                 label="Location"
               />
               <FormField
                 name="interest"
                 description="Add the 3 key things that you are passionate about.this will show on the main page"
-                // placeholder='Last Name'
                 label="Key Interests"
               />
 
               <FormField
                 name="github"
-                // placeholder='Last Name'
                 label="Github"
               />
               <FormField
                 name="linkedin"
-                // placeholder='Last Name'
                 label="Linked In"
               />
               <FormField
                 name="portfolio"
-                // placeholder='Last Name'
                 label="Your Portfolio/Project"
               />
-              {/* <FormField
+              <FormField
 								name='skills'
-								// placeholder='Email'
 								label='Your key skills'
 								info = 'Type your skills and press ‘Space’'
 								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
 							/> 
 							<ViewSkills>{newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
-							})}</ViewSkills> */}
+							})}</ViewSkills>
             </StyledForm>
             <ButtonContainer>
               <StyledButton
@@ -202,8 +183,6 @@ export default GraduateForm;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  ${"" /* justify-content: center;
-  align-items: flex-start; */}
 `;
 
 // const ValidationSchema = Yup.object().shape({
@@ -240,8 +219,6 @@ const X = styled.button`
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  ${"" /* justify-content: center;
-  align-items: center; */}
 `;
 
 const ButtonContainer = styled.div`
