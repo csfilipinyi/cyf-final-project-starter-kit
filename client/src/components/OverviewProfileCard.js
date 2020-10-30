@@ -26,9 +26,15 @@ const OverviewProfileCard = ({ profile, getProfile }) => {
         <CardTitle>
           {profile.first_name} {profile.surname}
         </CardTitle>
-        <CardText>{profile.location}</CardText>
-        <CardText>{profile.about_me}</CardText>
-        <CardText>{profile.interest}</CardText>
+        {/* <SubContainer>
+          <CardText>{profile.location}</CardText>
+        </SubContainer> */}
+        <SubContainer>
+          <CardText>{profile.about_me}</CardText>
+        </SubContainer>
+        <SubContainer>
+          <CardText>{profile.interest}</CardText>
+        </SubContainer>
         {/* <ViewSkills skills={profile.skills} /> */}
         <IconContainer>
           <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
@@ -64,6 +70,13 @@ const CardContainer = styled(Card)`
 const IconContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+const SubContainer = styled.div`
+  display: flex;
+  height: 65px;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
 `;
 const CardBody = styled(Card.Body)`
   display: flex;

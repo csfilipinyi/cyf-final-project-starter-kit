@@ -6,9 +6,11 @@ const EmailIcon = () => {
   return (
     <>
       <Container>
+        {/* <ELink href={} target="blank"> */}
         <Circle>
           <EmIcon src={EIcon} />
         </Circle>
+        {/* </ELink> */}
       </Container>
     </>
   );
@@ -36,4 +38,12 @@ const EmIcon = styled.img`
   width: 20px;
   height: 20px;
   color: #0090ff;
+`;
+const ELink = styled.a`
+  color: #0090ff;
+  font-family: Lato;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
 `;
