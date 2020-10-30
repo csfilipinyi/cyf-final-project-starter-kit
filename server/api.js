@@ -190,20 +190,25 @@ router.post("/ablitiy", authorization, async (req, res) => {
   }
 });
 //<------Delete end point from learning objective------>
-router.delete("/learningobjective/:id", (req, res) => {
+router.delete("/learningobjectives/:id", (req, res) => {
   const id = Number(req.params.id);
-  Connection.query(
-    "delete from learning_objective where id = $1",
-    [id],
-    (err, results) => {
-      if (!err) {
-        res.json({
-          message: `The learning objective with the id: ${id} has been deleted`,
-          table: "From learning objective",
-        });
-      }
-    }
-  );
+      Connection.query(
+        "delete * from learning_objective where id = $1" ,
+        [id],
+        (err, results) => {
+          if (!err) {
+            if(results.rowCount >0){
+              res.json({
+                message: `The learning objective with the id: ${id} has been deleted`,
+                table: "From learning objective",
+              });
+            }else{
+              res.json("Id not found")
+            }
+           
+          }
+       }
+      );
 });
 
 //------------------------------------------Post request for signup form-------------------------------------------------------
