@@ -10,7 +10,8 @@ export default function EditBox() {
   // const [learningObjective, setLearningObjective] = useState(skills);
   const [learningObj, setLearningObj] = useState([]);
   const [updateLO, setUpdateLO] = useState("");
- 
+  const [text, setText] = useState('')
+  
 
   const getLearningObj = () => {
     fetch(`/api/learningobjectives/${id}`)
@@ -27,21 +28,21 @@ export default function EditBox() {
     getLearningObj();
   }, [id]);
 
-  // const deleteLearningOb = (LearningID)=> {
-  //   console.log(LearningID)
-  //       fetch(`/api/learningobjectives/${LearningID}`, {
-  //           method: "DELETE",
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //           },
-  //         })
-  //           .then(res => res.json())
-  //           .then((data) =>data);
-
-  //       }
+  const deleteLearningOb = (LearningID)=> {
+    
+        fetch(`/api/learningobjectives/${LearningID}`, {
+            method: "DELETE",
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(()=> {
+        let newData=  learningObj.filter((p)=> p.id !== LearningID)
+        setLearningObj(newData)
+            })
+           }
 
   const updateLearningObj = (description, LearningID) => {
-    console.log(description);
     if (description) {
       fetch(`/api/learningobjectives/${LearningID}`, {
         method: "PUT",
@@ -61,13 +62,18 @@ export default function EditBox() {
     return;
   };
 
-  const cancelUpdate = (id) =>
-    new Promise((resolve) => {
-      resolve(id);
-    }).then(() => {
-      setUpdateLO("");
-      getLearningObj();
-    });
+
+  const handleEdit = (e)=>{
+    console.log("head", e.target.id)
+    setUpdateLO(e.target.id)
+  }
+  // const cancelUpdate = (id) =>
+  //   new Promise((resolve) => {
+  //     resolve(id);
+  //   }).then(() => {
+  //     setUpdateLO("");
+  //     getLearningObj();
+  //   });
 
   const addLearningObjective = (description) => {
     setLearningObjective(skills.push(description));
@@ -81,21 +87,22 @@ export default function EditBox() {
             return (
               <li key={index}>
                 <div className="edit-delete-buttons">
-                  
+                  {console.log("here is update", updateLO, id)}
                  
-                  {updateLO === index ? (
+                  {updateLO == id ? (
               <input
                 className="app-message__input"
-                onChange={e => setUpdateLO(e.target.value)}
-                value={learningObj.description}
+                onChange={e => setText(e.target.value)}
+                
               ></input>
             ) : (
               <span>{description} 
                     <button 
+                    onClick={handleEdit}
                     className="sumbit edit-btn"
-                    type="submit"
                     variant="secondary"
                     size="lg"
+                    id={id}
                     p-2
                     active
                   >
@@ -103,9 +110,9 @@ export default function EditBox() {
                     </button></span>
             )}
                   <span className="app-message-btn-del">
-                    {updateLO === id ? (
+                    {updateLO == id ? (
                       <>
-                        <button onClick={() => updateLearningObj(id)}>
+                        <button onClick={(e) => console.log(description,e, id)}>
                           Update
                         </button>
                         <button onClick={() => cancelUpdate("")}>Cancel</button>
@@ -114,7 +121,7 @@ export default function EditBox() {
                       <button
                         onClick={() => deleteLearningOb(id)}
                         className="sumbit delete-btn"
-                        type="submit"
+                       
                         variant="secondary"
                       >
                         Delete
