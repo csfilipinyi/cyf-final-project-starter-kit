@@ -18,8 +18,8 @@ const GraduateForm = ({ profile, handleClick }) => {
   const [newSkills, setNewSkills] = useState([]);
 
   useEffect(()=>{
-  	setNewSkills(profile.skills)
-  },[])
+  	profile.skills&&setNewSkills(profile.skills)
+  },[profile])
 
   const handleSubmit = async (values) => {
     const {

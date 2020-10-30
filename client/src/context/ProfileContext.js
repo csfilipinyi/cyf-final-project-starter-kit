@@ -69,6 +69,17 @@ const ProfileState = (props) =>{
 			});
 	};
 
+	const getSkills = ()=>{
+		dispatch({ type: types.Set_Is_Loading }),
+		axios.get(`${baseUrl}/graduates`)
+			.then((response)=>{
+				dispatch({ type: types.Set_All_Profiles, payload:response.data });
+			})
+			.catch((error)=>{
+				dispatch({ type:types.Set_Error, payload:error });
+			});
+	};
+
 
 	// .then((response)=>{
 	// 	// 	const graduate = response.data[0];
