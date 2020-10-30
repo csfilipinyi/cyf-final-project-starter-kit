@@ -44,7 +44,8 @@ export default function LoginForm() {
 
           window.localStorage.setItem("token", data.token);
 
-          window.localStorage.setItem("user", data.id)
+         const test = window.localStorage.setItem("user", data.id)
+console.log(test);
          window.localStorage.setItem("role", data.role)
           let role = data.role;
           role === "Student" ?  history.push("/skills") : history.push("/MentorsView")

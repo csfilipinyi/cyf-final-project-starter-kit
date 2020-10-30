@@ -15,7 +15,7 @@ export default function Html({skill}) {
   
   useEffect(() => {
 
-fetch(`/api/learningobjectives/${localStorage.getItem('userId')}/${skill}`)
+fetch(`/api/learningobjectives/${localStorage.getItem('user')}/${skill}`)
 .then((response) => response.json())
         .then((data) => {
           if (data.error) {
