@@ -6,9 +6,9 @@ const GitHubIcon = ({ gitHubLink }) => {
   return (
     <>
       <Container>
-        <a href={gitHubLink}>
+        <GitLink href={gitHubLink} target="blank">
           <GIcon src={GHIcon} />
-        </a>
+        </GitLink>
       </Container>
 
       {/* <img src="../assets/icons/avatar.svg" /> */}
@@ -35,4 +35,12 @@ const GIcon = styled.img`
   width: 22px;
   height: 22px;
   color: #0090ff;
+`;
+const GitLink = styled.a`
+  color: #0090ff;
+  font-family: Lato;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
 `;

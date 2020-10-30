@@ -4,6 +4,10 @@ import { AuthContext } from "../context/AuthContext";
 import { ProfileContext } from "../context/ProfileContext";
 import styled from "styled-components";
 import StyledButton from "../constant/StyledButton";
+import GitHubIcon from "./GitHubIconIcon.js";
+import LinkedinIcon from "./LinkedinIcon";
+import CvIcon from "./CvIcon";
+import EmailIcon from "./EmailIcon";
 
 const ViewMyProfile = ({ profile }) => {
   let history = useHistory();
@@ -23,6 +27,12 @@ const ViewMyProfile = ({ profile }) => {
           {profile.first_name} {profile.surname}
         </Name>
         <Description>{profile.location}</Description>
+        <IconContainer>
+          <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
+          <LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>
+          <CvIcon></CvIcon>
+          <EmailIcon></EmailIcon>
+        </IconContainer>
         <DescHead>About Me</DescHead>
         <Description>{profile.about_me}</Description>
         <SubHeads> {profile.first_name}'s Interests</SubHeads>
@@ -34,8 +44,8 @@ const ViewMyProfile = ({ profile }) => {
               return <SkillBox>{skill}</SkillBox>;
             })}
         </SkillsContainer>
-        <SubHeads>Find {profile.first_name}</SubHeads>
-        <SocialCon>
+        {/* <SubHeads>Find {profile.first_name}</SubHeads> */}
+        {/* <SocialCon>
           <SocialSubCon>
             <SocialIcon />
             <SocialText href={profile.linkedin_link} target="blank">
@@ -49,12 +59,13 @@ const ViewMyProfile = ({ profile }) => {
             </SocialText>
           </SocialSubCon>
           <SocialSubCon>
-            <SocialIcon />
-            <SocialText href={profile.portfolio_link} target="blank">
-              Portfolio
-            </SocialText>
-          </SocialSubCon>
-        </SocialCon>
+            <SocialIcon />*/}
+        <SubHeads>{profile.first_name}'s Portfolio</SubHeads>
+        <SocialText href={profile.portfolio_link} target="blank">
+          Portfolio
+        </SocialText>
+        {/* </SocialSubCon>
+        </SocialCon>  */}
       </SubCon>
     </Container>
   );
@@ -99,10 +110,10 @@ const DescHead = styled.p`
 const Description = styled.p`
   color: #000000;
   font-family: Lato;
-  font-size: 20px;
+  font-size: 18px;
   letter-spacing: 0;
   line-height: 24px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   ${"" /* text-align: center; */}
 `;
 const SubHeads = styled.p`
@@ -126,19 +137,19 @@ const SkillBox = styled.div`
   margin-right: 16px;
 `;
 
-const SocialCon = styled.div``;
+// const SocialCon = styled.div``;
 
-const SocialSubCon = styled.div`
-  display: flex;
-`;
+// const SocialSubCon = styled.div`
+//   display: flex;
+// `;
 
-const SocialIcon = styled.img`
-  height: 32px;
-  width: 32px;
-  border: 1px solid #979797;
-  background-color: #d8d8d8;
-  border-radius: 50%;
-`;
+// const SocialIcon = styled.img`
+//   height: 32px;
+//   width: 32px;
+//   border: 1px solid #979797;
+//   background-color: #d8d8d8;
+//   border-radius: 50%;
+// `;
 
 const SocialText = styled.a`
   color: #0090ff;
@@ -147,4 +158,10 @@ const SocialText = styled.a`
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
+`;
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 20%;
+  margin-bottom: 20px;
 `;
