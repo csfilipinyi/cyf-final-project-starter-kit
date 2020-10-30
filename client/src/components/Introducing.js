@@ -5,7 +5,7 @@ const Introducing = (props) => {
 	return (
 		<Container>
 			<Heading>{props.header}</Heading>
-			<Text>{props.text}</Text>
+			{/* <Text>{props.text}</Text> */}
 		</Container>
 	);
 };

@@ -57,13 +57,12 @@ const Home = () => {
 				/>
 			</Header>
 			<Introducing
-				header = 'Welcome to the CodeYourFuture Graduate Directory'
-				text = 'In this directory you will find recent graduates from the full-stack program at CodeYourFuture. CodeYourFuture graduates spent approximately 800 hours developing their technical and employability skills.
-				Learn more about the syllabus here -> https://syllabus.codeyourfuture.io/overview
-				
-				If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at contact@codeyourfuture.io.
-				'
-		  />	
+				header = 'Welcome to the CodeYourFuture Graduate Directory'				
+		  	/>	
+			 <Info>In this directory you will find recent graduates from the full-stack program at CodeYourFuture. CodeYourFuture graduates spent approximately 800 hours developing their technical and employability skills.
+				Learn more about the syllabus here</Info> 
+				<Link>https://syllabus.codeyourfuture.io/overview</Link>
+				<Info>If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at contact@codeyourfuture.io.</Info>
     		<Container>
 				{isLoading ? <Text>Loading...</Text>
 					: allProfiles && allProfiles.map(( profile, i ) => {
@@ -115,3 +114,5 @@ const Text = styled.p`
 	fontSize:20;
 `;
 
+const Info=styled.p`
+`
