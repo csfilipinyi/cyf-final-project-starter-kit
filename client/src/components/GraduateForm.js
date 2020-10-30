@@ -105,7 +105,6 @@ const GraduateForm = ({ profile, handleClick }) => {
         onSubmit={(values) => handleSubmit(values)}
         // validationSchema={ValidationSchema}
         onReset={handleReset}
-        onInterest={addInterest}
       >
         {(props) => (
           <>
