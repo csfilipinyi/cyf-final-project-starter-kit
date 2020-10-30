@@ -15,27 +15,27 @@ export default function MentorsEdit() {
  
 return(
     <Router>
-      <div>
-        <h2>Skills</h2>
+      <div className="skills-container">
+        <h2>Skill</h2>
 
         <ul>
           <li>
-            <Link to="/mentorsedit/html">HTML</Link>
+           <h2><Link to="/mentorsedit/html">HTML</Link></h2> 
           </li>
           <li>
-            <Link to="/mentorsedit/css">CSS</Link>
+            <h2><Link to="/mentorsedit/css">CSS</Link></h2>
           </li>
           <li>
-            <Link to="/mentorsedit/javascript">JavaScript</Link>
+            <h2><Link to="/mentorsedit/javascript">JavaScript</Link></h2>
           </li>
           <li>
-            <Link to="/mentorsedit/react">React.js</Link>
+            <h2><Link to="/mentorsedit/react">React.js</Link></h2>
           </li>
           <li>
-            <Link to="/mentorsedit/node">Node</Link>
+            <h2><Link to="/mentorsedit/node">Node</Link></h2>
           </li>
           <li>
-            <Link to="/mentorsedit/sql">SQL</Link>
+           <h2><Link to="/mentorsedit/sql">SQL</Link></h2> 
           </li>
         </ul>
 
