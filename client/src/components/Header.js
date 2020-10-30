@@ -10,11 +10,6 @@ const Header = ({ nav }) => {
 	const [open, setOpen] = useState(false);
 
 	const {isAuthenticated} = useContext(AuthContext)	
-	// const media = useMediaQuery();
-
-	// useEffect (()=>{
-	// 	media&&!media.isTablet&&setOpen(false);
-	// },[media]);
 
 	return (
 		<Container>
