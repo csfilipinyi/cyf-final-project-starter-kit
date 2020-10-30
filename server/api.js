@@ -179,7 +179,7 @@ router.post("/graduates", function (req, res) {
                         [graduate_id, skill_id],
                         (error, result) => {
                           if (result) {
-                            console.log(“post request for skills “, result);
+                            console.log("post request for skills ", result);
                           }
                         }
                       );
@@ -190,7 +190,7 @@ router.post("/graduates", function (req, res) {
             }
           }
         );
-        console.log(“post request result”, result);
+        console.log("post request result", result);
         res.status(200).send(result.rows);
       } else {
         res.status(404).send(error);
