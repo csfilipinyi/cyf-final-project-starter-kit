@@ -213,8 +213,8 @@ router.put("/graduates/:id", function (req, res) {
   const github = req.body.github_link;
   const linkedin = req.body.linkedin_link;
   const portfolio = req.body.portfolio_link;
-  const skills = req.body.skills;
-  console.log(skills[1]);
+  // const skills = req.body.skills;
+  // console.log(skills[1]);
   Connection.query(
     "update graduates set first_name=$1, surname=$2, about_me=$3, location=$4, interest=$5, github_link=$6, linkedin_link=$7, portfolio_link=$8 where github_id =$9",
     [
@@ -230,43 +230,43 @@ router.put("/graduates/:id", function (req, res) {
     ],
     (error, result) => {
       if (result) {
-        Connection.query(
-          `select id from graduates where github_id=$1`,
-          [github_id],
-          (error, result) => {
-            if (result) {
-              let graduate_id = result.rows[0].id;
-              Connection.query(
-                `delete from graduate_skill where graduate_id =$1`,
-                [graduate_id],
-                (error, result) => {
-                  console.log(skills);
-                  skills.map((s) => {
-                    Connection.query(
-                      `select id from skills where skill_name =$1`,
-                      [s],
-                      (error, result) => {
-                        if (result) {
-                          let skill_id = result.rows[0].id;
-                          Connection.query(
-                            `insert into graduate_skill values ($1,$2)`,
-                            [graduate_id, skill_id],
-                            (error, result) => {
-                              if (result) {
-                                console.log("post request for skills ", result);
-                              }
-                            }
-                          );
-                        }
-                      }
-                    );
-                  });
-                }
-              );
-            }
-          }
-        );
-        console.log("put request response", result);
+        // Connection.query(
+        //   `select id from graduates where github_id=$1`,
+        //   [github_id],
+        //   (error, result) => {
+        //     if (result) {
+        //       let graduate_id = result.rows[0].id;
+        //       Connection.query(
+        //         `delete from graduate_skill where graduate_id =$1`,
+        //         [graduate_id],
+        //         (error, result) => {
+        //           console.log(skills);
+        //           skills.map((s) => {
+        //             Connection.query(
+        //               `select id from skills where skill_name =$1`,
+        //               [s],
+        //               (error, result) => {
+        //                 if (result) {
+        //                   let skill_id = result.rows[0].id;
+        //                   Connection.query(
+        //                     `insert into graduate_skill values ($1,$2)`,
+        //                     [graduate_id, skill_id],
+        //                     (error, result) => {
+        //                       if (result) {
+        //                         console.log("post request for skills ", result);
+        //                       }
+        //                     }
+        //                   );
+        //                 }
+        //               }
+        //             );
+        //           });
+        //         }
+        //       );
+        //     }
+        //   }
+        // );
+        // console.log("put request response", result);
         res.status(200).send(result.rows);
       } else {
         res.status(404).send(error);
