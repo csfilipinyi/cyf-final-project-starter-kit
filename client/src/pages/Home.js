@@ -61,9 +61,11 @@ const Home = () => {
 		  	/>	
 			 <Info>In this directory you will find recent graduates from the full-stack program at CodeYourFuture. CodeYourFuture graduates spent approximately 800 hours developing their technical and employability skills.
 				Learn more about the syllabus here</Info> 
-				<Link>https://syllabus.codeyourfuture.io/overview</Link>
+				<LinkCYF href='https://syllabus.codeyourfuture.io/overview'>https://syllabus.codeyourfuture.io/overview</LinkCYF>
 				<Info>If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at contact@codeyourfuture.io.</Info>
-    		<Container>
+				<LinkCYF href='contact@codeyourfuture.io'>contact@codeyourfuture.io</LinkCYF>
+
+			<Container>
 				{isLoading ? <Text>Loading...</Text>
 					: allProfiles && allProfiles.map(( profile, i ) => {
 						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
@@ -115,4 +117,7 @@ const Text = styled.p`
 `;
 
 const Info=styled.p`
+`
+
+const LinkCYF =styled.a`
 `
