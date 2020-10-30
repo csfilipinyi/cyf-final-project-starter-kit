@@ -111,12 +111,10 @@ const GraduateForm = ({ profile, handleClick }) => {
             <StyledForm id="formLogin" noValidate>
               <FormField
                 name="firstName"
-                // placeholder='First Name'
                 label="First Name"
               />
               <FormField
                 name="surname"
-                // placeholder='Last Name'
                 label="Last Name"
               />
               <FormField
@@ -124,6 +122,7 @@ const GraduateForm = ({ profile, handleClick }) => {
                 height="150px"
                 description="Provide one sentence summary of what makes you tick. This will also be shown on the main page"
                 label="About Me"
+                as="textarea"
               />
               <FormField
                 name="location"
