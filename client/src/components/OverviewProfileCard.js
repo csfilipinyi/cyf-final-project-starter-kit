@@ -26,9 +26,9 @@ const OverviewProfileCard = ({ profile, getProfile }) => {
         <CardTitle>
           {profile.first_name} {profile.surname}
         </CardTitle>
-        <SubContainer>
+        {/* <SubContainer>
           {profile.location&&<CardText>{profile.location}</CardText>}
-        </SubContainer>
+        </SubContainer> */}
         <SubContainer>
           {profile.about_me&&<CardText>{profile.about_me}</CardText>}
         </SubContainer>
