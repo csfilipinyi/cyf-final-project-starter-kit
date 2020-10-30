@@ -26,16 +26,16 @@ const OverviewProfileCard = ({ profile, getProfile }) => {
         <CardTitle>
           {profile.first_name} {profile.surname}
         </CardTitle>
-        {/* <SubContainer>
-          <CardText>{profile.location}</CardText>
-        </SubContainer> */}
+        <SubContainer>
+          {profile.location&&<CardText>{profile.location}</CardText>}
+        </SubContainer>
         <SubContainer>
           <CardText>{profile.about_me}</CardText>
         </SubContainer>
         <SubContainer>
           <CardText>{profile.interest}</CardText>
         </SubContainer>
-        {/* <ViewSkills skills={profile.skills} /> */}
+        <ViewSkills skills={profile.skills} />
         <IconContainer>
           <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
           <LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>
