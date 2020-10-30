@@ -86,76 +86,122 @@ router.get("/graduates", (req, res) => {
 
 // create new profile
 router.post("/graduates", function (req, res) {
-  console.log(req.body);
-
+  console.log(req.body)
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const aboutMe = req.body.about_me;
   const location = req.body.location;
-  const interest = req.body.interest;
-  const github = req.body.github_link;
-  const linkedin = req.body.linkedin_link;
-  const portfolio = req.body.portfolio_link;
+  const interest=req.body.interest;
+  const github=req.body.github_link;
+  const linkedin=req.body.linkedin_link;
+  const portfolio=req.body.portfolio_link;
   const github_id = req.body.github_id;
-  const skills = req.body.skills;
-
+  const skills =req.body.skills.map(x=>x.toLowerCase());
+  
+  console.log('server', skills)
   //const github_name = req.body.githubName;
   //checking if the user is existed in our github table
   Connection.query(
-    `insert into graduates (first_name, surname, about_me, location, interest,github_link, linkedin_link, portfolio_link, github_id ) values` +
-      `($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-    [
-      newFirstName,
-      newSurname,
-      aboutMe,
-      location,
-      interest,
-      github,
-      linkedin,
-      portfolio,
-      github_id,
-    ],
-    (error, result) => {
-      if (result) {
-        Connection.query(
-          `select id from graduates where github_id=$1`,
-          [github_id],
+          `insert into graduates (first_name, surname, about_me, location, interest,github_link, linkedin_link, portfolio_link, github_id ) values` +
+            `($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`,
+          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, github_id],
           (error, result) => {
-            if (result) {
-              let graduate_id = result.rows[0].id;
-              console.log(skills);
-              skills.map((s) => {
-                Connection.query(
-                  `select id from skills where skill_name =$1`,
-                  [s],
-                  (error, result) => {
-                    if (result) {
-                      let skill_id = result.rows[0].id;
-                      Connection.query(
-                        `insert into graduate_skill values ($1,$2)`,
-                        [graduate_id, skill_id],
-                        (error, result) => {
-                          if (result) {
-                            console.log("post request for skills ", result);
-                          }
-                        }
-                      );
-                    }
+            if(result){
+              // return res.send(result.rows);
+              let graduate_id=result.rows[0].id
+              Connection.query(
+                `insert into graduate_skill (graduate_id, skill_id)` +
+                 ` select $1, id from skills where skill_name=ANY($2)`, [graduate_id, skills],
+                (err,result)=>{
+                  if (!err){
+                    res.status(200).send('success')
+        
+                  }else{
+                    console.log(err)
                   }
-                );
-              });
-            }
+                })
+            } else {
+              res.status(404).send(error)
+            } 
           }
+          
         );
-
-        console.log("post request result", result);
-        res.status(200).send(result.rows);
-      } else {
-        res.status(404).send(error);
-      }
-    }
-  );
 });
+
+
+
+
+// router.post("/graduates", function (req, res) {
+//   console.log(req.body);
+
+//   const newFirstName = req.body.first_name;
+//   const newSurname = req.body.surname;
+//   const aboutMe = req.body.about_me;
+//   const location = req.body.location;
+//   const interest = req.body.interest;
+//   const github = req.body.github_link;
+//   const linkedin = req.body.linkedin_link;
+//   const portfolio = req.body.portfolio_link;
+//   const github_id = req.body.github_id;
+//   const skills = req.body.skills;
+
+//   //const github_name = req.body.githubName;
+//   //checking if the user is existed in our github table
+//   Connection.query(
+//     `insert into graduates (first_name, surname, about_me, location, interest,github_link, linkedin_link, portfolio_link, github_id ) values` +
+//       `($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+//     [
+//       newFirstName,
+//       newSurname,
+//       aboutMe,
+//       location,
+//       interest,
+//       github,
+//       linkedin,
+//       portfolio,
+//       github_id,
+//     ],
+//     (error, result) => {
+//       if (result) {
+//         Connection.query(
+//           `select id from graduates where github_id=$1`,
+//           [github_id],
+//           (error, result) => {
+//             if (result) {
+//               let graduate_id = result.rows[0].id;
+//               console.log(skills);
+//               skills.map((s) => {
+//                 Connection.query(
+//                   `select id from skills where skill_name =$1`,
+//                   [s],
+//                   (error, result) => {
+//                     if (result) {
+//                       let skill_id = result.rows[0].id;
+//                       Connection.query(
+//                         `insert into graduate_skill values ($1,$2)`,
+//                         [graduate_id, skill_id],
+//                         (error, result) => {
+//                           if (result) {
+//                             console.log("post request for skills ", result);
+//                           }
+//                         }
+//                       );
+//                     }
+//                   }
+//                 );
+//               });
+//             }
+//           }
+//         );
+
+//         console.log("post request result", result);
+//         res.status(200).send(result.rows);
+//       } else {
+//         res.status(404).send(error);
+//       }
+//     }
+//   );
+// });
 //checking the github username exist in our database
 router.get("/accounts/:name", (req, res) => {
   const githubName = req.params.name;
