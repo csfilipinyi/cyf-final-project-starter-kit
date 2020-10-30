@@ -35,6 +35,7 @@ console.log(token)
     .catch(error =>console.log(error))
   }, []);
 
+
   const studentId = useQuery().get("studentId");
   console.log(studentId);
 

@@ -8,7 +8,7 @@ const routes = {
   '/skills/html':() => <SkillTracker skill ="html"/>,
    '/skills/css': () => <SkillTracker skill ="css"/>,
    '/skills/javascript': () => <SkillTracker  skill ="javascript"/>,
-   '/skills/react': () => <SkillTracker skill ="reactLib" />,
+   '/skills/react': () => <SkillTracker skill ="react" />,
    '/skills/node': () => <SkillTracker  skill ="node"/>,
    '/skills/sql': () => <SkillTracker  skill ="sql"/>
 };
