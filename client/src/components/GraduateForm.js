@@ -153,7 +153,7 @@ const GraduateForm = ({ profile, handleClick }) => {
 								info = 'Type your skills and press ‘Space’'
 								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
 							/> 
-							<ViewSkills>{newSkills.map((skill, i)=>{
+							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
             </StyledForm>
