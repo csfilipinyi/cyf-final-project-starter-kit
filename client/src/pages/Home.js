@@ -57,8 +57,12 @@ const Home = () => {
 				/>
 			</Header>
 			<Introducing
-				header = 'Lorem ipsum dolor sit amet'
-				text = 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi'
+				header = 'Welcome to the CodeYourFuture Graduate Directory'
+				text = 'In this directory you will find recent graduates from the full-stack program at CodeYourFuture. CodeYourFuture graduates spent approximately 800 hours developing their technical and employability skills.
+				Learn more about the syllabus here -> https://syllabus.codeyourfuture.io/overview
+				
+				If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at contact@codeyourfuture.io.
+				'
 		  />	
     		<Container>
 				{isLoading ? <Text>Loading...</Text>
