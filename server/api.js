@@ -52,7 +52,7 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
 
 router.get("/learningobjectives/:skill", (req, res) => {
   let skill = req.params.skill;
-  const queryLearningOb = `SELECT * FROM learning_objective  where skill = $1`;
+  const queryLearningOb = `SELECT * FROM learning_objective  where skill = $1 order by id`;
   Connection.query(queryLearningOb, [skill], (err, results) => {
     if (!err) {
       res.json(results.rows);
@@ -190,17 +190,27 @@ router.post("/ablitiy", authorization, async (req, res) => {
   }
 });
 //<------Delete end point from learning objective------>
-router.delete("/learningobjective/:id", (req, res) => {
+router.delete("/learningobjectives/:id", (req, res) => {
   const id = Number(req.params.id);
   Connection.query(
-    "delete from learning_objective where id = $1",
+    "delete from achievements where learning_obj_id = $1",
     [id],
     (err, results) => {
       if (!err) {
-        res.json({
-          message: `The learning objective with the id: ${id} has been deleted`,
-          table: "From learning objective",
-        });
+        Connection.query(
+          "delete from learning_objective where id =$1",
+          [id],
+          (err, results) => {
+            if (!err) {
+              res.json({
+                message: `The learning objective with the id: ${id} has been deleted`,
+                table: "From learning objective",
+              });
+            } else {
+              res.json("Id not found");
+            }
+          }
+        );
       }
     }
   );

@@ -62,7 +62,6 @@ INSERT into learning_objective(skill, description)
       ('javascript', 'Be able to link a Javascript file in your project'),
       ('javascript', 'Be able to do a console.log()'),
       ('javascript', 'Understand what a console.log is used for'),
-
       ('javascript', 'Understand the different types of data in Javascript e.g. string, integer, etc.'),
       ('javascript', 'Be able to assign a variable with const and let'),
       ('javascript', 'Understand the difference between const and let'),
