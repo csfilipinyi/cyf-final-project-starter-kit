@@ -19,7 +19,7 @@ const GraduateForm = ({ profile, handleClick }) => {
 
   // useEffect(()=>{
   // 	profile&&profile.skills&&setNewSkills(profile.skills)
-  // },[profile])
+  // },[profile.skills])
 
   const handleSubmit = async (values) => {
     const {
@@ -46,11 +46,11 @@ const GraduateForm = ({ profile, handleClick }) => {
       skills:newSkills
     };
     await handleClick(newProfile);
-    history.push("/viewprofile");
+    history.push(`/viewprofile`);
   };
 
   const handleReset = () => {
-    history.push("/viewprofile");
+    history.push(`/viewprofile`);
   };
 
   const deleteSkill = (e) => {

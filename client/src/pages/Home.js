@@ -25,7 +25,7 @@ const Home = () => {
 
 	const navigateToProfile = async ()=>{
 		await getProfile(github_id)
-		history.push('/viewprofile')
+		history.push(`/viewprofile`)
 	}
 
 	console.log('isauth', isAuthenticated, profile, github_id)

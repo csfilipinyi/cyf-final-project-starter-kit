@@ -15,7 +15,7 @@ const OverviewProfileCard = ({ profile, getProfile }) => {
 
   const handleClick = async (id) => {
     await getProfile(id);
-    history.push("/viewdetail");
+    history.push(`/viewdetail/${profile.first_name}`);
   };
 
   return (

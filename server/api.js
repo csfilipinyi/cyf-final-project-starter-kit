@@ -194,13 +194,14 @@ router.put("/graduates/:id", function (req, res) {
     ],
     (error, result) => {
       if (result) {
+        console.log('put query1 result', result)
         const graduate_id = result.rows[0].id
         Connection.query(
           "delete from graduate_skill where graduate_id=$1", [graduate_id],
           (error,result)=>{
             if(error) {
               res.status(404).send(error)
-            }
+            } 
           }
         )
         Connection.query(
@@ -208,6 +209,7 @@ router.put("/graduates/:id", function (req, res) {
            ` select $1, id from skills where skill_name=ANY($2)`, [graduate_id, skills],
            (error, result)=>{
               if (!error){
+                console.log('put query2 result', result)
                 res.status(200).send('inserted succesfully')
               }
            }

@@ -6,11 +6,11 @@ const EmailIcon = () => {
   return (
     <>
       <Container>
-        {/* <ELink href={} target="blank"> */}
+        <ELink href='mailto:someone@email.com' target="blank">
         <Circle>
           <EmIcon src={EIcon} />
         </Circle>
-        {/* </ELink> */}
+        </ELink>
       </Container>
     </>
   );
