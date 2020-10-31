@@ -40,8 +40,7 @@ const ViewMyProfile = ({ profile }) => {
         <SubHeads>{profile.first_name}’s skills</SubHeads>
         <SkillsContainer>
           {console.log('profile skills view profile', profile.skills)}
-          {profile.skills &&
-            profile.skills.map((skill) => {
+          {profile.skills && profile.skills.map((skill) => {
               return <SkillBox>{skill}</SkillBox>;
             })}
         </SkillsContainer>

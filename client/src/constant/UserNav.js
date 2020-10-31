@@ -8,11 +8,11 @@ import IconDown from '../assets/icons/IconArrowDown.svg'
 const UserNav = ({ open, setOpen, ...props }) => {
 	return (
 		<>
-			<Container>
-				<Circle>
+			<Container onClick={() => setOpen(!open)}>
+				<Circle style={{borderColor:open?'#0090FF':'black'}}>
 					<IUser src={IconUser} alt='User'/>
 				</Circle>
-				<Text>Your Profile</Text>
+				<Text style={{color:open?'#0090FF':'black'}}>Your Profile</Text>
 				{open?
 				<IArrow src={IconUp} alt='Arrow' onClick={() => setOpen(!open)}/>
 				:
@@ -57,11 +57,11 @@ const IArrow = styled.img`
 `;
 
 const Text = styled.p`
-	color: #0090FF;
   	font-family: Raleway;
   	font-size: 18px;
   	font-weight: bold;
   	letter-spacing: 0;
-  	line-height: 21px;
+	line-height: 21px;
+	margin-top:10px;  
 `
 

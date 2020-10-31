@@ -17,9 +17,9 @@ const GraduateForm = ({ profile, handleClick }) => {
 
   const [newSkills, setNewSkills] = useState([]);
 
-  useEffect(()=>{
-  	profile&&profile.skills&&setNewSkills(profile.skills)
-  },[profile])
+  // useEffect(()=>{
+  // 	profile&&profile.skills&&setNewSkills(profile.skills)
+  // },[profile])
 
   const handleSubmit = async (values) => {
     const {
@@ -43,7 +43,7 @@ const GraduateForm = ({ profile, handleClick }) => {
       github_link: github,
       linkedin_link: linkedin,
       portfolio_link: portfolio,
-      skills:skills
+      skills:newSkills
     };
     await handleClick(newProfile);
     history.push("/viewprofile");
@@ -66,9 +66,9 @@ const GraduateForm = ({ profile, handleClick }) => {
     let event = e.key;
     let word = e.target.value.trim().toUpperCase();
     if (event == " ") {
-      response.includes(word) &&
-      !newSkills.includes(word) &&
+      // response.includes(word) &&!newSkills.includes(word)&&
       setNewSkills([...newSkills, word]);
+      console.log('skilllllsss', response, newSkills, word)
       setFieldValue("skills", "");
     }
   };
@@ -94,7 +94,7 @@ const GraduateForm = ({ profile, handleClick }) => {
         github: "",
         linkedin: "",
         portfolio: "",
-        skills:""
+        skills:newSkills
       };
 
   return (
@@ -119,7 +119,7 @@ const GraduateForm = ({ profile, handleClick }) => {
               />
               <FormField
                 name="aboutMe"
-                height="150px"
+                height="90px"
                 description="Provide one sentence summary of what makes you tick. This will also be shown on the main page"
                 label="About Me"
                 as="textarea"
@@ -149,7 +149,7 @@ const GraduateForm = ({ profile, handleClick }) => {
               <FormField
 								name='skills'
 								label='Your key skills'
-								info = 'Type your skills and press ‘Space’'
+                info = 'Type your skills and press ‘Space’'
 								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
 							/> 
 							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{

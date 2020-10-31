@@ -52,9 +52,9 @@ const ProfileState = (props) =>{
 		error:null,
 	};
 
-	const baseUrl = 'https://designed-gd.herokuapp.com/api'
+	// const baseUrl = 'https://designed-gd.herokuapp.com/api'
 
-	// const baseUrl ='http://localhost:3100/api'
+	const baseUrl ='http://localhost:3100/api'
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
@@ -93,6 +93,7 @@ const ProfileState = (props) =>{
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
 				const graduate = response.data[0];
+				graduate.skills=response.data.map(x=>x.skill_name)
 				console.log('graduate', graduate)
 				dispatch({ type: types.Set_Profile, payload:graduate });
 			})
@@ -117,8 +118,9 @@ const ProfileState = (props) =>{
 				dispatch({ type: types.Set_Profile, payload:profile });
 			})
 			.catch((error)=>{
+				console.log('post error', error)
 				dispatch({ type:types.Set_Error, payload:error });
-			});
+		});
 	};
 
 

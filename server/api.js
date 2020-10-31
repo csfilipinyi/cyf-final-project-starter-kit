@@ -28,8 +28,8 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  redirect_uri: "https://designed-gd.herokuapp.com/login",
-  // redirect_uri:"http://localhost:3000/login",
+  // redirect_uri: "https://designed-gd.herokuapp.com/login",
+  redirect_uri:"http://localhost:3000/login",
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',
@@ -81,124 +81,46 @@ router.get("/graduates", (req, res) => {
       res.send(error);
     }
   });
-  // });
 });
 
 // create new profile
-// router.post("/graduates", function (req, res) {
-//   console.log(req.body)
-//   const newFirstName = req.body.first_name;
-//   const newSurname = req.body.surname;
-//   const aboutMe = req.body.about_me;
-//   const location = req.body.location;
-//   const interest=req.body.interest;
-//   const github=req.body.github_link;
-//   const linkedin=req.body.linkedin_link;
-//   const portfolio=req.body.portfolio_link;
-//   const github_id = req.body.github_id;
-//   const skills =req.body.skills.map(x=>x.toLowerCase());
-  
-//   console.log('server', skills)
-//   //const github_name = req.body.githubName;
-//   //checking if the user is existed in our github table
-//   Connection.query(
-//           `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, github_id ) values` +
-//             `($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`,
-//           [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, github_id],
-//           (error, result) => {
-//             if(result){
-//               // return res.send(result.rows);
-//               let graduate_id=result.rows[0].id
-//               Connection.query(
-//                 `insert into graduate_skill (graduate_id, skill_id)` +
-//                  ` select $1, id from skills where skill_name=ANY($2)`, [graduate_id, skills],
-//                 (err,result)=>{
-//                   if (!err){
-//                     res.status(200).send('success')
-        
-//                   }else{
-//                     console.log(err)
-//                   }
-//                 })
-//             } else {
-//               res.status(404).send(error)
-//             } 
-//           }
-          
-//         );
-// });
-
-
-
 router.post("/graduates", function (req, res) {
-  console.log(req.body);
+  console.log(req.body)
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const aboutMe = req.body.about_me;
   const location = req.body.location;
-  const interest = req.body.interest;
-  const github = req.body.github_link;
-  const linkedin = req.body.linkedin_link;
-  const portfolio = req.body.portfolio_link;
+  const interest=req.body.interest;
+  const github=req.body.github_link;
+  const linkedin=req.body.linkedin_link;
+  const portfolio=req.body.portfolio_link;
   const github_id = req.body.github_id;
-  const skills = req.body.skills;
-  //const github_name = req.body.githubName;
-  //checking if the user is existed in our github table
-  Connection.query(
-    `insert into graduates (first_name, surname, about_me, location, interest,github_link, linkedin_link, portfolio_link, github_id ) values` +
-      `($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-    [
-      newFirstName,
-      newSurname,
-      aboutMe,
-      location,
-      interest,
-      github,
-      linkedin,
-      portfolio,
-      github_id,
-    ],
-    (error, result) => {
-      if (result) {
-        Connection.query(
-          `select id from graduates where github_id=$1`,
-          [github_id],
-          (error, result) => {
-            if (result) {
-              let graduate_id = result.rows[0].id;
-              console.log(skills);
-              skills.map((s) => {
-                Connection.query(
-                  `select id from skills where skill_name =$1`,
-                  [s],
-                  (error, result) => {
-                    if (result) {
-                      let skill_id = result.rows[0].id;
-                      Connection.query(
-                        `insert into graduate_skill values ($1,$2)`,
-                        [graduate_id, skill_id],
-                        (error, result) => {
-                          if (result) {
-                            console.log("post request for skills ", result);
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-              });
-            }
-          }
-        );
-        console.log("post request result", result);
-        res.status(200).send(result.rows);
-      } else {
-        res.status(404).send(error);
-      }
-    }
-  );
-});
+  const skills =req.body.skills.map(x=>x.toLowerCase());
 
+  Connection.query(
+          `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, github_id ) values` +
+            `($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`,
+          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, github_id],
+          (error, result) => {
+            if(result){
+              let graduate_id=result.rows[0].id
+              Connection.query(
+                `insert into graduate_skill (graduate_id, skill_id)` +
+                 ` select $1, id from skills where skill_name=ANY($2)`, [graduate_id, skills],
+                (err,result)=>{
+                  if (!err){
+                    res.status(200).send('success')
+                  }else{
+                    console.log(err)
+                  }
+                })
+            } else {
+              res.status(404).send(error)
+            } 
+          }
+          
+        );
+});
 
 
 
@@ -230,14 +152,10 @@ router.get("/accounts/:name", (req, res) => {
 });
 
 router.get("/graduates/:id", (req, res) => {
+  console.log('get request called', req.params.id)
   const github_id = parseInt(req.params.id);
-  // Connection.connect((err) => {
-  //   if (err) {
-  //     return next(err);
-  //   }
-  // });
   Connection.query(
-    "SELECT * FROM graduates where github_id=$1 ",
+    "select g.*, s.skill_name from graduates g join graduate_skill gs on g.id=gs.graduate_id join skills s on s.id=gs.skill_id where g.github_id=$1",
     [github_id],
     (error, result) => {
       if (result.rowCount > 0) res.json(result.rows);
@@ -259,10 +177,10 @@ router.put("/graduates/:id", function (req, res) {
   const github = req.body.github_link;
   const linkedin = req.body.linkedin_link;
   const portfolio = req.body.portfolio_link;
-  // const skills = req.body.skills;
-  // console.log(skills[1]);
+  const skills =req.body.skills.map(x=>x.toLowerCase());
+
   Connection.query(
-    "update graduates set first_name=$1, surname=$2, about_me=$3, location=$4, interest=$5, github_link=$6, linkedin_link=$7, portfolio_link=$8 where github_id =$9",
+    "update graduates set first_name=$1, surname=$2, about_me=$3, location=$4, interest=$5, github_link=$6, linkedin_link=$7, portfolio_link=$8 where github_id =$9 returning id",
     [
       newFirstName,
       newSurname,
@@ -272,48 +190,28 @@ router.put("/graduates/:id", function (req, res) {
       github,
       linkedin,
       portfolio,
-      github_id,
+      github_id
     ],
     (error, result) => {
       if (result) {
-        // Connection.query(
-        //   `select id from graduates where github_id=$1`,
-        //   [github_id],
-        //   (error, result) => {
-        //     if (result) {
-        //       let graduate_id = result.rows[0].id;
-        //       Connection.query(
-        //         `delete from graduate_skill where graduate_id =$1`,
-        //         [graduate_id],
-        //         (error, result) => {
-        //           console.log(skills);
-        //           skills.map((s) => {
-        //             Connection.query(
-        //               `select id from skills where skill_name =$1`,
-        //               [s],
-        //               (error, result) => {
-        //                 if (result) {
-        //                   let skill_id = result.rows[0].id;
-        //                   Connection.query(
-        //                     `insert into graduate_skill values ($1,$2)`,
-        //                     [graduate_id, skill_id],
-        //                     (error, result) => {
-        //                       if (result) {
-        //                         console.log("post request for skills ", result);
-        //                       }
-        //                     }
-        //                   );
-        //                 }
-        //               }
-        //             );
-        //           });
-        //         }
-        //       );
-        //     }
-        //   }
-        // );
-        // console.log("put request response", result);
-        res.status(200).send(result.rows);
+        const graduate_id = result.rows[0].id
+        Connection.query(
+          "delete from graduate_skill where graduate_id=$1", [graduate_id],
+          (error,result)=>{
+            if(error) {
+              res.status(404).send(error)
+            }
+          }
+        )
+        Connection.query(
+          `insert into graduate_skill (graduate_id, skill_id)` +
+           ` select $1, id from skills where skill_name=ANY($2)`, [graduate_id, skills],
+           (error, result)=>{
+              if (!error){
+                res.status(200).send('inserted succesfully')
+              }
+           }
+        )
       } else {
         res.status(404).send(error);
       }

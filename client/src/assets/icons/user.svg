@@ -10,7 +10,16 @@
 			h40C512,443.62,485.371,379.333,437.02,330.98z M256,256c-59.551,0-108-48.448-108-108S196.449,40,256,40
 			c59.551,0,108,48.448,108,108S315.551,256,256,256z"/>
 	</g>
-	                <use id="🎨-Icon-Сolor" fill="#0090FF" xlink:href="#path-1"></use>
+	<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Style-guide-/-Icons-" transform="translate(-541.000000, -624.000000)">
+            <g id="27)-Icon/menu" transform="translate(541.000000, 624.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="🎨-Icon-Сolor" fill="red" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>     
 
 </g>
 </svg>

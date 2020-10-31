@@ -51,8 +51,8 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				redirectUri={'https://designed-gd.herokuapp.com/login'}
-				// redirectUri={'http://localhost:3000/login'}
+				// redirectUri={'https://designed-gd.herokuapp.com/login'}
+				redirectUri={'http://localhost:3000/login'}
 				buttonText='Log in'
 				/>
 			</Header>
@@ -60,10 +60,12 @@ const Home = () => {
 				header = 'Welcome to the CodeYourFuture Graduate Directory'				
 		  	/>	
 			 <Info>In this directory you will find recent graduates from the full-stack program at CodeYourFuture. CodeYourFuture graduates spent approximately 800 hours developing their technical and employability skills.
-				Learn more about the syllabus here</Info> 
-				<LinkCYF href='https://syllabus.codeyourfuture.io/overview'>https://syllabus.codeyourfuture.io/overview</LinkCYF>
-				<Info>If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at contact@codeyourfuture.io.</Info>
-				<LinkCYF href='contact@codeyourfuture.io'>contact@codeyourfuture.io</LinkCYF>
+				Learn more about the syllabus here<LinkCYF href='https://syllabus.codeyourfuture.io/overview'>https://syllabus.codeyourfuture.io/overview</LinkCYF>
+			</Info> 
+			<Info>If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at 
+			<LinkCYF href='mailto:contact@codeyourfuture.io'> contact@codeyourfuture.io</LinkCYF>
+			</Info>
+				
 
 			<Container>
 				{isLoading ? <Text>Loading...</Text>
@@ -117,7 +119,9 @@ const Text = styled.p`
 `;
 
 const Info=styled.p`
+	width:70%;
 `
 
 const LinkCYF =styled.a`
+	display:inline-block;
 `
