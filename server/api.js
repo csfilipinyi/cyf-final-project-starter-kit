@@ -52,7 +52,7 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
 
 router.get("/learningobjectives/:skill", (req, res) => {
   let skill = req.params.skill;
-  const queryLearningOb = `SELECT * FROM learning_objective  where skill = $1`;
+  const queryLearningOb = `SELECT * FROM learning_objective  where skill = $1 order by id`;
   Connection.query(queryLearningOb, [skill], (err, results) => {
     if (!err) {
       res.json(results.rows);

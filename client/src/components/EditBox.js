@@ -42,12 +42,12 @@ export default function EditBox() {
             })
            }
 
-  const updateLearningObj = (description, LearningID) => {
-    if (description) {
+  const updateLearningObj = (newDescription, LearningID) => {
+    if (newDescription) {
       fetch(`/api/learningobjectives/${LearningID}`, {
         method: "PUT",
         body: JSON.stringify({
-          description,
+         description: newDescription,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -63,21 +63,19 @@ export default function EditBox() {
   };
 
 
-  const handleEdit = (e)=>{
-    console.log("head", e.target.id)
-    setUpdateLO(e.target.id)
+  const handleEdit = (description, id)=>{
+    console.log("head", id)
+    setUpdateLO(id)
+    setText(description)
   }
-  // const cancelUpdate = (id) =>
-  //   new Promise((resolve) => {
-  //     resolve(id);
-  //   }).then(() => {
-  //     setUpdateLO("");
-  //     getLearningObj();
-  //   });
+  const cancelUpdate = id =>{
+  setUpdateLO("");
+  getLearningObj();
+}
 
-  const addLearningObjective = (description) => {
-    setLearningObjective(skills.push(description));
-  };
+  // const addLearningObjective = (description) => {
+  //   setLearningObjective(skills.push(description));
+  // };
   return (
     <div className="learning-objective-container">
       <h2 className="skill-name">{id}</h2>
@@ -93,12 +91,12 @@ export default function EditBox() {
               <input
                 className="app-message__input"
                 onChange={e => setText(e.target.value)}
-                
+                value={text}
               ></input>
             ) : (
               <span>{description} 
                     <button 
-                    onClick={handleEdit}
+                    onClick={()=>handleEdit(description, id)}
                     className="sumbit edit-btn"
                     variant="secondary"
                     size="lg"
@@ -112,7 +110,7 @@ export default function EditBox() {
                   <span className="app-message-btn-del">
                     {updateLO == id ? (
                       <>
-                        <button onClick={(e) => console.log(description,e, id)}>
+                        <button onClick={() => updateLearningObj(text, id)}>
                           Update
                         </button>
                         <button onClick={() => cancelUpdate("")}>Cancel</button>
