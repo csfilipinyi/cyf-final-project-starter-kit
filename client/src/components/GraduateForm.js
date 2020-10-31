@@ -13,13 +13,11 @@ const GraduateForm = ({ profile, handleClick }) => {
   let history = useHistory();
   const { github_id } = useContext(AuthContext);
 
-  console.log("profile", profile);
-
   const [newSkills, setNewSkills] = useState([]);
 
-  // useEffect(()=>{
-  // 	profile&&profile.skills&&setNewSkills(profile.skills)
-  // },[profile.skills])
+  useEffect(()=>{
+  	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
+  },[profile])
 
   const handleSubmit = async (values) => {
     const {
@@ -68,7 +66,6 @@ const GraduateForm = ({ profile, handleClick }) => {
     if (event == " ") {
       // response.includes(word) &&!newSkills.includes(word)&&
       setNewSkills([...newSkills, word]);
-      console.log('skilllllsss', response, newSkills, word)
       setFieldValue("skills", "");
     }
   };
@@ -99,11 +96,10 @@ const GraduateForm = ({ profile, handleClick }) => {
 
   return (
     <Container>
-      {console.log("initial", initialValue)}
       <Formik
         initialValues={initialValue}
         onSubmit={(values) => handleSubmit(values)}
-        // validationSchema={ValidationSchema}
+        validationSchema={ValidationSchema}
         onReset={handleReset}
       >
         {(props) => (
@@ -133,7 +129,6 @@ const GraduateForm = ({ profile, handleClick }) => {
                 description="Add the 3 key things that you are passionate about.this will show on the main page"
                 label="Key Interests"
               />
-
               <FormField
                 name="github"
                 label="Github"
@@ -183,16 +178,31 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-// const ValidationSchema = Yup.object().shape({
-// 	Name: Yup.string()
-// 		.required("Required"),
-// 	email: Yup.string()
-// 		.required("Required"),
-// 	graduateClass: Yup.string()
-// 		.required("Required"),
-// 	graduateYear: Yup.string()
-// 		.required("Required"),
-// });
+const ValidationSchema = Yup.object().shape({
+	firstName: Yup.string()
+    .required("Required")
+    .max(15, 'Should be less than 15'),
+  surname: Yup.string()
+    .required("Required")
+    .max(15, 'Should be less than 15'),
+  aboutMe: Yup.string()
+  .required("Required")
+  .max(100, 'Should be less than 100'),
+	location: Yup.string()
+    .required("Required")
+    .max(15, 'Should be less than 15'),
+	interest: Yup.string()
+    .required("Required")
+    .max(50, 'Should be less than 50'),
+	github: Yup.string()
+    .required("Required"),
+  linkedin: Yup.string()
+    .required("Required"),
+  portfolio: Yup.string()
+    .required("Required"),
+  skills: Yup.string()
+		.required("Required"),
+});
 
 const ViewSkills = styled.div`
   display: flex;

@@ -10,7 +10,6 @@ import ViewMyProfile from '../components/ViewMyProfile'
 const ViewDetail = () => {
     const {isAuthenticated} = useContext(AuthContext)
     const {profile} = useContext(ProfileContext)
-    console.log('prof', profile)
     let history = useHistory()
 
     const handleClick = () =>{

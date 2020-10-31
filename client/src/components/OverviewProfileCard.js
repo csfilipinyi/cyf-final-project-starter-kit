@@ -67,10 +67,15 @@ const CardContainer = styled(Card)`
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   margin: 48px 18px 10px 18px;
 `;
+
 const IconContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content:space-around;
+  align-items:center;
+  margin-bottom:3px 0 3px 0;
+  width:90%;
 `;
+
 const SubContainer = styled.div`
   display: flex;
   height: 65px;

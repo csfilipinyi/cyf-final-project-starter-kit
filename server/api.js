@@ -48,7 +48,6 @@ router.get("/callback", async (req, res) => {
 
   try {
     const accessToken = await client.getToken(options);
-    console.log("acces token", accessToken);
     //accessing the token number from the above
     const token = accessToken.token.access_token;
 
@@ -61,23 +60,15 @@ router.get("/callback", async (req, res) => {
     const { data } = await octokit.request("/user");
     return res.status(200).json(data.login);
   } catch (error) {
-    console.error("Access Token Error", error.message);
     return res.status(500).json("Authentication failed");
   }
 });
 
 router.get("/graduates", (req, res) => {
-  console.log("get graduates called");
-  // Connection.connect((err) => {
-  //   if (err) {
-  //     return next(err);
-  //   }
   Connection.query("SELECT * FROM graduates", (error, result) => {
-    console.log("got query");
     if (result) {
       res.json(result.rows);
     } else {
-      console.log("got error");
       res.send(error);
     }
   });
@@ -85,7 +76,6 @@ router.get("/graduates", (req, res) => {
 
 // create new profile
 router.post("/graduates", function (req, res) {
-  console.log(req.body)
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const aboutMe = req.body.about_me;
@@ -152,7 +142,6 @@ router.get("/accounts/:name", (req, res) => {
 });
 
 router.get("/graduates/:id", (req, res) => {
-  console.log('get request called', req.params.id)
   const github_id = parseInt(req.params.id);
   Connection.query(
     "select g.*, s.skill_name from graduates g join graduate_skill gs on g.id=gs.graduate_id join skills s on s.id=gs.skill_id where g.github_id=$1",
@@ -167,7 +156,6 @@ router.get("/graduates/:id", (req, res) => {
 
 //editing existing graduate
 router.put("/graduates/:id", function (req, res) {
-  console.log("put request called", req.body);
   const github_id = req.params.id;
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
@@ -194,7 +182,6 @@ router.put("/graduates/:id", function (req, res) {
     ],
     (error, result) => {
       if (result) {
-        console.log('put query1 result', result)
         const graduate_id = result.rows[0].id
         Connection.query(
           "delete from graduate_skill where graduate_id=$1", [graduate_id],
@@ -209,7 +196,6 @@ router.put("/graduates/:id", function (req, res) {
            ` select $1, id from skills where skill_name=ANY($2)`, [graduate_id, skills],
            (error, result)=>{
               if (!error){
-                console.log('put query2 result', result)
                 res.status(200).send('inserted succesfully')
               }
            }

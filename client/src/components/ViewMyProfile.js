@@ -13,8 +13,6 @@ const ViewMyProfile = ({ profile }) => {
   let history = useHistory();
   const { isAuthenticated } = useContext(AuthContext);
 
-  console.log("pro", profile);
-
   const handleClick = () => {
     history.push("/editprofile");
   };
@@ -39,7 +37,6 @@ const ViewMyProfile = ({ profile }) => {
         <Description>{profile.interest}</Description>
         <SubHeads>{profile.first_name}’s skills</SubHeads>
         <SkillsContainer>
-          {console.log('profile skills view profile', profile.skills)}
           {profile.skills && profile.skills.map((skill) => {
               return <SkillBox>{skill}</SkillBox>;
             })}
@@ -161,7 +158,7 @@ const SocialText = styled.a`
 `;
 const IconContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  width: 20%;
+  justify-content:space-around;
+  width:120px;
   margin-bottom: 20px;
 `;

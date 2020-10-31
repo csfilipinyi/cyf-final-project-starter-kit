@@ -16,11 +16,12 @@ export default StyledButton;
 
 
 const StyleButton = styled(Button)`
-    height: 56px;
-    width: 220px;
+    height: 40px;
+    width: 110px;
     border-radius: 2px;
     color:#fff;
-    margin:5px;
+    margin-top:11px;
+    font-size:12px;
     align-self:center;
     font-weight:bold;
     font-family: Arial;

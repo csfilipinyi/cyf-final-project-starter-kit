@@ -8,8 +8,8 @@ import { ProfileContext } from '../context/ProfileContext';
 
 const CreateProfile = () => {
 	const { addProfile, profile}  = useContext(ProfileContext);
-	const handleClick =(profile)=>{
-		addProfile(profile);
+	const handleClick =(newprofile)=>{
+		addProfile(newprofile);
 	}
 	return (
 		<Screen>

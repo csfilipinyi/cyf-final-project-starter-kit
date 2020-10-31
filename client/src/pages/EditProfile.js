@@ -7,8 +7,8 @@ import { ProfileContext } from '../context/ProfileContext';
 
 const EditProfile = () => {
 	const { editProfile, profile}  = useContext(ProfileContext);
-	const handleClick =(profile)=>{
-		editProfile(profile);
+	const handleClick =(newprofile)=>{
+		editProfile(newprofile);
 	}
 	return (
 		<Screen>

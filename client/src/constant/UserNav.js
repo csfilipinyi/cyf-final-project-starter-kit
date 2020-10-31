@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/NavBar';
 import IconUser from '../assets/icons/user.svg';
+import IconUserBlue from '../assets/icons/user_blue.svg';
 import IconUp from '../assets/icons/IconArrowUp.svg';
 import IconDown from '../assets/icons/IconArrowDown.svg'
 
@@ -10,7 +11,12 @@ const UserNav = ({ open, setOpen, ...props }) => {
 		<>
 			<Container onClick={() => setOpen(!open)}>
 				<Circle style={{borderColor:open?'#0090FF':'black'}}>
-					<IUser src={IconUser} alt='User'/>
+				{open?
+				<IUser src={IconUserBlue} alt='User'/>
+				:
+				<IUser src={IconUser} alt='User'/>
+				}
+					
 				</Circle>
 				<Text style={{color:open?'#0090FF':'black'}}>Your Profile</Text>
 				{open?

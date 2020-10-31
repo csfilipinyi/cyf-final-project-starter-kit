@@ -41,7 +41,6 @@ const EditMyProfile = () => {
 				{(props) => (
 
 					<>
-						{console.log(props)}
 						<StyledForm id='formLogin' noValidate>
 							<FormField
 								name='name'

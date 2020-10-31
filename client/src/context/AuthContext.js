@@ -64,19 +64,16 @@ const AuthState = (props) =>{
         axios.get(`${baseUrl}/accounts/${userName}`)
             .then(response=>{
                     if(response.status==200){
-                        console.log('200', response.data)
                         let name=response.data[0].account_name;
                         let id = response.data[0].github_id; 
                       return  dispatch({ type: types.Set_UserName, payload:{name, id}})
                     }
                     if (response.status==206){
-                        console.log('206', response.data.github_id)
                         let id=response.data.github_id
                         dispatch({ type: types.Set_Logged_In, payload:id});   
                     }
             })
             .catch((error)=>{
-                console.log('error', error)
 				dispatch({ type:types.Set_Is_Graduate });
 			});
     }

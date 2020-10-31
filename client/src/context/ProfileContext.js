@@ -88,13 +88,11 @@ const ProfileState = (props) =>{
 	// 	// })
 
 	const getProfile =  (id) => {
-		console.log('get profile called',`${baseUrl}/graduates/${id}`)
 		dispatch({ type: types.Set_Is_Loading });
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
 				const graduate = response.data[0];
 				graduate.skills=response.data.map(x=>x.skill_name)
-				console.log('graduate', graduate)
 				dispatch({ type: types.Set_Profile, payload:graduate });
 			})
 			.catch((error)=>{
@@ -104,7 +102,6 @@ const ProfileState = (props) =>{
 
 
 	const addProfile = (profile) => {
-		console.log('profile post', profile)
 		dispatch({ type: types.Set_Is_Loading });
 		const config = {
 			headers: {
@@ -114,11 +111,9 @@ const ProfileState = (props) =>{
 
 		axios.post(`${baseUrl}/graduates`, profile, config)
 			.then((response)=>{
-				console.log('post', response)
 				dispatch({ type: types.Set_Profile, payload:profile });
 			})
 			.catch((error)=>{
-				console.log('post error', error)
 				dispatch({ type:types.Set_Error, payload:error });
 		});
 	};
