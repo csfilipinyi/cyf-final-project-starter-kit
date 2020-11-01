@@ -13,11 +13,13 @@ const Home = () => {
 	let history = useHistory();
 
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, checkGraduate, isAuthenticated, github_id, userName, isGraduate} = useContext(AuthContext);
+	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, github_avatar, userName, isGraduate} = useContext(AuthContext);
 
 	const onSuccess = async (response) =>{
 		const accessCode = response.code;
 		const githubname = await fetchUserName(accessCode);
+
+		setGithub(githubname);
 		await checkGraduate(githubname);
 		clearProfile();
 	}
@@ -49,8 +51,8 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				redirectUri={'https://designed-gd.herokuapp.com/login'}
-				// redirectUri={'http://localhost:3000/login'}
+				// redirectUri={'https://designed-gd.herokuapp.com/login'}
+				redirectUri={'http://localhost:3000/login'}
 				buttonText='Graduate Login'
 				/>
 			</Header>
@@ -63,15 +65,12 @@ const Home = () => {
 			<Info>If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at <span> </span>
 			<LinkCYF href='mailto:contact@codeyourfuture.io'> contact@codeyourfuture.io</LinkCYF>
 			</Info>
-				
-
 			<Container>
 				{isLoading ? <Text>Loading...</Text>
 					: allProfiles && allProfiles.map(( profile, i ) => {
-						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
+						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } avatar={github_avatar}/>;
 					})}
 				{error && <Text>{error}</Text>}
-				{/* {profile&&<Redirect to='/viewdetail'/>} */}
 			</Container>
 		</Screen>
 	)}

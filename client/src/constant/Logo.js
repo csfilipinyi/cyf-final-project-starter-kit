@@ -1,11 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useContext} from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../assets/images/logo.png';
+import {AuthContext} from '../context/AuthContext'
 
 const LogoName = () => {
+    const {isAuthenticated} = useContext (AuthContext)
+    let history = useHistory()
+
+    const handleClick =()=>{
+        isAuthenticated?history.push('/viewallprofiles'):history.push('/')
+    }
+    
     return (
-      <Logo src={logo} />
+      <Logo src={logo} onClick={handleClick}/>
     );
 };
 

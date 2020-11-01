@@ -11,7 +11,7 @@ import EmailIcon from "./EmailIcon";
 
 const ViewMyProfile = ({ profile }) => {
   let history = useHistory();
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, github_avatar } = useContext(AuthContext);
 
   const handleClick = () => {
     history.push("/editprofile");
@@ -19,7 +19,7 @@ const ViewMyProfile = ({ profile }) => {
 
   return (
     <Container>
-      <Circle />
+      <Img src={github_avatar}/>
       <SubCon>
         <Name>
           {profile.first_name} {profile.surname}
@@ -41,28 +41,10 @@ const ViewMyProfile = ({ profile }) => {
               return <SkillBox>{skill}</SkillBox>;
             })}
         </SkillsContainer>
-        {/* <SubHeads>Find {profile.first_name}</SubHeads> */}
-        {/* <SocialCon>
-          <SocialSubCon>
-            <SocialIcon />
-            <SocialText href={profile.linkedin_link} target="blank">
-              LinkedIn
-            </SocialText>
-          </SocialSubCon>
-          <SocialSubCon>
-            <SocialIcon />
-            <SocialText href={profile.github_link} target="blank">
-              GitHub
-            </SocialText>
-          </SocialSubCon>
-          <SocialSubCon>
-            <SocialIcon />*/}
         <SubHeads>{profile.first_name}'s Portfolio</SubHeads>
         <SocialText href={profile.portfolio_link} target="blank">
           Portfolio
         </SocialText>
-        {/* </SocialSubCon>
-        </SocialCon>  */}
       </SubCon>
     </Container>
   );
@@ -76,12 +58,12 @@ const Container = styled.div`
   margin: 48px 15%;
 `;
 
-const Circle = styled.div`
-  height: 100px;
-  width: 157px;
-  background-color: #d8d8d8;
-  border-radius: 50%;
+const Img= styled.img`
+  width:157px;
+  height:157px;
+	border-radius:50%;
 `;
+
 
 const SubCon = styled.div`
   margin-left: 36px;

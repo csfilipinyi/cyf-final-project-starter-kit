@@ -11,8 +11,8 @@ import styled from "styled-components";
 
 const GraduateForm = ({ profile, handleClick }) => {
   let history = useHistory();
-  const { github_id } = useContext(AuthContext);
-
+  const { github_id, github_avatar } = useContext(AuthContext);
+  
   const [newSkills, setNewSkills] = useState([]);
 
   useEffect(()=>{
@@ -41,6 +41,7 @@ const GraduateForm = ({ profile, handleClick }) => {
       github_link: github,
       linkedin_link: linkedin,
       portfolio_link: portfolio,
+      avatar_url:github_avatar,
       skills:newSkills
     };
     await handleClick(newProfile);

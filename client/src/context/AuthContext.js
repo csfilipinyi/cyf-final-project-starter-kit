@@ -11,6 +11,7 @@ const types = {
 	Set_Logged_In: "Set_Logged_In",
     Set_UserName: "Set_UserName",
     Set_Is_Graduate:'Set_Is_Graduate',
+    Set_Github:'Set_Github',
     Set_Error: "Set_Error",
     Set_Logout:"Set_Logout"
 };
@@ -28,6 +29,8 @@ const authReducer = (state, action) => {
         return { ...state, github_id: action.payload.id, userName:action.payload.name, isAuthenticated:true, isLoading: false };
     case types.Set_Is_Graduate:
         return { ...state, isGraduate:false, isLoading: false }; 
+    case types.Set_Github:
+        return {...state, github_name:action.payload.accountname, github_avatar:action.payload.avatar}    
     case types.Logout:
         return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
     default:
@@ -40,6 +43,8 @@ const AuthState = (props) =>{
     const initialState={
         userName:null,
         github_id:null,
+        github_name:null,
+        github_avatar:null,
         isAuthenticated: false,
         isGraduate:true,
         isLoading:false,
@@ -56,8 +61,32 @@ const AuthState = (props) =>{
         })
     }
 
-    const baseUrl = 'https://designed-gd.herokuapp.com/api'
-    // const baseUrl = 'http://localhost:3100/api'
+    const setGithub = (githubname)=>{
+        const avatar_url =`https://avatars.githubusercontent.com/${githubname}`
+        const github = {
+            avatar:avatar_url,
+            accountname:githubname
+        }
+        dispatch({ type: types.Set_Github, payload:github }); 
+    //     const config = {
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+    //     };
+    //     const avatar = {
+    //         "avatar":avatar_url
+    //     }
+    //     axios.post(`${baseUrl}/avatars`, profile, config)
+    //     .then((response)=>{
+    //         dispatch({ type: types.Set_Github_Avatar, payload:avatar_url });
+    //     })
+    //     .catch((error)=>{
+    //         dispatch({ type:types.Set_Error, payload:error });
+    // });
+    }
+
+    // const baseUrl = 'https://designed-gd.herokuapp.com/api'
+    const baseUrl = 'http://localhost:3100/api'
 
     const checkGraduate = (userName)=>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
@@ -79,7 +108,6 @@ const AuthState = (props) =>{
     }
 
     const logOut = ()=>{
-        console.log('auth logout');
         dispatch({ type:types.Logout});
     }
 
@@ -89,12 +117,15 @@ const AuthState = (props) =>{
                 user:state.user,
                 userName:state.userName,
                 github_id:state.github_id,
+                github_name:state.github_name,
+                github_avatar:state.github_avatar,
                 isAuthenticated: state.isAuthenticated,
                 isLoading:state.isLoading,
                 isGraduate:state.isGraduate,
                 error:state.error,
                 checkGraduate,
                 fetchUserName, 
+                setGithub,
                 logOut
 			}}
 		>

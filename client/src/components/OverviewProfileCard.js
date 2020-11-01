@@ -3,32 +3,27 @@ import { Card } from "react-bootstrap";
 import styled from "styled-components";
 import ViewSkills from "../components/ViewSkills";
 import StyledButton from "../constant/StyledButton";
-import avatar from "../assets/icons/avatar.svg";
+// import avatarIcon from "../assets/icons/avatar.svg";
 import { useHistory } from "react-router-dom";
 import GitHubIcon from "./GitHubIconIcon.js";
 import LinkedinIcon from "./LinkedinIcon";
 import CvIcon from "./CvIcon";
 import EmailIcon from "./EmailIcon";
 
-const OverviewProfileCard = ({ profile, getProfile }) => {
+const OverviewProfileCard = ({ profile, getProfile}) => {
   let history = useHistory();
 
   const handleClick = async (id) => {
     await getProfile(id);
     history.push(`/viewdetail/${profile.first_name}`);
   };
-
   return (
     <CardContainer>
-      {/* <Img variant="top" src={profile.img||avatar} /> */}
-      <Img />
+      <Img src={profile.avatar_url}/>
       <CardBody>
         <CardTitle>
           {profile.first_name} {profile.surname}
         </CardTitle>
-        {/* <SubContainer>
-          {profile.location&&<CardText>{profile.location}</CardText>}
-        </SubContainer> */}
         <SubContainer>
           {profile.about_me&&<CardText>{profile.about_me}</CardText>}
         </SubContainer>
@@ -106,15 +101,10 @@ const CardText = styled(Card.Text)`
   text-align: center;
 `;
 
-// const Img= styled(Card.Img)`
-// 	width:88px;
-// 	margin-top:3px;
-// `;
-
-const Img = styled.div`
-  margin: 24px;
-  height: 88px;
-  width: 88px;
-  border-radius: 64px;
-  background-color: #d8d8d8;
+const Img= styled(Card.Img)`
+  width:88px;
+  height:88px;
+  border-radius:50%;
+	margin-top:3px;
 `;
+

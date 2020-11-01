@@ -21,7 +21,6 @@ const types = {
 //Stored actions in a reducer
 
 const profileReducer = (state, action) => {
-	console.log('action', action, state)
 	switch (action.type) {
 	case types.Set_Is_Loading:
 		return { ...state, isLoading: true };
@@ -52,9 +51,9 @@ const ProfileState = (props) =>{
 		error:null,
 	};
 
-	const baseUrl = 'https://designed-gd.herokuapp.com/api'
+	// const baseUrl = 'https://designed-gd.herokuapp.com/api'
 
-	// const baseUrl ='http://localhost:3100/api'
+	const baseUrl ='http://localhost:3100/api'
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
@@ -108,9 +107,9 @@ const ProfileState = (props) =>{
 				'Content-Type': 'application/json',
 			},
 		};
-
 		axios.post(`${baseUrl}/graduates`, profile, config)
 			.then((response)=>{
+				console.log('post request context response', response);
 				dispatch({ type: types.Set_Profile, payload:profile });
 			})
 			.catch((error)=>{

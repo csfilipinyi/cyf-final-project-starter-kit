@@ -28,8 +28,8 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  redirect_uri: "https://designed-gd.herokuapp.com/login",
-  // redirect_uri:"http://localhost:3000/login",
+  // redirect_uri: "https://designed-gd.herokuapp.com/login",
+  redirect_uri:"http://localhost:3000/login",
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',
@@ -85,12 +85,13 @@ router.post("/graduates", function (req, res) {
   const linkedin=req.body.linkedin_link;
   const portfolio=req.body.portfolio_link;
   const github_id = req.body.github_id;
+  const avatar_url=req.body.avatar_url;
   const skills =req.body.skills.map(x=>x.toLowerCase());
 
   Connection.query(
-          `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, github_id ) values` +
-            `($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`,
-          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, github_id],
+          `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, github_id, avatar_url ) values` +
+            `($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning *`,
+          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, github_id, avatar_url],
           (error, result) => {
             if(result){
               let graduate_id=result.rows[0].id
@@ -157,6 +158,7 @@ router.get("/graduates/:id", (req, res) => {
 //editing existing graduate
 router.put("/graduates/:id", function (req, res) {
   const github_id = req.params.id;
+  const avatar_url=req.body.avatar_url;
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const aboutMe = req.body.about_me;
@@ -168,7 +170,7 @@ router.put("/graduates/:id", function (req, res) {
   const skills =req.body.skills.map(x=>x.toLowerCase());
 
   Connection.query(
-    "update graduates set first_name=$1, surname=$2, about_me=$3, location=$4, interest=$5, github_link=$6, linkedin_link=$7, portfolio_link=$8 where github_id =$9 returning id",
+    "update graduates set first_name=$1, surname=$2, about_me=$3, location=$4, interest=$5, github_link=$6, linkedin_link=$7, portfolio_link=$8 avatar_url=$9 where github_id =$10 returning id",
     [
       newFirstName,
       newSurname,
@@ -178,6 +180,7 @@ router.put("/graduates/:id", function (req, res) {
       github,
       linkedin,
       portfolio,
+      avatar_url,
       github_id
     ],
     (error, result) => {
