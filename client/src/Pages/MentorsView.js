@@ -8,9 +8,12 @@ function useQuery() {
 }
 
 function MentorsView() {
-  let history = useHistory();
+  const [studentList, setStudentList]= useState([])
+
+  let history = useHistory();  
+  const token = window.localStorage.getItem("token");
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
+  
  
 console.log(token)
     if (!token) {
@@ -35,6 +38,15 @@ console.log(token)
     .catch(error =>console.log(error))
   }, []);
 
+  useEffect(()=>{
+    fetch(`/api/students`, {headers: {token}})
+    .then(res=>res.json())
+    .then(data =>{
+      console.log(data);
+      setStudentList(data)
+    })
+  },[])
+
 
   const studentId = useQuery().get("studentId");
   console.log(studentId);
@@ -53,14 +65,14 @@ console.log(token)
         </div>
       )}
       <ul>
-        {dataTesting.map((person, index) => {
+        {studentList.map(({user_id, first_name, last_name}) => {
           return (
-            <li id={index} className="students-name">
+            <li className="students-name">
               <a
-                href={`./MentorsView?studentId=${index}`}
+                href={`./MentorsView?studentId=${user_id}`}
                 className="name-list"
               >
-                {person.name}
+                {`${first_name} ${last_name}`}
               </a>
             </li>
           );
