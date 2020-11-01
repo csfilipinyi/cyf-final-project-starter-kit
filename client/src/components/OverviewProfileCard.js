@@ -3,7 +3,6 @@ import { Card } from "react-bootstrap";
 import styled from "styled-components";
 import ViewSkills from "../components/ViewSkills";
 import StyledButton from "../constant/StyledButton";
-// import avatarIcon from "../assets/icons/avatar.svg";
 import { useHistory } from "react-router-dom";
 import GitHubIcon from "./GitHubIconIcon.js";
 import LinkedinIcon from "./LinkedinIcon";

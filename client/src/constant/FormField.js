@@ -1,7 +1,6 @@
 import React from "react";
 import { useField } from "formik";
 import styled from "styled-components";
-// import PropTypes from "prop-types";
 
 const FormField = (props) => {
   const [field, meta] = useField(props);

@@ -2,9 +2,7 @@ import React, { useState, useContext } from 'react';
 import LogoName from '../constant/Logo';
 import UserNav from '../constant/UserNav'
 import {AuthContext} from '../context/AuthContext'
-// import NavBar from './NavBar';
 import styled from 'styled-components';
-// import useMediaQuery from '../helpers/useMediaQuery';
 
 const Header = ({ nav }) => {
 	const [open, setOpen] = useState(false);

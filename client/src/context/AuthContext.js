@@ -68,21 +68,6 @@ const AuthState = (props) =>{
             accountname:githubname
         }
         dispatch({ type: types.Set_Github, payload:github }); 
-    //     const config = {
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-    //     };
-    //     const avatar = {
-    //         "avatar":avatar_url
-    //     }
-    //     axios.post(`${baseUrl}/avatars`, profile, config)
-    //     .then((response)=>{
-    //         dispatch({ type: types.Set_Github_Avatar, payload:avatar_url });
-    //     })
-    //     .catch((error)=>{
-    //         dispatch({ type:types.Set_Error, payload:error });
-    // });
     }
 
     // const baseUrl = 'https://designed-gd.herokuapp.com/api'

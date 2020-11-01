@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { ProfileContext } from "../context/ProfileContext";
 import styled from "styled-components";
-import StyledButton from "../constant/StyledButton";
 import GitHubIcon from "./GitHubIconIcon.js";
 import LinkedinIcon from "./LinkedinIcon";
 import CvIcon from "./CvIcon";
@@ -11,7 +10,7 @@ import EmailIcon from "./EmailIcon";
 
 const ViewMyProfile = ({ profile }) => {
   let history = useHistory();
-  const { isAuthenticated, github_avatar } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
   const handleClick = () => {
     history.push("/editprofile");
@@ -19,7 +18,7 @@ const ViewMyProfile = ({ profile }) => {
 
   return (
     <Container>
-      <Img src={github_avatar}/>
+      <Img src={profile.avatar_url}/>
       <SubCon>
         <Name>
           {profile.first_name} {profile.surname}

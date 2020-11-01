@@ -4,25 +4,15 @@ import styled from "styled-components";
 
 const GitHubIcon = ({ gitHubLink }) => {
   return (
-    <>
       <Container>
         <GitLink href={gitHubLink} target="blank">
           <GIcon src={GHIcon} />
         </GitLink>
       </Container>
-
-      {/* <img src="../assets/icons/avatar.svg" /> */}
-    </>
   );
 };
 export default GitHubIcon;
 
-// const gitHubIcon = styled.img`
-//   height: 32px;
-//   width: 32px;
-//   border: 1px solid #979797;
-//   border-radius: 50%;
-// `;
 
 const Container = styled.div`
   display: flex;

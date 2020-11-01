@@ -109,7 +109,6 @@ const ProfileState = (props) =>{
 		};
 		axios.post(`${baseUrl}/graduates`, profile, config)
 			.then((response)=>{
-				console.log('post request context response', response);
 				dispatch({ type: types.Set_Profile, payload:profile });
 			})
 			.catch((error)=>{
