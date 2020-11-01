@@ -50,16 +50,15 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
 
 
 
-//--------------------------------------Get endpoint for learning objectives for mentors view page--------------------------------------------------
+//--------------Get endpoint for learning objectives for mentors view page------------
 
 router.get("/mentors/:skill", (req, res) => {
-  const userId = Number(req.params.id);
+  //const userId = Number(req.params.id);
   const skill = req.params.skill;
-  const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id from learning_objective lo 
-  left join achievements a on lo.id = a.learning_obj_id 
-  where lo.skill = $1 and (a.student_id = $2 or a.student_id is null) order by lo.id;`;
+  const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id from learning_objective lo left join achievements a on lo.id = a.learning_obj_id 
+  where lo.skill = $1 order by lo.id;`;
 
-  Connection.query(queryLo, [skill, userId], (err, results) => {
+  Connection.query(queryLo, [skill], (err, results) => {
     if (err) {
       console.log(err);
     }
