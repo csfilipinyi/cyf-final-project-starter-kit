@@ -8,6 +8,7 @@ import {
   useParams,
 } from "react-router-dom";
 import EditBox from "../components/EditBox";
+import StudentDetail from "./StudentDetail";
 
 
 
@@ -16,7 +17,7 @@ export default function MentorsEdit() {
 return(
     <Router>
       <div className="skills-container">
-        <h2>Skill</h2>
+        <h2>Skills</h2>
 
         <ul>
           <li>
@@ -40,7 +41,7 @@ return(
         </ul>
 
         <Switch>
-          <Route path="/mentorsedit/:id" children={<EditBox />} />
+          <Route path="/mentorsedit/:id" children={<EditBox />, <StudentDetail />} />
         </Switch>
       </div>
     </Router>
