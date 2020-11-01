@@ -14,6 +14,7 @@ router.get("/", (_, res, next) => {
     res.json({ message: "Hello, world!" });
   });
 });
+
 router.get("/learningobjectives", (req, res) => {
   Connection.query("select * from learning_objective ", (error, results) => {
     res.json(results.rows);
@@ -29,13 +30,40 @@ router.get("/", (_, res, next) => {
     res.json({ message: "Welcome to Knowledge Checklist" });
   });
 });
+// get endpoint to all learning Objectives
 
+router.get("/learningobjectives/:id", authorization, (req, res) => {
+  const userId = Number(req.params.id);
+  const role = req.user.role;
+  const id = req.user.id;
+
+  if (role === "Student" && id !== userId) {
+    return res.status(401).json("not authorized");
+  }
+  const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id  from learning_objective lo 
+  left join achievements a on lo.id = a.learning_obj_id 
+  where (a.student_id = $1 or a.student_id is null) order by lo.id;`;
+
+  Connection.query(queryLo, [userId], (err, results) => {
+    if (err) {
+      console.log(err);
+    }
+    //console.log(results.rows);
+    res.json(results.rows);
+  });
+});
 //--------------------------------------Get endpoint for learning objectives--------------------------------------------------
 
-router.get("/learningobjectives/:id/:skill", (req, res) => {
+router.get("/learningobjectives/:id/:skill", authorization, (req, res) => {
   const userId = Number(req.params.id);
   const skill = req.params.skill;
-  const queryLo = `select lo.id, lo.skill, description, ability, date_added,  from learning_objective lo 
+  const role = req.user.role;
+  const id = req.user.id;
+
+  if (role === "Student" && id !== userId) {
+    return res.status(401).json("not authorized");
+  }
+  const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id  from learning_objective lo 
   left join achievements a on lo.id = a.learning_obj_id 
   where lo.skill = $1 and (a.student_id = $2 or a.student_id is null) order by lo.id;`;
 
@@ -89,7 +117,7 @@ router.get("/students", authorization, async (req, res) => {
     const results = await Connection.query(query);
     res.json(results.rows);
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json(err);
   }
 });
 

@@ -1,54 +1,60 @@
 import React, { useState, useEffect } from "react";
 import dataTesting from "../dataTesting.json";
 import BoxDisplay from "../components/BoxDisplay";
-import { useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 function MentorsView() {
-  const [studentList, setStudentList]= useState([])
+  const [studentList, setStudentList] = useState([]);
 
-  let history = useHistory();  
+  let history = useHistory();
   const token = window.localStorage.getItem("token");
   useEffect(() => {
-  
- 
-console.log(token)
+    console.log(token);
     if (!token) {
       history.push("/");
     }
-    fetch(`/api/verify`, {headers: {token}})
-    .then(res => {
-  
-      if(res.status !==200){
-        history.push("/");
-      }
-       return res.json()
-    }) 
-    .then(data =>{
-       console.log(data)
-       window.localStorage.setItem("role", data.role)
-      if( data == "not authorized"||data.role == "Student"){
-       history.push("/");
-      }
-    } 
-    )
-    .catch(error =>console.log(error))
+    fetch(`/api/verify`, { headers: { token } })
+      .then((res) => {
+        if (res.status !== 200) {
+          history.push("/");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        window.localStorage.setItem("role", data.role);
+        if (data == "not authorized" || data.role == "Student") {
+          history.push("/");
+        }
+      })
+      .catch((error) => console.log(error));
   }, []);
 
-  useEffect(()=>{
-    fetch(`/api/students`, {headers: {token}})
-    .then(res=>res.json())
-    .then(data =>{
-      console.log(data);
-      setStudentList(data)
-    })
-  },[])
+  useEffect(() => {
+    fetch(`/api/students`, { headers: { token } })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setStudentList(data);
+      });
+  }, []);
 
+  let studentName = "";
 
   const studentId = useQuery().get("studentId");
+  if (studentId && studentList) {
+    const student = studentList.filter(
+      (student) => student.user_id == studentId
+    )[0];
+    console.log(studentList, studentId);
+    if (student) {
+      studentName = `${student.first_name} ${student.last_name}`;
+    }
+  }
   console.log(studentId);
 
   return (
@@ -61,19 +67,19 @@ console.log(token)
       </div>
       {studentId && (
         <div className="skills-container">
-          <BoxDisplay studentData={dataTesting} studentId={studentId} />
+          <BoxDisplay studentId={studentId} studentName={studentName} />
         </div>
       )}
       <ul>
-        {studentList.map(({user_id, first_name, last_name}) => {
+        {studentList.map(({ user_id, first_name, last_name }) => {
           return (
-            <li className="students-name">
-              <a
-                href={`./MentorsView?studentId=${user_id}`}
+            <li key={user_id} className="students-name">
+              <Link
+                to={`./MentorsView?studentId=${user_id}`}
                 className="name-list"
               >
                 {`${first_name} ${last_name}`}
-              </a>
+              </Link>
             </li>
           );
         })}
