@@ -41,7 +41,7 @@ return(
         </ul>
 
         <Switch>
-          <Route path="/mentorsedit/:id" children={<EditBox />, <StudentDetail />} />
+          <Route path="/mentorsedit/:id" children={<EditBox />} />
         </Switch>
       </div>
     </Router>

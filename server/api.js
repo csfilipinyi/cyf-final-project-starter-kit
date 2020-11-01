@@ -35,7 +35,7 @@ router.get("/", (_, res, next) => {
 router.get("/learningobjectives/:id/:skill", (req, res) => {
   const userId = Number(req.params.id);
   const skill = req.params.skill;
-  const queryLo = `select lo.id, lo.skill, description, ability, date_added from learning_objective lo 
+  const queryLo = `select lo.id, lo.skill, description, ability, date_added,  from learning_objective lo 
   left join achievements a on lo.id = a.learning_obj_id 
   where lo.skill = $1 and (a.student_id = $2 or a.student_id is null) order by lo.id;`;
 
