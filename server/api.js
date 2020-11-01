@@ -48,8 +48,6 @@ router.get("/learningobjectives/:id/:skill", (req, res) => {
   });
 });
 
-
-
 //--------------Get endpoint for learning objectives for mentors view page------------
 
 router.get("/mentors/:skill", (req, res) => {
@@ -67,7 +65,6 @@ router.get("/mentors/:skill", (req, res) => {
   });
 });
 
-
 //----------------------------------------------Get mentors endpoint fo learning objectives----------------------------------
 
 router.get("/learningobjectives/:skill", (req, res) => {
@@ -80,7 +77,23 @@ router.get("/learningobjectives/:skill", (req, res) => {
   });
 });
 
-//-----------------------------------------Edit end point from learning objective----------------------------------------
+// get list of students
+
+router.get("/students", authorization, async (req, res) => {
+  const role = req.user.role;
+  if (role !== "Mentor") {
+    return res.status(401).json("not authorized");
+  }
+  const query = `select user_id, first_name, last_name from users where user_role = 'Student' order by first_name asc`;
+  try {
+    const results = await Connection.query(query);
+    res.json(results.rows);
+  } catch (err) {
+    res.status(500).json(err)
+  }
+});
+
+//-----------------------------------Edit end point from learning objective----------------------------------------
 router.put("/learningobjectives/:id", (req, res) => {
   let id = req.params.id;
   let description = req.body.description;
