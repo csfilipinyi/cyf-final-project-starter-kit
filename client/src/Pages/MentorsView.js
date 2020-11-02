@@ -58,9 +58,11 @@ function MentorsView() {
   console.log(studentId);
 
   return (
+    <div>
+      <h1>Welcome Mentor</h1>
     <div className="skills-container">
       <div className="mentorsview-header-container">
-        <h2>Welcome Mentor</h2>
+        <h2 className="mentor-greet">Students</h2>
         <a href="/mentorsedit" className="signup-link">
           Edit Learning Objectives
         </a>
@@ -84,6 +86,7 @@ function MentorsView() {
           );
         })}
       </ul>
+    </div>
     </div>
   );
 }

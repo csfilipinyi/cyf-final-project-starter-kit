@@ -71,14 +71,31 @@ li {
 }
 
 .skills-container {
+  background-color:#e6dcdc;
+  border-radius: 6px;
   width: 20%;
   padding: 2%;
 }
 
-.skills-container h2 A {
+.skills-container A {
   color: #d12f2f;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  font-size: 20px;
 }
-
+.skills-container A:hover {
+  background-color: rgb(18, 88, 90);
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+}
+.skills-container A:focus {
+  background-color: rgb(18, 88, 90);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
 .modal-body .modal-footer {
   font-size: larger;
 }
