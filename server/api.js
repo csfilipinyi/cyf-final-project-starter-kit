@@ -207,21 +207,21 @@ router.post("/register", validInfo, async (req, res) => {
 });
 //-------------------------------post endpoint for learning objective---------------------------------------------------
 
-router.post("/learningobjectives", (req, res) => {
-  const { skill, description } = req.body;
-  Connection.query(
-    "INSERT INTO learning_objective (skill, description)" + "values($1, $2)",
-    [skill, description],
-    (err, results) => {
-      if (!err) {
-        res.json({
-          message: "your data has been inserted",
-          table: "Into the learning objective table",
-        });
-      }
-    }
-  );
-});
+// router.post("/learningobjectives", (req, res) => {
+//   const { skill, description } = req.body;
+//   Connection.query(
+//     "INSERT INTO learning_objective (skill, description)" + "values($1, $2)",
+//     [skill, description],
+//     (err, results) => {
+//       if (!err) {
+//         res.json({
+//           message: "your data has been inserted",
+//           table: "Into the learning objective table",
+//         });
+//       }
+//     }
+//   );
+// });
 
 //<---------------------------------------Endpoint abilities ---------------------------------------------->
 

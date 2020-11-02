@@ -136,9 +136,10 @@ console.log(learningObj)
           })}
         </ul>
         <div className="add-btn-container">
-          <button className="sumbit add-btn" type="submit" variant="secondary">
+          {/* <button className="sumbit add-btn" type="submit" variant="secondary">
             ADD
-          </button>
+          </button> */}
+          <AddForm />
         </div>
       </div>
     </div>
