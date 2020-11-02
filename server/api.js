@@ -105,7 +105,8 @@ router.post("/graduates", function (req, res) {
                   if (!err){
                     res.status(200).send('success')
                   }else{
-                    console.log(err)
+                    console.log(err);
+                    res.status(404).send(err);
                   }
                 })
             } else {
@@ -125,13 +126,14 @@ router.get("/accounts/:name", (req, res) => {
     "SELECT * FROM github_accounts where account_name=$1 ",
     [githubName],
     (error, result) => {
-      if (result.rowCount > 0) {
+      if (result && (result.rowCount > 0)) {
         let id = result.rows[0].id;
         Connection.query(
           "SELECT * FROM github_accounts GA join graduates G on(GA.id=G.github_id) where GA.account_name=$1 ",
           [githubName],
           (error, result) => {
-            if (result.rowCount > 0) res.status(200).json(result.rows);
+            if (result && (result.rowCount > 0))
+             res.status(200).json(result.rows);
             else {
               res.status(206).send({ account_name: githubName, github_id: id });
             }
@@ -151,9 +153,10 @@ router.get("/graduates/:id", (req, res) => {
     "select g.*, s.skill_name from graduates g join graduate_skill gs on g.id=gs.graduate_id join skills s on s.id=gs.skill_id where g.github_id=$1",
     [github_id],
     (error, result) => {
-      if (result.rowCount > 0) res.json(result.rows);
+      if (result &&(result.rowCount > 0))
+       res.json(result.rows);
       else
-        res.status(404).send("It has not been added to the graduate table yet");
+        res.status(404).send(error,"It has not been added to the graduate table yet");
     }
   );
 });
@@ -173,7 +176,7 @@ router.put("/graduates/:id", function (req, res) {
   const portfolio = req.body.portfolio_link;
   const emailAddress = req.body.email_address;
   const cvLink = req.body.cv_link;
-  const hired=(req.body.hired);
+  //const hired=(req.body.hired);
   const skills =req.body.skills.map(x=>x.toLowerCase());
 
   Connection.query(
@@ -202,17 +205,20 @@ router.put("/graduates/:id", function (req, res) {
           (error,result)=>{
             if(error) {
               res.status(404).send(error)
-            } 
+            } else {
+              Connection.query(
+                `insert into graduate_skill (graduate_id, skill_id)` +
+                 ` select $1, id from skills where skill_name=ANY($2)`, [graduate_id, skills],
+                 (error, result)=>{
+                    if (!error){
+                      res.status(200).send('updated succesfully')
+                    } else {
+                      res.status(400).send(error);
+                    }
+                 }
+              )
+            }
           }
-        )
-        Connection.query(
-          `insert into graduate_skill (graduate_id, skill_id)` +
-           ` select $1, id from skills where skill_name=ANY($2)`, [graduate_id, skills],
-           (error, result)=>{
-              if (!error){
-                res.status(200).send('inserted succesfully')
-              }
-           }
         )
       } else {
         res.status(404).send(error);

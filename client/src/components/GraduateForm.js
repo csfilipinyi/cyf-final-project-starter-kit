@@ -175,7 +175,7 @@ const GraduateForm = ({ profile, handleClick }) => {
 							})}</ViewSkills>
               <label >
             <Field type="checkbox" name="hired" />
-            {`${initialValue.hired}`}
+            {/* {`${initialValues.hired}`} */}
              </label>
              </StyledForm>
             <ButtonContainer>
