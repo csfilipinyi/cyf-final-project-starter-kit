@@ -52,7 +52,7 @@ router.get("/learningobjectives/:id", authorization, (req, res) => {
     res.json(results.rows);
   });
 });
-//--------------------------------------Get endpoint for learning objectives--------------------------------------------------
+//<--------------Get endpoint for learning objectives students view------------------------------>
 
 router.get("/learningobjectives/:id/:skill", authorization, (req, res) => {
   const userId = Number(req.params.id);
@@ -93,7 +93,7 @@ router.get("/mentors/:skill", (req, res) => {
   });
 });
 
-//----------------------------------------------Get mentors endpoint fo learning objectives----------------------------------
+//<------------Get mentors endpoint fo learning objectives -------------------------->
 
 router.get("/learningobjective/:skill", (req, res) => {
   let skill = req.params.skill;

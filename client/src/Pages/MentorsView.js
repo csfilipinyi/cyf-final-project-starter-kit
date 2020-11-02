@@ -38,7 +38,6 @@ function MentorsView() {
     fetch(`/api/students`, { headers: { token } })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setStudentList(data);
       });
   }, []);
@@ -50,43 +49,42 @@ function MentorsView() {
     const student = studentList.filter(
       (student) => student.user_id == studentId
     )[0];
-    console.log(studentList, studentId);
+
     if (student) {
       studentName = `${student.first_name} ${student.last_name}`;
     }
   }
-  console.log(studentId);
 
   return (
     <div>
       <h1>Welcome Mentor</h1>
-    <div className="skills-container">
-      <div className="mentorsview-header-container">
-        <h2 className="mentor-greet">Students</h2>
-        <a href="/mentorsedit" className="signup-link">
-          Edit Learning Objectives
-        </a>
-      </div>
-      {studentId && (
-        <div className="skills-container">
-          <BoxDisplay studentId={studentId} studentName={studentName} />
+      <div className="skills-container">
+        <div className="mentorsview-header-container">
+          <h2 className="mentor-greet">Students</h2>
+          <a href="/mentorsedit" className="signup-link">
+            Edit Learning Objectives
+          </a>
         </div>
-      )}
-      <ul>
-        {studentList.map(({ user_id, first_name, last_name }) => {
-          return (
-            <li key={user_id} className="students-name">
-              <Link
-                to={`./MentorsView?studentId=${user_id}`}
-                className="name-list"
-              >
-                {`${first_name} ${last_name}`}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+        {studentId && (
+          <div className="skills-container">
+            <BoxDisplay studentId={studentId} studentName={studentName} />
+          </div>
+        )}
+        <ul>
+          {studentList.map(({ user_id, first_name, last_name }) => {
+            return (
+              <li key={user_id} className="students-name">
+                <Link
+                  to={`./MentorsView?studentId=${user_id}`}
+                  className="name-list"
+                >
+                  {`${first_name} ${last_name}`}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }

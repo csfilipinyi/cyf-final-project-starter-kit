@@ -71,7 +71,7 @@ li {
 }
 
 .skills-container {
-  background-color:#e6dcdc;
+  background-color: #e6dcdc;
   border-radius: 6px;
   width: 20%;
   padding: 2%;
@@ -84,6 +84,7 @@ li {
   margin-top: 40px;
   font-size: 20px;
 }
+
 .skills-container A:hover {
   background-color: rgb(18, 88, 90);
   border-radius: 4px;
@@ -96,6 +97,13 @@ li {
   border-radius: 4px;
   text-decoration: none;
 }
+
+/* .current {
+  background-color: yellow;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+} */
 .modal-body .modal-footer {
   font-size: larger;
 }

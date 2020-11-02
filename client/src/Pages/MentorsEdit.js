@@ -10,33 +10,42 @@ import {
 import EditBox from "../components/EditBox";
 import StudentDetail from "./StudentDetail";
 
-
-
 export default function MentorsEdit() {
- 
-return(
+  return (
     <Router>
       <div className="skills-container">
         <h2>Skills</h2>
 
         <ul>
           <li>
-           <h2><Link to="/mentorsedit/html">HTML</Link></h2> 
+            <h2>
+              <Link to="/mentorsedit/html">HTML</Link>
+            </h2>
           </li>
           <li>
-            <h2><Link to="/mentorsedit/css">CSS</Link></h2>
+            <h2>
+              <Link to="/mentorsedit/css">CSS</Link>
+            </h2>
           </li>
           <li>
-            <h2><Link to="/mentorsedit/javascript">JavaScript</Link></h2>
+            <h2>
+              <Link to="/mentorsedit/javascript">JavaScript</Link>
+            </h2>
           </li>
           <li>
-            <h2><Link to="/mentorsedit/react">React.js</Link></h2>
+            <h2>
+              <Link to="/mentorsedit/react">React.js</Link>
+            </h2>
           </li>
           <li>
-            <h2><Link to="/mentorsedit/node">Node</Link></h2>
+            <h2>
+              <Link to="/mentorsedit/node">Node</Link>
+            </h2>
           </li>
           <li>
-           <h2><Link to="/mentorsedit/sql">SQL</Link></h2> 
+            <h2>
+              <Link to="/mentorsedit/sql">SQL</Link>
+            </h2>
           </li>
         </ul>
 
@@ -45,6 +54,5 @@ return(
         </Switch>
       </div>
     </Router>
-    )
-
+  );
 }
