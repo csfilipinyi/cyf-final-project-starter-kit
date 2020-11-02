@@ -46,8 +46,8 @@ const FormDescription = styled.p`
   font-style: italic;
   letter-spacing: 0;
   text-align: left;
-
-  padding-right: 300px;
+  width:65%;
+  ${'' /* padding-right: 100px; */}
   margin-top: 5px;
   margin-bottom: 30px;
 `;
