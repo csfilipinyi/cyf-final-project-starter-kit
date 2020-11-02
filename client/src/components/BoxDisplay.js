@@ -1,15 +1,7 @@
-import React, { useState } from "react";
-
-//0 no confidence
-//1 need to work on
-//2 confidence
-//any where when user click on the button it should send us number between 0 and 2 in
-// the database.
-//the maximum score for html skill is 10
-//so on mentors page if student score between 0-4 is week
-//5-7 is average
-//8-10 is strong
-///Note each skill have different number of learning objectives.
+import React, { useState, useEffect } from "react";
+import { Accordion, Card, Button, Container, Jumbotron } from "react-bootstrap";
+// let { id } = useParams();
+// console.log(id);
 
 function progress(params) {
   if (params == 2) {
@@ -21,32 +13,112 @@ function progress(params) {
   }
 }
 
+function BoxDisplay({ studentId, studentName }) {
+  const [studentDetail, setStudentDetail] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
+  console.log(studentDetail);
+  const token = window.localStorage.getItem("token");
+  const fetchDetails = (skill) => {
+    fetch(`/api/learningobjectives/${studentId}`, {
+      headers: { token },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          throw data;
+        }
+        console.log(data);
+        setStudentDetail(data);
+        // setIsClicked(!isClicked);
+      });
+  };
+  useEffect(fetchDetails, [studentId]);
 
-function BoxDisplay({ studentId, studentData }) {
-  console.log(studentData[1]);
-
+  const details = (skill) => {
+    return studentDetail
+      .filter((lo) => lo.skill === skill)
+      .map(({ description, ability }) => {
+        return (
+          <p>
+            - {description}:<button>score :{ability}</button>
+          </p>
+        );
+      });
+  };
   return (
-    <div className="learning-objective-container">
-      <h2>{studentData[studentId].name}</h2>
+    <Container className="learning-objective-container">
+      <h2>{studentName}</h2>
 
-      <ul>
-        <li>
-          HTML:
-          {progress(studentData[studentId].achievement[0].ability)}
-        </li>
-        <li>CSS:{progress(studentData[studentId].achievement[3].ability)}</li>
-        <li>
-          JavaScript:{progress(studentData[studentId].achievement[5].ability)}
-        </li>
-        <li>React:{progress(studentData[studentId].achievement[7].ability)}</li>
-        <li>Node:{progress(studentData[studentId].achievement[9].ability)}</li>
-        <li>SQL:{progress(studentData[studentId].achievement[11].ability)}</li>
-      </ul>
-      <button className="sumbit expand-btn" type="submit" variant="secondary">
-        Expand
-      </button>
-    </div>
+      <Accordion>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+              HTML:
+              {progress(0)}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>{details("html")}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
 
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+              CSS:{progress(0)}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="1">
+            <Card.Body>{details("css")}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="2">
+              JavaScript:
+              {progress(0)}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="2">
+            <Card.Body>{details("javascript")}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="3">
+              React:{progress(0)}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="3">
+            <Card.Body>{details("react")}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="4">
+              Node:{progress(0)}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="4">
+            <Card.Body>{details("node")}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="5">
+              SQL:{progress(0)}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="5">
+            <Card.Body>{details("sql")}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+    </Container>
   );
 }
 export default BoxDisplay;
