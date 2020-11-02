@@ -19,6 +19,7 @@ const GraduateForm = ({ profile, handleClick }) => {
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
   },[profile])
 
+
   const handleSubmit = async (values) => {
     const {
       firstName,
@@ -32,7 +33,7 @@ const GraduateForm = ({ profile, handleClick }) => {
       portfolio,
       cv,
       skills,
-      hired
+      employment_status
     } = values;
     const newProfile = {
       first_name: firstName,
@@ -48,7 +49,7 @@ const GraduateForm = ({ profile, handleClick }) => {
       cv_link:cv,
       avatar_url:github_avatar,
       skills:newSkills,
-      hired:hired
+      employment_status: employment_status
     };
     await handleClick(newProfile);
     history.push(`/viewprofile`);
@@ -77,6 +78,8 @@ const GraduateForm = ({ profile, handleClick }) => {
     }
   };
 
+  
+
   const initialValue = profile
     ? {
         firstName: profile.first_name,
@@ -90,7 +93,7 @@ const GraduateForm = ({ profile, handleClick }) => {
         portfolio: profile.portfolio_link,
         cv: profile.cv_link,
         skills:profile.skills,
-        hired: profile.hired
+        employment_status:profile.employment_status
       }
     : {
         firstName: "",
@@ -104,7 +107,7 @@ const GraduateForm = ({ profile, handleClick }) => {
         portfolio: "",
         cv:"",
         skills:newSkills,
-        hired: false
+        employment_status: ""
       };
 
   return (
@@ -173,10 +176,18 @@ const GraduateForm = ({ profile, handleClick }) => {
 							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
-              <label >
-            <Field type="checkbox" name="hired" />
-            {`${initialValue.hired}`}
-             </label>
+              <div id="my-radio-group">Employment Status</div>
+          <div role="group" aria-labelledby="my-radio-group">
+            <label>
+              <Field type="radio" name="employment_status" value="hired" />
+              hired
+            </label>
+            <label>
+              <Field type="radio" name="employment_status" value="not hired" />
+              Not Hired
+            </label>
+          </div>
+
              </StyledForm>
             <ButtonContainer>
               <StyledButton
@@ -228,7 +239,7 @@ const ValidationSchema = Yup.object().shape({
   portfolio: Yup.string()
     .required("Required"),
   skills: Yup.string()
-		.required("Required"),
+    .required("Required"), 
 });
 
 const ViewSkills = styled.div`
