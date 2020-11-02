@@ -11,10 +11,11 @@ export default function EditBox() {
   const [learningObj, setLearningObj] = useState([]);
   const [updateLO, setUpdateLO] = useState("");
   const [text, setText] = useState('')
-  
+
+  const token = window.localStorage.getItem("token");
 
   const getLearningObj = () => {
-    fetch(`/api/learningobjectives/${id}`)
+    fetch(`/api/learningobjective/${id}`, { headers: { token } })
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
@@ -72,7 +73,7 @@ export default function EditBox() {
   setUpdateLO("");
   getLearningObj();
 }
-
+console.log(learningObj)
   // const addLearningObjective = (description) => {
   //   setLearningObjective(skills.push(description));
   // };
