@@ -15,10 +15,10 @@ export default function AddForm({ getLearningObj }) {
     setAddDescription(updateInput);
     console.log(updateInput);
   }
-  function hadleSubmit(e) {
+ async function hadleSubmit(e) {
     e.preventDefault();
 
-    fetch(`/api/learningobjectives`, {
+  await  fetch(`/api/learningobjectives`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
