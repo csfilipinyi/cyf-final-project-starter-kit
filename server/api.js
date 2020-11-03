@@ -91,11 +91,12 @@ router.post("/graduates", function (req, res) {
   const cvLink = req.body.cv_link;
   const skills =req.body.skills.map(x=>x.toLowerCase());
   const statement=req.body.statement;
+  const isHired = req.body.is_hired;
 
   Connection.query(
-          `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, avatar_url, email_address, cv_link, statement, github_id) values` +
-            `($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) returning *`,
-          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, avatar_url,emailAddress,cvLink, , statement, github_id],
+          `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, avatar_url, email_address, cv_link, statement, is_hired, github_id) values` +
+            `($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) returning *`,
+          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, avatar_url,emailAddress,cvLink, isHired, statement, github_id],
 
           (error, result) => {
             if(result){
@@ -167,7 +168,7 @@ router.get("/graduates/:id", (req, res) => {
 router.put("/graduates/:id", function (req, res) {
   console.log('put request called', req.body)
 
-  const github_id = parseInt(req.params.id);
+  const github_id = req.params.id;
   const avatar_url=req.body.avatar_url;
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
@@ -179,12 +180,12 @@ router.put("/graduates/:id", function (req, res) {
   const portfolio = req.body.portfolio_link;
   const emailAddress = req.body.email_address;
   const cvLink = req.body.cv_link;
-  // const isHired=req.body.isHired;
+  const isHired=req.body.is_hired;
   const skills =req.body.skills.map(x=>x.toLowerCase());
   const statement =req.body.statement;
 
   Connection.query(
-    "update graduates set first_name=$1, surname=$2, about_me=$3, statement=$4, location=$5, interest=$6, github_link=$7, linkedin_link=$8, portfolio_link=$9, avatar_url=$10, email_address=$11, cv_link =$12 where github_id =$13 returning id",
+    "update graduates set first_name=$1, surname=$2, about_me=$3, statement=$4, location=$5, interest=$6, github_link=$7, linkedin_link=$8, portfolio_link=$9, avatar_url=$10, email_address=$11, cv_link =$12, is_hired=$13 where github_id =$14 returning id",
     [
       newFirstName,
       newSurname,
@@ -198,6 +199,7 @@ router.put("/graduates/:id", function (req, res) {
       avatar_url,
       emailAddress,
       cvLink,
+      isHired,
       github_id
     ],
     (error, result) => {

@@ -39,6 +39,7 @@ const Navigator = styled.div`
     margin-right:15%;
     margin-top:5px;
     color: #0090FF;
+    z-index:1000;
     &.open{
         flex-directon:column;
         position:absolute;

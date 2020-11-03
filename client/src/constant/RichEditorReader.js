@@ -25,5 +25,6 @@ export default RichEditorReader
 
 
 const Container = styled.div`
-    
+    margin-top:50px;
+    z-index:-1;
 `
