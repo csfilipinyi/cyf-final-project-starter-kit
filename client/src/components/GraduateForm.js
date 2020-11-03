@@ -1,20 +1,23 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import FormField from "../constant/FormField";
 import StyledButton from "../constant/StyledButton";
+import RichEditorField from '../constant/RichEditorField'
 import { ProfileContext } from "../context/ProfileContext";
 import { AuthContext } from "../context/AuthContext";
 import { skills } from "../api/skills";
 import styled from "styled-components";
 
+
 const GraduateForm = ({ profile, handleClick }) => {
   let history = useHistory();
   const { github_id, github_avatar } = useContext(AuthContext);
-  
-  const [newSkills, setNewSkills] = useState([]);
+  const { statement } = useContext(ProfileContext);
 
+  const [newSkills, setNewSkills] = useState([]);
+  console.log('edit profile', profile)
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
   },[profile])
@@ -30,6 +33,7 @@ const GraduateForm = ({ profile, handleClick }) => {
       linkedin,
       portfolio,
       skills,
+      // file
     } = values;
     const newProfile = {
       first_name: firstName,
@@ -42,10 +46,12 @@ const GraduateForm = ({ profile, handleClick }) => {
       linkedin_link: linkedin,
       portfolio_link: portfolio,
       avatar_url:github_avatar,
-      skills:newSkills
+      skills:newSkills,
+      statement:statement,
     };
     await handleClick(newProfile);
     history.push(`/viewprofile`);
+    console.log('file', file)
   };
 
   const handleReset = () => {
@@ -67,7 +73,7 @@ const GraduateForm = ({ profile, handleClick }) => {
     if (event == " ") {
       // response.includes(word) &&!newSkills.includes(word)&&
       setNewSkills([...newSkills, word]);
-      setFieldValue("skills", "");
+      setFieldValue("skills", " ");
     }
   };
 
@@ -92,7 +98,8 @@ const GraduateForm = ({ profile, handleClick }) => {
         github: "",
         linkedin: "",
         portfolio: "",
-        skills:newSkills
+        skills:newSkills,
+        // file:''
       };
 
   return (
@@ -120,6 +127,10 @@ const GraduateForm = ({ profile, handleClick }) => {
                 description="Provide one sentence summary of what makes you tick. This will also be shown on the main page"
                 label="About Me"
                 as="textarea"
+              />
+              <Label>Personal Statement</Label>
+              <Description>This part will be shown on the profile detail page</Description>
+              <RichEditorField 
               />
               <FormField
                 name="location"
@@ -232,4 +243,26 @@ const StyledForm = styled(Form)`
 
 const ButtonContainer = styled.div`
   margin-top: 40px;
+`;
+
+const Label = styled.label`
+  color: #000000;
+  font-family: ${(props) => props.theme.fontFamily.primary};
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-top: 30px;
+`;
+
+const Description = styled.p`
+  color: #000000;
+  font-family: ${(props) => props.theme.fontFamily.primary};
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: 0;
+  text-align: left;
+  padding-right: 300px;
+  margin-top: 5px;
+  margin-bottom: 30px;
 `;

@@ -15,12 +15,14 @@ const types = {
 	Set_Error: "Set_Error",
 	Set_Profile: "Set_Profile",
 	Clear_Profile :"Clear_Profile",
+	Set_Rich_Text:"Set_Rich_Text"
 };
 
 
 //Stored actions in a reducer
 
 const profileReducer = (state, action) => {
+	console.log('context action', action)
 	switch (action.type) {
 	case types.Set_Is_Loading:
 		return { ...state, isLoading: true };
@@ -34,8 +36,10 @@ const profileReducer = (state, action) => {
 		return { ...state, profile: null, isLoading: false };
 	// case types.Delete_Profile:
 	// 	return { ...state, allProfiles: state.allProfiles.filter((profile) => profile.id !== action.payload), loading: false };
+	case types.Set_Rich_Text:
+		return {...state, statement:action.payload};
 	default:
-		return state;
+		return state;		
 	}
 };
 
@@ -47,10 +51,10 @@ const ProfileState = (props) =>{
 	const initialState ={
 		allProfiles:[],
 		profile:[],
+		statement:null,
 		isLoading:false,
 		error:null,
 	};
-
 	// const baseUrl = 'https://designed-gd.herokuapp.com/api'
 
 	const baseUrl ='http://localhost:3100/api'
@@ -70,7 +74,7 @@ const ProfileState = (props) =>{
 
 	const getSkills = ()=>{
 		dispatch({ type: types.Set_Is_Loading }),
-		axios.get(`${baseUrl}/graduates`)
+		axios.get(`${baseUrl}/skillss`)
 			.then((response)=>{
 				dispatch({ type: types.Set_All_Profiles, payload:response.data });
 			})
@@ -80,11 +84,6 @@ const ProfileState = (props) =>{
 	};
 
 
-	// .then((response)=>{
-	// 	// 	const graduate = response.data[0];
-	// 	// 	console.log('graduate', graduate),
-	// 	// 	dispatch({ type:types.Set_Profile, payload: graduate });
-	// 	// })
 
 	const getProfile =  (id) => {
 		dispatch({ type: types.Set_Is_Loading });
@@ -136,7 +135,6 @@ const ProfileState = (props) =>{
 				'Content-Type': 'application/json',
 			},
 		};
-
 		axios.put(`${baseUrl}/graduates/${profile.github_id}`, profile, config)
 			.then((response)=>{
 				console.log("edit profile", response)
@@ -151,11 +149,17 @@ const ProfileState = (props) =>{
 		dispatch({ type: types.Clear_Profile });
 	};
 
+	const setRichtText = (text)=>{
+		console.log('profile context text', text, state.statement)
+		dispatch({ type: types.Set_Rich_Text, payload:text });
+	}
+
 	return (
 		<ProfileContext.Provider
 			value={{
 				allProfiles:state.allProfiles,
 				profile:state.profile,
+				statement:state.statement,
 				isLoading:state.isLoading,
 				error: state.error,
 				addProfile,
@@ -164,6 +168,7 @@ const ProfileState = (props) =>{
 				editProfile,
 				// deleteProfile,
 				clearProfile,
+				setRichtText
 			}}
 		>
 			{props.children}

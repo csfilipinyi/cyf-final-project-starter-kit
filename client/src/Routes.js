@@ -9,6 +9,8 @@ import ViewAllProfiles from './pages/ViewAllProfiles'
 import ViewProfile from "./pages/ViewProfile";
 import EditProfile from "./pages/EditProfile";
 import NotEligible from './pages/NotEligible'
+import RichEditorField from './constant/RichEditorField'
+import RichEditorReader from './constant/RichEditorReader'
 
 const Routes = () => {
 	return (
@@ -22,6 +24,9 @@ const Routes = () => {
 				<Route path='/viewprofile' component={ViewProfile} />
 				<Route path='/editprofile' component={EditProfile} />
 				<Route path='/notfound' component={NotEligible} />
+				<Route path='/test' component={RichEditorField} />
+				<Route path='/reader' component={RichEditorReader} />
+
 			</Switch>
 		</BrowserRouter>
 	);

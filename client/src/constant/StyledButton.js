@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
-import PropTypes from "prop-types";
 
 const StyledButton = (props) => {
 	return (
@@ -59,8 +58,5 @@ const StyleButton = styled(Button)`
     }
 `;
 
-StyleButton.propTypes = {
-	name: PropTypes.string.isRequired,
-};
 
 

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { ProfileContext } from '../context/ProfileContext';
 import { AuthContext } from '../context/AuthContext';
 import styled from 'styled-components'
@@ -8,7 +8,10 @@ import Introducing from '../components/Introducing'
 
 const ViewAllProfiles = () => {
     const { allProfiles, getProfile, isLoading, error }= useContext(ProfileContext);
-	const { } = useContext(AuthContext);
+
+	useEffect(()=>{
+		!allProfiles&&getProfile()
+	},[])
 
     return (
         <Screen>
@@ -23,11 +26,12 @@ const ViewAllProfiles = () => {
 			<LinkCYF href='mailto:contact@codeyourfuture.io'> contact@codeyourfuture.io</LinkCYF>
 			</Info>
             <Container>
-				{isLoading ? <Text>Loading...</Text>
+				{isLoading ? 
+					<p>Loading...</p>
 					: allProfiles && allProfiles.map(( profile, i ) => {
-						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
+						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />
 					})}
-				{error && <Text>{error}</Text>}
+				{error && <p>{error}</p>}
 			</Container>
         </Screen>
     )
@@ -49,9 +53,10 @@ const Container = styled.div`
 `;
 
 const Text = styled.p`
-	fontSize:20;
+	font-size:20;
 `;
-const Info=styled.p`
+
+const Info = styled.p`
 	width:70%;
 `
 

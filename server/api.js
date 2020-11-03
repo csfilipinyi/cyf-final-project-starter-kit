@@ -76,6 +76,7 @@ router.get("/graduates", (req, res) => {
 
 // create new profile
 router.post("/graduates", function (req, res) {
+  console.log('post request', req.body)
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const aboutMe = req.body.about_me;
@@ -87,11 +88,12 @@ router.post("/graduates", function (req, res) {
   const github_id = req.body.github_id;
   const avatar_url=req.body.avatar_url;
   const skills =req.body.skills.map(x=>x.toLowerCase());
+  const statement=req.body.statement;
 
   Connection.query(
-          `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, github_id, avatar_url ) values` +
-            `($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning *`,
-          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, github_id, avatar_url],
+          `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, github_id, avatar_url, statement ) values` +
+            `($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *`,
+          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, github_id, avatar_url, statement],
           (error, result) => {
             if(result){
               let graduate_id=result.rows[0].id
@@ -148,15 +150,16 @@ router.get("/graduates/:id", (req, res) => {
     "select g.*, s.skill_name from graduates g join graduate_skill gs on g.id=gs.graduate_id join skills s on s.id=gs.skill_id where g.github_id=$1",
     [github_id],
     (error, result) => {
-      if (result.rowCount > 0) res.json(result.rows);
+      if (!error) res.json(result.rows);
       else
-        res.status(404).send("It has not been added to the graduate table yet");
+        res.status(404).send(error);
     }
   );
 });
 
 //editing existing graduate
 router.put("/graduates/:id", function (req, res) {
+  console.log('put request called', req.body)
   const github_id = req.params.id;
   const avatar_url=req.body.avatar_url;
   const newFirstName = req.body.first_name;
@@ -168,9 +171,10 @@ router.put("/graduates/:id", function (req, res) {
   const linkedin = req.body.linkedin_link;
   const portfolio = req.body.portfolio_link;
   const skills =req.body.skills.map(x=>x.toLowerCase());
+  const statement =req.body.statement;
 
   Connection.query(
-    "update graduates set first_name=$1, surname=$2, about_me=$3, location=$4, interest=$5, github_link=$6, linkedin_link=$7, portfolio_link=$8 avatar_url=$9 where github_id =$10 returning id",
+    "update graduates set first_name=$1, surname=$2, about_me=$3, location=$4, interest=$5, github_link=$6, linkedin_link=$7, portfolio_link=$8, avatar_url=$9, statement=$10 where github_id=$11 returning id",
     [
       newFirstName,
       newSurname,
@@ -181,6 +185,7 @@ router.put("/graduates/:id", function (req, res) {
       linkedin,
       portfolio,
       avatar_url,
+      statement,
       github_id
     ],
     (error, result) => {
