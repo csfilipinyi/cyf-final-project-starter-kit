@@ -26,18 +26,20 @@ const GraduateForm = ({ profile, handleClick }) => {
     const {
       firstName,
       surname,
+      email,
       aboutMe,
       location,
       interest,
       github,
       linkedin,
       portfolio,
+      cv,
       skills,
-      // file
     } = values;
     const newProfile = {
       first_name: firstName,
       surname: surname,
+      email_address:email,
       github_id: github_id,
       about_me: aboutMe,
       location: location,
@@ -45,6 +47,7 @@ const GraduateForm = ({ profile, handleClick }) => {
       github_link: github,
       linkedin_link: linkedin,
       portfolio_link: portfolio,
+      cv_link:cv,
       avatar_url:github_avatar,
       skills:newSkills,
       statement:statement,
@@ -81,17 +84,21 @@ const GraduateForm = ({ profile, handleClick }) => {
     ? {
         firstName: profile.first_name,
         surname: profile.surname,
+        email:profile.email_address,
         aboutMe: profile.about_me,
         location: profile.location,
         interest: profile.interest,
         github: profile.github_link,
         linkedin: profile.linkedin_link,
         portfolio: profile.portfolio_link,
-        skills:profile.skills
+        cv: profile.cv_link,
+        skills:profile.skills,
+        hired: profile.hired
       }
     : {
         firstName: "",
         surname: "",
+        email:"",
         aboutMe: "",
         location: "",
         interest: "",
@@ -99,7 +106,7 @@ const GraduateForm = ({ profile, handleClick }) => {
         linkedin: "",
         portfolio: "",
         skills:newSkills,
-        // file:''
+        cv:""
       };
 
   return (
@@ -120,6 +127,11 @@ const GraduateForm = ({ profile, handleClick }) => {
               <FormField
                 name="surname"
                 label="Last Name"
+              />
+              <FormField
+                name="email"
+                description="if you don't want your e-mail address to be public, please add contact@codeyourfuture.com instead"
+                label="Your Email"
               />
               <FormField
                 name="aboutMe"
@@ -153,6 +165,11 @@ const GraduateForm = ({ profile, handleClick }) => {
                 name="portfolio"
                 label="Your Portfolio/Project"
               />
+               <FormField
+                name="cv"
+                description="Please provide a link to your CV. You can do that by creating a Google doc and sharing the link to that document. You may use any other online service."
+                label="Your CV"
+              />
               <FormField
 								name='skills'
 								label='Your key skills'
@@ -162,7 +179,11 @@ const GraduateForm = ({ profile, handleClick }) => {
 							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
-            </StyledForm>
+              <label >
+            <Field type="checkbox" name="hired" />
+            {/* {`${initialValues.hired}`} */}
+             </label>
+             </StyledForm>
             <ButtonContainer>
               <StyledButton
                 name="Cancel"
