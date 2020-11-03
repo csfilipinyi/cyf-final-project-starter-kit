@@ -15,12 +15,11 @@ router.get("/", (_, res, next) => {
   });
 });
 
-router.get("/learningobjectives", (req, res) => {
-  Connection.query("select * from learning_objective ", (error, results) => {
-    res.json(results.rows);
-  });
-});
-//Edit end point from learning objective
+// router.get("/learningobjectives", (req, res) => {
+//   Connection.query("select * from learning_objective ", (error, results) => {
+//     res.json(results.rows);
+//   });
+// });
 
 router.get("/", (_, res, next) => {
   Connection.connect((err) => {
@@ -30,7 +29,7 @@ router.get("/", (_, res, next) => {
     res.json({ message: "Welcome to Knowledge Checklist" });
   });
 });
-// get endpoint to all learning Objectives
+// <---------------get endpoint to all learning Objectives in BoxDisplay ---------->
 
 router.get("/learningobjectives/:id", authorization, (req, res) => {
   const userId = Number(req.params.id);
@@ -41,7 +40,7 @@ router.get("/learningobjectives/:id", authorization, (req, res) => {
     return res.status(401).json("not authorized");
   }
   const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id  from learning_objective lo 
-  left join achievements a on lo.id = a.learning_obj_id 
+  left join achievements a on lo.id = a.learning_obj_id and a.student_id =$1
   where (a.student_id = $1 or a.student_id is null) order by lo.id;`;
 
   Connection.query(queryLo, [userId], (err, results) => {
@@ -52,7 +51,7 @@ router.get("/learningobjectives/:id", authorization, (req, res) => {
     res.json(results.rows);
   });
 });
-//--------------------------------------Get endpoint for learning objectives--------------------------------------------------
+//<--Get endpoint for learning objectives students view and mentor------------------>
 
 router.get("/learningobjectives/:id/:skill", authorization, (req, res) => {
   const userId = Number(req.params.id);
@@ -64,7 +63,7 @@ router.get("/learningobjectives/:id/:skill", authorization, (req, res) => {
     return res.status(401).json("not authorized");
   }
   const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id  from learning_objective lo 
-  left join achievements a on lo.id = a.learning_obj_id 
+  left join achievements a on lo.id = a.learning_obj_id and a.student_id = $2
   where lo.skill = $1 and (a.student_id = $2 or a.student_id is null) order by lo.id;`;
 
   Connection.query(queryLo, [skill, userId], (err, results) => {
@@ -76,24 +75,24 @@ router.get("/learningobjectives/:id/:skill", authorization, (req, res) => {
   });
 });
 
-//--------------Get endpoint for learning objectives for mentors view page------------
+//<-----------Get endpoint for learning objectives for mentors view page------------>
 
-router.get("/mentors/:skill", (req, res) => {
-  //const userId = Number(req.params.id);
-  const skill = req.params.skill;
-  const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id from learning_objective lo left join achievements a on lo.id = a.learning_obj_id 
-  where lo.skill = $1 order by lo.id;`;
+// router.get("/mentors/:skill", (req, res) => {
+//   //const userId = Number(req.params.id);
+//   const skill = req.params.skill;
+//   const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id from learning_objective lo left join achievements a on lo.id = a.learning_obj_id
+//   where lo.skill = $1 order by lo.id;`;
 
-  Connection.query(queryLo, [skill], (err, results) => {
-    if (err) {
-      console.log(err);
-    }
-    //console.log(results.rows);
-    res.json(results.rows);
-  });
-});
+//   Connection.query(queryLo, [skill], (err, results) => {
+//     if (err) {
+//       console.log(err);
+//     }
+//     //console.log(results.rows);
+//     res.json(results.rows);
+//   });
+// });
 
-//----------------------------------------------Get mentors endpoint fo learning objectives----------------------------------
+//<------------Get mentors endpoint fo learning objectives in Editbox--------------->
 
 router.get("/learningobjective/:skill", (req, res) => {
   let skill = req.params.skill;
@@ -105,7 +104,7 @@ router.get("/learningobjective/:skill", (req, res) => {
   });
 });
 
-// get list of students
+//<-------------------- get list of students for mentorview------------------------->
 
 router.get("/students", authorization, async (req, res) => {
   const role = req.user.role;
@@ -121,7 +120,7 @@ router.get("/students", authorization, async (req, res) => {
   }
 });
 
-//-----------------------------------Edit end point from learning objective----------------------------------------
+//<-------------------Edit end point from learning objective------------------------>
 router.put("/learningobjectives/:id", (req, res) => {
   let id = req.params.id;
   let description = req.body.description;
@@ -141,7 +140,8 @@ router.put("/learningobjectives/:id", (req, res) => {
     }
   );
 });
-//post endpoint for learning objective
+
+//<------------------post endpoint for learning objective--------------------------->
 router.post("/learningobjectives", (req, res) => {
   const { skill, description } = req.body;
   Connection.query(
@@ -157,7 +157,7 @@ router.post("/learningobjectives", (req, res) => {
     }
   );
 });
-//Post request for signup form
+//<-----------------------------Post request for signup form------------------------>
 
 router.post("/register", validInfo, async (req, res) => {
   const {
@@ -205,7 +205,7 @@ router.post("/register", validInfo, async (req, res) => {
     res.status(500).send({ error: "Server error" });
   }
 });
-//-------------------------------post endpoint for learning objective---------------------------------------------------
+//--------------------------post endpoint for learning objective-------------------->
 
 // router.post("/learningobjectives", (req, res) => {
 //   const { skill, description } = req.body;
@@ -223,7 +223,7 @@ router.post("/register", validInfo, async (req, res) => {
 //   );
 // });
 
-//<---------------------------------------Endpoint abilities ---------------------------------------------->
+//<-------------------------------Endpoint abilities ------------------------------->
 
 router.post("/ability", authorization, async (req, res) => {
   const learning_obj_id = Number(req.body.learning_obj_id);
@@ -250,7 +250,7 @@ router.post("/ability", authorization, async (req, res) => {
     res.json("inserted");
   }
 });
-//<------Delete end point from learning objective------>
+//<-------------------Delete end point from learning objective---------------------->
 router.delete("/learningobjectives/:id", (req, res) => {
   const id = Number(req.params.id);
   Connection.query(
@@ -277,7 +277,7 @@ router.delete("/learningobjectives/:id", (req, res) => {
   );
 });
 
-//------------------------------------------Post request for signup form-------------------------------------------------------
+//<------------------------Post request for signup form----------------------------->
 
 router.post("/register", validInfo, async (req, res) => {
   const {

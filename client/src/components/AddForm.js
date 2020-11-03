@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function AddForm(props) {
+export default function AddForm({ getLearningObj }) {
   const initialDescription = {
     skill: "",
     description: "",
@@ -12,42 +12,43 @@ export default function AddForm(props) {
       [event.target.name]: event.target.value,
     };
     setAddDescription(updateInput);
-    console.log(updateInput)
+    console.log(updateInput);
   }
   function hadleSubmit(e) {
     e.preventDefault();
 
-  
-        fetch(`/api/learningobjectives`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            skill: addDescription.skill,
-            description: addDescription.description,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-        
-       
+    fetch(`/api/learningobjectives`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        skill: addDescription.skill,
+        description: addDescription.description,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
 
-     setAddDescription(initialDescription)
+    setAddDescription(initialDescription);
+    getLearningObj();
   }
 
   return (
     <div>
       <form onSubmit={hadleSubmit}>
-        <label>Skill</label><br/>
+        <label>Skill</label>
+        <br />
         <input
           type="text"
           placeholder="Type skill"
           value={addDescription.skill}
           onChange={handleChange}
           name="skill"
-        /><br/>
-        <label>Add your learning objective</label><br/>
+        />
+        <br />
+        <label>Add your learning objective</label>
+        <br />
         <input
           type="text"
           placeholder="add description"

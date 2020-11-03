@@ -12,10 +12,13 @@ export default function EditBox() {
   const [updateLO, setUpdateLO] = useState("");
   const [text, setText] = useState("");
 
+
+
   const token = window.localStorage.getItem("token");
 
+
   const getLearningObj = () => {
-    fetch(`/api/learningobjective/${id}`, { headers: { token } })
+    fetch(`/api/learningobjective/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
@@ -93,6 +96,8 @@ export default function EditBox() {
                     ></input>
                   ) : (
                     <span>
+
+
                       <div className="description">{description}</div>
                       <a
                         onClick={() => handleEdit(description, id)}
@@ -106,6 +111,7 @@ export default function EditBox() {
                           border="0"
                         ></img>
                       </a>
+
                     </span>
                   )}
                   <span className="app-message-btn-del">
@@ -129,7 +135,9 @@ export default function EditBox() {
                     ) : (
                       <a
                         onClick={() => deleteLearningOb(id)}
+
                         className="delete-btn crud"
+
                       >
                         <img
                           src="https://i.ibb.co/fd1dg7H/delete-1.png"
@@ -145,7 +153,11 @@ export default function EditBox() {
           })}
         </ul>
         <div className="add-btn-container">
-          <AddForm />
+
+          <AddForm getLearningObj={getLearningObj} />
+
+     
+
         </div>
       </div>
     </div>

@@ -115,8 +115,13 @@ li {
   font-size: larger;
   font-weight: 600;
 }
+
+
+
+
 .skills-container .edit-btn:not A:hover {
-  background-color: rgb(18, 88, 90);
+
+  background-color: rgb(18, 88, 90)
   border-radius: 4px;
   color: white;
   text-decoration: none;
@@ -131,6 +136,13 @@ li {
   border-radius: 4px;
   text-decoration: none;
 }
+
+/* .current {
+  background-color: yellow;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+} */
 .modal-body .modal-footer {
   font-size: larger;
 }

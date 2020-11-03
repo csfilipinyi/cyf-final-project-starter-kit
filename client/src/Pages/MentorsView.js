@@ -39,7 +39,6 @@ function MentorsView() {
     fetch(`/api/students`, { headers: { token } })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setStudentList(data);
       });
   }, []);
@@ -51,16 +50,19 @@ function MentorsView() {
     const student = studentList.filter(
       (student) => student.user_id == studentId
     )[0];
-    console.log(studentList, studentId);
+
     if (student) {
       studentName = `${student.first_name} ${student.last_name}`;
     }
   }
-  console.log(studentId);
 
   return (
     <div>
+
+      <h1>Welcome Mentor</h1>
+
       <Header />
+
       <div className="skills-container">
         <div className="mentorsview-header-container">
           <h2 className="mentor-greet">Students</h2>
@@ -71,6 +73,7 @@ function MentorsView() {
         {studentId && (
           <div className="skills-container">
             <BoxDisplay studentId={studentId} studentName={studentName} />
+
             <ul>
               {studentList.map(({ user_id, first_name, last_name }) => {
                 return (
@@ -87,6 +90,7 @@ function MentorsView() {
             </ul>
           </div>
         )}
+
       </div>
     </div>
   );

@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Accordion, Card, Button, Container, Jumbotron } from "react-bootstrap";
-// let { id } = useParams();
-// console.log(id);
 
-function progress(params) {
-  if (params == 2) {
-    return " Strong";
-  } else if (params == 1) {
-    return " Average";
-  } else {
-    return " Weak";
-  }
-}
+// function progress(params) {
+//   if (params == 2) {
+//     return " Strong";
+//   } else if (params == 1) {
+//     return " Average";
+//   } else {
+//     return " Weak";
+//   }
+// }
 
 function BoxDisplay({ studentId, studentName }) {
   const [studentDetail, setStudentDetail] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
-  console.log(studentDetail);
+
   const token = window.localStorage.getItem("token");
   const fetchDetails = (skill) => {
     fetch(`/api/learningobjectives/${studentId}`, {
@@ -29,22 +27,45 @@ function BoxDisplay({ studentId, studentName }) {
         }
         console.log(data);
         setStudentDetail(data);
-        // setIsClicked(!isClicked);
       });
   };
-  useEffect(fetchDetails, [studentId]);
 
-  const details = (skill) => {
+  useEffect(fetchDetails, [studentId]);
+  const abilityLength = [];
+  console.log(abilityLength);
+
+  const displayDetails = (skill) => {
     return studentDetail
       .filter((lo) => lo.skill === skill)
       .map(({ description, ability }) => {
         return (
           <p>
-            - {description}:<button>score :{ability}</button>
+            - {description}: <button> score :{ability} </button>
           </p>
         );
       });
   };
+
+  const getAverageAbility = (skill) => {
+    const filteredResults = studentDetail.filter((lo) => lo.skill === skill);
+    const totalAbility = filteredResults.reduce(
+      (currentTotalAbility, { ability }) => currentTotalAbility + ability,
+      0
+    );
+
+    const averageAbility = Math.round(
+      (totalAbility / (filteredResults.length * 2)) * 100
+    );
+
+    console.log(filteredResults);
+
+    if (averageAbility) {
+      return " " + averageAbility + " " + "%";
+    } else {
+      return " " + "Not covered yet!";
+    }
+  };
+  console.log(getAverageAbility());
   return (
     <Container className="learning-objective-container">
       <h2>{studentName}</h2>
@@ -54,22 +75,23 @@ function BoxDisplay({ studentId, studentName }) {
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="0">
               HTML:
-              {progress(0)}
+              {getAverageAbility("html")}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
-            <Card.Body>{details("html")}</Card.Body>
+            <Card.Body>{displayDetails("html")}</Card.Body>
           </Accordion.Collapse>
         </Card>
 
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              CSS:{progress(0)}
+              CSS:
+              {getAverageAbility("css")}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
-            <Card.Body>{details("css")}</Card.Body>
+            <Card.Body>{displayDetails("css")}</Card.Body>
           </Accordion.Collapse>
         </Card>
 
@@ -77,44 +99,47 @@ function BoxDisplay({ studentId, studentName }) {
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="2">
               JavaScript:
-              {progress(0)}
+              {getAverageAbility("javascript")}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="2">
-            <Card.Body>{details("javascript")}</Card.Body>
+            <Card.Body>{displayDetails("javascript")}</Card.Body>
           </Accordion.Collapse>
         </Card>
 
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="3">
-              React:{progress(0)}
+              React:
+              {getAverageAbility("react")}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="3">
-            <Card.Body>{details("react")}</Card.Body>
+            <Card.Body>{displayDetails("react")}</Card.Body>
           </Accordion.Collapse>
         </Card>
 
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="4">
-              Node:{progress(0)}
+              Node:
+              {getAverageAbility("node")}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="4">
-            <Card.Body>{details("node")}</Card.Body>
+            <Card.Body>{displayDetails("node")}</Card.Body>
           </Accordion.Collapse>
         </Card>
 
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="5">
-              SQL:{progress(0)}
+              SQL:
+              {getAverageAbility("sql")}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="5">
-            <Card.Body>{details("sql")}</Card.Body>
+            <Card.Body>{displayDetails("sql")}</Card.Body>
           </Accordion.Collapse>
         </Card>
       </Accordion>
