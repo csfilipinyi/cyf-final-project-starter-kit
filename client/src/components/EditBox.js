@@ -94,17 +94,18 @@ export default function EditBox() {
                   ) : (
                     <span>
                       <div className="description">{description}</div>
-                      <button
+                      <a
                         onClick={() => handleEdit(description, id)}
-                        className="sumbit edit-btn"
-                        variant="secondary"
-                        size="lg"
+                        className="edit-btn crud"
                         id={id}
-                        p-2
-                        active
                       >
-                        Edit
-                      </button>
+                        <img
+                          className="edit-btn crud"
+                          src="https://i.ibb.co/nrkVG9b/edit-1.png"
+                          alt="edit"
+                          border="0"
+                        ></img>
+                      </a>
                     </span>
                   )}
                   <span className="app-message-btn-del">
@@ -126,13 +127,16 @@ export default function EditBox() {
                         </button>
                       </>
                     ) : (
-                      <button
+                      <a
                         onClick={() => deleteLearningOb(id)}
-                        className="sumbit delete-btn"
-                        variant="secondary"
+                        className="delete-btn crud"
                       >
-                        Delete
-                      </button>
+                        <img
+                          src="https://i.ibb.co/fd1dg7H/delete-1.png"
+                          alt="delete "
+                          border="0"
+                        ></img>
+                      </a>
                     )}
                   </span>
                 </div>
@@ -141,9 +145,6 @@ export default function EditBox() {
           })}
         </ul>
         <div className="add-btn-container">
-          {/* <button className="sumbit add-btn" type="submit" variant="secondary">
-            ADD
-          </button> */}
           <AddForm />
         </div>
       </div>

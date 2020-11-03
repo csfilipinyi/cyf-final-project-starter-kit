@@ -107,10 +107,6 @@ li {
   text-align: center;
 }
 
-/* .skills-container ul {
-  width: 20vw;
-} */
-
 .skills-container A {
   color: #d12f2f;
   display: flex;
@@ -119,7 +115,7 @@ li {
   font-size: larger;
   font-weight: 600;
 }
-.skills-container A:hover {
+.skills-container .edit-btn:not A:hover {
   background-color: rgb(18, 88, 90);
   border-radius: 4px;
   color: white;
@@ -145,13 +141,9 @@ li {
 
 .delete-btn {
   float: right;
-  border-radius: 5%;
 }
 
 .edit-btn {
-  width: 100px;
-  height: 35px;
-  border-radius: 5%;
   float: left;
 }
 
@@ -165,10 +157,12 @@ li {
   justify-content: center;
 }
 
+.crud:hover {
+  cursor: pointer;
+}
 .add-btn {
   width: 100px;
   height: 40px;
-  /* text-align: center; */
   text-overflow: -50% -50%;
   border-radius: 5px;
 }
@@ -192,6 +186,6 @@ li {
   margin-left: 10%;
 }
 
-.description {
+/* .description {
   font-size: larger;
-}
+} */
