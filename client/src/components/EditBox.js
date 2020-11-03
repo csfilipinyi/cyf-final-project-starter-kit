@@ -10,7 +10,7 @@ export default function EditBox() {
   // const [learningObjective, setLearningObjective] = useState(skills);
   const [learningObj, setLearningObj] = useState([]);
   const [updateLO, setUpdateLO] = useState("");
-  const [text, setText] = useState('')
+  const [text, setText] = useState("");
 
   const token = window.localStorage.getItem("token");
 
@@ -29,26 +29,24 @@ export default function EditBox() {
     getLearningObj();
   }, [id]);
 
-  const deleteLearningOb = (LearningID)=> {
-    
-        fetch(`/api/learningobjectives/${LearningID}`, {
-            method: "DELETE",
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-            .then(()=> {
-        let newData=  learningObj.filter((p)=> p.id !== LearningID)
-        setLearningObj(newData)
-            })
-           }
+  const deleteLearningOb = (LearningID) => {
+    fetch(`/api/learningobjectives/${LearningID}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => {
+      let newData = learningObj.filter((p) => p.id !== LearningID);
+      setLearningObj(newData);
+    });
+  };
 
   const updateLearningObj = (newDescription, LearningID) => {
     if (newDescription) {
       fetch(`/api/learningobjectives/${LearningID}`, {
         method: "PUT",
         body: JSON.stringify({
-         description: newDescription,
+          description: newDescription,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -63,23 +61,22 @@ export default function EditBox() {
     return;
   };
 
-
-  const handleEdit = (description, id)=>{
-    console.log("head", id)
-    setUpdateLO(id)
-    setText(description)
-  }
-  const cancelUpdate = id =>{
-  setUpdateLO("");
-  getLearningObj();
-}
-console.log(learningObj)
+  const handleEdit = (description, id) => {
+    console.log("head", id);
+    setUpdateLO(id);
+    setText(description);
+  };
+  const cancelUpdate = (id) => {
+    setUpdateLO("");
+    getLearningObj();
+  };
+  console.log(learningObj);
   // const addLearningObjective = (description) => {
   //   setLearningObjective(skills.push(description));
   // };
   return (
     <div className="learning-objective-container">
-      <h2 className="skill-name">{id}</h2>
+      <h2 className="skill-name"></h2>
       <div>
         <ul>
           {learningObj.map(({ description, id }, index) => {
@@ -87,58 +84,67 @@ console.log(learningObj)
               <li key={index}>
                 <div className="edit-delete-buttons">
                   {console.log("here is update", updateLO, id)}
-                 
+
                   {updateLO == id ? (
-              <input
-                className="app-message__input"
-                onChange={e => setText(e.target.value)}
-                value={text}
-              ></input>
-            ) : (
-              <span>{description} 
-                    <button 
-                    onClick={()=>handleEdit(description, id)}
-                    className="sumbit edit-btn"
-                    variant="secondary"
-                    size="lg"
-                    id={id}
-                    p-2
-                    active
-                  >
-                    Edit
-                    </button></span>
-            )}
+                    <input
+                      className="app-message__input"
+                      onChange={(e) => setText(e.target.value)}
+                      value={text}
+                    ></input>
+                  ) : (
+                    <span>
+                      <div className="description">{description}</div>
+                      <a
+                        onClick={() => handleEdit(description, id)}
+                        className="edit-btn crud"
+                        id={id}
+                      >
+                        <img
+                          className="edit-btn crud"
+                          src="https://i.ibb.co/nrkVG9b/edit-1.png"
+                          alt="edit"
+                          border="0"
+                        ></img>
+                      </a>
+                    </span>
+                  )}
                   <span className="app-message-btn-del">
                     {updateLO == id ? (
                       <>
-                        <button onClick={() => updateLearningObj(text, id)}>
+                        <button
+                          onClick={() => updateLearningObj(text, id)}
+                          className="sumbit"
+                          variant="secondary"
+                        >
                           Update
                         </button>
-                        <button onClick={() => cancelUpdate("")}>Cancel</button>
+                        <button
+                          onClick={() => cancelUpdate("")}
+                          className="sumbit"
+                          variant="secondary"
+                        >
+                          Cancel
+                        </button>
                       </>
                     ) : (
-                      <button
+                      <a
                         onClick={() => deleteLearningOb(id)}
-                        className="sumbit delete-btn"
-                       
-                        variant="secondary"
+                        className="delete-btn crud"
                       >
-                        Delete
-                      </button>
+                        <img
+                          src="https://i.ibb.co/fd1dg7H/delete-1.png"
+                          alt="delete "
+                          border="0"
+                        ></img>
+                      </a>
                     )}
                   </span>
-
-                  
-                 
                 </div>
               </li>
             );
           })}
         </ul>
         <div className="add-btn-container">
-          {/* <button className="sumbit add-btn" type="submit" variant="secondary">
-            ADD
-          </button> */}
           <AddForm />
         </div>
       </div>

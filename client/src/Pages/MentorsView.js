@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import dataTesting from "../dataTesting.json";
 import BoxDisplay from "../components/BoxDisplay";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import Header from "../components/Header";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -59,34 +60,34 @@ function MentorsView() {
 
   return (
     <div>
-      <h1>Welcome Mentor</h1>
-    <div className="skills-container">
-      <div className="mentorsview-header-container">
-        <h2 className="mentor-greet">Students</h2>
-        <a href="/mentorsedit" className="signup-link">
-          Edit Learning Objectives
-        </a>
-      </div>
-      {studentId && (
-        <div className="skills-container">
-          <BoxDisplay studentId={studentId} studentName={studentName} />
+      <Header />
+      <div className="skills-container">
+        <div className="mentorsview-header-container">
+          <h2 className="mentor-greet">Students</h2>
+          <a href="/mentorsedit" className="signup-link">
+            Edit Learning Objectives
+          </a>
         </div>
-      )}
-      <ul>
-        {studentList.map(({ user_id, first_name, last_name }) => {
-          return (
-            <li key={user_id} className="students-name">
-              <Link
-                to={`./MentorsView?studentId=${user_id}`}
-                className="name-list"
-              >
-                {`${first_name} ${last_name}`}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+        {studentId && (
+          <div className="skills-container">
+            <BoxDisplay studentId={studentId} studentName={studentName} />
+            <ul>
+              {studentList.map(({ user_id, first_name, last_name }) => {
+                return (
+                  <li key={user_id} className="students-name">
+                    <Link
+                      to={`./MentorsView?studentId=${user_id}`}
+                      className="name-list"
+                    >
+                      {`${first_name} ${last_name}`}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
