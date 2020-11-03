@@ -6,10 +6,9 @@ import "../App.css";
 import validate from "./SignupValidation";
 import { token } from "morgan";
 
-
 const SignupForm = () => {
-  const [hasRegistered, setHasRegistered]= useState(false)
-  const [serverError , setServerError] = useState("")
+  const [hasRegistered, setHasRegistered] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const intialState = {
     firstName: "",
@@ -55,17 +54,15 @@ const SignupForm = () => {
         .then((data) => {
           if (data.error) {
             throw new Error(data.error);
-            
           }
           console.log(data);
 
           window.localStorage.setItem("token", data.token);
-          setHasRegistered(true)
+          setHasRegistered(true);
         })
-        .catch(error=> {
-          setServerError(error.message)
-        
-        }) 
+        .catch((error) => {
+          setServerError(error.message);
+        });
     }
   }, [isValid]);
 
@@ -142,7 +139,9 @@ const SignupForm = () => {
               onChange={handleChange}
               name="userClassId"
             />
-            {errors.userClassId && <p className="error">*{errors.userClassId} </p>}
+            {errors.userClassId && (
+              <p className="error">*{errors.userClassId} </p>
+            )}
             <label for="userGithub">Github Name</label>
             <input
               type="text"

@@ -10,12 +10,10 @@ export default function EditBox() {
   // const [learningObjective, setLearningObjective] = useState(skills);
   const [learningObj, setLearningObj] = useState([]);
   const [updateLO, setUpdateLO] = useState("");
-  const [text, setText] = useState('')
-
-  const token = window.localStorage.getItem("token");
+  const [text, setText] = useState("");
 
   const getLearningObj = () => {
-    fetch(`/api/learningobjective/${id}`, { headers: { token } })
+    fetch(`/api/learningobjective/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
@@ -29,26 +27,24 @@ export default function EditBox() {
     getLearningObj();
   }, [id]);
 
-  const deleteLearningOb = (LearningID)=> {
-    
-        fetch(`/api/learningobjectives/${LearningID}`, {
-            method: "DELETE",
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-            .then(()=> {
-        let newData=  learningObj.filter((p)=> p.id !== LearningID)
-        setLearningObj(newData)
-            })
-           }
+  const deleteLearningOb = (LearningID) => {
+    fetch(`/api/learningobjectives/${LearningID}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => {
+      let newData = learningObj.filter((p) => p.id !== LearningID);
+      setLearningObj(newData);
+    });
+  };
 
   const updateLearningObj = (newDescription, LearningID) => {
     if (newDescription) {
       fetch(`/api/learningobjectives/${LearningID}`, {
         method: "PUT",
         body: JSON.stringify({
-         description: newDescription,
+          description: newDescription,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -63,17 +59,16 @@ export default function EditBox() {
     return;
   };
 
-
-  const handleEdit = (description, id)=>{
-    console.log("head", id)
-    setUpdateLO(id)
-    setText(description)
-  }
-  const cancelUpdate = id =>{
-  setUpdateLO("");
-  getLearningObj();
-}
-console.log(learningObj)
+  const handleEdit = (description, id) => {
+    console.log("head", id);
+    setUpdateLO(id);
+    setText(description);
+  };
+  const cancelUpdate = (id) => {
+    setUpdateLO("");
+    getLearningObj();
+  };
+  console.log(learningObj);
   // const addLearningObjective = (description) => {
   //   setLearningObjective(skills.push(description));
   // };
@@ -87,27 +82,29 @@ console.log(learningObj)
               <li key={index}>
                 <div className="edit-delete-buttons">
                   {console.log("here is update", updateLO, id)}
-                 
+
                   {updateLO == id ? (
-              <input
-                className="app-message__input"
-                onChange={e => setText(e.target.value)}
-                value={text}
-              ></input>
-            ) : (
-              <span>{description} 
-                    <button 
-                    onClick={()=>handleEdit(description, id)}
-                    className="sumbit edit-btn"
-                    variant="secondary"
-                    size="lg"
-                    id={id}
-                    p-2
-                    active
-                  >
-                    Edit
-                    </button></span>
-            )}
+                    <input
+                      className="app-message__input"
+                      onChange={(e) => setText(e.target.value)}
+                      value={text}
+                    ></input>
+                  ) : (
+                    <span>
+                      {description}
+                      <button
+                        onClick={() => handleEdit(description, id)}
+                        className="sumbit edit-btn"
+                        variant="secondary"
+                        size="lg"
+                        id={id}
+                        p-2
+                        active
+                      >
+                        Edit
+                      </button>
+                    </span>
+                  )}
                   <span className="app-message-btn-del">
                     {updateLO == id ? (
                       <>
@@ -120,16 +117,12 @@ console.log(learningObj)
                       <button
                         onClick={() => deleteLearningOb(id)}
                         className="sumbit delete-btn"
-                       
                         variant="secondary"
                       >
                         Delete
                       </button>
                     )}
                   </span>
-
-                  
-                 
                 </div>
               </li>
             );
@@ -139,7 +132,7 @@ console.log(learningObj)
           {/* <button className="sumbit add-btn" type="submit" variant="secondary">
             ADD
           </button> */}
-          <AddForm />
+          <AddForm getLearningObj={getLearningObj} />
         </div>
       </div>
     </div>

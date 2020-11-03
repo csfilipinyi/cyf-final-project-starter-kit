@@ -14,16 +14,13 @@ if (process.env.DATABASE_URL) {
     },
   };
 } else {
-  
-    config = {
-
+  config = {
     user: process.env.db_user,
     host: "localhost",
     database: "cyf_knowledge_checklist",
     password: process.env.db_password,
-    port: process.env.db_port,
+    port: 5433,
   };
-
 }
 pool = new Pool(config);
 

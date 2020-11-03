@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Accordion, Card, Button, Container, Jumbotron } from "react-bootstrap";
-// let { id } = useParams();
-// console.log(id);
 
-function progress(params) {
-  if (params == 2) {
-    return " Strong";
-  } else if (params == 1) {
-    return " Average";
-  } else {
-    return " Weak";
-  }
-}
+// function progress(params) {
+//   if (params == 2) {
+//     return " Strong";
+//   } else if (params == 1) {
+//     return " Average";
+//   } else {
+//     return " Weak";
+//   }
+// }
 
 function BoxDisplay({ studentId, studentName }) {
   const [studentDetail, setStudentDetail] = useState([]);
@@ -29,7 +27,6 @@ function BoxDisplay({ studentId, studentName }) {
         }
         console.log(data);
         setStudentDetail(data);
-        // setIsClicked(!isClicked);
       });
   };
 
@@ -43,7 +40,7 @@ function BoxDisplay({ studentId, studentName }) {
       .map(({ description, ability }) => {
         return (
           <p>
-            - {description}: <button> score :{ability}</button>
+            - {description}: <button> score :{ability} </button>
           </p>
         );
       });
@@ -60,11 +57,15 @@ function BoxDisplay({ studentId, studentName }) {
       (totalAbility / (filteredResults.length * 2)) * 100
     );
 
-    console.log(averageAbility);
-
     console.log(filteredResults);
-  };
 
+    if (averageAbility) {
+      return " " + averageAbility + " " + "%";
+    } else {
+      return " " + "Not covered yet!";
+    }
+  };
+  console.log(getAverageAbility());
   return (
     <Container className="learning-objective-container">
       <h2>{studentName}</h2>
@@ -74,7 +75,6 @@ function BoxDisplay({ studentId, studentName }) {
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="0">
               HTML:
-              {progress(0)}
               {getAverageAbility("html")}
             </Accordion.Toggle>
           </Card.Header>
@@ -86,7 +86,7 @@ function BoxDisplay({ studentId, studentName }) {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              CSS:{progress(0)}
+              CSS:
               {getAverageAbility("css")}
             </Accordion.Toggle>
           </Card.Header>
@@ -99,7 +99,6 @@ function BoxDisplay({ studentId, studentName }) {
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="2">
               JavaScript:
-              {progress(0)}
               {getAverageAbility("javascript")}
             </Accordion.Toggle>
           </Card.Header>
@@ -111,7 +110,7 @@ function BoxDisplay({ studentId, studentName }) {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="3">
-              React:{progress(0)}
+              React:
               {getAverageAbility("react")}
             </Accordion.Toggle>
           </Card.Header>
@@ -123,7 +122,7 @@ function BoxDisplay({ studentId, studentName }) {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="4">
-              Node:{progress(0)}
+              Node:
               {getAverageAbility("node")}
             </Accordion.Toggle>
           </Card.Header>
@@ -135,7 +134,7 @@ function BoxDisplay({ studentId, studentName }) {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="5">
-              SQL:{progress(0)}
+              SQL:
               {getAverageAbility("sql")}
             </Accordion.Toggle>
           </Card.Header>
