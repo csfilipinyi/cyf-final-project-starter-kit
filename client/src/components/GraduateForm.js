@@ -10,15 +10,17 @@ import { ProfileContext } from "../context/ProfileContext";
 import { AuthContext } from "../context/AuthContext";
 import { skills } from "../api/skills";
 import styled from "styled-components";
-
+import AskDelete from './AskDelete'
 
 const GraduateForm = ({ profile, handleClick }) => {
   let history = useHistory();
-  const { github_id, github_avatar } = useContext(AuthContext);
-  const { statement } = useContext(ProfileContext);
+  const { github_id, github_avatar, logOut } = useContext(AuthContext);
+  const { statement, deleteProfile } = useContext(ProfileContext);
 
   const [newSkills, setNewSkills] = useState([]);
   const [isHired, setIsHired] = useState(false);
+  const [askDelete, setAskDelete]= useState(false)
+  console.log({askDelete})
 
   console.log('edit profile', profile)
   useEffect(()=>{
@@ -54,7 +56,7 @@ const GraduateForm = ({ profile, handleClick }) => {
       avatar_url:github_avatar,
       skills:newSkills,
       statement:statement,
-      isHired:isHired
+      is_hired:isHired
     };
     console.log('form new profile', newProfile)
     await handleClick(newProfile);
@@ -64,6 +66,21 @@ const GraduateForm = ({ profile, handleClick }) => {
   const handleReset = () => {
     history.push(`/viewprofile`);
   };
+  
+  const askBeforeDelete =()=>{
+    setAskDelete(true)
+  }
+  
+  const cancelDelete = ()=>{
+    setAskDelete(false)
+  }
+
+  const handleDelete = async()=>{
+      await deleteProfile(profile.github_id)
+      await logOut()
+      history.push('/')
+  }
+
 
   const deleteSkill = (e) => {
     e.preventDefault();
@@ -97,7 +114,6 @@ const GraduateForm = ({ profile, handleClick }) => {
         portfolio: profile.portfolio_link,
         cv: profile.cv_link,
         skills:profile.skills,
-        hired: profile.hired
       }
     : {
         firstName: "",
@@ -114,6 +130,8 @@ const GraduateForm = ({ profile, handleClick }) => {
       };
 
   return (
+    <>     
+    {askDelete&&<AskDelete handleDelete={handleDelete} cancelDelete={cancelDelete}/>}
     <Container>
       <Formik
         initialValues={initialValue}
@@ -150,7 +168,7 @@ const GraduateForm = ({ profile, handleClick }) => {
                 as="textarea"
               />
               <Label>Personal Statement</Label>
-              <Description>This part will be shown on the profile detail page</Description>
+              <Description>Provide a longer description about yourself to show on your profile details page.  This will display underneath your About me (short) details. </Description>
               <RichEditorField 
               />
               <FormField
@@ -188,16 +206,19 @@ const GraduateForm = ({ profile, handleClick }) => {
 							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
-              <label >
-            <Field type="checkbox" name="hired" />
-            {/* {`${initialValues.hired}`} */}
-             </label>
              </StyledForm>
             <ButtonContainer>
               <StyledButton
                 name="Cancel"
                 className="md"
+                type='button'
                 handleClick={props.handleReset}
+              />
+               <StyledButton
+                name="Delete"
+                className="md"
+                type='button'
+                handleClick={askBeforeDelete}
               />
               <StyledButton
                 name="Save"
@@ -210,6 +231,7 @@ const GraduateForm = ({ profile, handleClick }) => {
         )}
       </Formik>
     </Container>
+    </>
   );
 };
 

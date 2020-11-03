@@ -8,16 +8,18 @@ import GitHubIcon from "./GitHubIconIcon.js";
 import LinkedinIcon from "./LinkedinIcon";
 import CvIcon from "./CvIcon";
 import EmailIcon from "./EmailIcon";
+import HiredLabel from '../constant/HiredLabel'
 
 const OverviewProfileCard = ({ profile, getProfile}) => {
   let history = useHistory();
-
+  console.log('card is hired', profile.is_hired)
   const handleClick = async (id) => {
     await getProfile(id);
     history.push(`/viewdetail/${profile.first_name}`);
   };
   return (
     <CardContainer>
+      {profile.is_hired&&<HiredLabel/>}
       <Img src={profile.avatar_url}/>
       <CardBody>
         <CardTitle>
@@ -29,7 +31,6 @@ const OverviewProfileCard = ({ profile, getProfile}) => {
         <SubContainer>
          {profile.about_me&&<CardText>{profile.interest}</CardText>}
         </SubContainer>
-        {/* {profile.skills&&<ViewSkills skills={profile.skills} />} */}
         <IconContainer>
           {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
           {profile.linkedin_link&&<LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>}
@@ -104,6 +105,6 @@ const Img= styled(Card.Img)`
   width:88px;
   height:88px;
   border-radius:50%;
-	margin-top:3px;
+	margin-top:7px;
 `;
 

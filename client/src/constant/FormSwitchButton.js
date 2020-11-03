@@ -6,6 +6,9 @@ const FormSwitchButton = ({isHired, handleSwitch}) => {
     console.log('switch toggle', isHired)
     return (
         <Container>
+            <Description>
+               Not yet hired
+            </Description>
             <Toggle
                 checked={isHired}
                 onChange={handleSwitch}
@@ -21,7 +24,7 @@ const FormSwitchButton = ({isHired, handleSwitch}) => {
                 <Button className={`react-switch-button`} />
             </Label>
             <Description>
-                Employment Status
+               Hired
             </Description>
         </Container>
     )
@@ -79,5 +82,5 @@ const Description = styled.label`
     font-family: ${(props) => props.theme.fontFamily.primary};
     font-size: 20px;
     font-weight: bold;
-    margin-left:5px;
+    margin:0 5px;
 `

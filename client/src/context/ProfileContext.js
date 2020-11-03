@@ -34,8 +34,8 @@ const profileReducer = (state, action) => {
 		return { ...state, profile:action.payload, isLoading: false };
 	case types.Clear_Profile:
 		return { ...state, profile: null, isLoading: false };
-	// case types.Delete_Profile:
-	// 	return { ...state, allProfiles: state.allProfiles.filter((profile) => profile.id !== action.payload), loading: false };
+	case types.Delete_Profile:
+		return { ...state, allProfiles: state.allProfiles.filter((profile) => profile.github_id !== action.payload.github_id), loading: false };
 	case types.Set_Rich_Text:
 		return {...state, statement:action.payload};
 	default:
@@ -115,16 +115,16 @@ const ProfileState = (props) =>{
 		});
 	};
 
-	// const deleteProfile = (id) => {
-	// 	dispatch({ type: types.Set_Is_Loading });
-	// 	axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
-	// 		.then((response)=>{
-	// 			dispatch({ type: types.Set_Profile, payload:response.data });
-	// 		})
-	// 		.catch((error)=>{
-	// 			dispatch({ type:types.Set_Error, payload:error });
-	// 		});
-	// };
+	const deleteProfile = (id) => {
+		dispatch({ type: types.Set_Is_Loading });
+		axios.delete(`${baseUrl}/graduates/${id}`)
+			.then((response)=>{
+				dispatch({ type: types.Delete_Profile, payload:response.data });
+			})
+			.catch((error)=>{
+				dispatch({ type:types.Set_Error, payload:error });
+			});
+	};
 
 	const editProfile = (profile) => {
 		console.log('edited profile', profile)
@@ -165,7 +165,7 @@ const ProfileState = (props) =>{
 				getAllProfiles,
 				getProfile,
 				editProfile,
-				// deleteProfile,
+				deleteProfile,
 				clearProfile,
 				setRichtText
 			}}

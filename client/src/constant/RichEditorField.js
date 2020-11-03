@@ -20,7 +20,7 @@ class RichEditorField extends Component {
 
     componentDidMount (){
       const {profile} =this.context
-      if(profile.statement){
+      if(profile&&profile.statement){
         const contentState = convertFromRaw(JSON.parse(profile.statement));
         const editorState = EditorState.createWithContent(contentState);
         this.setState({editorState})

@@ -20,11 +20,12 @@ const ViewMyProfile = ({ profile }) => {
 
   return (
     <Container>
-      <Img src={profile.avatar_url}/>
       <ContainerLeft>
+          <Img src={profile.avatar_url}/>
           <SubCon>
             <Name>
-              {profile.first_name} {profile.surname}
+            {profile.first_name} {profile.surname}
+            {profile.is_hired && <HiredLabel>Hired</HiredLabel>}
             </Name>
             <Description>{profile.location}</Description>
             <IconContainer>
@@ -61,17 +62,38 @@ export default ViewMyProfile;
 
 const Container = styled.div`
   display: flex;
+  flex-direction:column;
   width: 70%;
   margin: 48px 15%;
 `;
 
 const ContainerLeft = styled.div`
-  width:30%;
+  display:flex;
+  width:100%;
 `
 const ContainerRight = styled.div`
-  box-shadow:inset 0 0 10px #000000;
-  width:60%;
+  display:flex;
+  justify-content:flex-start;
+  align-items:flex-start;
+  align-self:center;
+  margin-top:50px;
+  margin-left:50px;
+  width:80%;
   padding:10px;
+`
+const HiredLabel = styled.div`
+    width:60px;
+    height:30px;
+    background-color:#1E90FF;
+    text-align:center;
+    height: 19px;
+    color: #FFFFFF;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 19px;
+    margin-left:30px;
 `
 
 const Img= styled.img`
@@ -85,7 +107,11 @@ const SubCon = styled.div`
   margin-left: 36px;
 `;
 
-const Name = styled.p`
+const Name = styled.div`
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-right:5px;
   color: #000000;
   font-family: Lato;
   font-size: 28px;
@@ -132,7 +158,7 @@ const SubHeads = styled.p`
 
 const SkillsContainer = styled.div`
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 const SkillBox = styled.div`

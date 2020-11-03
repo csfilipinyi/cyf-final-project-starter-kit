@@ -42,6 +42,13 @@ const StyleButton = styled(Button)`
         border:4px solid ${(props)=>props.theme.colors.primaryGreen};
         color:${(props)=>props.theme.colors.primaryGreen};
     }
+    &.danger{
+        height:56px;
+        width:113px;
+        background-color:red;
+        border:4px solid ${(props)=>props.theme.colors.primaryGreen};
+        color:white;
+    }
     &.lg{
         height:56px;
         width:155px;

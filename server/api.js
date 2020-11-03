@@ -64,6 +64,20 @@ router.get("/callback", async (req, res) => {
   }
 });
 
+//get skills
+
+router.get("/skills", (req, res) => {
+  Connection.query("SELECT * FROM skills", (error, result) => {
+    if (result) {
+      res.json(result.rows);
+    } else {
+      res.send(error);
+    }
+  });
+});
+
+//get graduates
+
 router.get("/graduates", (req, res) => {
   Connection.query("SELECT * FROM graduates", (error, result) => {
     if (result) {
@@ -96,7 +110,7 @@ router.post("/graduates", function (req, res) {
   Connection.query(
           `insert into graduates (first_name, surname, about_me, location, interest, github_link, linkedin_link, portfolio_link, avatar_url, email_address, cv_link, statement, is_hired, github_id) values` +
             `($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) returning *`,
-          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, avatar_url,emailAddress,cvLink, isHired, statement, github_id],
+          [newFirstName, newSurname, aboutMe, location, interest, github, linkedin, portfolio, avatar_url, emailAddress, cvLink, statement, isHired, github_id],
 
           (error, result) => {
             if(result){
@@ -234,23 +248,26 @@ router.put("/graduates/:id", function (req, res) {
 
 router.delete("/graduates/:id", function (req, res) {
   let graduateId;
-  const github_id = parseInt(req.params.id);
+  const github_id = req.params.id;
   Connection.query(
     "SELECT * FROM graduates where github_id=$1 ",
     [github_id],
     (error, result) => {
+      console.log('graduate', result.rows)
       if (result.rowCount > 0) graduateId = result.rows[0].id;
       Connection.query(
-        "delete from graduate_skill  where  graduate_id=$1",
+        "delete from graduate_skill  where  graduate_id=$1 returning *",
         [graduateId],
-        (error) => {
+        (error, result) => {
+          console.log('skills', result.rows)
           if (error == undefined) {
             Connection.query(
-              "delete from graduates  where  github_id=$1",
+              "delete from graduates  where  github_id=$1 returning *",
               [github_id],
-              (error) => {
-                if (error == undefined) {
-                  res.send("graduate" + github_id + " deleted.");
+              (error,result) => {
+                if (error == undefined) { 
+                  console.log(result.rows[0])                
+                  res.send(result.rows[0]);
                 }
               }
             );
