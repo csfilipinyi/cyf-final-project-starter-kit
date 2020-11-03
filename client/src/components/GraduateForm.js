@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import FormField from "../constant/FormField";
 import StyledButton from "../constant/StyledButton";
 import RichEditorField from '../constant/RichEditorField'
+import FormSwitchButton from '../constant/FormSwitchButton'
 import { ProfileContext } from "../context/ProfileContext";
 import { AuthContext } from "../context/AuthContext";
 import { skills } from "../api/skills";
@@ -17,6 +18,8 @@ const GraduateForm = ({ profile, handleClick }) => {
   const { statement } = useContext(ProfileContext);
 
   const [newSkills, setNewSkills] = useState([]);
+  const [isHired, setIsHired] = useState(false);
+
   console.log('edit profile', profile)
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
@@ -34,7 +37,7 @@ const GraduateForm = ({ profile, handleClick }) => {
       linkedin,
       portfolio,
       cv,
-      skills,
+      skills
     } = values;
     const newProfile = {
       first_name: firstName,
@@ -51,10 +54,11 @@ const GraduateForm = ({ profile, handleClick }) => {
       avatar_url:github_avatar,
       skills:newSkills,
       statement:statement,
+      isHired:isHired
     };
+    console.log('form new profile', newProfile)
     await handleClick(newProfile);
     history.push(`/viewprofile`);
-    console.log('file', file)
   };
 
   const handleReset = () => {
@@ -120,6 +124,11 @@ const GraduateForm = ({ profile, handleClick }) => {
         {(props) => (
           <>
             <StyledForm id="formLogin" noValidate>
+              <FormSwitchButton
+                name="isHired"
+                isHired={isHired}
+                handleSwitch={()=>setIsHired(!isHired)}
+              />
               <FormField
                 name="firstName"
                 label="First Name"

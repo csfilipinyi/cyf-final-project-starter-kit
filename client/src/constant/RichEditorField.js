@@ -20,9 +20,11 @@ class RichEditorField extends Component {
 
     componentDidMount (){
       const {profile} =this.context
-      const contentState = convertFromRaw(JSON.parse(profile.statement));
-      const editorState = EditorState.createWithContent(contentState);
-      this.setState({editorState})
+      if(profile.statement){
+        const contentState = convertFromRaw(JSON.parse(profile.statement));
+        const editorState = EditorState.createWithContent(contentState);
+        this.setState({editorState})
+      }
     }
   
     handleKeyCommand(command, editorState) {
