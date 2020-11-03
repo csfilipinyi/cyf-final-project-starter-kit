@@ -9,6 +9,38 @@ body {
   box-sizing: border-box;
 }
 
+.header {
+  position: relative;
+  background-color: #efefef;
+  height: 20vh;
+  width: 100vw;
+  margin-left: -5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5vw;
+  margin: auto;
+  height: 50%;
+  /* float: left; */
+}
+
+.logout-img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5vw;
+  margin: auto;
+  height: 40%;
+  float: right;
+  justify-self: end;
+}
+
 .sign-form {
   background-color: #efefef;
   display: flex;
@@ -30,11 +62,6 @@ input {
 .sumbit {
   background-color: #d12f2f;
   margin-top: 3vh;
-}
-
-.submit {
-  background-color: #d12f2f;
-  margin: 3vh;
 }
 
 .login-page {
@@ -66,7 +93,7 @@ li {
   background-color: #efefef;
   position: absolute;
   margin-left: 25%;
-  width: 50%;
+  width: 60%;
   padding: 2%;
 }
 
@@ -75,6 +102,9 @@ li {
   border-radius: 6px;
   width: 20%;
   padding: 2%;
+  margin-left: -5vw;
+  height: 100vh;
+  text-align: center;
 }
 
 .skills-container A {
@@ -82,15 +112,24 @@ li {
   display: flex;
   flex-direction: column;
   margin-top: 40px;
-  font-size: 20px;
+  font-size: larger;
+  font-weight: 600;
 }
 
-.skills-container A:hover {
-  background-color: rgb(18, 88, 90);
+
+
+
+.skills-container .edit-btn:not A:hover {
+
+  background-color: rgb(18, 88, 90)
   border-radius: 4px;
   color: white;
   text-decoration: none;
 }
+.skills-container A:checked {
+  background-color: rgb(18, 88, 90);
+}
+
 .skills-container A:focus {
   background-color: rgb(18, 88, 90);
   color: white;
@@ -114,22 +153,14 @@ li {
 
 .delete-btn {
   float: right;
-  border-radius: 5%;
-}
-
-.expand-btn {
-  float: right;
-  border-radius: 5%;
 }
 
 .edit-btn {
-  width: 100px;
-  height: 35px;
-  border-radius: 5%;
+  float: left;
 }
 
 .edit-delete-buttons {
-  margin-bottom: 10%;
+  margin-bottom: 20%;
 }
 
 .add-btn-container {
@@ -138,10 +169,12 @@ li {
   justify-content: center;
 }
 
+.crud:hover {
+  cursor: pointer;
+}
 .add-btn {
   width: 100px;
   height: 40px;
-  /* text-align: center; */
   text-overflow: -50% -50%;
   border-radius: 5px;
 }
@@ -162,4 +195,9 @@ li {
 
 .students-name {
   margin-top: 10%;
+  margin-left: 10%;
+}
+
+.description {
+  font-size: larger;
 }

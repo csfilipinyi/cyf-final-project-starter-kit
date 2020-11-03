@@ -12,6 +12,11 @@ export default function EditBox() {
   const [updateLO, setUpdateLO] = useState("");
   const [text, setText] = useState("");
 
+
+
+  const token = window.localStorage.getItem("token");
+
+
   const getLearningObj = () => {
     fetch(`/api/learningobjective/${id}`)
       .then((response) => response.json())
@@ -74,7 +79,7 @@ export default function EditBox() {
   // };
   return (
     <div className="learning-objective-container">
-      <h2 className="skill-name">{id}</h2>
+      <h2 className="skill-name"></h2>
       <div>
         <ul>
           {learningObj.map(({ description, id }, index) => {
@@ -91,36 +96,55 @@ export default function EditBox() {
                     ></input>
                   ) : (
                     <span>
-                      {description}
-                      <button
+
+
+                      <div className="description">{description}</div>
+                      <a
                         onClick={() => handleEdit(description, id)}
-                        className="sumbit edit-btn"
-                        variant="secondary"
-                        size="lg"
+                        className="edit-btn crud"
                         id={id}
-                        p-2
-                        active
                       >
-                        Edit
-                      </button>
+                        <img
+                          className="edit-btn crud"
+                          src="https://i.ibb.co/nrkVG9b/edit-1.png"
+                          alt="edit"
+                          border="0"
+                        ></img>
+                      </a>
+
                     </span>
                   )}
                   <span className="app-message-btn-del">
                     {updateLO == id ? (
                       <>
-                        <button onClick={() => updateLearningObj(text, id)}>
+                        <button
+                          onClick={() => updateLearningObj(text, id)}
+                          className="sumbit"
+                          variant="secondary"
+                        >
                           Update
                         </button>
-                        <button onClick={() => cancelUpdate("")}>Cancel</button>
+                        <button
+                          onClick={() => cancelUpdate("")}
+                          className="sumbit"
+                          variant="secondary"
+                        >
+                          Cancel
+                        </button>
                       </>
                     ) : (
-                      <button
+                      <a
                         onClick={() => deleteLearningOb(id)}
-                        className="sumbit delete-btn"
-                        variant="secondary"
+
+                        className="delete-btn crud"
+
                       >
-                        Delete
-                      </button>
+                        <img
+                          src="https://i.ibb.co/fd1dg7H/delete-1.png"
+                          alt="delete "
+                          border="0"
+                        ></img>
+                      </a>
                     )}
                   </span>
                 </div>
@@ -129,10 +153,11 @@ export default function EditBox() {
           })}
         </ul>
         <div className="add-btn-container">
-          {/* <button className="sumbit add-btn" type="submit" variant="secondary">
-            ADD
-          </button> */}
+
           <AddForm getLearningObj={getLearningObj} />
+
+     
+
         </div>
       </div>
     </div>

@@ -24,9 +24,6 @@ export function App() {
           <div>
             {/* <SignupForm /> */}
 
-         
-         
-
             <Route exact path="/" component={LoginForm} />
             <Route path="/signup" component={SignupForm} />
 
