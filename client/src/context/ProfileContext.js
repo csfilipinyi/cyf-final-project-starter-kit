@@ -115,7 +115,6 @@ const ProfileState = (props) =>{
 		});
 	};
 
-
 	// const deleteProfile = (id) => {
 	// 	dispatch({ type: types.Set_Is_Loading });
 	// 	axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)

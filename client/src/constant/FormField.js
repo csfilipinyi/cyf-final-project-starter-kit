@@ -46,7 +46,7 @@ const FormDescription = styled.p`
   font-style: italic;
   letter-spacing: 0;
   text-align: left;
-  padding-right: 300px;
+  width:65%;
   margin-top: 5px;
   margin-bottom: 30px;
 `;
@@ -78,7 +78,3 @@ const Error = styled.p`
   margin: 0;
   padding: 0;
 `;
-
-// FormField.propTypes = {
-// 	name: PropTypes.string.isRequired,
-// };
