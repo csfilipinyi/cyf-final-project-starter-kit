@@ -40,7 +40,7 @@ router.get("/learningobjectives/:id", authorization, (req, res) => {
     return res.status(401).json("not authorized");
   }
   const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id  from learning_objective lo 
-  left join achievements a on lo.id = a.learning_obj_id 
+  left join achievements a on lo.id = a.learning_obj_id and a.student_id =$1
   where (a.student_id = $1 or a.student_id is null) order by lo.id;`;
 
   Connection.query(queryLo, [userId], (err, results) => {
@@ -63,7 +63,7 @@ router.get("/learningobjectives/:id/:skill", authorization, (req, res) => {
     return res.status(401).json("not authorized");
   }
   const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id  from learning_objective lo 
-  left join achievements a on lo.id = a.learning_obj_id 
+  left join achievements a on lo.id = a.learning_obj_id and a.student_id = $2
   where lo.skill = $1 and (a.student_id = $2 or a.student_id is null) order by lo.id;`;
 
   Connection.query(queryLo, [skill, userId], (err, results) => {
