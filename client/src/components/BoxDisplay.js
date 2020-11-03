@@ -17,7 +17,7 @@ function BoxDisplay({ studentId, studentName }) {
 
   const token = window.localStorage.getItem("token");
   const fetchDetails = (skill) => {
-    fetch(`/api/learningobjectives/${studentId}`, {
+    fetch(`/api/abilities/${studentId}`, {
       headers: { token },
     })
       .then((response) => response.json())

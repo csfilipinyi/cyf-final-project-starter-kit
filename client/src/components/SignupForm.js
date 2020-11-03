@@ -55,9 +55,11 @@ const SignupForm = () => {
           if (data.error) {
             throw new Error(data.error);
           }
-          console.log(data);
-
           window.localStorage.setItem("token", data.token);
+
+          window.localStorage.setItem("user", data.id);
+          window.localStorage.setItem("role", data.role);
+
           setHasRegistered(true);
         })
         .catch((error) => {

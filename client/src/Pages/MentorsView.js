@@ -55,14 +55,11 @@ function MentorsView() {
       studentName = `${student.first_name} ${student.last_name}`;
     }
   }
-
+  console.log(studentList);
   return (
     <div>
-
       <h1>Welcome Mentor</h1>
-
       <Header />
-
       <div className="skills-container">
         <div className="mentorsview-header-container">
           <h2 className="mentor-greet">Students</h2>
@@ -73,24 +70,23 @@ function MentorsView() {
         {studentId && (
           <div className="skills-container">
             <BoxDisplay studentId={studentId} studentName={studentName} />
-
-            <ul>
-              {studentList.map(({ user_id, first_name, last_name }) => {
-                return (
-                  <li key={user_id} className="students-name">
-                    <Link
-                      to={`./MentorsView?studentId=${user_id}`}
-                      className="name-list"
-                    >
-                      {`${first_name} ${last_name}`}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
           </div>
         )}
 
+        <ul>
+          {studentList.map(({ user_id, first_name, last_name }) => {
+            return (
+              <li key={user_id} className="students-name">
+                <Link
+                  to={`./MentorsView?studentId=${user_id}`}
+                  className="name-list"
+                >
+                  {`${first_name} ${last_name}`}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

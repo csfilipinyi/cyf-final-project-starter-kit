@@ -121,7 +121,7 @@ li {
 
 .skills-container .edit-btn:not A:hover {
 
-  background-color: rgb(18, 88, 90)
+  background-color: rgb(18, 88, 90);
   border-radius: 4px;
   color: white;
   text-decoration: none;

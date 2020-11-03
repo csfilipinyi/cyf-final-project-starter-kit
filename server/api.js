@@ -31,7 +31,7 @@ router.get("/", (_, res, next) => {
 });
 // <---------------get endpoint to all learning Objectives in BoxDisplay ---------->
 
-router.get("/learningobjectives/:id", authorization, (req, res) => {
+router.get("/abilities/:id", authorization, (req, res) => {
   const userId = Number(req.params.id);
   const role = req.user.role;
   const id = req.user.id;
@@ -75,22 +75,7 @@ router.get("/learningobjectives/:id/:skill", authorization, (req, res) => {
   });
 });
 
-//<-----------Get endpoint for learning objectives for mentors view page------------>
 
-// router.get("/mentors/:skill", (req, res) => {
-//   //const userId = Number(req.params.id);
-//   const skill = req.params.skill;
-//   const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id from learning_objective lo left join achievements a on lo.id = a.learning_obj_id
-//   where lo.skill = $1 order by lo.id;`;
-
-//   Connection.query(queryLo, [skill], (err, results) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     //console.log(results.rows);
-//     res.json(results.rows);
-//   });
-// });
 
 //<------------Get mentors endpoint fo learning objectives in Editbox--------------->
 
@@ -157,75 +142,10 @@ router.post("/learningobjectives", (req, res) => {
     }
   );
 });
-//<-----------------------------Post request for signup form------------------------>
 
-router.post("/register", validInfo, async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    userRole,
-    userEmail,
-    userSlack,
-    userPassword,
-    userGithub,
-    userClassId,
-    cyfCity,
-  } = req.body;
-  try {
-    const user = await Connection.query(
-      "SELECT * FROM users WHERE user_email = $1",
-      [userEmail]
-    );
-    if (user.rows.length !== 0) {
-      return res.status(401).json("User already exist!");
-    }
+//<-------------------------------Endpoint abilities Skills tracker.js------------------------------->
 
-    const salt = await bcrypt.genSalt(10);
-    const bcryptPassword = await bcrypt.hash(userPassword, salt);
-
-    let newUser = await Connection.query(
-      "INSERT INTO users (first_name, last_name, user_role,user_email,user_slack,user_password,user_github,class_id, cyf_city)" +
-        " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *",
-      [
-        firstName,
-        lastName,
-        userRole,
-        userEmail,
-        userSlack,
-        bcryptPassword,
-        userGithub,
-        userClassId,
-        cyfCity,
-      ]
-    );
-    const token = jwtGenerator(newUser.rows[0].user_id);
-    res.json({ token });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send({ error: "Server error" });
-  }
-});
-//--------------------------post endpoint for learning objective-------------------->
-
-// router.post("/learningobjectives", (req, res) => {
-//   const { skill, description } = req.body;
-//   Connection.query(
-//     "INSERT INTO learning_objective (skill, description)" + "values($1, $2)",
-//     [skill, description],
-//     (err, results) => {
-//       if (!err) {
-//         res.json({
-//           message: "your data has been inserted",
-//           table: "Into the learning objective table",
-//         });
-//       }
-//     }
-//   );
-// });
-
-//<-------------------------------Endpoint abilities ------------------------------->
-
-router.post("/ability", authorization, async (req, res) => {
+router.post("/abilities", authorization, async (req, res) => {
   const learning_obj_id = Number(req.body.learning_obj_id);
   const ability = Number(req.body.ability);
   const student_id = req.user.id;
@@ -297,7 +217,7 @@ router.post("/register", validInfo, async (req, res) => {
       [userEmail]
     );
     if (user.rows.length !== 0) {
-      return res.status(401).json("User already exist!");
+      return res.status(401).json({error: "User already exist!"});
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -318,8 +238,17 @@ router.post("/register", validInfo, async (req, res) => {
         cyfCity,
       ]
     );
-    const token = jwtGenerator(newUser.rows[0].user_id);
-    res.json({ token });
+    const token = jwtGenerator(
+      newUser.rows[0].user_id,
+      newUser.rows[0].user_role
+    );
+    console.log("here is the token");
+    res.json({
+      token: token,
+      message: "Registered",
+      id: newUser.rows[0].user_id,
+      role: newUser.rows[0].user_role,
+    });
   } catch (err) {
     console.error(err.message);
 
