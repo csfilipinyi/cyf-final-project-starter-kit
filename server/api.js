@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Connection } from "./db";
+import { mentorsOnly } from "./middleware/mentorsOnly";
 const router = new Router();
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("./utils/jwtGenerator");
@@ -31,14 +32,11 @@ router.get("/", (_, res, next) => {
 });
 // <---------------get endpoint to all learning Objectives in BoxDisplay ---------->
 
-router.get("/abilities/:id", authorization, (req, res) => {
+router.get("/abilities/:id", authorization, mentorsOnly, (req, res) => {
   const userId = Number(req.params.id);
   const role = req.user.role;
   const id = req.user.id;
 
-  if (role === "Student" && id !== userId) {
-    return res.status(401).json("not authorized");
-  }
   const queryLo = `select lo.id, lo.skill, description, ability, date_added, a.student_id  from learning_objective lo 
   left join achievements a on lo.id = a.learning_obj_id and a.student_id =$1
   where (a.student_id = $1 or a.student_id is null) order by lo.id;`;
@@ -75,27 +73,26 @@ router.get("/learningobjectives/:id/:skill", authorization, (req, res) => {
   });
 });
 
-
-
 //<------------Get mentors endpoint fo learning objectives in Editbox--------------->
 
-router.get("/learningobjective/:skill", (req, res) => {
-  let skill = req.params.skill;
-  const queryLearningOb = `SELECT * FROM learning_objective  where skill = $1 order by id`;
-  Connection.query(queryLearningOb, [skill], (err, results) => {
-    if (!err) {
-      res.json(results.rows);
-    }
-  });
-});
+router.get(
+  "/learningobjectives/:skill",
+  authorization,
+  mentorsOnly,
+  (req, res) => {
+    let skill = req.params.skill;
+    const queryLearningOb = `SELECT * FROM learning_objective  where skill = $1 order by id`;
+    Connection.query(queryLearningOb, [skill], (err, results) => {
+      if (!err) {
+        res.json(results.rows);
+      }
+    });
+  }
+);
 
 //<-------------------- get list of students for mentorview------------------------->
 
-router.get("/students", authorization, async (req, res) => {
-  const role = req.user.role;
-  if (role !== "Mentor") {
-    return res.status(401).json("not authorized");
-  }
+router.get("/students", authorization, mentorsOnly, async (req, res) => {
   const query = `select user_id, first_name, last_name from users where user_role = 'Student' order by first_name asc`;
   try {
     const results = await Connection.query(query);
@@ -106,28 +103,33 @@ router.get("/students", authorization, async (req, res) => {
 });
 
 //<-------------------Edit end point from learning objective------------------------>
-router.put("/learningobjectives/:id", (req, res) => {
-  let id = req.params.id;
-  let description = req.body.description;
-  Connection.query(
-    "update learning_objective set description = $1 where id = $2 ",
-    [description, id],
-    function (err, results) {
-      if (!err) {
-        if (results.rowCount == 0) {
-          res
-            .status(404)
-            .json(`Learning objective with the id: ${id} does not exist`);
-        } else {
-          res.json("Learing objective has been updated");
+router.put(
+  "/learningobjectives/:id",
+  authorization,
+  mentorsOnly,
+  (req, res) => {
+    let id = req.params.id;
+    let description = req.body.description;
+    Connection.query(
+      "update learning_objective set description = $1 where id = $2 ",
+      [description, id],
+      function (err, results) {
+        if (!err) {
+          if (results.rowCount == 0) {
+            res
+              .status(404)
+              .json(`Learning objective with the id: ${id} does not exist`);
+          } else {
+            res.json("Learing objective has been updated");
+          }
         }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 //<------------------post endpoint for learning objective--------------------------->
-router.post("/learningobjectives", (req, res) => {
+router.post("/learningobjectives", authorization, mentorsOnly, (req, res) => {
   const { skill, description } = req.body;
   Connection.query(
     "INSERT INTO learning_objective (skill, description)" + "values($1, $2)",
@@ -171,31 +173,36 @@ router.post("/abilities", authorization, async (req, res) => {
   }
 });
 //<-------------------Delete end point from learning objective---------------------->
-router.delete("/learningobjectives/:id", (req, res) => {
-  const id = Number(req.params.id);
-  Connection.query(
-    "delete from achievements where learning_obj_id = $1",
-    [id],
-    (err, results) => {
-      if (!err) {
-        Connection.query(
-          "delete from learning_objective where id =$1",
-          [id],
-          (err, results) => {
-            if (!err) {
-              res.json({
-                message: `The learning objective with the id: ${id} has been deleted`,
-                table: "From learning objective",
-              });
-            } else {
-              res.json("Id not found");
+router.delete(
+  "/learningobjectives/:id",
+  authorization,
+  mentorsOnly,
+  (req, res) => {
+    const id = Number(req.params.id);
+    Connection.query(
+      "delete from achievements where learning_obj_id = $1",
+      [id],
+      (err, results) => {
+        if (!err) {
+          Connection.query(
+            "delete from learning_objective where id =$1",
+            [id],
+            (err, results) => {
+              if (!err) {
+                res.json({
+                  message: `The learning objective with the id: ${id} has been deleted`,
+                  table: "From learning objective",
+                });
+              } else {
+                res.json("Id not found");
+              }
             }
-          }
-        );
+          );
+        }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 //<------------------------Post request for signup form----------------------------->
 
@@ -217,7 +224,7 @@ router.post("/register", validInfo, async (req, res) => {
       [userEmail]
     );
     if (user.rows.length !== 0) {
-      return res.status(401).json({error: "User already exist!"});
+      return res.status(401).json({ error: "User already exist!" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -298,16 +305,5 @@ router.get("/verify", authorization, async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-
-// router.get("/dashboard",authorization , async (req, res) => {
-//   try {
-//       const user = await Connection.query("select * from users where user_id=1", [req.user.id]);
-//       res.json(user.rows[0]);
-//   }
-//   catch (err) {
-//       console.error(err.message);
-//       res.status(500).json("server error");
-//   }
-// })
 
 export default router;

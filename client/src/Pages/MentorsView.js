@@ -62,7 +62,6 @@ function MentorsView() {
       <Header />
       <div className="skills-container">
         <div className="mentorsview-header-container">
-          <h2 className="mentor-greet">Students</h2>
           <a href="/mentorsedit" className="signup-link">
             Edit Learning Objectives
           </a>
@@ -72,7 +71,7 @@ function MentorsView() {
             <BoxDisplay studentId={studentId} studentName={studentName} />
           </div>
         )}
-
+        <h2 className="mentor-greet">Students</h2>
         <ul>
           {studentList.map(({ user_id, first_name, last_name }) => {
             return (

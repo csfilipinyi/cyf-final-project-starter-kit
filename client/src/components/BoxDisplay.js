@@ -58,11 +58,13 @@ function BoxDisplay({ studentId, studentName }) {
     );
 
     console.log(filteredResults);
-
-    if (averageAbility) {
-      return " " + averageAbility + " " + "%";
-    } else {
+    const abilitiesAreAllNull = filteredResults.every(
+      (lo) => lo.ability === null
+    );
+    if (abilitiesAreAllNull) {
       return " " + "Not covered yet!";
+    } else {
+      return " " + averageAbility + " " + "%";
     }
   };
   console.log(getAverageAbility());
