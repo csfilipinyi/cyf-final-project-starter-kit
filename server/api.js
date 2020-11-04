@@ -273,14 +273,14 @@ router.post("/login", validInfo, async (req, res) => {
       [userEmail]
     );
     if (user.rows.length === 0) {
-      return res.status(401).json("Email is not registered");
+      return res.status(401).json({ error: "Email is not registered" });
     }
     const validPassword = await bcrypt.compare(
       userPassword,
       user.rows[0].user_password
     );
     if (!validPassword) {
-      return res.status(401).json("password or email is incorrect");
+      return res.status(401).json({error: "Password or Email is incorrect"});
     }
 
     const token = jwtGenerator(user.rows[0].user_id, user.rows[0].user_role);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Jumbotron, Container, Form, Col, Row } from "react-bootstrap";
 
 import useFormValidation from "./useFormValidation";
@@ -8,7 +8,7 @@ import { Link, useHistory } from "react-router-dom";
 
 export default function LoginForm() {
   let history = useHistory();
-  
+  const [serverError, setServerError] = useState("");
   const intialState = {
     userEmail: "",
     userPassword: "",
@@ -23,7 +23,6 @@ export default function LoginForm() {
   console.log(errors);
 
   useEffect(() => {
-   
     if (isValid) {
       fetch(`/api/login`, {
         method: "POST",
@@ -40,25 +39,26 @@ export default function LoginForm() {
           if (data.error) {
             throw data;
           }
-         
 
           window.localStorage.setItem("token", data.token);
 
-         const test = window.localStorage.setItem("user", data.id)
-console.log(test);
-         window.localStorage.setItem("role", data.role)
+          const test = window.localStorage.setItem("user", data.id);
+          console.log(test);
+          window.localStorage.setItem("role", data.role);
           let role = data.role;
-          role === "Student" ?  history.push("/skills") : history.push("/MentorsView")
+          role === "Student"
+            ? history.push("/skills")
+            : history.push("/MentorsView");
         })
-        .catch((error) => console.log(error));
+        .catch(({error}) => setServerError(error));
     }
   }, [isValid]);
 
-  
   return (
     <Jumbotron fluid>
       <Container>
         <Form onSubmit={handleSubmit} className="login-page">
+          <p className="error">{serverError}</p>
           <label>Email</label>
           <input
             type="email"
@@ -79,8 +79,6 @@ console.log(test);
           {errors.userPassword && (
             <p className="error">*{errors.userPassword} </p>
           )}
-          {/* <Link to="/Skills"> */}
-
           <button
             className="sumbit"
             type="submit"
@@ -91,7 +89,8 @@ console.log(test);
           >
             Login
           </button>
-
+          <br />
+          <em> Don't have an account then</em>
           <Link to="/signup" className="signup-link">
             signup
           </Link>
