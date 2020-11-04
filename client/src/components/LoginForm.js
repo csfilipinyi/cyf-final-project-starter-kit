@@ -42,8 +42,8 @@ export default function LoginForm() {
 
           window.localStorage.setItem("token", data.token);
 
-          const test = window.localStorage.setItem("user", data.id);
-          console.log(test);
+          window.localStorage.setItem("user", data.id);
+         window.localStorage.setItem("name", data.first_name);
           window.localStorage.setItem("role", data.role);
           let role = data.role;
           role === "Student"

@@ -32,6 +32,8 @@ function MentorsView() {
         if (data == "not authorized" || data.role == "Student") {
           history.push("/");
         }
+       let name = window.localStorage.setItem("name", data.first_name);
+       console.log(name)
       })
       .catch((error) => console.log(error));
   }, []);
