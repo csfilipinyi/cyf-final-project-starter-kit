@@ -11,6 +11,7 @@ import EditProfile from "./pages/EditProfile";
 import NotEligible from './pages/NotEligible'
 import RichEditorField from './constant/RichEditorField'
 import RichEditorReader from './constant/RichEditorReader'
+import Admin from './pages/Admin'
 
 const Routes = () => {
 	return (
@@ -18,6 +19,7 @@ const Routes = () => {
 			<Switch>
 				<Route exact path='/' component={Home} />
 				<Route path='/login' component={Login} />
+				<Route path='/admin' component={Admin} />
 				<Route exact path='/profiles' component={ViewAllProfiles}/>
 				<Route path='/profiles/new' component={CreateProfile} />
 				<Route path='/profile/edit' component={EditProfile} />

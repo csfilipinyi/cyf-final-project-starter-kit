@@ -12,6 +12,7 @@ const types = {
     Set_UserName: "Set_UserName",
     Set_Is_Graduate:'Set_Is_Graduate',
     Set_Github:'Set_Github',
+    Set_Is_Admin:'Set_Is_Admin',
     Set_Error: "Set_Error",
     Set_Logout:"Set_Logout"
 };
@@ -24,17 +25,19 @@ const authReducer = (state, action) => {
 	case types.Set_Error:
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_Logged_In:
-		return { ...state, isAuthenticated:true, github_id:action.payload, isLoading: false };
-        case types.Set_UserName:
-            return { ...state, github_id: action.payload.id, userName:action.payload.name, isAuthenticated:true, isLoading: false };
-        case types.Set_Is_Graduate:
-            return { ...state, isGraduate:false, isLoading: false }; 
-        case types.Set_Github:
-            return {...state, github_name:action.payload.accountname, github_avatar:action.payload.avatar}    
-        case types.Logout:
-            return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
-        default:
-            return state;
+        return { ...state, isAuthenticated:true, github_id:action.payload, isLoading: false };
+    case types.Set_UserName:
+        return { ...state, github_id: action.payload.id, userName:action.payload.name, isAuthenticated:true, isLoading: false };
+    case types.Set_Is_Graduate:
+        return { ...state, isGraduate:false, isLoading: false }; 
+    case types.Set_Is_Admin:
+        return { ...state, isAdmin:true, isLoading: false }; 
+    case types.Set_Github:
+        return {...state, github_name:action.payload.accountname, github_avatar:action.payload.avatar}    
+    case types.Logout:
+        return { ...state, userName:null, isAuthenticated:false, isAdmin:false, isLoading: false };
+    default:
+        return state;
         }
         };
                     
@@ -47,6 +50,7 @@ const authReducer = (state, action) => {
             github_avatar:null,
             isAuthenticated: false,
             isGraduate:true,
+            isAdmin:false,
             isLoading:false,
             error:null,
         }
@@ -82,6 +86,10 @@ const authReducer = (state, action) => {
                             let id = response.data[0].github_id; 
                         return  dispatch({ type: types.Set_UserName, payload:{name, id}})
                         }
+                        if(response.status==201){
+                            console.log('isAdmin context called')
+                        return  dispatch({ type: types.Set_Is_Admin})
+                        }
                         if (response.status==206){
                             let id=response.data.github_id
                             dispatch({ type: types.Set_Logged_In, payload:id});   
@@ -107,6 +115,7 @@ const authReducer = (state, action) => {
                 isAuthenticated: state.isAuthenticated,
                 isLoading:state.isLoading,
                 isGraduate:state.isGraduate,
+                isAdmin:state.isAdmin,
                 error:state.error,
                 checkGraduate,
                 fetchUserName, 

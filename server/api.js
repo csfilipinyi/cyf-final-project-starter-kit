@@ -76,6 +76,18 @@ router.get("/skills", (req, res) => {
   });
 });
 
+//get github account names
+
+router.get("/accounts", (req, res) => {
+  Connection.query("SELECT * FROM github_accounts", (error, result) => {
+    if (result) {
+      res.json(result.rows);
+    } else {
+      res.send(error);
+    }
+  });
+});
+
 //get graduates
 
 router.get("/graduates", (req, res) => {
@@ -140,28 +152,33 @@ router.post("/graduates", function (req, res) {
 router.get("/accounts/:name", (req, res) => {
   const githubName = req.params.name;
   Connection.query(
-    "SELECT * FROM github_accounts where account_name=$1 ",
+    "SELECT * FROM github_accounts where account_name=$1",
     [githubName],
     (error, result) => {
-      if (result && (result.rowCount > 0)) {
+      if (result && result.rowCount > 0) {
+        console.log('check admin or graduate', result.rows[0].is_admin)
+        if (result.rows[0].is_admin){
+          console.log('he is admin', result.rows[0]);
+          res.status(201).json(result.rows[0]);
+        } else {
         let id = result.rows[0].id;
         Connection.query(
-          "SELECT * FROM github_accounts GA join graduates G on(GA.id=G.github_id) where GA.account_name=$1 ",
+          "SELECT * FROM github_accounts GA join graduates G on(GA.id=G.github_id) where GA.account_name=$1",
           [githubName],
           (error, result) => {
-            if (result && (result.rowCount > 0))
-             res.status(200).json(result.rows);
+            if (result && (result.rowCount > 0)){
+              res.status(200).json(result.rows);
+            }
             else {
               res.status(206).send({ account_name: githubName, github_id: id });
             }
           }
-        );
-      } else
-        res
-          .status(404)
-          .send("this is  github account does not belong to a CYF graduates");
-    }
-  );
+        )};
+        }
+        else{
+          res.status(404).send("this is  github account does not belong to a CYF graduates");
+        }
+    });
 });
 
 router.get("/graduates/:id", (req, res) => {

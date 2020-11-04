@@ -13,12 +13,12 @@ const Home = () => {
 	let history = useHistory();
 
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, github_avatar, userName, isGraduate} = useContext(AuthContext);
+	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, github_avatar, userName, isGraduate, isAdmin} = useContext(AuthContext);
 
+	console.log('home page', isAdmin)
 	const onSuccess = async (response) =>{
 		const accessCode = response.code;
 		const githubname = await fetchUserName(accessCode);
-
 		setGithub(githubname);
 		await checkGraduate(githubname);
 		clearProfile();
@@ -38,7 +38,8 @@ const Home = () => {
 	useEffect (()=>{
 		!userName&&isAuthenticated&&history.push('/profiles/new')
 		!isGraduate&&history.push('/notfound')
-	},[ isAuthenticated, isGraduate])
+		isAdmin&&history.push('/admin')
+	},[ isAuthenticated, isGraduate, isAdmin])
 
     const onFailure = response => console.error(response);  
 
