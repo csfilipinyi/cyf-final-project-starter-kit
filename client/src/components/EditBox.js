@@ -12,10 +12,7 @@ export default function EditBox() {
   const [updateLO, setUpdateLO] = useState("");
   const [text, setText] = useState("");
 
-
-
   const token = window.localStorage.getItem("token");
-
 
   const getLearningObj = () => {
     fetch(`/api/learningobjectives/${id}`, {headers: {token}})
@@ -85,20 +82,18 @@ export default function EditBox() {
         <ul>
           {learningObj.map(({ description, id }, index) => {
             return (
-              <li key={index}>
+              <li className="lo-style" key={index}>
                 <div className="edit-delete-buttons">
                   {console.log("here is update", updateLO, id)}
 
                   {updateLO == id ? (
-                    <input
+                    <textarea
                       className="app-message__input"
                       onChange={(e) => setText(e.target.value)}
                       value={text}
-                    ></input>
+                    ></textarea>
                   ) : (
                     <span>
-
-
                       <div className="description">{description}</div>
                       <a
                         onClick={() => handleEdit(description, id)}
@@ -112,7 +107,6 @@ export default function EditBox() {
                           border="0"
                         ></img>
                       </a>
-
                     </span>
                   )}
                   <span className="app-message-btn-del">
@@ -136,9 +130,7 @@ export default function EditBox() {
                     ) : (
                       <a
                         onClick={() => deleteLearningOb(id)}
-
                         className="delete-btn crud"
-
                       >
                         <img
                           src="https://i.ibb.co/fd1dg7H/delete-1.png"
@@ -154,11 +146,7 @@ export default function EditBox() {
           })}
         </ul>
         <div className="add-btn-container">
-
           <AddForm getLearningObj={getLearningObj} />
-
-     
-
         </div>
       </div>
     </div>

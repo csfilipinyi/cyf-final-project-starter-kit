@@ -89,6 +89,7 @@ li {
   list-style: none;
   font-size: larger;
   margin-bottom: 1vh;
+  font-size: 26px;
 }
 
 .learning-objective-container {
@@ -100,6 +101,29 @@ li {
   width: 60%;
   padding: 2%;
 }
+.edit-display-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10vh;
+  margin-left: 5vh;
+}
+.default-skill-display {
+  color: black;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 65px;
+}
+
+.default-skill-display:hover {
+  color: #db4437;
+}
+
+.active-skill-display {
+  color: #db4437;
+  text-decoration-line: underline;
+  font-weight: bolder;
+  text-size-adjust: 42px;
+}
 
 .skills-container {
   background-color: #e6dcdc;
@@ -107,11 +131,11 @@ li {
   width: 20%;
   padding: 2%;
   height: 100vh;
-  text-align: center;
+  text-align: left;
 }
 
 .skills-container A {
-  color: #d12f2f;
+  color: #db4437;
   display: flex;
   flex-direction: column;
   margin-top: 40px;
@@ -148,7 +172,7 @@ li {
 }
 
 .modal-footer button {
-  background-color: #d12f2f;
+  background-color: #db4437;
 }
 
 .delete-btn {
@@ -244,10 +268,15 @@ li {
 }
 
 .footer-submit {
-  background-color: #ff2a13;
+
+  background-color: #db4437;
+  color: #efefef;
+
+ 
 
 .display-details {
   display: flex;
   justify-content: space-between;
+
 
 }

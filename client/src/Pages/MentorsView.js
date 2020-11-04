@@ -45,7 +45,7 @@ function MentorsView() {
   }, []);
 
   let studentName = "";
-
+  console.log(studentList);
   const studentId = useQuery().get("studentId");
   if (studentId && studentList) {
     const student = studentList.filter(
@@ -61,16 +61,34 @@ function MentorsView() {
 
     <div className="mentorsview-page">
 
+      <Header />
+      <h1>Welcome Mentor</h1>
+
+
     <div>
 
-      <h1>Welcome Mentor</h1>
-      <Header />
+     
+
       <div className="skills-container">
         <div className="mentorsview-header-container">
           <a href="/mentorsedit" className="signup-link">
             Edit Learning Objectives
           </a>
         </div>
+        <ul>
+          {studentList.map(({ user_id, first_name, last_name }) => {
+            return (
+              <li key={user_id} className="students-name">
+                <Link
+                  to={`./MentorsView?studentId=${user_id}`}
+                  className="name-list"
+                >
+                  {`${first_name} ${last_name}`}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
         {studentId && (
           <div className="box-display-component">
             <BoxDisplay studentId={studentId} studentName={studentName} />

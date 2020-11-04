@@ -41,7 +41,7 @@ export default function SkillsNav() {
   }, []);
   const routeResult = useRoutes(routes);
   return (
-    <div class="skillsnav-page">
+    <div className="skillsnav-page">
       <div>
         <Header />
       </div>
