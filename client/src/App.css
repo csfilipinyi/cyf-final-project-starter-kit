@@ -80,6 +80,7 @@ input {
   color: #ff0033;
 }
 .signup-link {
+  margin-bottom: 10vh;
   font-size: large;
   float: right;
 }
@@ -217,14 +218,19 @@ li {
   font-size: larger;
 }
 
+.student-list {
+  position: relative;
+}
+
 .students-name {
-  margin-top: 10%;
+  position: absolute;
   margin-left: 10%;
 }
 
 .description {
   font-size: larger;
 }
+
 
 .skillsnav-page {
   position: relative;
@@ -262,6 +268,15 @@ li {
 }
 
 .footer-submit {
+
   background-color: #db4437;
   color: #efefef;
+
+ 
+
+.display-details {
+  display: flex;
+  justify-content: space-between;
+
+
 }
