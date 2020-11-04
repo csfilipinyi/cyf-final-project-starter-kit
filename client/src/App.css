@@ -116,9 +116,6 @@ li {
   font-weight: 600;
 }
 
-
-
-
 .skills-container .edit-btn:not A:hover {
 
   background-color: rgb(18, 88, 90);
@@ -126,6 +123,7 @@ li {
   color: white;
   text-decoration: none;
 }
+
 .skills-container A:checked {
   background-color: rgb(18, 88, 90);
 }
