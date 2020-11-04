@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Modal from "./Modal";
 import useFormValidation from "./useFormValidation";
 import "../App.css";
 import validate from "./SignupValidation";
-import { token } from "morgan";
 
 const SignupForm = () => {
   const [hasRegistered, setHasRegistered] = useState(false);
   const [serverError, setServerError] = useState("");
-
+  
   const intialState = {
     firstName: "",
     lastName: "",
@@ -168,9 +166,6 @@ const SignupForm = () => {
               <option value="Mentor">Mentor</option>
             </select>
             {errors.userRole && <p className="error">*{errors.userRole} </p>}
-            {/* <Link> */}
-            {/* <input  to="/modal" type="submit" value="Submit" className="submit" /> */}
-            {/* </Link> */}
             <button
               to="/modal"
               className="submit"
@@ -180,7 +175,7 @@ const SignupForm = () => {
             >
               Submit
             </button>
-            {serverError}
+            <p className="error">{serverError}</p>
           </div>
         </form>
       )}
