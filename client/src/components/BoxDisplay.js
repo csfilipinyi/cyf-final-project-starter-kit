@@ -17,7 +17,7 @@ function BoxDisplay({ studentId, studentName }) {
 
   const token = window.localStorage.getItem("token");
   const fetchDetails = (skill) => {
-    fetch(`/api/learningobjectives/${studentId}`, {
+    fetch(`/api/abilities/${studentId}`, {
       headers: { token },
     })
       .then((response) => response.json())
@@ -39,7 +39,7 @@ function BoxDisplay({ studentId, studentName }) {
       .filter((lo) => lo.skill === skill)
       .map(({ description, ability }) => {
         return (
-          <p>
+          <p className="display-details">
             - {description}: <button> score :{ability} </button>
           </p>
         );
@@ -58,11 +58,13 @@ function BoxDisplay({ studentId, studentName }) {
     );
 
     console.log(filteredResults);
-
-    if (averageAbility) {
-      return " " + averageAbility + " " + "%";
-    } else {
+    const abilitiesAreAllNull = filteredResults.every(
+      (lo) => lo.ability === null
+    );
+    if (abilitiesAreAllNull) {
       return " " + "Not covered yet!";
+    } else {
+      return " " + averageAbility + " " + "%";
     }
   };
   console.log(getAverageAbility());

@@ -11,11 +11,15 @@ import EditBox from "../components/EditBox";
 import StudentDetail from "./StudentDetail";
 
 import Header from "../components/Header";
+
 import Footer from "../components/Footer";
+
+
 
 export default function MentorsEdit() {
   return (
     <Router>
+
       <div className="mentorsedit-page">
         <Header />
       </div>
@@ -54,6 +58,12 @@ export default function MentorsEdit() {
             </h2>
           </li>
         </ul>
+
+
+      <div >
+        <Header />
+      </div>
+      <div className="skills-container">
 
         <Switch>
           <Route path="/mentorsedit/:id" children={<EditBox />} />

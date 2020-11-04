@@ -23,7 +23,7 @@ export default function Html({ skill }) {
   //fetch here call
 
   function updateAchievement(newAbility, id) {
-    fetch(`/api/ability`, {
+    fetch(`/api/abilities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
