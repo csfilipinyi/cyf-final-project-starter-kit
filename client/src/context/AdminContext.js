@@ -33,8 +33,8 @@ const AdminState = (props) =>{
     
     const [state, dispatch] = useReducer(authReducer, initialState);
     
-    // const baseUrl = 'https://designed-gd.herokuapp.com/api'
-        const baseUrl = 'http://localhost:3100/api'
+    const baseUrl = 'https://designed-gd.herokuapp.com/api'
+    // const baseUrl = 'http://localhost:3100/api'
         
       
     const fetchSkills = ()=>{
