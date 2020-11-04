@@ -3,6 +3,7 @@ import dataTesting from "../dataTesting.json";
 import BoxDisplay from "../components/BoxDisplay";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -57,7 +58,11 @@ function MentorsView() {
   }
   console.log(studentList);
   return (
+
+    <div className="mentorsview-page">
+
     <div>
+
       <h1>Welcome Mentor</h1>
       <Header />
       <div className="skills-container">
@@ -71,6 +76,7 @@ function MentorsView() {
             <BoxDisplay studentId={studentId} studentName={studentName} />
           </div>
         )}
+
         <h2 className="mentor-greet">Students</h2>
         <ul className="student-list">
           {studentList.map(({ user_id, first_name, last_name }) => {
@@ -86,7 +92,9 @@ function MentorsView() {
             );
           })}
         </ul>
+
       </div>
+      <Footer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useRoutes, A } from "hookrouter";
 import SkillTracker from "./SkillsTracker";
 import { useHistory } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const routes = {
   "/skills/html": () => <SkillTracker skill="html" />,
@@ -40,7 +41,7 @@ export default function SkillsNav() {
   }, []);
   const routeResult = useRoutes(routes);
   return (
-    <div>
+    <div class="skillsnav-page">
       <div>
         <Header />
       </div>
@@ -52,6 +53,9 @@ export default function SkillsNav() {
         <A href="/skills/react">React</A>
         <A href="/skills/node">Node JS</A>
         <A href="/skills/sql">SQL</A>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

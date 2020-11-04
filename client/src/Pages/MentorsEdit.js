@@ -12,13 +12,59 @@ import StudentDetail from "./StudentDetail";
 
 import Header from "../components/Header";
 
+import Footer from "../components/Footer";
+
+
+
 export default function MentorsEdit() {
   return (
     <Router>
+
+      <div className="mentorsedit-page">
+        <Header />
+      </div>
+      <div className="skills-container">
+        <h2>Skills</h2>
+
+        <ul>
+          <li>
+            <h2>
+              <Link to="/mentorsedit/html">HTML</Link>
+            </h2>
+          </li>
+          <li>
+            <h2>
+              <Link to="/mentorsedit/css">CSS</Link>
+            </h2>
+          </li>
+          <li>
+            <h2>
+              <Link to="/mentorsedit/javascript">JavaScript</Link>
+            </h2>
+          </li>
+          <li>
+            <h2>
+              <Link to="/mentorsedit/react">React.js</Link>
+            </h2>
+          </li>
+          <li>
+            <h2>
+              <Link to="/mentorsedit/node">Node</Link>
+            </h2>
+          </li>
+          <li>
+            <h2>
+              <Link to="/mentorsedit/sql">SQL</Link>
+            </h2>
+          </li>
+        </ul>
+
+
       <div >
         <Header />
       </div>
       <div className="skills-container">
+
         <Switch>
           <Route path="/mentorsedit/:id" children={<EditBox />} />
         </Switch>
@@ -30,6 +76,7 @@ export default function MentorsEdit() {
         <Link to="/mentorsedit/node">Node</Link>
         <Link to="/mentorsedit/sql">SQL</Link>
       </div>
+      <Footer />
     </Router>
   );
 }
