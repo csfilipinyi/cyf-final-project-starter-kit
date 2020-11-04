@@ -2,7 +2,6 @@ import React, {useContext, useState} from 'react'
 import styled from 'styled-components'
 import {Editor, EditorState, convertFromRaw} from 'draft-js'
 import {ProfileContext} from '../context/ProfileContext'
-import storedState from "../api/storedState.json";
 import '../../../node_modules/draft-js/dist/Draft.css'
 import 'draft-js/dist/Draft.css'
 import '../RichText.css'

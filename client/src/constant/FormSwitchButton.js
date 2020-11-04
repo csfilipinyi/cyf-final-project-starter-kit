@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 
 const FormSwitchButton = ({isHired, handleSwitch}) => {
-    console.log('switch toggle', isHired)
+
     return (
         <Container>
             <Description>

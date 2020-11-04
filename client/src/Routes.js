@@ -19,14 +19,11 @@ const Routes = () => {
 				<Route exact path='/' component={Home} />
 				<Route path='/login' component={Login} />
 				<Route exact path='/profiles' component={ViewAllProfiles}/>
-				<Route exact path='/profiles/new' component={CreateProfile} />
+				<Route path='/profiles/new' component={CreateProfile} />
+				<Route path='/profile/edit' component={EditProfile} />
+				<Route path='/profiles/:name' component={ViewDetail} />
 				<Route path='/myprofile' component={ViewProfile} />
-				<Route exact path='/profile/edit' component={EditProfile} />
-				<Route exact path='/profiles/:name' component={ViewDetail} />
 				<Route path='/notfound' component={NotEligible} />
-				<Route path='/test' component={RichEditorField} />
-				<Route path='/reader' component={RichEditorReader} />
-
 			</Switch>
 		</BrowserRouter>
 	);

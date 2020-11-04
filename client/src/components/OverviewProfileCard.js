@@ -17,6 +17,7 @@ const OverviewProfileCard = ({ profile, getProfile}) => {
     await getProfile(id);
     history.push(`/profiles/${profile.first_name}`);
   };
+  
   return (
     <CardContainer>
       {profile.is_hired&&<HiredLabel/>}

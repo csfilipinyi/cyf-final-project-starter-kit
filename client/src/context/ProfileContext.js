@@ -127,7 +127,6 @@ const ProfileState = (props) =>{
 	};
 
 	const editProfile = (profile) => {
-		console.log('edited profile', profile)
 		dispatch({ type: types.Set_Is_Loading });
 		const config = {
 			headers: {
@@ -136,7 +135,6 @@ const ProfileState = (props) =>{
 		};
 		axios.put(`${baseUrl}/graduates/${profile.github_id}`, profile, config)
 			.then((response)=>{
-				console.log("edit profile", response)
 				dispatch({ type: types.Set_Profile, payload:profile });
 			})
 			.catch((error)=>{

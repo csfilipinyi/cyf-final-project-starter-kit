@@ -8,7 +8,6 @@ import RichEditorField from '../constant/RichEditorField'
 import FormSwitchButton from '../constant/FormSwitchButton'
 import { ProfileContext } from "../context/ProfileContext";
 import { AuthContext } from "../context/AuthContext";
-import { skills } from "../api/skills";
 import styled from "styled-components";
 
 const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
@@ -19,7 +18,6 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   const [newSkills, setNewSkills] = useState([]);
   const [isHired, setIsHired] = useState(false);
   
-  console.log('edit profile', profile)
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
   },[profile])
@@ -55,7 +53,6 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
       statement:statement,
       is_hired:isHired
     };
-    console.log('form new profile', newProfile)
     await handleClick(newProfile);
     history.push(`/myprofile`);
   };
@@ -72,8 +69,8 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
 
   const handleValidate = async (e, setFieldValue) => {
     e.persist();
-    const res = await skills();
-    const response = res.map((x) => x.toUpperCase());
+    // const res = await skills();
+    // const response = res.map((x) => x.toUpperCase());
     let event = e.key;
     let word = e.target.value.trim().toUpperCase();
     if (event == " ") {
