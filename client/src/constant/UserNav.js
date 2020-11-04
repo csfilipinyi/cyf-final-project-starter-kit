@@ -7,6 +7,7 @@ import IconUp from '../assets/icons/IconArrowUp.svg';
 import IconDown from '../assets/icons/IconArrowDown.svg'
 
 const UserNav = ({ open, setOpen, ...props }) => {
+
 	return (
 		<>
 			<Container onClick={() => setOpen(!open)}>

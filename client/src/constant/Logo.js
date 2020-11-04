@@ -9,7 +9,7 @@ const LogoName = () => {
     let history = useHistory()
 
     const handleClick =()=>{
-        isAuthenticated?history.push('/viewallprofiles'):history.push('/')
+        isAuthenticated?history.push('/profiles'):history.push('/')
     }
     
     return (

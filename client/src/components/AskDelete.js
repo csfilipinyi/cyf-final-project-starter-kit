@@ -7,8 +7,8 @@ const AskDelete = ({handleDelete, cancelDelete}) => {
         <Container>
              Are you sure to delete your profile?
              <ButtonContainer>
-             <StyledButton handleClick={handleDelete} className='danger'>Yes</StyledButton>   
-             <StyledButton handleClick={cancelDelete} className='md'>No</StyledButton>  
+                <StyledButton handleClick={handleDelete} name='Yes' className='danger'/>
+                <StyledButton handleClick={cancelDelete} name='No' className='md'/>
              </ButtonContainer>
         </Container>
     )
@@ -19,17 +19,22 @@ export default AskDelete
 
 const Container= styled.div`
     display:flex;
+    flex-direction:column;
     justify-content:center;
-    align-items:space-between;
-    width:500px;
-    height:450px;
-    background-color:gray;
-    position:relative;
-    bottom:35%;
-    left:35%;
+    align-items:center;
+    align-self:center;
+    width:100%;
+    height:400px;
     color:black;
+    font-family: Raleway;
+    font-size: 48px;
+    font-weight: 800;
 `
 
 const ButtonContainer=styled.div`
     display:flex;
-    `
+    width:50%;
+    justify-content:space-around;
+    color: #000000;
+    margin-top:50px;
+`

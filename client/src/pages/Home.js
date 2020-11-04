@@ -26,7 +26,7 @@ const Home = () => {
 
 	const navigateToProfile = async ()=>{
 		await getProfile(github_id)
-		history.push(`/viewprofile`)
+		history.push(`/myprofile`)
 	}
 
 	useEffect(()=>{
@@ -36,7 +36,7 @@ const Home = () => {
 	},[userName, github_id])
 
 	useEffect (()=>{
-		!userName&&isAuthenticated&&history.push('/createprofile')
+		!userName&&isAuthenticated&&history.push('/profiles/new')
 		!isGraduate&&history.push('/notfound')
 	},[ isAuthenticated, isGraduate])
 

@@ -15,7 +15,7 @@ const OverviewProfileCard = ({ profile, getProfile}) => {
   console.log('card is hired', profile.is_hired)
   const handleClick = async (id) => {
     await getProfile(id);
-    history.push(`/viewdetail/${profile.first_name}`);
+    history.push(`/profiles/${profile.first_name}`);
   };
   return (
     <CardContainer>
@@ -50,7 +50,7 @@ export default OverviewProfileCard;
 
 const CardContainer = styled(Card)`
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   align-items: center;
   font-family: Lato;
   background-color: ${(props) => props.theme.colors.primaryLightGray};
@@ -61,13 +61,14 @@ const CardContainer = styled(Card)`
   border-radius: 5px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
   margin: 48px 18px 10px 18px;
+  padding-top:5px;
 `;
 
 const IconContainer = styled.div`
   display: flex;
   justify-content:space-around;
   align-items:center;
-  margin-bottom:3px 0 3px 0;
+  margin-bottom:3px 0 10px 0;
   width:90%;
 `;
 

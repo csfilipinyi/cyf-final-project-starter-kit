@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import LogoName from '../constant/Logo';
 import UserNav from '../constant/UserNav'
 import {AuthContext} from '../context/AuthContext'
@@ -8,7 +8,8 @@ const Header = ({ nav }) => {
 	const [open, setOpen] = useState(false);
 
 	const {isAuthenticated} = useContext(AuthContext)	
-
+	
+   
 	return (
 		<Container>
 			<LogoName />

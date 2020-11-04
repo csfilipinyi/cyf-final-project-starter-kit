@@ -15,45 +15,43 @@ const ViewMyProfile = ({ profile }) => {
   const { isAuthenticated } = useContext(AuthContext);
 
   const handleClick = () => {
-    history.push("/editprofile");
+    history.push("/profile/edit");
   };
 
   return (
     <Container>
-      <ContainerLeft>
-          <Img src={profile.avatar_url}/>
-          <SubCon>
-            <Name>
-            {profile.first_name} {profile.surname}
-            {profile.is_hired && <HiredLabel>Hired</HiredLabel>}
-            </Name>
-            <Description>{profile.location}</Description>
-            <IconContainer>
-              <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
-              <LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>
-              <CvIcon></CvIcon>
-              <EmailIcon></EmailIcon>
-            </IconContainer>
-            <DescHead>About Me</DescHead>
-            <Description>{profile.about_me}</Description>
-            <SubHeads> {profile.first_name}'s Interests</SubHeads>
-            <Description>{profile.interest}</Description>
-            <SubHeads>{profile.first_name}’s skills</SubHeads>
-            <SkillsContainer>
-              {profile.skills && profile.skills.map((skill) => {
-                return <SkillBox>{skill}</SkillBox>;
-              })}
-            </SkillsContainer>
-            <SubHeads>{profile.first_name}'s Portfolio</SubHeads>
-            <SocialText href={profile.portfolio_link} target="blank">
-              Portfolio
-            </SocialText>
-          </SubCon>
-        </ContainerLeft>
-        {profile.statement&&<ContainerRight>
+      <Img src={profile.avatar_url}/>
+      <SubCon>
+        <Name>
+        {profile.first_name} {profile.surname}
+        {profile.is_hired && <HiredLabel>Hired</HiredLabel>}
+        </Name>
+        <Description>{profile.location}</Description>
+        <IconContainer>
+          <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
+          <LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>
+          <CvIcon></CvIcon>
+          <EmailIcon></EmailIcon>
+        </IconContainer>
+        <DescHead>About Me</DescHead>
+        <Description>{profile.about_me}</Description>
+        <SubHeads> {profile.first_name}'s Interests</SubHeads>
+        <Description>{profile.interest}</Description>
+        <SubHeads>{profile.first_name}’s skills</SubHeads>
+        <SkillsContainer>
+          {profile.skills && profile.skills.map((skill) => {
+            return <SkillBox>{skill}</SkillBox>;
+          })}
+        </SkillsContainer>
+        <SubHeads>{profile.first_name}'s Portfolio</SubHeads>
+        <SocialText href={profile.portfolio_link} target="blank">
+          Portfolio
+        </SocialText>
+        {profile.statement&&<ContainerStatement>
           <DescHeadPS>Personal Statement</DescHeadPS>
           <RichEditorReader/>
-        </ContainerRight>}
+        </ContainerStatement>}
+      </SubCon>
     </Container>
   );
 };
@@ -62,24 +60,17 @@ export default ViewMyProfile;
 
 const Container = styled.div`
   display: flex;
-  flex-direction:column;
   width: 70%;
   margin: 48px 15%;
 `;
 
-const ContainerLeft = styled.div`
+const ContainerStatement = styled.div`
   display:flex;
-  width:100%;
-`
-const ContainerRight = styled.div`
-  display:flex;
-  justify-content:flex-start;
+  flex-direction:column;
+  justify-content:flex-start;  
   align-items:flex-start;
-  align-self:center;
-  margin-top:50px;
-  margin-left:50px;
-  width:80%;
-  padding:10px;
+  width:100%;
+  margin-top:30px;
 `
 const HiredLabel = styled.div`
     width:60px;
@@ -97,14 +88,14 @@ const HiredLabel = styled.div`
 `
 
 const Img= styled.img`
-  width:157px;
-  height:157px;
+  width:160px;
+  height:160px;
 	border-radius:50%;
 `;
 
 
 const SubCon = styled.div`
-  margin-left: 36px;
+  margin-left: 40px;
 `;
 
 const Name = styled.div`
@@ -145,7 +136,6 @@ const Description = styled.p`
   letter-spacing: 0;
   line-height: 24px;
   margin-bottom: 20px;
-  ${"" /* text-align: center; */}
 `;
 const SubHeads = styled.p`
   color: #000000;
@@ -167,20 +157,6 @@ const SkillBox = styled.div`
   background-color: #f3f3f3;
   margin-right: 16px;
 `;
-
-// const SocialCon = styled.div``;
-
-// const SocialSubCon = styled.div`
-//   display: flex;
-// `;
-
-// const SocialIcon = styled.img`
-//   height: 32px;
-//   width: 32px;
-//   border: 1px solid #979797;
-//   background-color: #d8d8d8;
-//   border-radius: 50%;
-// `;
 
 const SocialText = styled.a`
   color: #0090ff;

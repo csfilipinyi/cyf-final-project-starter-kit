@@ -10,18 +10,15 @@ import { ProfileContext } from "../context/ProfileContext";
 import { AuthContext } from "../context/AuthContext";
 import { skills } from "../api/skills";
 import styled from "styled-components";
-import AskDelete from './AskDelete'
 
-const GraduateForm = ({ profile, handleClick }) => {
+const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   let history = useHistory();
   const { github_id, github_avatar, logOut } = useContext(AuthContext);
   const { statement, deleteProfile } = useContext(ProfileContext);
 
   const [newSkills, setNewSkills] = useState([]);
   const [isHired, setIsHired] = useState(false);
-  const [askDelete, setAskDelete]= useState(false)
-  console.log({askDelete})
-
+  
   console.log('edit profile', profile)
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
@@ -60,28 +57,13 @@ const GraduateForm = ({ profile, handleClick }) => {
     };
     console.log('form new profile', newProfile)
     await handleClick(newProfile);
-    history.push(`/viewprofile`);
+    history.push(`/myprofile`);
   };
 
   const handleReset = () => {
-    history.push(`/viewprofile`);
+    history.push(`/myprofile`);
   };
   
-  const askBeforeDelete =()=>{
-    setAskDelete(true)
-  }
-  
-  const cancelDelete = ()=>{
-    setAskDelete(false)
-  }
-
-  const handleDelete = async()=>{
-      await deleteProfile(profile.github_id)
-      await logOut()
-      history.push('/')
-  }
-
-
   const deleteSkill = (e) => {
     e.preventDefault();
     let remainedSkills = newSkills.filter((skill) => skill !== e.target.value);
@@ -129,9 +111,7 @@ const GraduateForm = ({ profile, handleClick }) => {
         cv:""
       };
 
-  return (
-    <>     
-    {askDelete&&<AskDelete handleDelete={handleDelete} cancelDelete={cancelDelete}/>}
+  return (   
     <Container>
       <Formik
         initialValues={initialValue}
@@ -214,12 +194,12 @@ const GraduateForm = ({ profile, handleClick }) => {
                 type='button'
                 handleClick={props.handleReset}
               />
-               <StyledButton
+              {askBeforeDelete&&<StyledButton
                 name="Delete"
-                className="md"
+                className="danger"
                 type='button'
                 handleClick={askBeforeDelete}
-              />
+              />}
               <StyledButton
                 name="Save"
                 className="sm"
@@ -231,7 +211,6 @@ const GraduateForm = ({ profile, handleClick }) => {
         )}
       </Formik>
     </Container>
-    </>
   );
 };
 
@@ -294,7 +273,10 @@ const StyledForm = styled(Form)`
 `;
 
 const ButtonContainer = styled.div`
-  margin-top: 40px;
+  margin:50px 0;
+  display:flex;
+  width:55%;
+  justify-content:space-between;
 `;
 
 const Label = styled.label`

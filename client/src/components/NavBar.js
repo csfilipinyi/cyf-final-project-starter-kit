@@ -15,10 +15,10 @@ const NavBar = ({ open }) => {
 	return (
 		<Navigator className={open ? 'open' : null}>
 			<StyledList className={open ? 'open' : null}>
-                <StyledNavLink to='/viewprofile'>
+                <StyledNavLink to='/myprofile'>
                     View Your Profile
 				</StyledNavLink>
-                <StyledNavLink to='/editprofile'>
+                <StyledNavLink to='/profile/edit'>
                     Edit Your Profile
 				</StyledNavLink>
 				<StyledNavLink to='/' onClick={handleClick}>

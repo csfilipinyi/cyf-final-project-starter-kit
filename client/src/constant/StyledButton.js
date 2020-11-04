@@ -33,21 +33,30 @@ const StyleButton = styled(Button)`
     }
     &.sm{
         height:56px;
-        width:92px;
+        width:110px;
+        font-family: Arial;
+        font-size: 18px;
+        font-weight: bold;
     }
     &.md{
         height:56px;
-        width:113px;
+        width:110px;
         background-color:white;
         border:4px solid ${(props)=>props.theme.colors.primaryGreen};
         color:${(props)=>props.theme.colors.primaryGreen};
+        font-family: Arial;
+        font-size: 18px;
+        font-weight: bold;
     }
     &.danger{
         height:56px;
         width:113px;
         background-color:red;
-        border:4px solid ${(props)=>props.theme.colors.primaryGreen};
+        border:4px solid red;
         color:white;
+        font-family: Arial;
+        font-size: 18px;
+        font-weight: bold;
     }
     &.lg{
         height:56px;
