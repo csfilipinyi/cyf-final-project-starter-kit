@@ -18,7 +18,7 @@ export default function EditBox() {
 
 
   const getLearningObj = () => {
-    fetch(`/api/learningobjective/${id}`)
+    fetch(`/api/learningobjectives/${id}`, {headers: {token}})
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
@@ -36,7 +36,7 @@ export default function EditBox() {
     fetch(`/api/learningobjectives/${LearningID}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
+        token
       },
     }).then(() => {
       let newData = learningObj.filter((p) => p.id !== LearningID);
@@ -53,6 +53,7 @@ export default function EditBox() {
         }),
         headers: {
           "Content-Type": "application/json",
+          token
         },
       })
         .then((res) => res.json())
