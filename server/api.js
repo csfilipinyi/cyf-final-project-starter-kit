@@ -28,8 +28,8 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  // redirect_uri: "https://designed-gd.herokuapp.com/login",
-  redirect_uri:"http://localhost:3000/login",
+  redirect_uri: "https://designed-gd.herokuapp.com/login",
+  // redirect_uri:"http://localhost:3000/login",
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',

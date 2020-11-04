@@ -51,8 +51,8 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				// redirectUri={'https://designed-gd.herokuapp.com/login'}
-				redirectUri={'http://localhost:3000/login'}
+				redirectUri={'https://designed-gd.herokuapp.com/login'}
+				// redirectUri={'http://localhost:3000/login'}
 				buttonText='Graduate Login'
 				/>
 			</Header>
