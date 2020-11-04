@@ -112,6 +112,7 @@ function MentorsView() {
         </ul>
 
       </div>
+   </div>
       <Footer />
     </div>
   );

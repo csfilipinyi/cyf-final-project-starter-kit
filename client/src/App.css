@@ -268,15 +268,10 @@ li {
 }
 
 .footer-submit {
-
   background-color: #db4437;
   color: #efefef;
-
- 
-
+}
 .display-details {
   display: flex;
   justify-content: space-between;
-
-
 }
