@@ -67,12 +67,12 @@ function MentorsView() {
           </a>
         </div>
         {studentId && (
-          <div className="skills-container">
+          <div className="box-display-component">
             <BoxDisplay studentId={studentId} studentName={studentName} />
           </div>
         )}
         <h2 className="mentor-greet">Students</h2>
-        <ul>
+        <ul className="student-list">
           {studentList.map(({ user_id, first_name, last_name }) => {
             return (
               <li key={user_id} className="students-name">

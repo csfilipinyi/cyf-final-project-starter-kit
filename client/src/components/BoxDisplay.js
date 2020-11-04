@@ -39,7 +39,7 @@ function BoxDisplay({ studentId, studentName }) {
       .filter((lo) => lo.skill === skill)
       .map(({ description, ability }) => {
         return (
-          <p>
+          <p className="display-details">
             - {description}: <button> score :{ability} </button>
           </p>
         );

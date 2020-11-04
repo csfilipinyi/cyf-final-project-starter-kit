@@ -79,6 +79,7 @@ input {
   color: #ff0033;
 }
 .signup-link {
+  margin-bottom: 10vh;
   font-size: large;
   float: right;
 }
@@ -117,7 +118,6 @@ li {
 }
 
 .skills-container .edit-btn:not A:hover {
-
   background-color: rgb(18, 88, 90);
   border-radius: 4px;
   color: white;
@@ -191,11 +191,20 @@ li {
   font-size: larger;
 }
 
+.student-list {
+  position: relative;
+}
+
 .students-name {
-  margin-top: 10%;
+  position: absolute;
   margin-left: 10%;
 }
 
 .description {
   font-size: larger;
+}
+
+.display-details {
+  display: flex;
+  justify-content: space-between;
 }
