@@ -3,6 +3,7 @@ import dataTesting from "../dataTesting.json";
 import BoxDisplay from "../components/BoxDisplay";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -57,8 +58,7 @@ function MentorsView() {
   }
 
   return (
-    <div>
-
+    <div className="mentorsview-page">
       <h1>Welcome Mentor</h1>
 
       <Header />
@@ -90,8 +90,8 @@ function MentorsView() {
             </ul>
           </div>
         )}
-
       </div>
+      <Footer />
     </div>
   );
 }
