@@ -1,6 +1,7 @@
 import React from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ editLearningObjectives }) {
   return (
     <div className="header">
       <img
@@ -8,6 +9,7 @@ export default function Header() {
         alt="code your future"
         className="header-img"
       ></img>
+      {editLearningObjectives}
       <a href="/">
         <img
           src="https://www.flaticon.com/svg/static/icons/svg/159/159707.svg"

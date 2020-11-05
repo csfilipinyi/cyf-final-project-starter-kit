@@ -10,25 +10,19 @@ body {
 }
 
 .header {
-  /* margin-top: -10vh; */
   position: relative;
   background-color: #efefef;
   height: 20vh;
   width: 100%;
-  /* margin-left: -5vw; */
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 }
 
 .header-img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 5vw;
-  margin: auto;
+  /* position: absolute; */
+  margin-left: 5vw;
   height: 50%;
-  /* float: left; */
 }
 
 .logout-img {
@@ -38,8 +32,8 @@ body {
   right: 5vw;
   margin: auto;
   height: 40%;
-  float: right;
-  justify-self: end;
+  /* float: right;
+  justify-self: end; */
 }
 
 .sign-form {
@@ -80,8 +74,14 @@ input {
   color: #ff0033;
 }
 .signup-link {
-  margin-bottom: 10vh;
+  position: absolute;
+  right: 0;
+  margin-right: 14vw;
+  color: #d12f2f;
   font-size: large;
+}
+
+.edit-lo-container {
   float: right;
 }
 
@@ -207,13 +207,6 @@ li {
   margin-bottom: 10%;
 }
 
-.mentorsview-header-container {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 80vw;
-}
-
 .name-list {
   font-size: larger;
 }
@@ -230,7 +223,6 @@ li {
 .description {
   font-size: larger;
 }
-
 
 .skillsnav-page {
   position: relative;
