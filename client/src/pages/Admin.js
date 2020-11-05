@@ -45,7 +45,7 @@ const Admin = () => {
     }
 
     const handleClickAccount= async (e)=>{
-        const account_name= newAccount.toLowerCase().trim()
+        const account_name= newAccount.trim()
         if(!(github_accounts.find((i)=>(i.account_name===account_name)))&&account_name!==''){
             const account = {
                 account_name: account_name
