@@ -27,32 +27,30 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  ${"" /* align-items: flex-start; */}
 `;
 
 const FormLabel = styled.label`
   color: #000000;
   font-family: ${(props) => props.theme.fontFamily.primary};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
-  margin-top: 30px;
+  margin-top:20px;
 `;
 const FormDescription = styled.p`
   color: #000000;
   font-family: ${(props) => props.theme.fontFamily.primary};
-  font-size: 18px;
+  font-size: 16px;
   font-style: italic;
   letter-spacing: 0;
   text-align: left;
   width:65%;
-  margin-top: 5px;
-  margin-bottom: 30px;
+  margin-bottom:15px;
 `;
 const InputField = styled.input`
-  height: ${(props) => props.height || "60px"};
-  width: 538px;
+  height: ${(props) => props.height || "50px"};
+  width: 700px;
   border: 1px solid #333333;
   background-color: #ffffff;
   box-sizing: border-box;

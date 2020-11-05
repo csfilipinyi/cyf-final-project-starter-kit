@@ -35,20 +35,20 @@ const Navigator = styled.div`
     display:flex;
     margin-right:15%;
     margin-top:5px;
-    color: #0090FF;
-    z-index:1000;
+    color:#0090FF;
+    z-index:100;
     &.open{
         flex-directon:column;
         position:absolute;
         right:0px;
-        top:70px;
+        top:60px;
         width:252px;
-        height:165px;
+        height:110px;
         align-items:flex-start;
         justify-content:flex-start;
         background-color: #FAFAFA;
         box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2);
-        z-index:1;
+        z-index:100;
     }
 `;
 

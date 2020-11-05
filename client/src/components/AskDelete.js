@@ -5,7 +5,7 @@ import StyledButton from '../constant/StyledButton'
 const AskDelete = ({handleDelete, cancelDelete}) => {
     return (
         <Container>
-             Are you sure to delete your profile?
+             Are you sure you want to delete your profile?
              <ButtonContainer>
                 <StyledButton handleClick={handleDelete} name='Yes' className='danger'/>
                 <StyledButton handleClick={cancelDelete} name='No' className='md'/>

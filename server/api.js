@@ -67,7 +67,7 @@ router.get("/callback", async (req, res) => {
 //get skills
 
 router.get("/skills", (req, res) => {
-  Connection.query("SELECT * FROM skills", (error, result) => {
+  Connection.query("SELECT skill_name FROM skills", (error, result) => {
     if (result) {
       res.json(result.rows);
     } else {
@@ -75,11 +75,28 @@ router.get("/skills", (req, res) => {
     }
   });
 });
+
+// inserting new skills
+router.post("/skills", function (req, res) {
+  const skillName = req.body.skill_name;
+  
+  Connection.query(
+    `insert into skills (skill_name)VALUES($1) returning *`
+    ,[skillName],
+    (err,result)=>{
+      if (!err){
+        console.log('post skill', result.rows[0])
+        res.status(200).send(result.rows[0])
+      }else{
+        res.status(404).send(err);
+      }
+    })
+ })
 
 //get github account names
 
 router.get("/accounts", (req, res) => {
-  Connection.query("SELECT * FROM github_accounts", (error, result) => {
+  Connection.query("SELECT account_name FROM github_accounts", (error, result) => {
     if (result) {
       res.json(result.rows);
     } else {
@@ -87,6 +104,22 @@ router.get("/accounts", (req, res) => {
     }
   });
 });
+
+//insert github username in github account table
+router.post("/accounts", function (req, res) {
+  const github_username = req.body.account_name;
+  Connection.query(
+    `insert into github_accounts (account_name) VALUES($1) returning *`,
+    [github_username],
+    (err,result)=>{
+      if (!err){
+        console.log('post account', result.rows[0])
+        res.status(200).send(result.rows[0])
+      }else{
+        res.status(404).send(err);
+      }
+    })
+ })
 
 //get graduates
 
@@ -182,7 +215,7 @@ router.get("/accounts/:name", (req, res) => {
 });
 
 router.get("/graduates/:id", (req, res) => {
-  const github_id = parseInt(req.params.id);
+  const github_id = req.params.id;
   Connection.query(
     "select g.*, s.skill_name from graduates g join graduate_skill gs on g.id=gs.graduate_id join skills s on s.id=gs.skill_id where g.github_id=$1",
     [github_id],

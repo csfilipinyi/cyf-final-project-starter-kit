@@ -8,19 +8,26 @@ import RichEditorField from '../constant/RichEditorField'
 import FormSwitchButton from '../constant/FormSwitchButton'
 import { ProfileContext } from "../context/ProfileContext";
 import { AuthContext } from "../context/AuthContext";
+import { AdminContext } from "../context/AdminContext";
 import styled from "styled-components";
 
 const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   let history = useHistory();
   const { github_id, github_avatar, logOut } = useContext(AuthContext);
   const { statement, deleteProfile } = useContext(ProfileContext);
+  const { fetchSkills, skillsList } = useContext(AdminContext);
 
   const [newSkills, setNewSkills] = useState([]);
   const [isHired, setIsHired] = useState(false);
-  
+  console.log('form skill list', skillsList)
+
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
   },[profile])
+
+  useEffect (()=>{
+    fetchSkills()
+  },[])
 
   const handleSubmit = async (values) => {
     const {
@@ -121,6 +128,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
             <StyledForm id="formLogin" noValidate>
               <FormSwitchButton
                 name="isHired"
+                profile={profile}
                 isHired={isHired}
                 handleSwitch={()=>setIsHired(!isHired)}
               />
@@ -140,7 +148,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               <FormField
                 name="aboutMe"
                 height="90px"
-                description="Provide one sentence summary of what makes you tick. This will also be shown on the main page"
+                description="Provide a one sentence summary that demonstrates what you are passionate about. This will be shown on the main page of the site"
                 label="About Me"
                 as="textarea"
               />
@@ -154,7 +162,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               />
               <FormField
                 name="interest"
-                description="Add the 3 key things that you are passionate about.this will show on the main page"
+                description="Add the 3 key things that you are most passionate about here. This will show on the main page of the site"
                 label="Key Interests"
               />
               <FormField
@@ -176,33 +184,36 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               />
               <FormField
 								name='skills'
-								label='Your key skills'
+								label='Your Key Skills'
                 info = 'Type your skills and press ‘Space’'
-								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
-							/> 
+                onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
+                autocomplete="new-password"
+              /> 
 							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
              </StyledForm>
             <ButtonContainer>
-              <StyledButton
-                name="Cancel"
-                className="md"
-                type='button'
-                handleClick={props.handleReset}
-              />
               {askBeforeDelete&&<StyledButton
-                name="Delete"
+                name="Delete Profile"
                 className="danger"
                 type='button'
                 handleClick={askBeforeDelete}
               />}
-              <StyledButton
-                name="Save"
-                className="sm"
-                type="submit"
-                handleClick={props.handleSubmit}
-              />
+              <SubButtonContainer>            
+                <StyledButton
+                  name="Cancel"
+                  className="md"
+                  type='button'
+                  handleClick={props.handleReset}
+                  />
+                <StyledButton
+                  name="Save"
+                  className="sm"
+                  type="submit"
+                  handleClick={props.handleSubmit}
+                  />
+              </SubButtonContainer>
             </ButtonContainer>
           </>
         )}
@@ -225,6 +236,9 @@ const ValidationSchema = Yup.object().shape({
   surname: Yup.string()
     .required("Required")
     .max(15, 'Should be less than 15'),
+  email:Yup.string()
+  .email('Wrong email format')
+  .required('Required'),
   aboutMe: Yup.string()
   .required("Required")
   .max(100, 'Should be less than 100'),
@@ -239,6 +253,8 @@ const ValidationSchema = Yup.object().shape({
   linkedin: Yup.string()
     .required("Required"),
   portfolio: Yup.string()
+    .required("Required"),
+  cv: Yup.string()
     .required("Required"),
   skills: Yup.string()
 		.required("Required"),
@@ -272,9 +288,16 @@ const StyledForm = styled(Form)`
 const ButtonContainer = styled.div`
   margin:50px 0;
   display:flex;
-  width:55%;
+  flex-direction:column;
+  width:80%;
   justify-content:space-between;
 `;
+
+const SubButtonContainer =styled.div`
+  display:flex;
+  justify-content:space-between;
+  width:100%
+`
 
 const Label = styled.label`
   color: #000000;

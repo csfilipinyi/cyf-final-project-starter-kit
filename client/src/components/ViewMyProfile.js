@@ -17,7 +17,7 @@ const ViewMyProfile = ({ profile }) => {
   const handleClick = () => {
     history.push("/profile/edit");
   };
-
+  console.log('avatar', profile.avatar_url)
   return (
     <Container>
       <Img src={profile.avatar_url}/>
@@ -31,7 +31,7 @@ const ViewMyProfile = ({ profile }) => {
           <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
           <LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>
           <CvIcon></CvIcon>
-          <EmailIcon></EmailIcon>
+          <EmailIcon profile={profile}></EmailIcon>
         </IconContainer>
         <DescHead>About Me</DescHead>
         <Description>{profile.about_me}</Description>
@@ -102,7 +102,7 @@ const Name = styled.div`
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-right:5px;
+  margin:0 5px 5px 0;
   color: #000000;
   font-family: Lato;
   font-size: 28px;
@@ -113,7 +113,7 @@ const Name = styled.div`
 const DescHead = styled.p`
   color: #000000;
   font-family: Lato;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
@@ -122,7 +122,7 @@ const DescHead = styled.p`
 const DescHeadPS = styled.p`
   color: #000000;
   font-family: Lato;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
@@ -134,7 +134,6 @@ const Description = styled.p`
   font-family: Lato;
   font-size: 18px;
   letter-spacing: 0;
-  line-height: 24px;
   margin-bottom: 20px;
 `;
 const SubHeads = styled.p`
@@ -168,7 +167,7 @@ const SocialText = styled.a`
 `;
 const IconContainer = styled.div`
   display: flex;
-  justify-content:space-around;
-  width:120px;
+  justify-content:space-between;
+  width:200px;
   margin-bottom: 20px;
 `;

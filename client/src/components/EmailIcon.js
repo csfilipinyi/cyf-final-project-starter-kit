@@ -2,11 +2,20 @@ import React from "react";
 import EIcon from "../assets/icons/iconfinder_icon-email_211660.svg";
 import styled from "styled-components";
 
-const EmailIcon = () => {
+
+const EmailIcon = ({profile}) => {
+
+  const choseMailAdress = ()=>{
+     if(profile&&profile.email_adress){
+       return profile.email_adress
+     } else {
+       return 'contact@codeyourfuture.io'
+     }
+  }
   return (
     <>
       <Container>
-        <ELink href='mailto:someone@email.com' target="blank">
+        <ELink href={`mailto:${choseMailAdress()}`} target="blank">
         <Circle>
           <EmIcon src={EIcon} />
         </Circle>

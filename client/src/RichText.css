@@ -3,7 +3,7 @@
  */
 
 .RichEditor-root {
-  width: 538px;
+  width: 700px;
   background: #fff;
   border: 1px solid #333333;
   font-family: 'Georgia', serif;
@@ -60,7 +60,7 @@
 .RichEditor-styleButton {
   color: #999;
   cursor: pointer;
-  margin-right: 16px;
+  margin-right:35px;
   padding: 2px 0;
   display: inline-block;
 }

@@ -50,7 +50,7 @@ const StyleButton = styled(Button)`
     }
     &.danger{
         height:56px;
-        width:113px;
+        width:150px;
         background-color:red;
         border:4px solid red;
         color:white;
