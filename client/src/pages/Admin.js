@@ -52,7 +52,6 @@ const Admin = () => {
             }
             await addNewAccount(account)
             setSuccess(true)
-
         } else {
             setPresent(true)
         }

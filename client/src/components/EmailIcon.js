@@ -3,11 +3,11 @@ import EIcon from "../assets/icons/iconfinder_icon-email_211660.svg";
 import styled from "styled-components";
 
 
-const EmailIcon = ({profile}) => {
+const EmailIcon = ({singleProfile}) => {
 
   const choseMailAdress = ()=>{
-     if(profile&&profile.email_adress){
-       return profile.email_adress
+     if(singleProfile&&singleProfile.email_adress){
+       return singleProfile.email_adress
      } else {
        return 'contact@codeyourfuture.io'
      }
