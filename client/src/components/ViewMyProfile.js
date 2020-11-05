@@ -9,18 +9,19 @@ import CvIcon from "./CvIcon";
 import EmailIcon from "./EmailIcon";
 import RichEditorReader from '../constant/RichEditorReader'
 
-const ViewMyProfile = ({ profile }) => {
+const ViewMyProfile = (props) => {
 
   let history = useHistory();
   const { isAuthenticated } = useContext(AuthContext);
+  const { profile} = useContext(ProfileContext);
 
   const handleClick = () => {
     history.push("/profile/edit");
   };
-  console.log('avatar', profile.avatar_url)
+  console.log('avatar', profile);
   return (
-    <Container>
-      {profile.avatar_url&&<Img src={profile.avatar_url}/>}
+    <>{profile&&<Container>
+      <Img src={profile.avatar_url}/>
       <SubCon>
         {profile.first_name&&profile.surname&&<Name>
         {profile.first_name} {profile.surname}
@@ -52,7 +53,8 @@ const ViewMyProfile = ({ profile }) => {
           <RichEditorReader/>
         </ContainerStatement>}
       </SubCon>
-    </Container>
+    </Container>}
+    </>
   );
 };
 

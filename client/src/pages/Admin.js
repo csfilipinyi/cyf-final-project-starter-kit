@@ -32,8 +32,8 @@ const Admin = () => {
     }
 
     const handleClickSkill= async (e)=>{
-        const skill_name= newSkill.toLowerCase()
-        if(!(skillsList.find((i)=>(i.skill_name===skill_name)))){
+        const skill_name= newSkill.toLowerCase().trim()
+        if(!(skillsList.find((i)=>(i.skill_name===skill_name)))&&skill_name!==''){
             const skill = {
                 skill_name: skill_name
             }
@@ -45,13 +45,14 @@ const Admin = () => {
     }
 
     const handleClickAccount= async (e)=>{
-        const account_name= newAccount.toLowerCase()
-        if(!(github_accounts.find((i)=>(i.account_name===account_name)))){
+        const account_name= newAccount.toLowerCase().trim()
+        if(!(github_accounts.find((i)=>(i.account_name===account_name)))&&account_name!==''){
             const account = {
                 account_name: account_name
             }
             await addNewAccount(account)
             setSuccess(true)
+
         } else {
             setPresent(true)
         }
@@ -128,7 +129,6 @@ const SkillsContainer = styled.div`
     display:flex;
     flex-wrap:wrap;
     width:70%;
-    min-height:100vh;
     margin-top:30px
 `
 
@@ -136,7 +136,6 @@ const AccountsContainer = styled.div`
     display:flex;
     flex-wrap:wrap;
     width:70%;
-    min-height:100vh;
     margin-top:50px;
 `
 const StyledButtonGroup=styled(ButtonGroup)`

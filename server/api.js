@@ -222,7 +222,7 @@ router.get("/graduates/:id", (req, res) => {
     (error, result) => {
       console.log('get request', result.rows)
       if (result && (result.rowCount > 0))
-        res.json(result.rows[0]);
+        res.status(200).json(result.rows);
       else
         res.status(404).send(error,"It has not been added to the graduate table yet");
     }

@@ -3,12 +3,16 @@ import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../assets/images/logo.png';
 import {AuthContext} from '../context/AuthContext'
+import {ProfileContext} from '../context/ProfileContext'
 
 const LogoName = () => {
     const {isAuthenticated} = useContext (AuthContext)
+    const {getAllProfiles} = useContext (ProfileContext)
+
     let history = useHistory()
 
-    const handleClick =()=>{
+    const handleClick =async ()=>{
+        await getAllProfiles()
         isAuthenticated?history.push('/profiles'):history.push('/')
     }
     

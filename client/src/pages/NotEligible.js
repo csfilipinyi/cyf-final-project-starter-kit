@@ -2,15 +2,18 @@ import React, {useContext} from 'react'
 import styled from  'styled-components'
 import {Link, useHistory} from 'react-router-dom'
 import {AuthContext} from '../context/AuthContext'
+import {ProfileContext} from '../context/ProfileContext'
 import Header from '../components/Header'
 
 const NotEligible = () => {
     const {setGraduate} = useContext(AuthContext);
+    const {getAllProfiles} = useContext(ProfileContext);
     let history = useHistory()
     
-    const handleClick =()=>{
+    const handleClick =async()=>{
         setGraduate();
-        history.goBack('/')
+        await getAllProfiles();
+        history.push('/');
     }
     
     return (

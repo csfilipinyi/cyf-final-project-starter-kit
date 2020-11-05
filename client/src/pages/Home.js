@@ -43,7 +43,7 @@ const Home = () => {
 
     const onFailure = response => console.error(response);  
 
-	useEffect(getAllProfiles, []);
+	useEffect(()=>getAllProfiles(), []);
 	console.log('home all profiles', allProfiles)
 	return (
 		<Screen>
@@ -68,8 +68,8 @@ const Home = () => {
 			</Info>
 			<Container>
 				{isLoading?<Text>Loading...</Text>			
-					: allProfiles && allProfiles.map(( profile, i ) => {
-						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } avatar={github_avatar}/>
+					: allProfiles && allProfiles.map(( singleProfile, i ) => {
+						return <OverviewProfileCard singleProfile={ singleProfile } getProfile={getProfile} key={ i } />
 					})}
 				{error && <Text>{error}</Text>}
 			</Container>

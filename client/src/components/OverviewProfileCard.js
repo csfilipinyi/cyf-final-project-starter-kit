@@ -10,40 +10,39 @@ import CvIcon from "./CvIcon";
 import EmailIcon from "./EmailIcon";
 import HiredLabel from '../constant/HiredLabel'
 
-const OverviewProfileCard = ({ profile, getProfile}) => {
+const OverviewProfileCard = ({ singleProfile, getProfile}) => {
   let history = useHistory();
-  console.log('card is hired', profile.is_hired)
-
+  
   const handleClick = async (id) => {
     await getProfile(id);
-    history.push(`/profiles/${profile.first_name}`);
+    history.push(`/profiles/${singleProfile.first_name}`);
   };
   
   return (
     <CardContainer>
-      {/* {profile.is_hired&&<HiredLabel/>}
-      {profile.avatar_url&&<profile.avatar_urlImg src={profile.avatar_url}/>}
+      {singleProfile.is_hired&&<HiredLabel/>}
+      <Img src={singleProfile.avatar_url}/>
       <CardBody>
-        {profile.first_name&&profile.surname&&<CardTitle>
-          {profile.first_name} {profile.surname}
-        </CardTitle>}
+        <CardTitle>
+          {singleProfile.first_name} {singleProfile.surname}
+        </CardTitle>
         <SubContainer>
-          {profile.about_me&&<CardText>{profile.about_me}</CardText>}
+          {singleProfile.about_me&&<CardText>{singleProfile.about_me}</CardText>}
         </SubContainer>
         <SubContainer>
-         {profile.interest&&<CardText>{profile.interest}</CardText>}
+         {singleProfile.about_me&&<CardText>{singleProfile.interest}</CardText>}
         </SubContainer>
         <IconContainer>
-          {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
-          {profile.linkedin_link&&<LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>}
+          {singleProfile.github_link&&<GitHubIcon gitHubLink={singleProfile.github_link}></GitHubIcon>}
+          {singleProfile.linkedin_link&&<LinkedinIcon linkedinLink={singleProfile.linkedin_link}></LinkedinIcon>}
           <CvIcon></CvIcon>
           <EmailIcon></EmailIcon>
         </IconContainer>
         <StyledButton
           name="View Profile"
-          handleClick={() => handleClick(`${profile.github_id}`)}
+          handleClick={() => handleClick(`${singleProfile.github_id}`)}
         />
-      </CardBody> */}
+      </CardBody>
     </CardContainer>
   );
 };

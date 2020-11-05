@@ -105,7 +105,7 @@ const authReducer = (state, action) => {
         }
 
         const setGraduate = ()=>{
-            dispatch({ type:types.Set_Is_Graduate, payload:true});
+            return dispatch({ type:types.Set_Is_Graduate, payload:true});
         }
 
     return (

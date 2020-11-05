@@ -14,7 +14,7 @@ const ViewAllProfiles = () => {
 	},[])
 
     return (
-        <Screen>
+		<>{allProfiles&&<Screen>
             <Header />
             <Introducing
 				header = 'Welcome to the CodeYourFuture Graduate Directory'				
@@ -29,11 +29,12 @@ const ViewAllProfiles = () => {
 				{isLoading ? 
 					<p>Loading...</p>
 					: allProfiles && allProfiles.map(( profile, i ) => {
-						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />
+						return <OverviewProfileCard singleProfile={ profile } getProfile={getProfile} key={ i } />
 					})}
 				{error && <p>{error}</p>}
 			</Container>
-        </Screen>
+        </Screen>}
+		</>
     )
 }
 
