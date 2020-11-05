@@ -220,10 +220,12 @@ router.get("/graduates/:id", (req, res) => {
     "select g.*, s.skill_name from graduates g join graduate_skill gs on g.id=gs.graduate_id join skills s on s.id=gs.skill_id where g.github_id=$1",
     [github_id],
     (error, result) => {
-      if (result && (result.rowCount > 0))
+      if (error) {
+        res.status(500).send(error);
+      } else if (result && (result.rowCount > 0))
         res.status(200).json(result.rows);
       else
-        res.status(404).send(error,"It has not been added to the graduate table yet");
+        res.status(404).send("It has not been added to the graduate table yet");
     }
   );
 });
