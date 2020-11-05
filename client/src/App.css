@@ -215,10 +215,10 @@ li {
   position: relative;
 }
 
-.students-name {
+/* .students-name {
   position: absolute;
   margin-left: 10%;
-}
+} */
 
 .description {
   font-size: larger;
