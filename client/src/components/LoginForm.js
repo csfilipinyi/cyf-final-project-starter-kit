@@ -5,6 +5,7 @@ import useFormValidation from "./useFormValidation";
 import "../App.css";
 import loginValidation from "./loginValidation";
 import { Link, useHistory } from "react-router-dom";
+import Header from "./Header";
 
 export default function LoginForm() {
   let history = useHistory();
@@ -50,52 +51,61 @@ export default function LoginForm() {
             ? history.push("/skills")
             : history.push("/MentorsView");
         })
-        .catch(({error}) => setServerError(error));
+        .catch(({ error }) => setServerError(error));
     }
   }, [isValid]);
 
   return (
-    <Jumbotron fluid>
-      <Container>
-        <Form onSubmit={handleSubmit} className="login-page">
-          <p className="error">{serverError}</p>
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="Email"
-            name="userEmail"
-            onChange={handleChange}
-            value={input.userEmail}
-          />
-          {errors.userEmail && <p className="error">*{errors.userEmail} </p>}
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Password"
-            name="userPassword"
-            onChange={handleChange}
-            value={input.userPassword}
-          />
-          {errors.userPassword && (
-            <p className="error">*{errors.userPassword} </p>
-          )}
-          <button
-            className="sumbit"
-            type="submit"
-            variant="secondary"
-            size="lg"
-            p-2
-            active
-          >
-            Login
-          </button>
-          <br />
-          <em> Don't have an account then</em>
-          <Link to="/signup" className="signup-link">
-            signup
-          </Link>
-        </Form>
-      </Container>
-    </Jumbotron>
+    <div className="login-container">
+      <Header />
+      <img
+        src="https://scontent.fman1-1.fna.fbcdn.net/v/t1.0-9/79578286_2464400743836747_4092696502684614656_o.jpg?_nc_cat=109&ccb=2&_nc_sid=730e14&_nc_ohc=pq3QvjFuDlcAX-ruQJI&_nc_ht=scontent.fman1-1.fna&oh=c56c5a6c959fbdb2232100b79d85d982&oe=5FCAF53F"
+        alt="code your future"
+        border="0"
+        className="login-image"
+      ></img>
+      <Jumbotron fluid>
+        <Container>
+          <Form onSubmit={handleSubmit} className="login-page">
+            <p className="error">{serverError}</p>
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="Email"
+              name="userEmail"
+              onChange={handleChange}
+              value={input.userEmail}
+            />
+            {errors.userEmail && <p className="error">*{errors.userEmail} </p>}
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              name="userPassword"
+              onChange={handleChange}
+              value={input.userPassword}
+            />
+            {errors.userPassword && (
+              <p className="error">*{errors.userPassword} </p>
+            )}
+            <button
+              className="sumbit"
+              type="submit"
+              variant="secondary"
+              size="lg"
+              p-2
+              active
+            >
+              Login
+            </button>
+            <br />
+            <em> Don't have an account then</em>
+            <Link to="/signup" className="signup-link">
+              signup
+            </Link>
+          </Form>
+        </Container>
+      </Jumbotron>
+    </div>
   );
 }
