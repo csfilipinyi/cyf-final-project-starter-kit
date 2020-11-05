@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 
 body {
-  /* margin: 10vh; */
   font-family: "Raleway", sans-serif;
 }
 
@@ -10,12 +9,10 @@ body {
 }
 
 .header {
-  /* margin-top: -10vh; */
   position: relative;
   background-color: #efefef;
   height: 20vh;
   width: 100%;
-  /* margin-left: -5vw; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -28,7 +25,6 @@ body {
   left: 5vw;
   margin: auto;
   height: 50%;
-  /* float: left; */
 }
 
 .logout-img {
@@ -71,6 +67,14 @@ input {
   align-items: center;
   padding: 2%;
   font-size: larger;
+  margin-top: -100vh;
+  background-color: rgb(230, 230, 230);
+  opacity: 0.85;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .login-page label {
@@ -230,7 +234,6 @@ li {
 .description {
   font-size: larger;
 }
-
 
 .skillsnav-page {
   position: relative;
