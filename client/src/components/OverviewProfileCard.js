@@ -13,7 +13,7 @@ import HiredLabel from '../constant/HiredLabel'
 const OverviewProfileCard = ({ profile, getProfile}) => {
   let history = useHistory();
   console.log('card is hired', profile.is_hired)
-  
+
   const handleClick = async (id) => {
     await getProfile(id);
     history.push(`/profiles/${profile.first_name}`);

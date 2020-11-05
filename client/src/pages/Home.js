@@ -67,12 +67,10 @@ const Home = () => {
 			<LinkCYF href='mailto:contact@codeyourfuture.io'> contact@codeyourfuture.io</LinkCYF>
 			</Info>
 			<Container>
-				{isLoading && <Text>Loading...</Text>}
-					
-					{/* // : allProfiles && allProfiles.map(( profile, i ) => {
-					// 	return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } avatar={github_avatar}/>;
-					// })} */}
-
+				{isLoading?<Text>Loading...</Text>			
+					: allProfiles && allProfiles.map(( profile, i ) => {
+						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } avatar={github_avatar}/>
+					})}
 				{error && <Text>{error}</Text>}
 			</Container>
 		</Screen>
