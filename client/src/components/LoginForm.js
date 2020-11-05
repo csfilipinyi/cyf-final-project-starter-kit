@@ -5,7 +5,6 @@ import useFormValidation from "./useFormValidation";
 import "../App.css";
 import loginValidation from "./loginValidation";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./Header";
 
 export default function LoginForm() {
   let history = useHistory();
@@ -43,19 +42,20 @@ export default function LoginForm() {
 
           window.localStorage.setItem("token", data.token);
 
-          const test = window.localStorage.setItem("user", data.id);
-          console.log(test);
+          window.localStorage.setItem("user", data.id);
+         window.localStorage.setItem("name", data.first_name);
           window.localStorage.setItem("role", data.role);
           let role = data.role;
           role === "Student"
             ? history.push("/skills")
             : history.push("/MentorsView");
         })
-        .catch(({ error }) => setServerError(error));
+        .catch(({error}) => setServerError(error));
     }
   }, [isValid]);
 
   return (
+
     <div className="login-container">
       <img
         src="https://scontent.fman1-1.fna.fbcdn.net/v/t1.0-9/79578286_2464400743836747_4092696502684614656_o.jpg?_nc_cat=109&ccb=2&_nc_sid=730e14&_nc_ohc=pq3QvjFuDlcAX-ruQJI&_nc_ht=scontent.fman1-1.fna&oh=c56c5a6c959fbdb2232100b79d85d982&oe=5FCAF53F"
@@ -106,5 +106,6 @@ export default function LoginForm() {
         </Container>
       </Jumbotron>
     </div>
+
   );
 }

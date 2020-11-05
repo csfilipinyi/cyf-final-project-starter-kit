@@ -247,7 +247,8 @@ router.post("/register", validInfo, async (req, res) => {
     );
     const token = jwtGenerator(
       newUser.rows[0].user_id,
-      newUser.rows[0].user_role
+      newUser.rows[0].user_role,
+      newUser.rows[0].first_name
     );
     console.log("here is the token");
     res.json({
@@ -255,6 +256,7 @@ router.post("/register", validInfo, async (req, res) => {
       message: "Registered",
       id: newUser.rows[0].user_id,
       role: newUser.rows[0].user_role,
+      name: newUser.rows[0].first_name,
     });
   } catch (err) {
     console.error(err.message);
@@ -283,12 +285,17 @@ router.post("/login", validInfo, async (req, res) => {
       return res.status(401).json({error: "Password or Email is incorrect"});
     }
 
-    const token = jwtGenerator(user.rows[0].user_id, user.rows[0].user_role);
+    const token = jwtGenerator(
+      user.rows[0].user_id,
+      user.rows[0].user_role,
+      user.rows[0].first_name
+    );
     res.json({
       token: token,
       message: "login successful",
       id: user.rows[0].user_id,
       role: user.rows[0].user_role,
+      name: user.rows[0].first_name
     });
   } catch (err) {
     console.error(err.message);
@@ -299,7 +306,7 @@ router.post("/login", validInfo, async (req, res) => {
 router.get("/verify", authorization, async (req, res) => {
   try {
     console.log("passed the authorization");
-    res.json({ id: req.user.id, role: req.user.role });
+    res.json({ id: req.user.id, role: req.user.role, name: req.user.first_name });
   } catch (err) {
     console.error("error", err.message);
     res.status(500).send("Server error");

@@ -14,18 +14,22 @@ import Header from "../components/Header";
 
 import Footer from "../components/Footer";
 
-
-
 export default function MentorsEdit() {
+  let back = "Back";
   return (
     <Router>
+      <Header />
+      <div className="mentorsedit-page"></div>
 
-      <div className="mentorsedit-page">
-        <Header />
-      </div>
+      {/* <div className="mentorsedit-page">
+        <Header back={back} />
+      </div> */}
 
       <div className="edit-display-container">
-        <div className="skillNav-display">
+        <Switch>
+          <Route path="/mentorsedit/:id" children={<EditBox />} />
+        </Switch>
+        <div className="skillNav-display skills-container">
           <ul>
             <li>
               <NavLink
@@ -83,11 +87,6 @@ export default function MentorsEdit() {
             </li>
           </ul>
         </div>
-
-        <Header />
-      </div>
-      <div className="skills-container">
-
 
         <Switch>
           <Route path="/mentorsedit/:id" children={<EditBox />} />
