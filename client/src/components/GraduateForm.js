@@ -19,7 +19,6 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
 
   const [newSkills, setNewSkills] = useState([]);
   const [isHired, setIsHired] = useState(false);
-  console.log('form skill list', skillsList)
 
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
@@ -76,13 +75,11 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
 
   const handleValidate = async (e, setFieldValue) => {
     e.persist();
-    // const res = await skills();
-    // const response = res.map((x) => x.toUpperCase());
+    const response = skillsList.map((x) => x.skill_name.toUpperCase());
     let event = e.key;
     let word = e.target.value.trim().toUpperCase();
     if (event == " ") {
-      // response.includes(word) &&!newSkills.includes(word)&&
-      setNewSkills([...newSkills, word]);
+      response.includes(word)&&!newSkills.includes(word)&&setNewSkills([...newSkills, word])
       setFieldValue("skills", " ");
     }
   };

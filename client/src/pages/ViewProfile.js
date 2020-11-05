@@ -7,9 +7,13 @@ import ViewMyProfile from '../components/ViewMyProfile'
 
 
 const ViewProfile = () => {
-    const {isAuthenticated} = useContext(AuthContext)
-    const {profile} = useContext(ProfileContext)
+    const {isAuthenticated, github_id} = useContext(AuthContext)
+    const {profile, getProfile} = useContext(ProfileContext)
 
+    console.log('view profile', {github_id})
+    useEffect (()=>{
+        getProfile(github_id)
+    },[])
 
 	return (
 		<Screen>

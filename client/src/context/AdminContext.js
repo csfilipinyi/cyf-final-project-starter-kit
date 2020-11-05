@@ -75,7 +75,6 @@ const AdminState = (props) =>{
 		};
 		axios.post(`${baseUrl}/accounts`, githubName, config)
 			.then((response)=>{
-                console.log('add account response', response.data)
 				dispatch({ type: types.Set_New_Account, payload:response.data})
 			})
 			.catch((error)=>{

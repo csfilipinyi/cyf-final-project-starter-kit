@@ -33,8 +33,9 @@ const Home = () => {
 		if(userName){
 			navigateToProfile()
 		}
-	},[userName, github_id])
-	console.log('isgraduate', isGraduate)
+	},[userName])
+
+
 	useEffect (()=>{
 		!userName&&isAuthenticated&&history.push('/profiles/new')
 		!isGraduate&&history.push('/notfound')

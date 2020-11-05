@@ -5,9 +5,9 @@ import styled from "styled-components";
 
 const EmailIcon = ({singleProfile}) => {
 
-  const choseMailAdress = ()=>{
-     if(singleProfile&&singleProfile.email_adress){
-       return singleProfile.email_adress
+  const choseMailAddress = ()=>{
+     if(singleProfile&&singleProfile.email_address){
+       return singleProfile.email_address
      } else {
        return 'contact@codeyourfuture.io'
      }
@@ -15,7 +15,7 @@ const EmailIcon = ({singleProfile}) => {
   return (
     <>
       <Container>
-        <ELink href={`mailto:${choseMailAdress()}`} target="blank">
+        <ELink href={`mailto:${choseMailAddress()}`} target="blank">
         <Circle>
           <EmIcon src={EIcon} />
         </Circle>

@@ -148,7 +148,6 @@ const ProfileState = (props) =>{
 	};
 
 	const setRichtText = (text)=>{
-		console.log('profile context text', text, state.statement)
 		dispatch({ type: types.Set_Rich_Text, payload:text });
 	}
 

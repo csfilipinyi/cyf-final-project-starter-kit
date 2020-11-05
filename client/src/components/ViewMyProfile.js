@@ -18,7 +18,7 @@ const ViewMyProfile = (props) => {
   const handleClick = () => {
     history.push("/profile/edit");
   };
-  console.log('avatar', profile);
+
   return (
     <>{profile&&<Container>
       <Img src={profile.avatar_url}/>
@@ -32,7 +32,7 @@ const ViewMyProfile = (props) => {
         {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
         {profile.linkedin_link&&<LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>}
           <CvIcon></CvIcon>
-          <EmailIcon profile={profile}></EmailIcon>
+          <EmailIcon singleProfile={profile}></EmailIcon>
         </IconContainer>
         <DescHead>About Me</DescHead>
         {profile.about_me&&<Description>{profile.about_me}</Description>}
