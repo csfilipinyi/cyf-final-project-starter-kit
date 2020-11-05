@@ -44,7 +44,7 @@ const Home = () => {
     const onFailure = response => console.error(response);  
 
 	useEffect(getAllProfiles, []);
-
+	console.log('home all profiles', allProfiles)
 	return (
 		<Screen>
 			<Header>
@@ -67,7 +67,7 @@ const Home = () => {
 			<LinkCYF href='mailto:contact@codeyourfuture.io'> contact@codeyourfuture.io</LinkCYF>
 			</Info>
 			<Container>
-				{isLoading && <Text>Loading...</Text>)}
+				{isLoading && <Text>Loading...</Text>}
 					
 					{/* // : allProfiles && allProfiles.map(( profile, i ) => {
 					// 	return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } avatar={github_avatar}/>;
