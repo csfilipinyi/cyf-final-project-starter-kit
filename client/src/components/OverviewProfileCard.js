@@ -30,7 +30,7 @@ const OverviewProfileCard = ({ profile, getProfile}) => {
           {profile.about_me&&<CardText>{profile.about_me}</CardText>}
         </SubContainer>
         <SubContainer>
-         {profile.about_me&&<CardText>{profile.interest}</CardText>}
+         {profile.interest&&<CardText>{profile.interest}</CardText>}
         </SubContainer>
         <IconContainer>
           {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
