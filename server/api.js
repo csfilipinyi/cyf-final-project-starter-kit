@@ -220,7 +220,6 @@ router.get("/graduates/:id", (req, res) => {
     "select g.*, s.skill_name from graduates g join graduate_skill gs on g.id=gs.graduate_id join skills s on s.id=gs.skill_id where g.github_id=$1",
     [github_id],
     (error, result) => {
-      console.log('get request', result.rows)
       if (result && (result.rowCount > 0))
         res.status(200).json(result.rows);
       else
@@ -304,13 +303,11 @@ router.delete("/graduates/:id", function (req, res) {
     "SELECT * FROM graduates where github_id=$1 ",
     [github_id],
     (error, result) => {
-      console.log('graduate', result.rows)
       if (result.rowCount > 0) graduateId = result.rows[0].id;
       Connection.query(
         "delete from graduate_skill  where  graduate_id=$1 returning *",
         [graduateId],
         (error, result) => {
-          console.log('skills', result.rows)
           if (error == undefined) {
             Connection.query(
               "delete from graduates  where  github_id=$1 returning *",

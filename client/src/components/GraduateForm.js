@@ -164,11 +164,11 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               />
               <FormField
                 name="github"
-                label="Github"
+                label="Github Link"
               />
               <FormField
                 name="linkedin"
-                label="Linked In"
+                label="LinkedIn Link"
               />
               <FormField
                 name="portfolio"
