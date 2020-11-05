@@ -21,7 +21,7 @@ const OverviewProfileCard = ({ profile, getProfile}) => {
   
   return (
     <CardContainer>
-      {profile.is_hired&&<HiredLabel/>}
+      {/* {profile.is_hired&&<HiredLabel/>}
       {profile.avatar_url&&<profile.avatar_urlImg src={profile.avatar_url}/>}
       <CardBody>
         {profile.first_name&&profile.surname&&<CardTitle>
@@ -43,7 +43,7 @@ const OverviewProfileCard = ({ profile, getProfile}) => {
           name="View Profile"
           handleClick={() => handleClick(`${profile.github_id}`)}
         />
-      </CardBody>
+      </CardBody> */}
     </CardContainer>
   );
 };
