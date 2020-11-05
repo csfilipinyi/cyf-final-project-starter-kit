@@ -76,8 +76,8 @@ function MentorsView() {
     <div className="mentorsview-page">
       <Header editLearningObjectives={editLearningObjectives} />
       <h1>Welcome Mentor</h1>
-      <div>
-        <div className="skills-container">
+      <div className="main-container">
+        <div className="studentName-Container">
           {/* <ul>
             {studentList.map(({ user_id, first_name, last_name }) => {
               return (
