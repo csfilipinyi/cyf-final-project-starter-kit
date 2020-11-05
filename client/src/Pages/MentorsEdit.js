@@ -15,16 +15,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function MentorsEdit() {
-  let back = "Back"
+  let back = "Back";
   return (
     <Router>
-
       <Header />
       <div className="mentorsedit-page"></div>
 
-//       <div className="mentorsedit-page">
-//         <Header back={back} />
-//       </div>
+      {/* <div className="mentorsedit-page">
+        <Header back={back} />
+      </div> */}
 
       <div className="edit-display-container">
         <Switch>
@@ -92,10 +91,8 @@ export default function MentorsEdit() {
         <Switch>
           <Route path="/mentorsedit/:id" children={<EditBox />} />
         </Switch>
-
       </div>
       <Footer />
     </Router>
   );
 }
-
