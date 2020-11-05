@@ -52,8 +52,9 @@ export default function SkillsNav() {
   return (
     <div className="skillsnav-page">
       <div>
-        <Header logout={logout}/>
+        <Header logout={logout} />
       </div>
+      <h1>Welcome {window.localStorage.getItem("name")}</h1>
       <div className="skills-container">
         {routeResult}
         <A href="/skills/html">Html</A>

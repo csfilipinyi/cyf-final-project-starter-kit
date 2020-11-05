@@ -32,8 +32,6 @@ function MentorsView() {
         if (data == "not authorized" || data.role == "Student") {
           history.push("/");
         }
-        let name = window.localStorage.setItem("name", data.first_name);
-        console.log(name);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -85,7 +83,7 @@ function MentorsView() {
   return (
     <div className="mentorsview-page">
       <Header editLearningObjectives={editLearningObjectives} logout={logout} />
-      <h1>Welcome Mentor</h1>
+  <h1>Welcome {window.localStorage.getItem("name")}</h1>
       <div className="main-container">
         <div className="studentName-Container">
           {/* <ul>

@@ -33,14 +33,25 @@ function BoxDisplay({ studentId, studentName }) {
   useEffect(fetchDetails, [studentId]);
   const abilityLength = [];
   console.log(abilityLength);
-
+ //confident still learning not confident
+  function getScore(ability){
+    if(ability ===0){
+      return " Not Confident";
+    }
+    if(ability===1){
+      return " Still Learning";
+    }
+    if(ability=== 2){
+      return " Confident";
+    }
+  }
   const displayDetails = (skill) => {
     return studentDetail
       .filter((lo) => lo.skill === skill)
       .map(({ description, ability }) => {
         return (
           <p className="display-details">
-            - {description}: <button> score :{ability} </button>
+            - {description}: <span> {getScore(ability)} </span>
           </p>
         );
       });
@@ -57,17 +68,44 @@ function BoxDisplay({ studentId, studentName }) {
       (totalAbility / (filteredResults.length * 2)) * 100
     );
 
-    console.log(filteredResults);
+    console.log(averageAbility);
     const abilitiesAreAllNull = filteredResults.every(
       (lo) => lo.ability === null
     );
-    if (abilitiesAreAllNull) {
-      return " " + "Not covered yet!";
-    } else {
-      return " " + averageAbility + " " + "%";
-    }
+    return abilitiesAreAllNull ? null : averageAbility;
   };
+
+  function getLabelFromAbility(averageAbility) {
+    if (averageAbility === null) {
+      return " Not covered";
+    }
+    if (averageAbility < 25) {
+      return " Not confident";
+    }
+    if (averageAbility > 25 && averageAbility < 75) {
+      return " Still learning";
+    }
+    if (averageAbility > 75) {
+      return "  Confident";
+    }
+  }
+
+  function getClassNameFromAbility(averageAbility) {
+    if (averageAbility === null) {
+      return " text-dark";
+    }
+    if (averageAbility < 25) {
+      return "btn-red text-light";
+    } else if (averageAbility > 25 && averageAbility < 75) {
+      return "btn-yellow text-dark";
+    } else if (averageAbility > 75) {
+      return " btn-green text-light";
+    }
+  }
+
+ 
   console.log(getAverageAbility());
+
   return (
     <Container className="learning-objective-container">
       <h2>{studentName}</h2>
@@ -75,9 +113,14 @@ function BoxDisplay({ studentId, studentName }) {
       <Accordion>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="0"
+              className={getClassNameFromAbility(getAverageAbility("html"))}
+            >
               HTML:
-              {getAverageAbility("html")}
+              {getLabelFromAbility(getAverageAbility("html"))}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
@@ -87,9 +130,14 @@ function BoxDisplay({ studentId, studentName }) {
 
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+            <Accordion.Toggle
+              eventKey="1"
+              variant="link"
+              as={Button}
+              className={getClassNameFromAbility(getAverageAbility("css"))}
+            >
               CSS:
-              {getAverageAbility("css")}
+              {getLabelFromAbility(getAverageAbility("css"))}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
@@ -99,9 +147,16 @@ function BoxDisplay({ studentId, studentName }) {
 
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="2">
+            <Accordion.Toggle
+              eventKey="2"
+              variant="link"
+              as={Button}
+              className={getClassNameFromAbility(
+                getAverageAbility("javascript")
+              )}
+            >
               JavaScript:
-              {getAverageAbility("javascript")}
+              {getLabelFromAbility(getAverageAbility("javascript"))}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="2">
@@ -111,9 +166,14 @@ function BoxDisplay({ studentId, studentName }) {
 
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="3">
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="3"
+              className={getClassNameFromAbility(getAverageAbility("react"))}
+            >
               React:
-              {getAverageAbility("react")}
+              {getLabelFromAbility(getAverageAbility("react"))}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="3">
@@ -123,9 +183,14 @@ function BoxDisplay({ studentId, studentName }) {
 
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="4">
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="4"
+              className={getClassNameFromAbility(getAverageAbility("node"))}
+            >
               Node:
-              {getAverageAbility("node")}
+              {getLabelFromAbility(getAverageAbility("node"))}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="4">
@@ -135,9 +200,14 @@ function BoxDisplay({ studentId, studentName }) {
 
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="5">
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="5"
+              className={getClassNameFromAbility(getAverageAbility("sql"))}
+            >
               SQL:
-              {getAverageAbility("sql")}
+              {getLabelFromAbility(getAverageAbility("sql"))}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="5">
