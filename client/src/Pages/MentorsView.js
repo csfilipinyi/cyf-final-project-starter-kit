@@ -70,11 +70,21 @@ function MentorsView() {
     <a href="/mentorsedit" className="signup-link">
       Edit Learning Objectives
     </a>
+   
   );
+   let logout = (
+     <a href="/">
+       <img
+         src="https://www.flaticon.com/svg/static/icons/svg/159/159707.svg"
+         alt="logout"
+         className="logout-img"
+       ></img>
+     </a>
+   );
 
   return (
     <div className="mentorsview-page">
-      <Header editLearningObjectives={editLearningObjectives} />
+      <Header editLearningObjectives={editLearningObjectives} logout={logout} />
       <h1>Welcome Mentor</h1>
       <div className="main-container">
         <div className="studentName-Container">

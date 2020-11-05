@@ -51,6 +51,7 @@ body {
   justify-content: space-between;
   padding: 2%;
   font-size: larger;
+  margin-bottom: 60px;
 }
 
 .sign-form label {
