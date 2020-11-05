@@ -123,7 +123,7 @@ li {
 }
 .default-skill-display {
   color: black;
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 400;
   line-height: 65px;
 }
@@ -136,7 +136,6 @@ li {
   color: #db4437;
   text-decoration-line: underline;
   font-weight: bolder;
-  text-size-adjust: 42px;
 }
 
 .skills-container {
@@ -154,6 +153,21 @@ li {
   min-height: 100vh;
   padding: 2%;
   text-align: left;
+}
+.studentName-Container a {
+  color: black;
+}
+.students-name {
+  border-bottom: 1px solid #db4437;
+  font-size: 18px;
+  margin-right: 30px;
+  font-weight: 900;
+}
+
+.students-name:focus {
+  color: #db4437;
+  font-size: 18px;
+  margin-right: 30px;
 }
 
 .skills-container A {
@@ -225,17 +239,17 @@ li {
   border-radius: 5px;
 }
 
-.skill-name {
+/* .skill-name {
   margin-bottom: 10%;
-}
+} */
 
-.name-list {
+/* .name-list {
   font-size: larger;
-}
+} */
 
-.student-list {
+/* .student-list {
   position: relative;
-}
+} */
 
 /* .students-name {
   position: absolute;
