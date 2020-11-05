@@ -1,9 +1,8 @@
 import React from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
-
 export default function Header({ editLearningObjectives }) {
-export default function Header({ editLoImg, back }) {
+  // export default function Header({ editLoImg, back }) {
   return (
     <div className="header">
       <img
@@ -14,10 +13,10 @@ export default function Header({ editLoImg, back }) {
 
       {editLearningObjectives}
 
-     <a href="/MentorsView">
-       <h3>{back}</h3>
-     </a>
-     <a href="/mentorsedit">{editLoImg}</a>
+      {/* <a href="/MentorsView">
+        <h3>{back}</h3>
+      </a> */}
+      {/* <a href="/mentorsedit">{editLoImg}</a> */}
 
       <a href="/">
         <img
