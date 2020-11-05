@@ -17,13 +17,12 @@ import Footer from "../components/Footer";
 
 
 export default function MentorsEdit() {
+  let back = "Back"
   return (
     <Router>
-
       <div className="mentorsedit-page">
-        <Header />
+        <Header back={back} />
       </div>
-
       <div className="edit-display-container">
         <div className="skillNav-display">
           <ul>
@@ -83,12 +82,6 @@ export default function MentorsEdit() {
             </li>
           </ul>
         </div>
-
-        <Header />
-      </div>
-      <div className="skills-container">
-
-
         <Switch>
           <Route path="/mentorsedit/:id" children={<EditBox />} />
         </Switch>
@@ -97,3 +90,4 @@ export default function MentorsEdit() {
     </Router>
   );
 }
+
