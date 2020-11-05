@@ -20,33 +20,33 @@ const ViewMyProfile = ({ profile }) => {
   console.log('avatar', profile.avatar_url)
   return (
     <Container>
-      <Img src={profile.avatar_url}/>
+      {profile.avatar_url&&<Img src={profile.avatar_url}/>}
       <SubCon>
-        <Name>
+        {profile.first_name&&profile.surname&&<Name>
         {profile.first_name} {profile.surname}
         {profile.is_hired && <HiredLabel>Hired</HiredLabel>}
-        </Name>
-        <Description>{profile.location}</Description>
+        </Name>}
+        {profile.location&&<Description>{profile.location}</Description>}
         <IconContainer>
-          <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
-          <LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>
+        {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
+        {profile.linkedin_link&&<LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>}
           <CvIcon></CvIcon>
           <EmailIcon profile={profile}></EmailIcon>
         </IconContainer>
         <DescHead>About Me</DescHead>
-        <Description>{profile.about_me}</Description>
-        <SubHeads> {profile.first_name}'s Interests</SubHeads>
-        <Description>{profile.interest}</Description>
-        <SubHeads>{profile.first_name}’s skills</SubHeads>
+        {profile.about_me&&<Description>{profile.about_me}</Description>}
+        {profile.first_name&&<SubHeads> {profile.first_name}'s Interests</SubHeads>}
+        {profile.interest&&<Description>{profile.interest}</Description>}
+        {profile.first_name&&<SubHeads>{profile.first_name}’s skills</SubHeads>}
         <SkillsContainer>
           {profile.skills && profile.skills.map((skill) => {
             return <SkillBox>{skill}</SkillBox>;
           })}
         </SkillsContainer>
-        <SubHeads>{profile.first_name}'s Portfolio</SubHeads>
-        <SocialText href={profile.portfolio_link} target="blank">
+        {profile.first_name&&<SubHeads>{profile.first_name}'s Portfolio</SubHeads>}
+        {profile.portfolio_link&&<SocialText href={profile.portfolio_link} target="blank">
           Portfolio
-        </SocialText>
+        </SocialText>}
         {profile.statement&&<ContainerStatement>
           <DescHeadPS>Personal Statement</DescHeadPS>
           <RichEditorReader/>

@@ -21,11 +21,11 @@ const OverviewProfileCard = ({ profile, getProfile}) => {
   return (
     <CardContainer>
       {profile.is_hired&&<HiredLabel/>}
-      <Img src={profile.avatar_url}/>
+      {profile.avatar_url&&<profile.avatar_urlImg src={profile.avatar_url}/>}
       <CardBody>
-        <CardTitle>
+        {profile.first_name&&profile.surname&&<CardTitle>
           {profile.first_name} {profile.surname}
-        </CardTitle>
+        </CardTitle>}
         <SubContainer>
           {profile.about_me&&<CardText>{profile.about_me}</CardText>}
         </SubContainer>
