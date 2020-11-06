@@ -2,7 +2,10 @@ import React, {useContext, useEffect, useState} from 'react'
 import {AdminContext} from '../context/AdminContext'
 import {Button, ButtonGroup, InputGroup, FormControl} from 'react-bootstrap'
 import styled from 'styled-components'
+import {ProfileContext} from '../context/ProfileContext'
 import Header from '../components/Header';
+import GraduatesTable from '../components/GraduatesTable'
+import MailBox from '../components/MailBox'
 
 const Admin = () => {
     const [display, setDisplay] =useState('')
@@ -11,16 +14,23 @@ const Admin = () => {
     const [success, setSuccess] = useState(false)
     const [present, setPresent] = useState(false)
 
+    const [receivers, setReceivers] =useState([]);
+    const [mBox, setMBox] =useState(false)
+    const [mailSuccess, setMailSuccess] =useState(false)
+
     const {skillsList, github_accounts, fetchSkills, fetchGithubAccounts, addNewSkill, addNewAccount} = useContext(AdminContext)
-    
+    const {allProfiles,getAllProfiles} = useContext (ProfileContext);
+
     console.log('admin', newAccount, github_accounts)
 
     useEffect (()=>{
         fetchSkills()
         fetchGithubAccounts()
+        getAllProfiles()
     },[])
 
     setTimeout(()=>setSuccess(false),3000);
+    setTimeout(()=>setMailSuccess(false),3000);
     setTimeout(()=>setPresent(false),3000);
 
     const handleChangeSkill =(e)=>{
@@ -60,6 +70,8 @@ const Admin = () => {
     return (
         <Screen>
             <Header/>
+                {mailSuccess&& <MailSucces>The mail has been sent succesfully</MailSucces>}
+                {mBox?<MailBox  setMBox={setMBox} receivers={receivers} setMailSuccess={setMailSuccess}/>:
                 <Container>
                     {success&&<Succesfull><p>Succesfully Added</p></Succesfull>}
                     <InputContainer>
@@ -72,7 +84,7 @@ const Admin = () => {
                                 onChange={handleChangeSkill}
                                 />
                                 <InputGroup.Append>
-                                <Button variant="outline-secondary" onClick={handleClickSkill}>Add Skill</Button>
+                                <StyledAddButton variant="outline-secondary" onClick={handleClickSkill}>Add Skill</StyledAddButton>
                                 </InputGroup.Append>
                             </StyledInputGroup>
                                 {present&&newSkill&&<Present>"{newSkill}"  is already present on our table</Present>}
@@ -86,7 +98,7 @@ const Admin = () => {
                                 onChange={handleChangeAccount}
                                 />
                                 <InputGroup.Append>
-                                <Button variant="outline-secondary" onClick={handleClickAccount}>Add Account</Button>
+                                <StyledAddButton variant="outline-secondary" onClick={handleClickAccount}>Add Account</StyledAddButton>
                                 </InputGroup.Append>
                                 {present&&newAccount&&<Present>"{newAccount}" is already present on our table</Present>}
                             </StyledInputGroup>
@@ -95,6 +107,7 @@ const Admin = () => {
                     <StyledButtonGroup aria-label="Basic example">
                         <StyledButton variant="secondary" onClick={()=>setDisplay('skills')} className={display==='skills'?'active':null}>Skills</StyledButton>
                         <StyledButton variant="secondary" onClick={()=>setDisplay('accounts')} className={display==='accounts'?'active':null}>Github Accounts</StyledButton>
+                        <StyledButton variant="secondary" onClick={()=>setDisplay('graduates')} className={display==='accounts'?'active':null}>Graduates</StyledButton>
                     </StyledButtonGroup>
                     {display==='skills'&&<SkillsContainer>
                             {skillsList.map((i)=>{
@@ -106,7 +119,8 @@ const Admin = () => {
                                         return <Account>{i.account_name}</Account>
                                     })}
                         </AccountsContainer>}
-                </Container>
+                    {display==='graduates'&&<GraduatesTable allProfiles={allProfiles} setReceivers={setReceivers} receivers={receivers} setMBox={setMBox}/>}
+                </Container>}
         </Screen>
     )
 }
@@ -148,6 +162,9 @@ const InputContainer = styled.div`
     margin-top:90px;
     width:70%;
     display:flex;
+`
+const StyledAddButton =styled(Button)`
+    z-index:0;
 `
 
 const StyledButton = styled(Button)`
@@ -215,4 +232,21 @@ const Account =styled.div`
     text-align:center;
     padding-top:5px;
     border-radius:4%;
+`
+
+const MailSucces = styled.div`
+    width:440px;
+    height:120px;
+    background-color:black;
+    color:white;
+    border-radius:4px;
+    font-size:22px;
+    font-family:arial;
+    font-weight:bold;
+    diplay:flex;
+    position:absolute;
+    top:350px;
+    left:35%;
+    text-align:center;
+    padding-top:50px;
 `

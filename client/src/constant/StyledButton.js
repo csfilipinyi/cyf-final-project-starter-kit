@@ -60,13 +60,12 @@ const StyleButton = styled(Button)`
     }
     &.lg{
         height:56px;
-        width:155px;
+        width:150px;
+        border:4px solid green;
         color: #FFFFFF;
         font-family: Arial;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: bold;
-        letter-spacing: 0;
-        line-height: 26px;
     }
     &:active{
         background-color:#red;

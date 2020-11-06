@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ViewSkills from "../components/ViewSkills";
 import StyledButton from "../constant/StyledButton";
 import { useHistory } from "react-router-dom";
-import GitHubIcon from "./GitHubIconIcon.js";
+import GitHubIcon from "./GitHubIcon.js";
 import LinkedinIcon from "./LinkedinIcon";
 import CvIcon from "./CvIcon";
 import EmailIcon from "./EmailIcon";

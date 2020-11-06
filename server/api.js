@@ -1,4 +1,8 @@
 var bodyParser = require("body-parser");
+const nodemailer = require('nodemailer');
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
+const cron = require('node-cron')
 
 import { Router } from "express";
 
@@ -327,5 +331,83 @@ router.delete("/graduates/:id", function (req, res) {
     }
   );
 });
+
+//MAIL SENDER
+
+const myOAuth2Client = new OAuth2(
+  "750224175661-1a4rbgivicg4ev7ufsn8jk155b11eh3p.apps.googleusercontent.com",
+  "QZdqdWUZ8zhRDOfkGssucbkj",
+  "https://developers.google.com/oauthplayground"
+)
+
+myOAuth2Client.setCredentials({
+  refresh_token:"1//0fu2pTuPeXMg_CgYIARAAGA8SNwF-L9IrAQeYWpE41TO-CaKeJ9VYNDCpA5hJ-uua2BRgzAlz3DiilKvIwp2uxByWgFBB1_uxJEE",
+ });
+
+const myAccessToken = async () => {
+    const token = await myOAuth2Client.getAccessToken
+    return token
+}
+
+let transporter = nodemailer.createTransport({
+  service:"gmail",
+  auth: {
+      type: "OAuth2",
+      user:"cyf.graduate.platform@gmail.com",
+      clientId: "750224175661-1a4rbgivicg4ev7ufsn8jk155b11eh3p.apps.googleusercontent.com",
+      clientSecret: "QZdqdWUZ8zhRDOfkGssucbkj",
+      refreshToken:"1//04ODmHKF0G0jGCgYIARAAGAQSNwF-L9IrOQ-ub1CcsVr4TVm0v63qcscOy33Vs_Uvv6o-j2NFVfCbBQnrrKov_tETkYbbXPjHjfo",
+      // accessToken:myAccessToken
+  },
+    tls:{
+      rejectUnauthorized:false
+    }
+});
+
+
+router.post("/send", (req,res)=>{
+    console.log("email", req.body)
+    const sender = req.body.sender;
+    const receiver=req.body.receiver;
+    const subject= req.body.subject;
+    const message = req.body.message;
+   
+    const mailOptions = {
+      from: sender,
+      to: receiver,
+      subject:subject, 
+      text: message
+    }
+
+    transporter.sendMail(mailOptions, (err,result)=>{
+      if(err){res.status(404).send(err)
+      }else{
+      transporter.close();
+      res.status(200).send("Email has been sent succesfully")}
+      }
+    )
+})
+
+const receivers =["cyf.graduate.platform@gmail.com", "obakir90@gmail.com", "obakir90.c@gmail.com"]
+
+cron.schedule('5 * * * * *', ()=>{
+  receivers.map((receiver)=>{
+    const mail = {
+      from: "cyf.graduate.platform@gmail.com",
+      to: receiver,
+      subject: "Mail", 
+      text: "This mail sent from cyf"
+    }
+    transporter.sendMail(mail, (err, info)=>{
+        if(err){
+            console.log('hataa var', err)
+        } else {
+            console.log('email is sent'+info.response)
+        }
+    })
+  })
+})
+
+
 
 export default router;
