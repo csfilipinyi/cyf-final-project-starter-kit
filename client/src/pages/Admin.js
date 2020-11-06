@@ -49,8 +49,10 @@ const Admin = () => {
             }
             await addNewSkill(skill)
             setSuccess(true)
+            setNewSkill('')
         } else {
             setPresent(true)
+            setNewSkill('')
         }
     }
 
@@ -62,8 +64,10 @@ const Admin = () => {
             }
             await addNewAccount(account)
             setSuccess(true)
+            setNewAccount('')
         } else {
             setPresent(true)
+            setNewAccount('')
         }
     }
 

@@ -87,7 +87,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
     let word = e.target.value.trim().toUpperCase();
     if (event == " ") {
       response.includes(word)&&!newSkills.includes(word)&&setNewSkills([...newSkills, word])
-      setFieldValue("skills", "");
+      setFieldValue("skills", " ");
     }
   };
 

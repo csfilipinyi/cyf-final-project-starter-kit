@@ -31,7 +31,7 @@ const ViewMyProfile = (props) => {
         <IconContainer>
         {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
         {profile.linkedin_link&&<LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>}
-          <CvIcon></CvIcon>
+          <CvIcon CvLink={profile.cv_link}></CvIcon>
           <EmailIcon singleProfile={profile}></EmailIcon>
         </IconContainer>
         <DescHead>About Me</DescHead>

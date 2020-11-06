@@ -35,7 +35,7 @@ const OverviewProfileCard = ({ singleProfile, getProfile}) => {
         <IconContainer>
           {singleProfile.github_link&&<GitHubIcon gitHubLink={singleProfile.github_link}></GitHubIcon>}
           {singleProfile.linkedin_link&&<LinkedinIcon linkedinLink={singleProfile.linkedin_link}></LinkedinIcon>}
-          <CvIcon></CvIcon>
+          <CvIcon CvLink={singleProfile.cv_link}></CvIcon>
           <EmailIcon singleProfile={singleProfile}></EmailIcon>
         </IconContainer>
         <StyledButton

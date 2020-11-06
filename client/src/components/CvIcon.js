@@ -2,11 +2,11 @@ import React from "react";
 import CIcon from "../assets/icons/earth-globe-grid-interface-symbol.svg";
 import styled from "styled-components";
 
-const CvIcon = () => {
+const CvIcon = ({CvLink}) => {
   return (
     <>
       <Container>
-        <CVIcon src={CIcon} />
+        <CVIcon src={CIcon} href={CvLink}/>
       </Container>
     </>
   );

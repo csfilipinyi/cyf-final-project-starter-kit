@@ -46,7 +46,7 @@ const GraduatesTable = ({allProfiles, setReceivers, receivers, setMBox}) =>{
                                     <td>{singleProfile.location}</td>
                                     <td>
                                         <Social>
-                                            <GitHubIcon/><LinkedinIcon/><CvIcon/>
+                                            <GitHubIcon gitHubLink={singleProfile.github_link}/><LinkedinIcon linkedinLink={singleProfile.linkedin_link} /><CvIcon CvLink={singleProfile.cv_link}/>
                                         </Social>
                                     </td>
                                     
