@@ -107,7 +107,7 @@ const Admin = () => {
                     <StyledButtonGroup aria-label="Basic example">
                         <StyledButton variant="secondary" onClick={()=>setDisplay('skills')} className={display==='skills'?'active':null}>Skills</StyledButton>
                         <StyledButton variant="secondary" onClick={()=>setDisplay('accounts')} className={display==='accounts'?'active':null}>Github Accounts</StyledButton>
-                        <StyledButton variant="secondary" onClick={()=>setDisplay('graduates')} className={display==='accounts'?'active':null}>Graduates</StyledButton>
+                        <StyledButton variant="secondary" onClick={()=>setDisplay('graduates')} className={display==='graduates'?'active':null}>Graduates</StyledButton>
                     </StyledButtonGroup>
                     {display==='skills'&&<SkillsContainer>
                             {skillsList.map((i)=>{
