@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { ProfileContext } from "../context/ProfileContext";
 import styled from "styled-components";
-import GitHubIcon from "./GitHubIconIcon.js";
+import GitHubIcon from "./GitHubIcon.js";
 import LinkedinIcon from "./LinkedinIcon";
 import CvIcon from "./CvIcon";
 import EmailIcon from "./EmailIcon";
