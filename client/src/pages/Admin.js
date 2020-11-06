@@ -49,10 +49,10 @@ const Admin = () => {
             }
             await addNewSkill(skill)
             setSuccess(true)
-            setTimeout(()=>setNewSkill(''),5000);           
+            setTimeout(()=>setNewSkill(''),3000);           
         } else {
             setPresent(true)
-            setTimeout(()=>setNewSkill(''),5000); 
+            setTimeout(()=>setNewSkill(''),3000); 
         }          
     }
 
@@ -64,10 +64,10 @@ const Admin = () => {
             }
             await addNewAccount(account)
             setSuccess(true);
-            setTimeout(()=>setNewAccount(''),5000);           
+            setTimeout(()=>setNewAccount(''),3000);           
         } else {
             setPresent(true);
-            setTimeout(()=>setNewAccount(''),5000);           
+            setTimeout(()=>setNewAccount(''),3000);           
         }
     }
 
@@ -86,6 +86,7 @@ const Admin = () => {
                                 aria-label="Add a new skill"
                                 aria-describedby="basic-addon2"
                                 onChange={handleChangeSkill}
+                                value={newSkill}
                                 />
                                 <InputGroup.Append>
                                 <StyledAddButton variant="outline-secondary" onClick={handleClickSkill}>Add Skill</StyledAddButton>
@@ -100,6 +101,7 @@ const Admin = () => {
                                 aria-label="Add a new github name of a graduate"
                                 aria-describedby="basic-addon2"
                                 onChange={handleChangeAccount}
+                                value={newAccount}
                                 />
                                 <InputGroup.Append>
                                 <StyledAddButton variant="outline-secondary" onClick={handleClickAccount}>Add Account</StyledAddButton>
