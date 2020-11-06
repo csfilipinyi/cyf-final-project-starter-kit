@@ -87,7 +87,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
     let word = e.target.value.trim().toUpperCase();
     if (event == " ") {
       response.includes(word)&&!newSkills.includes(word)&&setNewSkills([...newSkills, word])
-      setFieldValue("skills", " ");
+      setFieldValue("skills", "");
     }
   };
 
@@ -191,8 +191,8 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
 								label='Your Key Skills'
                 info = 'Type your skills and press ‘Space’'
                 onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
-                autocomplete="new-password"
-                onBlur={handleSkillError}
+                autocomplete="off"
+                onBlur={()=>setFieldValue(newSkills)}
                 skillError={skillError}
               /> 
               {skillError&&<p>Required</p>}
@@ -301,7 +301,7 @@ const ButtonContainer = styled.div`
 
 const SubButtonContainer =styled.div`
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   width:100%
 `
 
