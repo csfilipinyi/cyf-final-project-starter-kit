@@ -32,18 +32,14 @@ CREATE TABLE achievements
    id SERIAL  PRIMARY KEY,
    student_id      INTEGER REFERENCES users(user_id),
    learning_obj_id INTEGER REFERENCES learning_objective(id),
-
-   ability INT,
-   date_added DATE NOT NULL DEFAULT 'CURRENT_DATE'
-
-
-
-
-   
+ability INT,
+   date_added DATE NOT NULL DEFAULT CURRENT_DATE   
 );
 
 INSERT into learning_objective(skill, description)
-      VALUES('html', 'Understand what ''parent'' and ''child'' is'),
+      VALUES
+      
+      ('html', 'Understand what ''parent'' and ''child'' is'),
       ('html', 'Can create and link a stylesheet is'),
       ('html', 'Understand what semantic tags are and how to use them'),
       ('html', 'Be able to include a form in a web page'),
@@ -59,6 +55,12 @@ INSERT into learning_objective(skill, description)
       ('css', 'Understand how to implement Grid and when to use it'),
       ('css', 'Understand how to include Bootstrap in a project'),
       ('css', 'Be able to use Bootstrap classes'),
+      ('git', 'Can initialize a repo for a new project'),
+      ('git', 'Can use a .gitignore file'),
+      ('git', 'Can use the commands git add, git commit and git push correctly'),
+      ('git', 'Can make a pull request on GitHub'),
+      ('git', 'Know how to handle a merge conflict'),
+      ('git', 'Know how to fork a repo and understand how this differs from cloning'),
       ('javascript', 'Be able to link a Javascript file in your project'),
       ('javascript', 'Be able to do a console.log()'),
       ('javascript', 'Understand what a console.log is used for'),
