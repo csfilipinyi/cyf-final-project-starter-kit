@@ -15,7 +15,7 @@ export default function EditBox() {
   const token = window.localStorage.getItem("token");
 
   const getLearningObj = () => {
-    fetch(`/api/learningobjectives/${id}`, {headers: {token}})
+    fetch(`/api/learningobjectives/${id}`, { headers: { token } })
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
@@ -33,7 +33,7 @@ export default function EditBox() {
     fetch(`/api/learningobjectives/${LearningID}`, {
       method: "DELETE",
       headers: {
-        token
+        token,
       },
     }).then(() => {
       let newData = learningObj.filter((p) => p.id !== LearningID);
@@ -50,7 +50,7 @@ export default function EditBox() {
         }),
         headers: {
           "Content-Type": "application/json",
-          token
+          token,
         },
       })
         .then((res) => res.json())
@@ -114,15 +114,13 @@ export default function EditBox() {
                       <>
                         <button
                           onClick={() => updateLearningObj(text, id)}
-                          className="sumbit"
-                          variant="secondary"
+                          className="submit update-btn"
                         >
                           Update
                         </button>
                         <button
                           onClick={() => cancelUpdate("")}
-                          className="sumbit"
-                          variant="secondary"
+                          className="submit cancel-btn "
                         >
                           Cancel
                         </button>

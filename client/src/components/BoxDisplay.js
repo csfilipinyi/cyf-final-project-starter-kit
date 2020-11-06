@@ -33,15 +33,15 @@ function BoxDisplay({ studentId, studentName }) {
   useEffect(fetchDetails, [studentId]);
   const abilityLength = [];
   console.log(abilityLength);
- //confident still learning not confident
-  function getScore(ability){
-    if(ability ===0){
+  //confident still learning not confident
+  function getScore(ability) {
+    if (ability === 0) {
       return " Not Confident";
     }
-    if(ability===1){
+    if (ability === 1) {
       return " Still Learning";
     }
-    if(ability=== 2){
+    if (ability === 2) {
       return " Confident";
     }
   }
@@ -103,7 +103,6 @@ function BoxDisplay({ studentId, studentName }) {
     }
   }
 
- 
   console.log(getAverageAbility());
 
   return (

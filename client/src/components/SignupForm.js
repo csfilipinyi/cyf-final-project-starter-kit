@@ -3,12 +3,12 @@ import Modal from "./Modal";
 import useFormValidation from "./useFormValidation";
 import "../App.css";
 import validate from "./SignupValidation";
-import Footer from "./Footer"
+import Footer from "./Footer";
 import Header from "./Header";
 const SignupForm = () => {
   const [hasRegistered, setHasRegistered] = useState(false);
   const [serverError, setServerError] = useState("");
-  
+
   const intialState = {
     firstName: "",
     lastName: "",
@@ -170,7 +170,7 @@ const SignupForm = () => {
             {errors.userRole && <p className="error">*{errors.userRole} </p>}
             <button
               to="/modal"
-              className="submit"
+              className="signup-submit"
               type="submit"
               value="Submit"
               className="submit"
@@ -181,8 +181,10 @@ const SignupForm = () => {
           </div>
         </form>
       )}
-      <div className="sign-up-footer">   <Footer /></div>
-   
+
+      <div className="sign-up-footer">
+        <Footer />
+      </div>
     </div>
   );
 };
