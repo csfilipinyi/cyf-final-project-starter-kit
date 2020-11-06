@@ -48,11 +48,11 @@ const Admin = () => {
                 skill_name: skill_name
             }
             await addNewSkill(skill)
-            setSuccess(true)&&setNewSkill('')
+            setSuccess(true)
+            setTimeout(()=>setNewSkill(''),5000);           
         } else {
-            console.log('test skills', newSkill)
-            setPresent(true)&&setNewSkill('');
-        }
+            setPresent(true)
+            setTimeout(()=>setNewSkill(''),5000);           
     }
 
     const handleClickAccount= async (e)=>{
@@ -63,8 +63,10 @@ const Admin = () => {
             }
             await addNewAccount(account)
             setSuccess(true);
+            setTimeout(()=>setNewAccount(''),5000);           
         } else {
             setPresent(true);
+            setTimeout(()=>setNewAccount(''),5000);           
         }
     }
 
