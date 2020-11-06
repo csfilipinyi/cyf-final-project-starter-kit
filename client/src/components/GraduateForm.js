@@ -18,7 +18,12 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   const { fetchSkills, skillsList } = useContext(AdminContext);
 
   const [newSkills, setNewSkills] = useState([]);
+  const [skillError, setSkillError] = useState(false)
   const [isHired, setIsHired] = useState(false);
+
+  const handleSkillError=()=>{
+    !newSkills>0&&setSkillError(true)
+  }
 
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
@@ -59,8 +64,10 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
       statement:statement,
       is_hired:isHired
     };
-    await handleClick(newProfile);
-    history.push(`/myprofile`);
+    if(!skillError){
+      await handleClick(newProfile);
+      history.push(`/myprofile`);
+    }
   };
 
   const handleReset = () => {
@@ -174,7 +181,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
                 name="portfolio"
                 label="Your Portfolio/Project"
               />
-               <FormField
+              <FormField
                 name="cv"
                 description="Please provide a link to your CV. You can do that by creating a Google doc and sharing the link to that document. You may use any other online service."
                 label="Your CV"
@@ -185,7 +192,10 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
                 info = 'Type your skills and press ‘Space’'
                 onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
                 autocomplete="new-password"
+                onBlur={handleSkillError}
+                skillError={skillError}
               /> 
+              {skillError&&<p>Required</p>}
 							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
@@ -285,7 +295,6 @@ const StyledForm = styled(Form)`
 const ButtonContainer = styled.div`
   margin:50px 0;
   display:flex;
-  flex-direction:column;
   width:80%;
   justify-content:space-between;
 `;
