@@ -27,7 +27,7 @@ export default function MentorsEdit() {
   );
   return (
     <Router>
-      <Header logout={logout} />
+      <Header logout={logout} back={back} />
       <div className="mentorsedit-page"></div>
 
       {/* <div className="mentorsedit-page">
