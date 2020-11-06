@@ -48,12 +48,10 @@ const Admin = () => {
                 skill_name: skill_name
             }
             await addNewSkill(skill)
-            setSuccess(true)
-            setNewSkill('')
+            setSuccess(true)&&setNewSkill('')
         } else {
             console.log('test skills', newSkill)
-            setPresent(true);
-            setNewSkill('');
+            setPresent(true)&&setNewSkill('');
         }
     }
 
