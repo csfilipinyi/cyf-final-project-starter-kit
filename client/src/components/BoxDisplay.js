@@ -150,6 +150,23 @@ function BoxDisplay({ studentId, studentName }) {
               eventKey="2"
               variant="link"
               as={Button}
+              className={getClassNameFromAbility(getAverageAbility("git"))}
+            >
+              GIT:
+              {getLabelFromAbility(getAverageAbility("git"))}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="2">
+            <Card.Body>{displayDetails("git")}</Card.Body>
+          </Accordion.Collapse>
+        </Card>
+
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle
+              eventKey="3"
+              variant="link"
+              as={Button}
               className={getClassNameFromAbility(
                 getAverageAbility("javascript")
               )}
@@ -158,7 +175,7 @@ function BoxDisplay({ studentId, studentName }) {
               {getLabelFromAbility(getAverageAbility("javascript"))}
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="2">
+          <Accordion.Collapse eventKey="3">
             <Card.Body>{displayDetails("javascript")}</Card.Body>
           </Accordion.Collapse>
         </Card>
@@ -168,14 +185,14 @@ function BoxDisplay({ studentId, studentName }) {
             <Accordion.Toggle
               as={Button}
               variant="link"
-              eventKey="3"
+              eventKey="4"
               className={getClassNameFromAbility(getAverageAbility("react"))}
             >
               React:
               {getLabelFromAbility(getAverageAbility("react"))}
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="3">
+          <Accordion.Collapse eventKey="4">
             <Card.Body>{displayDetails("react")}</Card.Body>
           </Accordion.Collapse>
         </Card>
@@ -185,14 +202,14 @@ function BoxDisplay({ studentId, studentName }) {
             <Accordion.Toggle
               as={Button}
               variant="link"
-              eventKey="4"
+              eventKey="5"
               className={getClassNameFromAbility(getAverageAbility("node"))}
             >
               Node:
               {getLabelFromAbility(getAverageAbility("node"))}
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="4">
+          <Accordion.Collapse eventKey="5">
             <Card.Body>{displayDetails("node")}</Card.Body>
           </Accordion.Collapse>
         </Card>
@@ -202,14 +219,14 @@ function BoxDisplay({ studentId, studentName }) {
             <Accordion.Toggle
               as={Button}
               variant="link"
-              eventKey="5"
+              eventKey="6"
               className={getClassNameFromAbility(getAverageAbility("sql"))}
             >
               SQL:
               {getLabelFromAbility(getAverageAbility("sql"))}
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="5">
+          <Accordion.Collapse eventKey="6">
             <Card.Body>{displayDetails("sql")}</Card.Body>
           </Accordion.Collapse>
         </Card>
