@@ -93,11 +93,10 @@ const Container = styled.div`
 `
 
 const ButtonContainer =styled.div`
-    diplay:flex;
+    display:flex;
     justify-content:space-between;
     align-items:space-between;
     width:70%;
-    // background-color:yellow;
 `
 
 const StyledForm=styled(Form)`

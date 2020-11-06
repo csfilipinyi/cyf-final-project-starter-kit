@@ -52,7 +52,8 @@ const Admin = () => {
             setTimeout(()=>setNewSkill(''),5000);           
         } else {
             setPresent(true)
-            setTimeout(()=>setNewSkill(''),5000);           
+            setTimeout(()=>setNewSkill(''),5000); 
+        }          
     }
 
     const handleClickAccount= async (e)=>{
