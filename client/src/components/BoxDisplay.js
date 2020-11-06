@@ -58,34 +58,37 @@ function BoxDisplay({ studentId, studentName }) {
   };
 
   const getAverageAbility = (skill) => {
-    const filteredResults = studentDetail.filter((lo) => lo.skill === skill);
-    const totalAbility = filteredResults.reduce(
+    const allLoResults = studentDetail.filter((lo) => lo.skill === skill);
+    const abilitiesAreAllNull = allLoResults.every((lo) => lo.ability === null);
+    if (abilitiesAreAllNull) {
+      return null;
+    }
+    const filteredLo = allLoResults.filter((lo) => lo.ability !== null);
+    const totalAbility = filteredLo.reduce(
       (currentTotalAbility, { ability }) => currentTotalAbility + ability,
       0
     );
 
     const averageAbility = Math.round(
-      (totalAbility / (filteredResults.length * 2)) * 100
+      (totalAbility / (filteredLo.length * 2)) * 100
     );
 
-    console.log(averageAbility);
-    const abilitiesAreAllNull = filteredResults.every(
-      (lo) => lo.ability === null
-    );
-    return abilitiesAreAllNull ? null : averageAbility;
+    console.log(skill, averageAbility);
+
+    return averageAbility;
   };
 
   function getLabelFromAbility(averageAbility) {
     if (averageAbility === null) {
       return " Not covered";
     }
-    if (averageAbility < 25) {
+    if (averageAbility <= 25) {
       return " Not confident";
     }
     if (averageAbility > 25 && averageAbility < 75) {
       return " Still learning";
     }
-    if (averageAbility > 75) {
+    if (averageAbility >= 75) {
       return "  Confident";
     }
   }
@@ -94,11 +97,11 @@ function BoxDisplay({ studentId, studentName }) {
     if (averageAbility === null) {
       return " text-dark";
     }
-    if (averageAbility < 25) {
+    if (averageAbility <= 25) {
       return "btn-red text-light";
     } else if (averageAbility > 25 && averageAbility < 75) {
       return "btn-yellow text-dark";
-    } else if (averageAbility > 75) {
+    } else if (averageAbility >= 75) {
       return " btn-green text-light";
     }
   }
