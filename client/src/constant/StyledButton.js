@@ -37,6 +37,7 @@ const StyleButton = styled(Button)`
         font-family: Arial;
         font-size: 18px;
         font-weight: bold;
+        margin:5px;
     }
     &.md{
         height:56px;
@@ -47,10 +48,11 @@ const StyleButton = styled(Button)`
         font-family: Arial;
         font-size: 18px;
         font-weight: bold;
+        margin:5px;
     }
     &.danger{
         height:56px;
-        width:150px;
+        width:180px;
         background-color:red;
         border:4px solid red;
         color:white;

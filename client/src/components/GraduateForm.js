@@ -192,7 +192,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
                 info = 'Type your skills and press ‘Space’'
                 onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
                 autocomplete="off"
-                onBlur={()=>setFieldValue(newSkills)}
+                onBlur={()=>props.setFieldValue(newSkills)}
                 skillError={skillError}
               /> 
               {skillError&&<p>Required</p>}
