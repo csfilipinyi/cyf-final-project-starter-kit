@@ -32,8 +32,6 @@ function MentorsView() {
         if (data == "not authorized" || data.role == "Student") {
           history.push("/");
         }
-        let name = window.localStorage.setItem("name", data.first_name);
-        console.log(name);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -70,12 +68,22 @@ function MentorsView() {
     <a href="/mentorsedit" className="signup-link">
       Edit Learning Objectives
     </a>
+   
   );
+   let logout = (
+     <a href="/">
+       <img
+         src="https://www.flaticon.com/svg/static/icons/svg/159/159707.svg"
+         alt="logout"
+         className="logout-img"
+       ></img>
+     </a>
+   );
 
   return (
     <div className="mentorsview-page">
-      <Header editLearningObjectives={editLearningObjectives} />
-      <h1>Welcome Mentor</h1>
+      <Header editLearningObjectives={editLearningObjectives} logout={logout} />
+  <h1>Welcome {window.localStorage.getItem("name")}</h1>
       <div className="main-container">
         <div className="studentName-Container">
           {/* <ul>

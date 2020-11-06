@@ -53,6 +53,7 @@ export default function Html({ skill }) {
 
   return (
     <div className="learning-objective-container">
+      <p>Welcome {window.localStorage.getItem("name")}</p>
       <h2>{skill}</h2>
       <ul>
         {xyz.map(({ description, id, ability }, index) => {

@@ -3,7 +3,8 @@ import Modal from "./Modal";
 import useFormValidation from "./useFormValidation";
 import "../App.css";
 import validate from "./SignupValidation";
-
+import Footer from "./Footer"
+import Header from "./Header";
 const SignupForm = () => {
   const [hasRegistered, setHasRegistered] = useState(false);
   const [serverError, setServerError] = useState("");
@@ -68,6 +69,7 @@ const SignupForm = () => {
 
   return (
     <div>
+      <Header />
       {hasRegistered ? (
         <Modal role={input.userRole} />
       ) : (
@@ -179,6 +181,8 @@ const SignupForm = () => {
           </div>
         </form>
       )}
+      <div className="sign-up-footer">   <Footer /></div>
+   
     </div>
   );
 };
