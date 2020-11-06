@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 const routes = {
   "/skills/html": () => <SkillTracker skill="html" />,
   "/skills/css": () => <SkillTracker skill="css" />,
+  "/skills/git": () => <SkillTracker skill="git" />,
   "/skills/javascript": () => <SkillTracker skill="javascript" />,
   "/skills/react": () => <SkillTracker skill="react" />,
   "/skills/node": () => <SkillTracker skill="node" />,
@@ -61,6 +62,7 @@ export default function SkillsNav() {
         {routeResult}
         <A href="/skills/html">Html</A>
         <A href="/skills/css">CSS</A>
+        <A href="/skills/git">GIT</A>
         <A href="/skills/javascript">Javascript</A>
         <A href="/skills/react">React</A>
         <A href="/skills/node">Node JS</A>
