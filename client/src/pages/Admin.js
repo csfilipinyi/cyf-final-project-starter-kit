@@ -51,8 +51,9 @@ const Admin = () => {
             setSuccess(true)
             setNewSkill('')
         } else {
-            setPresent(true)
-            setNewSkill('')
+            console.log('test skills', newSkill)
+            setPresent(true);
+            setNewSkill('');
         }
     }
 
@@ -63,11 +64,9 @@ const Admin = () => {
                 account_name: account_name
             }
             await addNewAccount(account)
-            setSuccess(true)
-            setNewAccount('')
+            setSuccess(true);
         } else {
-            setPresent(true)
-            setNewAccount('')
+            setPresent(true);
         }
     }
 
