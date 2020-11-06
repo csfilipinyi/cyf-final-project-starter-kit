@@ -38,7 +38,7 @@ export default function MentorsEdit() {
         <Switch>
           <Route path="/mentorsedit/:id" children={<EditBox />} />
         </Switch>
-        <div className="skillNav-display skills-container">
+        <div className="skillNav-display ">
           <ul>
             <li>
               <NavLink

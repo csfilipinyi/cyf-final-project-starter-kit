@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 export default function AddForm({ getLearningObj }) {
-    const token = window.localStorage.getItem("token");
+  const token = window.localStorage.getItem("token");
   const initialDescription = {
     skill: "",
     description: "",
@@ -15,14 +15,14 @@ export default function AddForm({ getLearningObj }) {
     setAddDescription(updateInput);
     console.log(updateInput);
   }
- async function hadleSubmit(e) {
+  async function hadleSubmit(e) {
     e.preventDefault();
 
-  await  fetch(`/api/learningobjectives`, {
+    await fetch(`/api/learningobjectives`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        token
+        token,
       },
       body: JSON.stringify({
         skill: addDescription.skill,
@@ -59,7 +59,7 @@ export default function AddForm({ getLearningObj }) {
           name="description"
         />
         <div className="add-btn-container">
-          <button className="sumbit add-btn" type="submit" variant="secondary">
+          <button className=" add-btn" type="submit" variant="secondary">
             ADD
           </button>
         </div>

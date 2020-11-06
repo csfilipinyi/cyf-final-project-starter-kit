@@ -68,22 +68,23 @@ function MentorsView() {
     <a href="/mentorsedit" className="signup-link">
       Edit Learning Objectives
     </a>
-   
   );
-   let logout = (
-     <a href="/">
-       <img
-         src="https://www.flaticon.com/svg/static/icons/svg/159/159707.svg"
-         alt="logout"
-         className="logout-img"
-       ></img>
-     </a>
-   );
+  let logout = (
+    <a href="/">
+      <img
+        src="https://www.flaticon.com/svg/static/icons/svg/159/159707.svg"
+        alt="logout"
+        className="logout-img"
+      ></img>
+    </a>
+  );
 
   return (
     <div className="mentorsview-page">
       <Header editLearningObjectives={editLearningObjectives} logout={logout} />
-  <h1>Welcome {window.localStorage.getItem("name")}</h1>
+      <h1 className="welcome-msg">
+        Welcome {window.localStorage.getItem("name")}
+      </h1>
       <div className="main-container">
         <div className="studentName-Container">
           {/* <ul>
@@ -105,7 +106,7 @@ function MentorsView() {
               <BoxDisplay studentId={studentId} studentName={studentName} />
             </div>
           )}
-          <h2 className="mentor-greet">Students</h2>
+          <h2 className="mentor-greet">Students List:</h2>
           <ul className="student-list">
             {studentList.map(({ user_id, first_name, last_name }) => {
               return (

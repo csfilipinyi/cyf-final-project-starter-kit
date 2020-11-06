@@ -89,14 +89,7 @@ export default function LoginForm() {
           {errors.userPassword && (
             <p className="error">*{errors.userPassword} </p>
           )}
-          <button
-            className="sumbit"
-            type="submit"
-            variant="secondary"
-            size="lg"
-            p-2
-            active
-          >
+          <button className="submit" type="submit" size="lg" p-2 active>
             Login
           </button>
           <br />

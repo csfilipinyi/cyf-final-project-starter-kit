@@ -40,22 +40,24 @@ export default function SkillsNav() {
       .catch((error) => console.log(error));
   }, []);
   const routeResult = useRoutes(routes);
-    let logout = (
-      <a href="/">
-        <img
-          src="https://www.flaticon.com/svg/static/icons/svg/159/159707.svg"
-          alt="logout"
-          className="logout-img"
-        ></img>
-      </a>
-    );
+  let logout = (
+    <a href="/">
+      <img
+        src="https://www.flaticon.com/svg/static/icons/svg/159/159707.svg"
+        alt="logout"
+        className="logout-img"
+      ></img>
+    </a>
+  );
   return (
     <div className="skillsnav-page">
       <div>
         <Header logout={logout} />
       </div>
-      <h1>Welcome {window.localStorage.getItem("name")}</h1>
-      <div className="skills-container">
+      <h1 className="welcome-msg">
+        Welcome {window.localStorage.getItem("name")}
+      </h1>
+      <div className="skills-container  ">
         {routeResult}
         <A href="/skills/html">Html</A>
         <A href="/skills/css">CSS</A>
