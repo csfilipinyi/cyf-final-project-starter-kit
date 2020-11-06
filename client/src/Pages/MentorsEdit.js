@@ -60,6 +60,15 @@ export default function MentorsEdit() {
             </li>
             <li>
               <NavLink
+                to="/mentorsedit/git"
+                activeClassName="active-skill-display"
+                className="default-skill-display"
+              >
+                Git
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/mentorsedit/javascript"
                 activeClassName="active-skill-display"
                 className="default-skill-display"
