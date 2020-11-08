@@ -58,7 +58,7 @@ const SignupForm = () => {
 
           window.localStorage.setItem("user", data.id);
           window.localStorage.setItem("role", data.role);
-
+          window.localStorage.setItem("name", data.name);
           setHasRegistered(true);
         })
         .catch((error) => {
