@@ -62,7 +62,7 @@ const authReducer = (state, action) => {
 
         
         const fetchUserName = (code)=>{
-            return axios.get(`https://designed-gd.herokuapp.com/api/callback?code=${code}`)
+            return axios.get(`https://dev-graduate-directory.herokuapp.com/api/callback?code=${code}`)
             .then(response => {
                 return response.data
             })
