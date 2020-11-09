@@ -14,7 +14,7 @@ import styled from "styled-components";
 const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   let history = useHistory();
   const { github_id, github_avatar, logOut } = useContext(AuthContext);
-  const { statement, deleteProfile } = useContext(ProfileContext);
+  const { statement, deleteProfile} = useContext(ProfileContext);
   const { fetchSkills, skillsList } = useContext(AdminContext);
 
   const [newSkills, setNewSkills] = useState([]);
@@ -133,7 +133,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               <FormSwitchButton
                 name="isHired"
                 profile={profile}
-                isHired={isHired}
+                isHired={profile.is_hired||isHired}
                 handleSwitch={()=>setIsHired(!isHired)}
               />
               <FormField
