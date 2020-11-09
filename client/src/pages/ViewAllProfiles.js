@@ -7,7 +7,7 @@ import OverviewProfileCard from '../components/OverviewProfileCard'
 import Introducing from '../components/Introducing'
 
 const ViewAllProfiles = () => {
-    const { allProfiles, isLoading, error }= useContext(ProfileContext);
+    const { allProfiles, getProfile, isLoading, error }= useContext(ProfileContext);
 
 
     return (
