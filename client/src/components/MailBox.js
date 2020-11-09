@@ -57,8 +57,8 @@ const MailBox = ({receivers, setMBox, setMailSuccess}) => {
 							/>
                         </StyledForm>
                         <ButtonContainer>
-                            <StyledButton name='Cancel' className='danger' handleClick={()=>setMBox(false)} type='button'/>
-                            <StyledButton name='Send email' className='lg' type='submit' handleClick={(prop) => handleSubmit(props.values)}/>
+                            <StyledButton name='Cancel' className='cancel-md' handleClick={()=>setMBox(false)} type='button'/>
+                            <StyledButton name='Send email' className='success-md' type='submit' handleClick={(prop) => handleSubmit(props.values)}/>
                         </ButtonContainer>
 					</>
 				)}

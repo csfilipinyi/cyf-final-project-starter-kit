@@ -203,20 +203,20 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
             <ButtonContainer>
               {askBeforeDelete&&<StyledButton
                 name="Delete Profile"
-                className="danger"
+                className="danger-md"
                 type='button'
                 handleClick={askBeforeDelete}
               />}
               <SubButtonContainer>            
                 <StyledButton
                   name="Cancel"
-                  className="md"
+                  className="cancel"
                   type='button'
                   handleClick={props.handleReset}
                   />
                 <StyledButton
                   name="Save"
-                  className="sm"
+                  className="success-sm"
                   type="submit"
                   handleClick={props.handleSubmit}
                   />
@@ -295,7 +295,7 @@ const StyledForm = styled(Form)`
 const ButtonContainer = styled.div`
   margin:50px 0;
   display:flex;
-  width:80%;
+  width:700px;
   justify-content:space-between;
 `;
 

@@ -7,8 +7,8 @@ const AskDelete = ({handleDelete, cancelDelete}) => {
         <Container>
              Are you sure you want to delete your profile?
              <ButtonContainer>
-                <StyledButton handleClick={handleDelete} name='Yes' className='danger'/>
-                <StyledButton handleClick={cancelDelete} name='No' className='md'/>
+                <StyledButton handleClick={handleDelete} name='Yes' className='danger-sm'/>
+                <StyledButton handleClick={cancelDelete} name='No' className='success-sm'/>
              </ButtonContainer>
         </Container>
     )

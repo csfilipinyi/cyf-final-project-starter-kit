@@ -174,19 +174,15 @@ const StyledAddButton =styled(Button)`
 `
 
 const StyledButton = styled(Button)`
-    width:150px;
+    width:180px;
     height:50px;
     background-color:#E5E7E9;
     color:#000000;
     border:2px solid white;
     &:hover{
-        width:150px;
-        height:50px;
         border:2px solid white;
     }
     &:active{
-        width:150px;
-        height:50px;
         background-color:green;
         border:2px solid white;
     }

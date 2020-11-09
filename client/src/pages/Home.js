@@ -89,14 +89,15 @@ const Header = styled.div`
 `;
 
 const GitHub = styled(GitHubLogin)`
-	height: 56px;
-	width: 106px;
+	height: 60px;
+	width: 160px;
 	border-radius: 2px;
 	color:#fff;
 	margin-right:15%;
 	align-self:center;
 	font-weight:bold;
 	font-family: Arial;
+	border:2px solid green;
 	background-color:${(props)=>props.theme.colors.primaryGreen};		
 `
 

@@ -31,43 +31,63 @@ const StyleButton = styled(Button)`
         background-color:${(props)=>props.theme.colors.primaryGreen};
         border:0.5px solid black;
     }
-    &.sm{
+    &.danger-sm{
         height:56px;
         width:110px;
         font-family: Arial;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         margin:5px;
+        background-color:red;
     }
-    &.md{
+    &.success-sm{
+        height:56px;
+        width:110px;
+        font-family: Arial;
+        font-size: 16px;
+        font-weight: bold;
+        margin:5px;
+        background-color:green;
+    }
+    &.danger-md{
+        height:60px;
+        width:160px;
+        font-family: Arial;
+        font-size: 16px;
+        font-weight: bold;
+        margin:5px;
+        background-color:red;
+    }
+    &.success-md{
+        height:60px;
+        width:160px;
+        font-family: Arial;
+        font-size: 16px;
+        font-weight: bold;
+        margin:5px;
+        background-color:green;
+    }
+    &.cancel{
         height:56px;
         width:110px;
         background-color:white;
         border:4px solid ${(props)=>props.theme.colors.primaryGreen};
         color:${(props)=>props.theme.colors.primaryGreen};
         font-family: Arial;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         margin:5px;
     }
-    &.danger{
-        height:56px;
-        width:180px;
-        background-color:red;
-        border:4px solid red;
-        color:white;
+    &.cancel-md{
+        height:60px;
+        width:160px;
+        background-color:white;
+        border:4px solid ${(props)=>props.theme.colors.primaryGreen};
+        color:${(props)=>props.theme.colors.primaryGreen};
         font-family: Arial;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
-    }
-    &.lg{
-        height:56px;
-        width:150px;
-        border:4px solid green;
-        color: #FFFFFF;
-        font-family: Arial;
-        font-size: 18px;
-        font-weight: bold;
+        margin:5px;
     }
     &:active{
         background-color:#red;
