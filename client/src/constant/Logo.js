@@ -14,6 +14,7 @@ const LogoName = () => {
     const handleClick = async ()=>{
         await getAllProfiles();
         if (allProfiles&&isAuthenticated){
+            console.log('logo clicked', {allProfiles})
             history.push('/profiles')
         } else {
             history.push('/')
