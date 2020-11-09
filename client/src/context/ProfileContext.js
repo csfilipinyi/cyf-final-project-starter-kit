@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import {base_url} from '../../../base_url'
+import {base_url_back} from '../../../base_url'
 
 //Created Context
 export const ProfileContext = React.createContext();
@@ -56,7 +56,7 @@ const ProfileState = (props) =>{
 		error:null,
 	};
 
-	const baseUrl = base_url;
+	const baseUrl = `${base_url_back}/api`
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
