@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ProtectedRoute from './helpers/ProtectedRoute'
+import {ProtectedRoute} from './helpers/ProtectedRoute'
 import Home from "./pages/Home";
 import Login from './pages/Login'
 import CreateProfile from "./pages/CreateProfile";
@@ -19,12 +19,12 @@ const Routes = () => {
 			<Switch>
 				<Route exact path='/' component={Home} />
 				<Route path='/login' component={Login} />
-				<Route path='/admin' component={Admin} />
+				<ProtectedRoute path='/admin' component={Admin} />
 				<Route exact path='/profiles' component={ViewAllProfiles}/>
-				<Route path='/profiles/new' component={CreateProfile} />
-				<Route path='/profile/edit' component={EditProfile} />
+				<ProtectedRoute path='/profiles/new' component={CreateProfile} />
+				<ProtectedRoute path='/profile/edit' component={EditProfile} />
 				<Route path='/profiles/:name' component={ViewDetail} />
-				<Route path='/myprofile' component={ViewProfile} />
+				<ProtectedRoute path='/myprofile' component={ViewProfile} />
 				<Route path='/notfound' component={NotEligible} />
 			</Switch>
 		</BrowserRouter>

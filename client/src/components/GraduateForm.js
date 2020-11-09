@@ -22,7 +22,8 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   const [isHired, setIsHired] = useState(false);
 
   const handleSkillError=()=>{
-    !newSkills>0&&setSkillError(true)
+    !newSkills.length>0&&setSkillError(true)
+    console.log('onblur called', (!newSkills.length>0), skillError)
   }
 
   useEffect(()=>{
@@ -189,13 +190,13 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               <FormField
 								name='skills'
 								label='Your Key Skills'
-                info = 'Type your skills and press ‘Space’'
+                description = 'Type your skills and press ‘Space’'
                 onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
                 autocomplete="off"
                 onBlur={handleSkillError}
                 skillError={skillError}
               /> 
-              {skillError&&<p>Required</p>}
+              {skillError&&<Error>Required</Error>}
 							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
 								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
 							})}</ViewSkills>
@@ -325,3 +326,11 @@ text-align: left;
 width:65%;
 margin-bottom:15px;
 `;
+
+const Error = styled.p`
+  font-size: "10px";
+  line-height: 14px;
+  color: red;
+  margin: 0;
+  padding: 0;
+`
