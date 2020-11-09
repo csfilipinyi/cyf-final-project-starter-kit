@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import BASE_URL from '../api/api'
-
+import {base_url} from '../../../base_url'
 
 //Created Context
 export const ProfileContext = React.createContext();
@@ -57,7 +56,7 @@ const ProfileState = (props) =>{
 		error:null,
 	};
 
-	const baseUrl = `https://dev-graduate-directory.herokuapp.com/api`
+	const baseUrl = base_url;
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
