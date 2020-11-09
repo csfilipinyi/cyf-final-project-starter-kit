@@ -7,6 +7,7 @@ import { ProfileContext } from '../context/ProfileContext';
 import { AuthContext } from '../context/AuthContext';
 import styled from 'styled-components';
 import GitHubLogin from "react-github-login";
+import {BASE_URL} from '../api/api'
 
 
 const Home = () => {
@@ -53,8 +54,7 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				redirectUri={'https://designed-gd.herokuapp.com/login'}
-				// redirectUri={'http://localhost:3000/login'}
+				redirectUri={`${BASE_URL}/login`}
 				buttonText='Graduate Login'
 				/>
 			</Header>

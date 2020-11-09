@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
+import {BASE_URL} from '../api/api'
 
 
 
@@ -57,8 +58,8 @@ const authReducer = (state, action) => {
         
         const [state, dispatch] = useReducer(authReducer, initialState);
         
-        const baseUrl = 'https://designed-gd.herokuapp.com/api'
-        // const baseUrl = 'http://localhost:3100/api'
+        const baseUrl = `${BASE_URL}/api`
+
         
         const fetchUserName = (code)=>{
             return axios.get(`https://designed-gd.herokuapp.com/api/callback?code=${code}`)

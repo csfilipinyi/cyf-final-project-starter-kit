@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-
+import {BASE_URL} from '../api/api'
 export const AdminContext = React.createContext();
 
 
@@ -39,8 +39,7 @@ const AdminState = (props) =>{
     
     const [state, dispatch] = useReducer(authReducer, initialState);
     
-    const baseUrl = 'https://designed-gd.herokuapp.com/api'
-    // const baseUrl = 'http://localhost:3100/api'
+    const baseUrl = `${BASE_URL}/api`
         
       
     const fetchSkills = ()=>{
