@@ -22,8 +22,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   const [isHired, setIsHired] = useState(false);
 
   const handleSkillError=()=>{
-    !newSkills.length>0&&setSkillError(true)
-    console.log('onblur called', (!newSkills.length>0), skillError)
+    !newSkills.length>0?setSkillError(true):setSkillError(false)
   }
 
   useEffect(()=>{

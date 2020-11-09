@@ -87,7 +87,6 @@ const authReducer = (state, action) => {
                         return  dispatch({ type: types.Set_UserName, payload:{name, id}})
                         }
                         if(response.status==201){
-                            console.log('isAdmin context called')
                         return  dispatch({ type: types.Set_Is_Admin})
                         }
                         if (response.status==206){

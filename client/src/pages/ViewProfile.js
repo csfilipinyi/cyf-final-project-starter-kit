@@ -10,7 +10,6 @@ const ViewProfile = () => {
     const {isAuthenticated, github_id} = useContext(AuthContext)
     const {profile, getProfile} = useContext(ProfileContext)
 
-    console.log('view profile', {github_id})
     useEffect (()=>{
         getProfile(github_id)
     },[])

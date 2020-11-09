@@ -21,7 +21,6 @@ const Admin = () => {
     const {skillsList, github_accounts, fetchSkills, fetchGithubAccounts, addNewSkill, addNewAccount} = useContext(AdminContext)
     const {allProfiles,getAllProfiles} = useContext (ProfileContext);
 
-    console.log('admin', newAccount, github_accounts)
 
     useEffect (()=>{
         fetchSkills()

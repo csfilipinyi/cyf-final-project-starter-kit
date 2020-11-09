@@ -48,7 +48,6 @@ const AdminState = (props) =>{
         dispatch({ type: types.Set_Is_Loading, payload:true }),       
         axios.get(`${baseUrl}/skills`)
             .then(response=>{
-                console.log('skills fetch response', response.data)
                 return dispatch({ type: types.Set_Skills, payload:response.data})
             })
             .catch((error)=>{
@@ -92,7 +91,6 @@ const AdminState = (props) =>{
 		};
 		axios.post(`${baseUrl}/skills`, skill, config)
 			.then((response)=>{
-                console.log('add skill response', response.data)
 				dispatch({ type: types.Set_New_Skill, payload:response.data})
 			})
 			.catch((error)=>{

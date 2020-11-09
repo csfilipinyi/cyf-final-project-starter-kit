@@ -7,10 +7,8 @@ import StyledButton from '../constant/StyledButton';
 import styled from 'styled-components'
 
 const MailBox = ({receivers, setMBox, setMailSuccess}) => {
-    console.log('mail box receiver', receivers)
 
     const handleSubmit = async (values)=>{
-        console.log('mail values', values)
         const config = {
 			headers: {
 				'Content-Type': 'application/json',

@@ -3,7 +3,6 @@ import CIcon from "../assets/icons/earth-globe-grid-interface-symbol.svg";
 import styled from "styled-components";
 
 const CvIcon = ({CvLink}) => {
-  console.log('Cv link', CvLink)
   return (
     <>
       <Container>

@@ -12,7 +12,6 @@ const GraduatesTable = ({allProfiles, setReceivers, receivers, setMBox}) =>{
    
     const handleChange =(e)=>{
         const gradEmail = e.target.value
-        console.log('checkbox', e.target.value)
         if(e.target.checked){
             !receivers.includes(gradEmail)&&setReceivers([...receivers, gradEmail])
         } else {

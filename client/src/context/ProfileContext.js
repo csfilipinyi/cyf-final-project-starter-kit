@@ -22,7 +22,6 @@ const types = {
 //Stored actions in a reducer
 
 const profileReducer = (state, action) => {
-	console.log('context action', action)
 	switch (action.type) {
 	case types.Set_Is_Loading:
 		return { ...state, isLoading: true };
@@ -88,7 +87,6 @@ const ProfileState = (props) =>{
 		dispatch({ type: types.Set_Is_Loading });
 		axios.get(`${baseUrl}/graduates/${id}`)
 			.then((response)=>{
-				console.log('get profile', response.data)
 				const graduate = response.data[0];
 				graduate.skills=response.data.map(x=>x.skill_name)
 				dispatch({ type: types.Set_Profile, payload:graduate });

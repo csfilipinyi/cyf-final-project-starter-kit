@@ -16,7 +16,6 @@ const Home = () => {
 	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
 	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, github_avatar, userName, isGraduate, isAdmin} = useContext(AuthContext);
 
-	console.log('home page', isAdmin)
 	const onSuccess = async (response) =>{
 		const accessCode = response.code;
 		const githubname = await fetchUserName(accessCode);
@@ -46,7 +45,6 @@ const Home = () => {
     const onFailure = response => console.error(response);  
 
 	useEffect(()=>getAllProfiles(), []);
-	console.log('home all profiles', allProfiles)
 	return (
 		<Screen>
 			<Header>

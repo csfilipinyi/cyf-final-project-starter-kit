@@ -90,7 +90,6 @@ router.post("/skills", function (req, res) {
     ,[skillName],
     (err,result)=>{
       if (!err){
-        console.log('post skill', result.rows[0])
         res.status(200).send(result.rows[0])
       }else{
         res.status(404).send(err);
@@ -118,7 +117,6 @@ router.post("/accounts", function (req, res) {
     [github_username],
     (err,result)=>{
       if (!err){
-        console.log('post account', result.rows[0])
         res.status(200).send(result.rows[0])
       }else{
         res.status(404).send(err);
@@ -140,7 +138,6 @@ router.get("/graduates", (req, res) => {
 
 // create new profile
 router.post("/graduates", function (req, res) {
-  console.log('post request', req.body)
   const newFirstName = req.body.first_name;
   const newSurname = req.body.surname;
   const aboutMe = req.body.about_me;
@@ -172,7 +169,6 @@ router.post("/graduates", function (req, res) {
                   if (!err){
                     res.status(200).send('success')
                   }else{
-                    console.log(err);
                     res.status(404).send(err);
                   }
                 })
@@ -194,9 +190,7 @@ router.get("/accounts/:name", (req, res) => {
     [githubName],
     (error, result) => {
       if (result && result.rowCount > 0) {
-        console.log('check admin or graduate', result.rows[0].is_admin)
         if (result.rows[0].is_admin){
-          console.log('he is admin', result.rows[0]);
           res.status(201).json(result.rows[0]);
         } else {
         let id = result.rows[0].id;
@@ -237,7 +231,6 @@ router.get("/graduates/:id", (req, res) => {
 
 //editing existing graduate
 router.put("/graduates/:id", function (req, res) {
-  console.log('put request called', req.body)
 
   const github_id = req.params.id;
   const avatar_url=req.body.avatar_url;
@@ -321,7 +314,6 @@ router.delete("/graduates/:id", function (req, res) {
               [github_id],
               (error,result) => {
                 if (error == undefined) { 
-                  console.log(result.rows[0])                
                   res.send(result.rows[0]);
                 }
               }
@@ -367,7 +359,6 @@ let transporter = nodemailer.createTransport({
 
 
 router.post("/send", (req,res)=>{
-    console.log("email", req.body)
     const sender = req.body.sender;
     const receiver=req.body.receiver;
     const subject= req.body.subject;
