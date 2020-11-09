@@ -7,13 +7,17 @@ import {ProfileContext} from '../context/ProfileContext'
 
 const LogoName = () => {
     const {isAuthenticated} = useContext (AuthContext)
-    const {getAllProfiles} = useContext (ProfileContext)
+    const {getAllProfiles, allProfiles} = useContext (ProfileContext)
 
     let history = useHistory()
 
-    const handleClick =async ()=>{
-        await getAllProfiles()
-        isAuthenticated?history.push('/profiles'):history.push('/')
+    const handleClick = async ()=>{
+        await getAllProfiles();
+        if (allProfiles&&isAuthenticated){
+            history.push('/profiles')
+        } else {
+            history.push('/')
+        }
     }
     
     return (
