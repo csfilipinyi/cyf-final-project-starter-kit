@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import {BASE_URL} from '../api/api'
+import BASE_URL from '/../api/api'
 
 
 //Created Context

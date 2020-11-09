@@ -6,7 +6,7 @@ const cron = require('node-cron')
 
 
 import { Router } from "express";
-import {BASE_URL} from '../client/src/api/api'
+import BASE_URL from '/../client/src/api/api'
 import { Connection } from "./db";
 
 import { AuthorizationCode } from "simple-oauth2";

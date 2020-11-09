@@ -7,7 +7,7 @@ import { ProfileContext } from '../context/ProfileContext';
 import { AuthContext } from '../context/AuthContext';
 import styled from 'styled-components';
 import GitHubLogin from "react-github-login";
-import {BASE_URL} from '../api/api'
+import BASE_URL from '/../api/api'
 
 
 const Home = () => {
