@@ -7,11 +7,8 @@ import OverviewProfileCard from '../components/OverviewProfileCard'
 import Introducing from '../components/Introducing'
 
 const ViewAllProfiles = () => {
-    const { allProfiles, getProfile, isLoading, error }= useContext(ProfileContext);
+    const { allProfiles, isLoading, error }= useContext(ProfileContext);
 
-	useEffect(()=>{
-		!allProfiles&&getProfile()
-	},[])
 
     return (
 		<>{allProfiles&&<Screen>
