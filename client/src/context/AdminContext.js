@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-// import BASE_URL from '../api/api'
 export const AdminContext = React.createContext();
 
 
