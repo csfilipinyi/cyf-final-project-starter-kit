@@ -57,8 +57,7 @@ const ProfileState = (props) =>{
 		error:null,
 	};
 
-	const baseUrl = `${BASE_URL}/api`
-
+	const baseUrl = `https://dev-graduate-directory.herokuapp.com/api`
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 

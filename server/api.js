@@ -33,7 +33,7 @@ const client = new AuthorizationCode({
 
 const authorizationUri = client.authorizeURL({
   //we can put in the redirect_uri when we deploy the app
-  redirect_uri: `${BASE_URL}/login`,
+  redirect_uri: `https://dev-graduate-directory.herokuapp.com/login`,
   scope: "user",
   // expires_in: '30' something to look into later
   // state: '3(#0/!~',

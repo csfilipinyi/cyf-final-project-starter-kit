@@ -58,8 +58,7 @@ const authReducer = (state, action) => {
         
         const [state, dispatch] = useReducer(authReducer, initialState);
         
-        const baseUrl = `${BASE_URL}/api`
-
+        const baseUrl = `https://dev-graduate-directory.herokuapp.com/api`
         
         const fetchUserName = (code)=>{
             return axios.get(`https://dev-graduate-directory.herokuapp.com/api/callback?code=${code}`)
