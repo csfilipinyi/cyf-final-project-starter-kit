@@ -11,6 +11,8 @@ const types = {
 	Set_Logged_In: "Set_Logged_In",
     Set_UserName: "Set_UserName",
     Set_Is_Graduate:'Set_Is_Graduate',
+    Set_Github:'Set_Github',
+    Set_Is_Admin:'Set_Is_Admin',
     Set_Error: "Set_Error",
     Set_Logout:"Set_Logout"
 };
@@ -23,71 +25,106 @@ const authReducer = (state, action) => {
 	case types.Set_Error:
 		return { ...state, isLoading: false, error:action.payload };
 	case types.Set_Logged_In:
-		return { ...state, isAuthenticated:true, isLoading: false };
+        return { ...state, isAuthenticated:true, github_id:action.payload, isLoading: false };
     case types.Set_UserName:
-        return { ...state, userName: action.payload, isAuthenticated:true, isLoading: false };
+        return { ...state, github_id: action.payload.id, userName:action.payload.name, isAuthenticated:true, isLoading: false };
     case types.Set_Is_Graduate:
         return { ...state, isGraduate:action.payload, isLoading: false }; 
+    case types.Set_Is_Admin:
+        return { ...state, isAdmin:true, isAuthenticated:true, isLoading: false }; 
+    case types.Set_Github:
+        return {...state, github_name:action.payload.accountname, github_avatar:action.payload.avatar}    
     case types.Logout:
-        return { ...state, userProfile:null, userName:null, isAuthenticated:false, isLoading: false };
+        return { ...state, userName:null, isAuthenticated:false, isAdmin:false, isLoading: false };
     default:
-		return state;
-	}
-};
-
-
-const AuthState = (props) =>{
-    const initialState={
-        userName : null,
-        isAuthenticated: false,
-        isGraduate:true,
-        isLoading:false,
-		error:null,
-    }
-
-    const [state, dispatch] = useReducer(authReducer, initialState);
-
-
-    const fetchUserName = (code)=>{
-        fetch(`https://gd-auth-test.herokuapp.com/api/callback?code=${code}`)
-        .then(res => res.json())
-        .then(username => {
-            checkGraduate(username)
-         })
-    }
-
-    const checkGraduate = (userName)=>{
-        dispatch({ type: types.Set_Is_Loading, payload:true }),       
-        fetch('https://gist.githubusercontent.com/OBakir90/f8e29b4cafda937e884723470983c777/raw/78fde67c93d4a539b3aec4de1ba3fd4e13a2b626/status')
-            .then(response=>response.json())
-            .then(profile=>{     
-                    console.log('profile', profile)
-                    profile[0].status?
-                    dispatch({ type: types.Set_UserName, payload:userName})
-                    :     
-                    dispatch({ type: types.Set_Logged_In});   
+        return state;
+        }
+        };
+                    
+                    
+    const AuthState = (props) =>{
+        const initialState={
+            userName:null,
+            github_id:null,
+            github_name:null,
+            github_avatar:null,
+            isAuthenticated: false,
+            isGraduate:true,
+            isAdmin:false,
+            isLoading:false,
+            error:null,
+        }
+        
+        const [state, dispatch] = useReducer(authReducer, initialState);
+        
+        const baseUrl = 'https://designed-gd.herokuapp.com/api'
+        // const baseUrl = 'http://localhost:3100/api'
+        
+        const fetchUserName = (code)=>{
+            return axios.get(`https://designed-gd.herokuapp.com/api/callback?code=${code}`)
+            .then(response => {
+                return response.data
             })
-            .catch((error)=>{
-                console.log(error);
-				dispatch({ type:types.Set_Is_Graduate, payload:false });
-			});
-    }
+        }
+                        
+        const setGithub = (githubname)=>{
+            const avatar_url =`https://avatars.githubusercontent.com/${githubname}`
+            const github = {
+                avatar:avatar_url,
+                accountname:githubname
+            }
+            dispatch({ type: types.Set_Github, payload:github }); 
+        }
 
-    const logOut = ()=>{
-        console.log('auth logout');
-        dispatch({ type:types.Logout});
-    }
+
+        const checkGraduate = (userName)=>{
+            dispatch({ type: types.Set_Is_Loading, payload:true }),       
+            axios.get(`${baseUrl}/accounts/${userName}`)
+                .then(response=>{
+                        if(response.status==200){
+                            let name=response.data[0].account_name;
+                            let id = response.data[0].github_id; 
+                        return  dispatch({ type: types.Set_UserName, payload:{name, id}})
+                        }
+                        if(response.status==201){
+                            console.log('isAdmin context called')
+                        return  dispatch({ type: types.Set_Is_Admin})
+                        }
+                        if (response.status==206){
+                            let id=response.data.github_id
+                            dispatch({ type: types.Set_Logged_In, payload:id});   
+                        }
+                })
+                .catch((error)=>{
+                    dispatch({ type:types.Set_Is_Graduate, payload:false });
+                });
+        }
+
+        const logOut = ()=>{
+            dispatch({ type:types.Logout});
+        }
+
+        const setGraduate = ()=>{
+            return dispatch({ type:types.Set_Is_Graduate, payload:true});
+        }
 
     return (
 		<AuthContext.Provider
 			value={{
-				userName :state.userName,
+                user:state.user,
+                userName:state.userName,
+                github_id:state.github_id,
+                github_name:state.github_name,
+                github_avatar:state.github_avatar,
                 isAuthenticated: state.isAuthenticated,
                 isLoading:state.isLoading,
                 isGraduate:state.isGraduate,
+                isAdmin:state.isAdmin,
                 error:state.error,
                 checkGraduate,
                 fetchUserName, 
+                setGithub,
+                setGraduate,
                 logOut
 			}}
 		>

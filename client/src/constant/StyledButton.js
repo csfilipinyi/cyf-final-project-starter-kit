@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
-import PropTypes from "prop-types";
 
 const StyledButton = (props) => {
 	return (
@@ -16,11 +15,12 @@ export default StyledButton;
 
 
 const StyleButton = styled(Button)`
-    height: 56px;
-    width: 220px;
+    height: 40px;
+    width: 110px;
     border-radius: 2px;
     color:#fff;
-    margin:5px;
+    margin-top:11px;
+    font-size:12px;
     align-self:center;
     font-weight:bold;
     font-family: Arial;
@@ -33,24 +33,41 @@ const StyleButton = styled(Button)`
     }
     &.sm{
         height:56px;
-        width:92px;
+        width:110px;
+        font-family: Arial;
+        font-size: 18px;
+        font-weight: bold;
+        margin:5px;
     }
     &.md{
         height:56px;
-        width:113px;
+        width:110px;
         background-color:white;
         border:4px solid ${(props)=>props.theme.colors.primaryGreen};
         color:${(props)=>props.theme.colors.primaryGreen};
+        font-family: Arial;
+        font-size: 18px;
+        font-weight: bold;
+        margin:5px;
+    }
+    &.danger{
+        height:56px;
+        width:180px;
+        background-color:red;
+        border:4px solid red;
+        color:white;
+        font-family: Arial;
+        font-size: 18px;
+        font-weight: bold;
     }
     &.lg{
         height:56px;
-        width:155px;
+        width:150px;
+        border:4px solid green;
         color: #FFFFFF;
         font-family: Arial;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: bold;
-        letter-spacing: 0;
-        line-height: 26px;
     }
     &:active{
         background-color:#red;
@@ -58,8 +75,5 @@ const StyleButton = styled(Button)`
     }
 `;
 
-StyleButton.propTypes = {
-	name: PropTypes.string.isRequired,
-};
 
 

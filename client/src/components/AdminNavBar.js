@@ -3,7 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import {AuthContext} from '../context/AuthContext'
 import styled from 'styled-components';
 
-const NavBar = ({ open }) => {
+const AdminNavBar = ({ open }) => {
     const history = useHistory()
     const { logOut }= useContext(AuthContext);
 
@@ -15,11 +15,8 @@ const NavBar = ({ open }) => {
 	return (
 		<Navigator className={open ? 'open' : null}>
 			<StyledList className={open ? 'open' : null}>
-                <StyledNavLink to='/myprofile'>
-                    View Your Profile
-				</StyledNavLink>
-                <StyledNavLink to='/profile/edit'>
-                    Edit Your Profile
+                <StyledNavLink to='/admin'>
+                    Admin Panel
 				</StyledNavLink>
 				<StyledNavLink to='/' onClick={handleClick}>
                     Log out
@@ -29,7 +26,7 @@ const NavBar = ({ open }) => {
 	);
 };
 
-export default NavBar;
+export default AdminNavBar;
 
 
 
@@ -38,20 +35,20 @@ const Navigator = styled.div`
     display:flex;
     margin-right:15%;
     margin-top:5px;
-    color: #0090FF;
-    z-index:1000;
+    color:#0090FF;
+    z-index:100;
     &.open{
         flex-directon:column;
         position:absolute;
         right:0px;
-        top:70px;
+        top:60px;
         width:252px;
-        height:165px;
+        height:110px;
         align-items:flex-start;
         justify-content:flex-start;
         background-color: #FAFAFA;
         box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2);
-        z-index:1;
+        z-index:100;
     }
 `;
 

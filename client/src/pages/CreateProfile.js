@@ -1,10 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import styled from "styled-components";
 import GraduateForm from "../components/GraduateForm";
 import Header from '../components/Header';
 import Introducing from '../components/Introducing';
+import { ProfileContext } from '../context/ProfileContext';
+
 
 const CreateProfile = () => {
+	const { addProfile, profile}  = useContext(ProfileContext);
+	const handleClick =(newprofile)=>{
+		addProfile(newprofile);
+	}
 	return (
 		<Screen>
 			<Header />
@@ -13,7 +19,7 @@ const CreateProfile = () => {
 					header = 'Create your profile'
 					text = 'Consectetur adipiscing elit, sed do eiusmod tempor'
 				/>
-				<GraduateForm />
+				<GraduateForm handleClick={handleClick} profile={profile}/>
 			</Container>
 		</Screen>
 	);

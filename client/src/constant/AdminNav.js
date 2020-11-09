@@ -5,8 +5,9 @@ import IconUser from '../assets/icons/user.svg';
 import IconUserBlue from '../assets/icons/user_blue.svg';
 import IconUp from '../assets/icons/IconArrowUp.svg';
 import IconDown from '../assets/icons/IconArrowDown.svg'
+import AdminNavBar from '../components/AdminNavBar'
 
-const UserNav = ({ open, setOpen, ...props }) => {
+const AdminNav = ({ open, setOpen, ...props }) => {
 
 	return (
 		<>
@@ -19,19 +20,19 @@ const UserNav = ({ open, setOpen, ...props }) => {
 				}
 					
 				</Circle>
-				<Text style={{color:open?'#0090FF':'black'}}>Your Profile</Text>
+				<Text style={{color:open?'#0090FF':'black'}}>Admin Profile</Text>
 				{open?
 				<IArrow src={IconUp} alt='Arrow' onClick={() => setOpen(!open)}/>
 				:
 				<IArrow src={IconDown} alt='Arrow' onClick={() => setOpen(!open)}/>
 				}
 			</Container>
-			{open&&<NavBar open={open} />}
+			{open&&<AdminNavBar open={open} />}
 		</>
 	);
 };
 
-export default UserNav;
+export default AdminNav;
 
 const Container = styled.div`
 	display:flex;

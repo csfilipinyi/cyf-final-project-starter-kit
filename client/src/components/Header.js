@@ -1,25 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import LogoName from '../constant/Logo';
 import UserNav from '../constant/UserNav'
+import AdminNav from '../constant/AdminNav'
 import {AuthContext} from '../context/AuthContext'
-// import NavBar from './NavBar';
 import styled from 'styled-components';
-// import useMediaQuery from '../helpers/useMediaQuery';
 
 const Header = ({ nav }) => {
 	const [open, setOpen] = useState(false);
 
-	const {isAuthenticated} = useContext(AuthContext)	
-	// const media = useMediaQuery();
-
-	// useEffect (()=>{
-	// 	media&&!media.isTablet&&setOpen(false);
-	// },[media]);
-
+	const {isAuthenticated, isAdmin} = useContext(AuthContext)	
+	
+   
 	return (
 		<Container>
 			<LogoName />
-			{isAuthenticated&&<UserNav open={open} setOpen={setOpen}/>}
+			{isAuthenticated&&!isAdmin&&<UserNav open={open} setOpen={setOpen}/>}
+			{isAdmin&&<AdminNav open={open} setOpen={setOpen}/>}
+
 		</Container>
 	);
 };

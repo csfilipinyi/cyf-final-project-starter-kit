@@ -1,43 +1,51 @@
 import React, { useContext, useEffect } from "react";
-import {NavLink, Redirect, useHistory} from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import OverviewProfileCard from '../components/OverviewProfileCard';
-import ViewProfileDetail from '../components/ViewProfileDetail';
 import Introducing from '../components/Introducing';
 import Logo from '../constant/Logo'
 import { ProfileContext } from '../context/ProfileContext';
 import { AuthContext } from '../context/AuthContext';
 import styled from 'styled-components';
 import GitHubLogin from "react-github-login";
-import {graduates, graduateProfile} from '../api/graduates'
 
 
 const Home = () => {
 	let history = useHistory();
 
-	const { getAllProfiles, getProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, isAuthenticated, userName, isGraduate} = useContext(AuthContext);
+	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
+	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, github_avatar, userName, isGraduate, isAdmin} = useContext(AuthContext);
 
-
-	const onSuccess =  (response) =>{
+	console.log('home page', isAdmin)
+	const onSuccess = async (response) =>{
 		const accessCode = response.code;
-		fetchUserName(accessCode);
+		const githubname = await fetchUserName(accessCode);
+		setGithub(githubname);
+		await checkGraduate(githubname);
+		clearProfile();
+	}
+
+	const navigateToProfile = async ()=>{
+		await getProfile(github_id)
+		history.push(`/myprofile`)
 	}
 
 	useEffect(()=>{
-		userName&&history.push('/viewprofile')
-		getProfile()
-		console.log('effect1', userName)
+		if(userName){
+			navigateToProfile()
+		}
 	},[userName])
 
+
 	useEffect (()=>{
-		!userName&&isAuthenticated&&history.push('/createprofile')
+		!userName&&isAuthenticated&&history.push('/profiles/new')
 		!isGraduate&&history.push('/notfound')
-	},[ userName, isAuthenticated, isGraduate])
+		isAdmin&&history.push('/admin')
+	},[ isAuthenticated, isGraduate, isAdmin])
 
     const onFailure = response => console.error(response);  
 
-	useEffect(getAllProfiles, []);
-
+	useEffect(()=>getAllProfiles(), []);
+	console.log('home all profiles', allProfiles)
 	return (
 		<Screen>
 			<Header>
@@ -46,20 +54,25 @@ const Home = () => {
 				onSuccess={onSuccess}
 				onFailure={onFailure}
 				redirectUri={'https://designed-gd.herokuapp.com/login'}
-				buttonText='Log in'
+				// redirectUri={'http://localhost:3000/login'}
+				buttonText='Graduate Login'
 				/>
 			</Header>
 			<Introducing
-				header = 'Lorem ipsum dolor sit amet'
-				text = 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi'
-		  />	
-    		<Container>
-				{isLoading ? <Text>Loading...</Text>
-					: allProfiles && allProfiles.map(( profile, i ) => {
-						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />;
+				header = 'Welcome to the CodeYourFuture Graduate Directory'				
+		  	/>	
+			 <Info>In this directory you will find recent graduates from the full-stack program at CodeYourFuture. CodeYourFuture graduates spent approximately 800 hours developing their technical and employability skills.
+				Learn more about the syllabus <LinkCYF href='https://syllabus.codeyourfuture.io/overview'>here</LinkCYF>
+			</Info> 
+			<Info>If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at <span> </span>
+			<LinkCYF href='mailto:contact@codeyourfuture.io'> contact@codeyourfuture.io</LinkCYF>
+			</Info>
+			<Container>
+				{isLoading?<Text>Loading...</Text>			
+					: allProfiles && allProfiles.map(( singleProfile, i ) => {
+						return <OverviewProfileCard singleProfile={ singleProfile } getProfile={getProfile} key={ i } />
 					})}
 				{error && <Text>{error}</Text>}
-				{/* {profile&&<Redirect to='/viewdetail'/>} */}
 			</Container>
 		</Screen>
 	)}
@@ -104,3 +117,10 @@ const Text = styled.p`
 	fontSize:20;
 `;
 
+const Info=styled.p`
+	width:70%;
+`
+
+const LinkCYF =styled.a`
+	display:inline-block;
+`
