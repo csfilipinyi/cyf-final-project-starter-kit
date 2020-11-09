@@ -18,7 +18,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   const { fetchSkills, skillsList } = useContext(AdminContext);
 
   const [newSkills, setNewSkills] = useState([]);
-  const [skillError, setSkillError] = useState(false)
+  const [skillError, setSkillError] = useState(false);
   const [isHired, setIsHired] = useState(false);
 
   const handleSkillError=()=>{
@@ -146,7 +146,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               />
               <FormField
                 name="email"
-                description="if you don't want your e-mail address to be public, please add contact@codeyourfuture.com instead"
+                description="If you don't want your e-mail address to be public, please add contact@codeyourfuture.io"
                 label="Your Email"
               />
               <FormField
@@ -192,7 +192,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
                 info = 'Type your skills and press ‘Space’'
                 onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
                 autocomplete="off"
-                onBlur={()=>props.setFieldValue(newSkills)}
+                onBlur={handleSkillError}
                 skillError={skillError}
               /> 
               {skillError&&<p>Required</p>}
@@ -308,21 +308,20 @@ const SubButtonContainer =styled.div`
 const Label = styled.label`
   color: #000000;
   font-family: ${(props) => props.theme.fontFamily.primary};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
-  margin-top: 30px;
+  margin-top:20px;
 `;
 
 const Description = styled.p`
-  color: #000000;
-  font-family: ${(props) => props.theme.fontFamily.primary};
-  font-size: 18px;
-  font-style: italic;
-  letter-spacing: 0;
-  text-align: left;
-  padding-right: 300px;
-  margin-top: 5px;
-  margin-bottom: 30px;
+color: #000000;
+font-family: ${(props) => props.theme.fontFamily.primary};
+font-size: 16px;
+font-style: italic;
+letter-spacing: 0;
+text-align: left;
+width:65%;
+margin-bottom:15px;
 `;

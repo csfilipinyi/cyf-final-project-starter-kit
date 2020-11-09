@@ -18,37 +18,37 @@ const ViewMyProfile = (props) => {
   const handleClick = () => {
     history.push("/profile/edit");
   };
+  const {is_hired, first_name, location, surname, skills, avatar_url, about_me, interest, statement, github_link, linkedin_link, cv_link, portfolio_link, github_id}=profile
 
   return (
     <>{profile&&<Container>
-      <Img src={profile.avatar_url}/>
+      <Img src={avatar_url}/>
       <SubCon>
-        {profile.first_name&&profile.surname&&<Name>
-        {profile.first_name} {profile.surname}
-        {profile.is_hired && <HiredLabel>Hired</HiredLabel>}
+        {first_name&&surname&&<Name>
+        {first_name} {surname}
+        {is_hired && <HiredLabel>Hired</HiredLabel>}
         </Name>}
-        {profile.location&&<Description>{profile.location}</Description>}
+        {location&&<Description>{location}</Description>}
         <IconContainer>
-        {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
-        {profile.linkedin_link&&<LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>}
-          <CvIcon CvLink={profile.cv_link}></CvIcon>
+        {github_link&&<GitHubIcon gitHubLink={github_link}></GitHubIcon>}
+        {linkedin_link&&<LinkedinIcon linkedinLink={linkedin_link}></LinkedinIcon>}
+          <CvIcon CvLink={cv_link}></CvIcon>
           <EmailIcon singleProfile={profile}></EmailIcon>
         </IconContainer>
         <DescHead>About Me</DescHead>
-        {profile.about_me&&<Description>{profile.about_me}</Description>}
-        {profile.first_name&&<SubHeads> {profile.first_name}'s Interests</SubHeads>}
-        {profile.interest&&<Description>{profile.interest}</Description>}
-        {profile.first_name&&<SubHeads>{profile.first_name}’s skills</SubHeads>}
+        {about_me&&<Description>{about_me}</Description>}
+        {first_name&&<SubHeads> {first_name}'s Interests</SubHeads>}
+        {interest&&<Description>{interest}</Description>}
+        {first_name&&<SubHeads>{first_name}’s skills</SubHeads>}
         <SkillsContainer>
-          {profile.skills && profile.skills.map((skill) => {
+          {skills && skills.map((skill) => {
             return <SkillBox>{skill}</SkillBox>;
           })}
         </SkillsContainer>
-        {profile.first_name&&<SubHeads>{profile.first_name}'s Portfolio</SubHeads>}
-        {profile.portfolio_link&&<SocialText href={profile.portfolio_link} target="blank">
-          Portfolio
+        {portfolio_link&&<SocialText href={portfolio_link} target="blank">
+          {first_name}'s Portfolio
         </SocialText>}
-        {profile.statement&&<ContainerStatement>
+        {statement&&<ContainerStatement>
           <DescHeadPS>Personal Statement</DescHeadPS>
           <RichEditorReader/>
         </ContainerStatement>}
@@ -157,6 +157,7 @@ const SkillBox = styled.div`
   border-radius: 2px;
   background-color: #f3f3f3;
   margin-right: 16px;
+  padding:3px 5px;
 `;
 
 const SocialText = styled.a`

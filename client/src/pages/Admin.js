@@ -97,14 +97,14 @@ const Admin = () => {
                         <SubDiv>
                             <StyledInputGroup className="mb-3">
                                 <FormControl
-                                placeholder="Add a new graduate github"
+                                placeholder="Add a new Graduate"
                                 aria-label="Add a new github name of a graduate"
                                 aria-describedby="basic-addon2"
                                 onChange={handleChangeAccount}
                                 value={newAccount}
                                 />
                                 <InputGroup.Append>
-                                <StyledAddButton variant="outline-secondary" onClick={handleClickAccount}>Add Account</StyledAddButton>
+                                <StyledAddButton variant="outline-secondary" onClick={handleClickAccount}>Add Graduate</StyledAddButton>
                                 </InputGroup.Append>
                                 {present&&newAccount&&<Present>"{newAccount}" is already present on our table</Present>}
                             </StyledInputGroup>
@@ -112,8 +112,8 @@ const Admin = () => {
                     </InputContainer>
                     <StyledButtonGroup aria-label="Basic example">
                         <StyledButton variant="secondary" onClick={()=>setDisplay('skills')} className={display==='skills'?'active':null}>Skills</StyledButton>
-                        <StyledButton variant="secondary" onClick={()=>setDisplay('accounts')} className={display==='accounts'?'active':null}>Github Accounts</StyledButton>
-                        <StyledButton variant="secondary" onClick={()=>setDisplay('graduates')} className={display==='graduates'?'active':null}>Graduates</StyledButton>
+                        <StyledButton variant="secondary" onClick={()=>setDisplay('accounts')} className={display==='accounts'?'active':null}>Eligible Graduates</StyledButton>
+                        <StyledButton variant="secondary" onClick={()=>setDisplay('graduates')} className={display==='graduates'?'active':null}>Graduate Profiles</StyledButton>
                     </StyledButtonGroup>
                     {display==='skills'&&<SkillsContainer>
                             {skillsList.map((i)=>{
@@ -212,7 +212,7 @@ const Succesfull =styled.div`
 `
 
 const Present =styled.p`
-    font-size:20px;
+    font-size:16px;
     color: red;
     font-family: Raleway;
 `

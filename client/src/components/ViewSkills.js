@@ -25,5 +25,6 @@ const Skill = styled.div`
     border: 1px solid #DEDEDE;
     border-radius: 2px;
     background-color: #F3F3F3;
-    margin:3px;
+	margin:3px;
+	padding:3px 5px;
 `;

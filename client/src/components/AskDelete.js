@@ -27,14 +27,15 @@ const Container= styled.div`
     height:400px;
     color:black;
     font-family: Raleway;
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 800;
 `
 
 const ButtonContainer=styled.div`
     display:flex;
     width:50%;
-    justify-content:space-around;
+    justify-content:center;
+    align-items:space-around;
     color: #000000;
     margin-top:50px;
 `
