@@ -12,6 +12,7 @@ const LogoName = () => {
     let history = useHistory()
 
     const handleClick = async ()=>{
+        console.log('logo clicked', {allProfiles})
         await getAllProfiles();
         if (allProfiles&&isAuthenticated){
             console.log('logo clicked', {allProfiles})
