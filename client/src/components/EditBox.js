@@ -76,7 +76,7 @@ export default function EditBox() {
   //   setLearningObjective(skills.push(description));
   // };
   return (
-    <div className="learning-objective-container">
+    <div className="lo-wrapper">
       <h2 className="skill-name"></h2>
       <div>
         <ul>

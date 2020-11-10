@@ -11,13 +11,13 @@ export default function Header({ editLearningObjectives, logout, back }) {
         className="header-img"
       ></img>
 
-      {editLearningObjectives}
+      <h3>{editLearningObjectives}</h3>
 
       <a href="/MentorsView">
-        <h3>{back}</h3>
+        <h3 className="signup-link">{back}</h3>
       </a>
       {/* <a href="/mentorsedit">{editLoImg}</a> */}
-       {logout}
+      {logout}
       {/* <a href="/">
         <img
           src="https://www.flaticon.com/svg/static/icons/svg/159/159707.svg"

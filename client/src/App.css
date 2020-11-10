@@ -105,7 +105,15 @@ input {
   color: #219653;
   font-size: large;
 }
-
+a:link {
+  text-decoration: none;
+}
+.signup-link:hover {
+  background-color: #495464;
+  color: white;
+  padding: 10px;
+  border-bottom: none;
+}
 .signup-prompt {
   display: flex;
   flex-direction: row;
@@ -132,10 +140,19 @@ li {
   padding: 2%;
 }
 .edit-display-container {
+  padding-bottom: 60px;
+
   display: flex;
   flex-direction: row;
   margin-top: 10vh;
-  margin-left: 5vh;
+
+  padding-right: 20px;
+  margin-left: 20px;
+}
+.lo-wrapper {
+  background-color: #efefef;
+  padding: 30px;
+  margin-left: 30px;
 }
 .default-skill-display {
   color: white;
@@ -150,9 +167,10 @@ li {
 
 .active-skill-display {
   color: #db4437;
-
   font-weight: bolder;
   background-color: white;
+  padding: 8px;
+  border-radius: 2px;
 }
 
 .skills-container {
@@ -165,13 +183,15 @@ li {
   margin-left: 24px;
 }
 .skillNav-display {
+  display: flex;
+  flex-basis: 300px;
   background-color: #495464;
   border-radius: 6px;
-  width: 22%;
   min-height: 100vh;
   padding: 2%;
   text-align: left;
-  margin-left: 20px;
+  margin-left: 80px;
+  margin-right: 20px;
 }
 .studentName-Container {
   background-color: #495464;
@@ -253,11 +273,11 @@ li {
   margin-bottom: 20%;
 }
 
-.add-btn-container {
+/* .add-btn-container {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .crud:hover {
   cursor: pointer;
@@ -289,6 +309,20 @@ li {
   margin-left: 10%;
 } */
 
+.app-message__input {
+  min-height: 0.1em;
+  max-height: 50vh;
+  width: 100%;
+}
+
+.dropdown-skill {
+  padding: 5px;
+  margin: 5px 0 8px 0;
+}
+
+.input-label {
+  font-size: 18px;
+}
 .description {
   font-size: 22px;
 }
@@ -337,4 +371,19 @@ li {
 .display-details {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 500px) {
+  .edit-display-container {
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0;
+  }
+  .skillNav-display {
+    width: 100%;
+    margin-left: 0;
+  }
+  .lo-wrapper {
+    max-width: 100%;
+  }
 }
