@@ -34,7 +34,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   },[])
 
   useEffect (()=>{
-    setIsHired(profile.is_hired)
+    profile&&setIsHired(profile.is_hired)
   },[])
 
   const handleSubmit = async (values) => {
@@ -252,7 +252,7 @@ const ValidationSchema = Yup.object().shape({
   .required('Required'),
   aboutMe: Yup.string()
   .required("Required")
-  .max(100, 'Should be less than 100'),
+  .max(80, 'Should be less than 80'),
 	location: Yup.string()
     .required("Required")
     .max(15, 'Should be less than 15'),
