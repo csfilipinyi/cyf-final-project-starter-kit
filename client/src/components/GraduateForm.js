@@ -33,6 +33,10 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
     fetchSkills()
   },[])
 
+  useEffect (()=>{
+    setIsHired(profile.is_hired)
+  },[])
+
   const handleSubmit = async (values) => {
     const {
       firstName,
@@ -133,7 +137,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               <FormSwitchButton
                 name="isHired"
                 profile={profile}
-                isHired={profile.is_hired||isHired}
+                isHired={isHired}
                 handleSwitch={()=>setIsHired(!isHired)}
               />
               <FormField
