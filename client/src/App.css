@@ -55,6 +55,14 @@ body {
   border-bottom: 5px solid #000;
 }
 
+.signup-form-container {
+  flex-grow: 1;
+}
+
+.signup-container {
+  display: flex;
+}
+
 .sign-form label {
   margin-top: 2vh;
 }
