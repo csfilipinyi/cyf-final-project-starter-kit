@@ -7,11 +7,15 @@ import OverviewProfileCard from '../components/OverviewProfileCard'
 import Introducing from '../components/Introducing'
 
 const ViewAllProfiles = () => {
-    const { allProfiles, getProfile, isLoading, error }= useContext(ProfileContext);
+    const { allProfiles, getProfile, getAllProfiles, isLoading, error }= useContext(ProfileContext);
 
+	console.log('all profiles', allProfiles);	
+
+	useEffect(()=>{
+		getAllProfiles();
+	},[])
 
     return (
-		<>
 		<Screen>
             <Header />
             <Introducing
@@ -32,7 +36,6 @@ const ViewAllProfiles = () => {
 				{error && <p>{error}</p>}
 			</Container>
         </Screen>
-		</>
     )
 }
 
