@@ -6,7 +6,7 @@ const CvIcon = ({CvLink}) => {
   return (
     <>
       <Container>
-       <CVLink href={CvLink} target="blank">
+       <CVLink href={CvLink} target="_blank">
         <CVIcon src={CIcon} />
         </CVLink>
       </Container>
