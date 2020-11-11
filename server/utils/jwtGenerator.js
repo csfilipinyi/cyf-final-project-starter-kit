@@ -10,7 +10,7 @@ function jwtGenerator(user_id, user_role, first_name) {
     },
   };
 
-  return jwt.sign(payload, process.env.jwtSecret, { expiresIn: "3h" });
+  return jwt.sign(payload, process.env.jwtSecret, { expiresIn: "5h" });
 }
 
 module.exports = jwtGenerator;

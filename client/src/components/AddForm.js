@@ -39,25 +39,30 @@ export default function AddForm({ getLearningObj }) {
   return (
     <div>
       <form onSubmit={hadleSubmit}>
-        <label>Skill</label>
+        <label className="input-label">Choose a Skill</label>
         <br />
-        <input
-          type="text"
-          placeholder="Type skill"
-          value={addDescription.skill}
-          onChange={handleChange}
-          name="skill"
-        />
+
+        <select name="skill" onChange={handleChange} className="dropdown-skill">
+          <option value="select">Select</option>
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="git">GIT</option>
+          <option value="javascript">Javascript</option>
+          <option value="react">React</option>
+          <option value="node">Node</option>
+          <option value="sql">SQL</option>
+        </select>
         <br />
-        <label>Add your learning objective</label>
+        <label className="input-label">Add your learning objective</label>
         <br />
-        <input
+        <textarea
+          className="app-message__input"
           type="text"
           placeholder="add description"
           value={addDescription.description}
           onChange={handleChange}
           name="description"
-        />
+        ></textarea>
         <div className="add-btn-container">
           <button className=" add-btn" type="submit" variant="secondary">
             ADD

@@ -15,7 +15,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function MentorsEdit() {
-  let back = "Back";
+  let back = "Students Progress";
   let logout = (
     <a href="/">
       <img
@@ -35,9 +35,9 @@ export default function MentorsEdit() {
       </div> */}
 
       <div className="edit-display-container">
-        <Switch>
+        {/* <Switch>
           <Route path="/mentorsedit/:id" children={<EditBox />} />
-        </Switch>
+        </Switch> */}
         <div className="skillNav-display ">
           <ul>
             <li>
