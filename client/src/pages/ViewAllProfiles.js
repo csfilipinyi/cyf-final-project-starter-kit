@@ -31,7 +31,7 @@ const ViewAllProfiles = () => {
 					})}
 				{error && <p>{error}</p>}
 			</Container>
-        </Screen>}
+        </Screen>
 		</>
     )
 }

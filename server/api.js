@@ -380,25 +380,25 @@ router.post("/send", (req,res)=>{
     )
 })
 
-// const receivers =["cyf.graduate.platform@gmail.com", "obakir90@gmail.com", "obakir90.c@gmail.com"]
+const receivers =["cyf.graduate.platform@gmail.com", "obakir90@gmail.com", "obakir90.c@gmail.com"]
 
-// cron.schedule('5 * * * * *', ()=>{
-//   receivers.map((receiver)=>{
-//     const mail = {
-//       from: "cyf.graduate.platform@gmail.com",
-//       to: receiver,
-//       subject: "Mail", 
-//       html: "<b>Dear graduate,</b> <br>Updating your profile will increase your chances of getting hired. <br> CYF team"
-//     }
-//     transporter.sendMail(mail, (err, info)=>{
-//         if(err){
-//             console.log('hataa var', err)
-//         } else {
-//             console.log('email is sent'+info.response)
-//         }
-//     })
-//   })
-// })
+cron.schedule('0 0 1 * * *', ()=>{
+  receivers.map((receiver)=>{
+    const mail = {
+      from: "cyf.graduate.platform@gmail.com",
+      to: receiver,
+      subject: "Mail", 
+      html: "<b>Dear graduate,</b> <br>Updating your profile will increase your chances of getting hired. <br> CYF team"
+    }
+    transporter.sendMail(mail, (err, info)=>{
+        if(err){
+            console.log('hataa var', err)
+        } else {
+            console.log('email is sent'+info.response)
+        }
+    })
+  })
+})
 
 
 
