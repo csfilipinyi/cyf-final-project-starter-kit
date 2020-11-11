@@ -11,7 +11,8 @@ const ViewAllProfiles = () => {
 
 
     return (
-		<>{allProfiles&&<Screen>
+		<>
+		<Screen>
             <Header />
             <Introducing
 				header = 'Welcome to the CodeYourFuture Graduate Directory'				
