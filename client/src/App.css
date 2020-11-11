@@ -19,6 +19,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .login-container {
@@ -27,20 +28,15 @@ body {
 }
 
 .header-img {
-  /* position: absolute; */
   margin-left: 5vw;
   height: 50%;
 }
 
 .logout-img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 5vw;
-  margin: auto;
-  height: 40%;
-  /* float: right;
-  justify-self: end; */
+ width: 68px;
+ height: 68px;
+ margin-right:10px;
+  
 }
 
 .sign-form {
@@ -80,11 +76,22 @@ input {
   height: 2rem;
   width: 7rem;
 }
-.update-btn {
-  margin-right: 8px;
-  margin-left: 8px;
+.submit-btn{
+   background-color: #219653;
+  color: #efefef;
+  border: none;
+  font-size: 18px;
+  height: 2rem;
+  width: 7rem;
 }
-
+.update-btn {
+  margin-bottom: 10px;
+}
+.update-cancel-btn {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
 .cancel-btn {
   background-color: #db4437;
 }
@@ -107,6 +114,14 @@ input {
 }
 .error {
   color: #ff0033;
+}
+.register {
+  text-align: center;
+  color: #219653;
+  font-size: large;
+}
+.register:hover {
+  color: #219653;
 }
 .signup-link {
   text-align: center;
@@ -153,14 +168,21 @@ li {
   display: flex;
   flex-direction: row;
   margin-top: 10vh;
-
   padding-right: 20px;
   margin-left: 20px;
+  /* max-width: 100%; */
 }
 .lo-wrapper {
   background-color: #efefef;
+  display: flex;
+  width: 70%;
+  flex: 1;
   padding: 30px;
   margin-left: 30px;
+}
+.lo-list {
+  max-width: 100%;
+  background-color: red;
 }
 .default-skill-display {
   color: white;
@@ -269,16 +291,23 @@ li {
   background-color: #db4437;
 }
 
-.delete-btn {
+/* .delete-btn {
   float: right;
 }
 
 .edit-btn {
   float: left;
+} */
+.icon-edit {
+  margin-right: 10px;
+  margin-left: auto;
 }
-
+.lo-style {
+  width: 100%;
+}
 .edit-delete-buttons {
-  margin-bottom: 20%;
+  display: flex;
+  align-items: center;
 }
 
 /* .add-btn-container {
@@ -333,6 +362,7 @@ li {
 }
 .description {
   font-size: 22px;
+  margin-right: 10px;
 }
 
 .skillsnav-page {
@@ -392,6 +422,13 @@ li {
     margin-left: 0;
   }
   .lo-wrapper {
-    max-width: 100%;
+  width: 100%;
+   margin-left: 0;
   }
+  .lo-style {
+  width: 100%;
+} 
+.p-0{
+  padding: 0;
+}
 }

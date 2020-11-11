@@ -95,7 +95,7 @@ export default function LoginForm() {
           <br />
           <div className="signup-prompt">
             <em>Don't have an account? &nbsp;</em>
-            <Link to="/signup" className="signup-link">
+            <Link to="/signup" className="register">
               Signup
             </Link>
           </div>

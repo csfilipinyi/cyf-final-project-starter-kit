@@ -78,11 +78,11 @@ export default function EditBox() {
   return (
     <div className="lo-wrapper">
       <h2 className="skill-name"></h2>
-      <div>
-        <ul>
+      <div className="lo-style ">
+        <ul className="p-0">
           {learningObj.map(({ description, id }, index) => {
             return (
-              <li className="lo-style" key={index}>
+              <li key={index}>
                 <div className="edit-delete-buttons">
                   {console.log("here is update", updateLO, id)}
 
@@ -93,11 +93,11 @@ export default function EditBox() {
                       value={text}
                     ></textarea>
                   ) : (
-                    <span>
-                      <div className="description">{description}</div>
+                    <>
+                      <p className="description">{description}</p>
                       <a
                         onClick={() => handleEdit(description, id)}
-                        className="edit-btn crud"
+                        className="edit-btn icon-edit crud"
                         id={id}
                       >
                         <img
@@ -107,20 +107,20 @@ export default function EditBox() {
                           border="0"
                         ></img>
                       </a>
-                    </span>
+                    </>
                   )}
-                  <span className="app-message-btn-del">
+                  <span className="update-cancel-btn">
                     {updateLO == id ? (
                       <>
                         <button
                           onClick={() => updateLearningObj(text, id)}
-                          className="submit update-btn"
+                          className="submit-btn update-btn"
                         >
                           Update
                         </button>
                         <button
                           onClick={() => cancelUpdate("")}
-                          className="submit cancel-btn "
+                          className="submit-btn cancel-btn "
                         >
                           Cancel
                         </button>
@@ -128,7 +128,7 @@ export default function EditBox() {
                     ) : (
                       <a
                         onClick={() => deleteLearningOb(id)}
-                        className="delete-btn crud"
+                        className="delete-btn icon-edit crud"
                       >
                         <img
                           src="https://i.ibb.co/fd1dg7H/delete-1.png"
