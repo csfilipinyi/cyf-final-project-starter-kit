@@ -15,7 +15,7 @@ const EmailIcon = ({singleProfile}) => {
   return (
     <>
       <Container>
-        <ELink href={`mailto:${choseMailAddress()}`} target="_blank">
+        <ELink href={`mailto:${choseMailAddress()}`} target="blank">
         <Circle>
           <EmIcon src={EIcon} />
         </Circle>
