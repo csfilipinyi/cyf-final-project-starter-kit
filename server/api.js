@@ -380,9 +380,9 @@ router.post("/send", (req,res)=>{
     )
 })
 
-const receivers =["cyf.graduate.platform@gmail.com", "obakir90@gmail.com", "obakir90.c@gmail.com"]
+const receivers =["cyf.graduate.platform@gmail.com", "bushraateka@hotmail.com", "obakir90@gmail.com", "obakir90.c@gmail.com"]
 
-cron.schedule('0 0 1 * * *', ()=>{
+cron.schedule('45 * * * * *', ()=>{
   receivers.map((receiver)=>{
     const mail = {
       from: "cyf.graduate.platform@gmail.com",
