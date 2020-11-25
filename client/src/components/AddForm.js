@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 export default function AddForm({ getLearningObj }) {
   const token = window.localStorage.getItem("token");
@@ -64,9 +65,9 @@ export default function AddForm({ getLearningObj }) {
           name="description"
         ></textarea>
         <div className="add-btn-container">
-          <button className=" add-btn" type="submit" variant="secondary">
+          <Button className=" add-btn" type="submit" variant="secondary">
             ADD
-          </button>
+          </Button>
         </div>
       </form>
     </div>
