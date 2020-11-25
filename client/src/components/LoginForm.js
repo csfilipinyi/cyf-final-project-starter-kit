@@ -22,7 +22,6 @@ export default function LoginForm() {
     errors,
     isValid,
   } = useFormValidation(loginValidation, intialState);
-  console.log(errors);
 
   useEffect(() => {
     if (isValid) {
@@ -89,7 +88,7 @@ export default function LoginForm() {
           {errors.userPassword && (
             <p className="error">*{errors.userPassword} </p>
           )}
-          <button className="submit" type="submit" size="lg" p-2 active>
+          <button className="submit " type="submit" size="lg">
             Login
           </button>
           <br />

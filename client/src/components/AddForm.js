@@ -64,7 +64,7 @@ export default function AddForm({ getLearningObj }) {
           name="description"
         ></textarea>
         <div className="add-btn-container">
-          <button className=" add-btn" type="submit" variant="secondary">
+          <button className=" add-btn" type="submit">
             ADD
           </button>
         </div>

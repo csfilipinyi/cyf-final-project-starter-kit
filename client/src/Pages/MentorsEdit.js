@@ -8,7 +8,6 @@ import {
   useParams,
 } from "react-router-dom";
 import EditBox from "../components/EditBox";
-import StudentDetail from "./StudentDetail";
 
 import Header from "../components/Header";
 
