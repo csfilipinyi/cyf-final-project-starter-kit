@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory} from 'react-router-dom';
 import OverviewProfileCard from '../components/OverviewProfileCard';
 import Introducing from '../components/Introducing';
+import FilterProfiles from '../components/FilterProfiles'
 import Logo from '../constant/Logo'
 import { ProfileContext } from '../context/ProfileContext';
 import { AuthContext } from '../context/AuthContext';
@@ -12,9 +13,9 @@ import {base_url} from '../../../base_url'
 
 const Home = () => {
 	let history = useHistory();
-
-	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, github_avatar, userName, isGraduate, isAdmin} = useContext(AuthContext);
+	const [filteredProfiles, setFilteredProfiles]=useState([])
+	const { getAllProfiles, getProfile, clearProfile, allProfiles, isLoading, error }= useContext(ProfileContext);
+	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, userName, isGraduate, isAdmin} = useContext(AuthContext);
 
 	const onSuccess = async (response) =>{
 		const accessCode = response.code;
@@ -35,6 +36,7 @@ const Home = () => {
 		}
 	},[userName])
 
+	useEffect(()=>setFilteredProfiles(allProfiles), [allProfiles])
 
 	useEffect (()=>{
 		!userName&&isAuthenticated&&history.push('/profiles/new')
@@ -65,9 +67,10 @@ const Home = () => {
 			<Info>If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at <span> </span>
 			<LinkCYF href='mailto:contact@codeyourfuture.io'> contact@codeyourfuture.io</LinkCYF>
 			</Info>
+			<FilterProfiles allProfiles={allProfiles} setFilteredProfiles={setFilteredProfiles}/>
 			<Container>
 				{isLoading?<Text>Loading...</Text>			
-					: allProfiles && allProfiles.map(( singleProfile, i ) => {
+					: filteredProfiles && filteredProfiles.map(( singleProfile, i ) => {
 						return <OverviewProfileCard singleProfile={ singleProfile } getProfile={getProfile} key={ i } />
 					})}
 				{error && <Text>{error}</Text>}

@@ -127,13 +127,27 @@ router.post("/accounts", function (req, res) {
 //get graduates
 
 router.get("/graduates", (req, res) => {
-  Connection.query("SELECT * FROM graduates", (error, result) => {
-    if (result) {
-      res.json(result.rows);
-    } else {
-      res.send(error);
+  Connection.query(
+    "select g.*, s.skill_name from graduates g join graduate_skill gs on g.id=gs.graduate_id join skills s on s.id=gs.skill_id",
+    (error, result) => {
+      if (error) {
+        res.status(500).send(error);
+      } else if (result && (result.rowCount > 0)){
+        console.log(result.rows)
+        res.status(200).json(result.rows);
+      }
+      else{
+        res.status(404).send("An error occured");
+      }
     }
-  });
+  );
+  // Connection.query("SELECT * FROM graduates", (error, result) => {
+  //   if (result) {
+  //     res.json(result.rows);
+  //   } else {
+  //     res.send(error);
+  //   }
+  // });
 });
 
 // create new profile
