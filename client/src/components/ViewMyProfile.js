@@ -149,13 +149,15 @@ const SubHeads = styled.p`
 const SkillsContainer = styled.div`
   display: flex;
   margin-bottom: 20px;
+  width: 100%;
+  flex-wrap:wrap;
 `;
 
 const SkillBox = styled.div`
   border: 1px solid #dedede;
   border-radius: 2px;
   background-color: #f3f3f3;
-  margin-right: 16px;
+  margin: 10px;
   padding:3px 5px;
 `;
 

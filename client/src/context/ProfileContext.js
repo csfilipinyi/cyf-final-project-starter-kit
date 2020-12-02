@@ -63,7 +63,23 @@ const ProfileState = (props) =>{
 		dispatch({ type: types.Set_Is_Loading }),
 		axios.get(`${baseUrl}/graduates`)
 			.then((response)=>{
-				dispatch({ type: types.Set_All_Profiles, payload:response.data });
+			// let idList = response.data.map(p=>p.id).filter((p,i,a)=>a.indexOf(p)===i)
+			let grad =response.data.reduce((acc, gr)=>{
+				if(acc[gr.id]){
+					Array.isArray(acc[gr.id].skill_name) ?
+					acc[gr.id].skill_name=[...acc[gr.id].skill_name, gr.skill_name]:
+					acc[gr.id].skill_name=[gr.skill_name]
+				} else{
+					acc[gr.id]=gr;
+				}
+				return acc
+			},{})
+
+			let graduates = [];
+			for (let g in grad) {
+				graduates.push(grad[g]) 
+			}
+			dispatch({ type: types.Set_All_Profiles, payload:graduates });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });

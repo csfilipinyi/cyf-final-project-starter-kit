@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormField from "../constant/FormField";
 import StyledButton from "../constant/StyledButton";
@@ -13,17 +13,21 @@ import styled from "styled-components";
 
 const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   let history = useHistory();
-  const { github_id, github_avatar, logOut } = useContext(AuthContext);
-  const { statement, deleteProfile} = useContext(ProfileContext);
+  const { github_id, github_avatar } = useContext(AuthContext);
+  const { statement} = useContext(ProfileContext);
   const { fetchSkills, skillsList } = useContext(AdminContext);
-
+  
   const [newSkills, setNewSkills] = useState([]);
-  const [skillError, setSkillError] = useState(false);
+  const [skillError, setSkillError] = useState(true);
   const [isHired, setIsHired] = useState(false);
-
+  
   const handleSkillError=()=>{
     !newSkills.length>0?setSkillError(true):setSkillError(false)
   }
+
+  useEffect(()=>{
+    handleSkillError()
+  },[newSkills])
 
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
@@ -48,8 +52,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
       github,
       linkedin,
       portfolio,
-      cv,
-      skills
+      cv
     } = values;
     const newProfile = {
       first_name: firstName,
@@ -78,21 +81,16 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
     history.push(`/myprofile`);
   };
   
+  const addSkill =(e)=>{
+    e.preventDefault()
+    let word =e.target.textContent.toLowerCase() 
+    !newSkills.includes(word)&&setNewSkills([...newSkills, word])
+  }
+
   const deleteSkill = (e) => {
     e.preventDefault();
     let remainedSkills = newSkills.filter((skill) => skill !== e.target.value);
     setNewSkills(remainedSkills);
-  };
-
-  const handleValidate = async (e, setFieldValue) => {
-    e.persist();
-    const response = skillsList.map((x) => x.skill_name.toUpperCase());
-    let event = e.key;
-    let word = e.target.value.trim().toUpperCase();
-    if (event == " ") {
-      response.includes(word)&&!newSkills.includes(word)&&setNewSkills([...newSkills, word])
-      setFieldValue("skills", " ");
-    }
   };
 
   const initialValue = profile
@@ -190,19 +188,22 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
                 description="Please provide a link to your CV. You can do that by creating a Google doc and sharing the link to that document. You may use any other online service."
                 label="Your CV"
               />
-              <FormField
-								name='skills'
-								label='Your Key Skills'
-                description = 'Type your skills and press ‘Space’'
-                onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
-                autocomplete="off"
-                onBlur={handleSkillError}
-                skillError={skillError}
-              /> 
-              {skillError&&<Error>Required</Error>}
-							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
-								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
-							})}</ViewSkills>
+              <Label>Your Key Skills</Label>
+              
+              {skillError&&<Error>Key Skills Required</Error>} 
+              
+              <PossibleSkills>
+                      {skillsList&&skillsList.map((skill,i)=>{
+                        return <Skill key={i} onClick={addSkill}>{skill.skill_name.toUpperCase()}</Skill>
+                      })
+                    }
+              </PossibleSkills>
+              <Description>Select your skills. if you have another skill undescribed above. please<a href={`mailto:contact@codeyourfuture.io`}> inform us</a></Description>
+							<ViewSkills>
+                      {newSkills&&newSkills.map((skill, i)=>{
+                          return <SelectedSkill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></SelectedSkill>;
+                      })}
+              </ViewSkills>
              </StyledForm>
             <ButtonContainer>
               {askBeforeDelete&&<StyledButton
@@ -266,22 +267,31 @@ const ValidationSchema = Yup.object().shape({
   portfolio: Yup.string()
     .required("Required"),
   cv: Yup.string()
-    .required("Required"),
-  skills: Yup.string()
-		.required("Required"),
+    .required("Required")
 });
 
 const ViewSkills = styled.div`
   display: flex;
   width: 100%;
+  width: 700px;
+  flex-wrap:wrap;
 `;
 
-const Skill = styled.div`
+const SelectedSkill = styled.div`
   border: 1px solid #dedede;
   border-radius: 2px;
   background-color: #f3f3f3;
   margin: 3px;
   padding: 3px 10px;
+`;
+
+const Skill = styled.div`
+  border: 1px solid black;
+  border-radius: 2px;
+  background-color: #f5f5f5;
+  margin: 3px;
+  padding: 3px 10px;
+  cursor:pointer;
 `;
 
 const X = styled.button`
@@ -336,4 +346,10 @@ const Error = styled.p`
   color: red;
   margin: 0;
   padding: 0;
+`
+
+const PossibleSkills = styled.div`
+  display: flex;
+  width: 700px;
+  flex-wrap:wrap;
 `
