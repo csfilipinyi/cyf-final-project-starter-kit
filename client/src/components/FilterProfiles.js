@@ -105,6 +105,7 @@ const FilterProfiles = ({allProfiles, setFilteredProfiles}) => {
                                 onClick = {handleDesiredSkills}
                             />
                             {skills&&skills.map((skill,i)=>{
+                                console.log('skills', skills, 'skill', skill)
                                 return <Form.Check
                                 key={i}
                                 inline
