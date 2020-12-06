@@ -1,7 +1,9 @@
 const { Pool } = require('pg')
+require("dotenv").config();
 
 let pool;
 let config;
+
 
 if (process.env.DATABASE_URL) { //it's set in Heroku
   const connectionString = process.env.DATABASE_URL
