@@ -1,4 +1,13 @@
-# Starter Kit
+# Spring action cleaning
+A full stack PERN (PostgreSQL, Express, React, Node) project that aims to ease the tracking and recording of workers' hours.
+
+## Prerequisites
+- [Node] (10+)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- Terminal access
+- Web browser
+
+## Features
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -14,32 +23,27 @@
  - [x] [Cloud Foundry] deployment
  - [x] [Docker] build
 
-## Setup
+## Setup to run locally
+- Fork and clone this repository
+- Install packages by running `npm install` in the project's root directory from your terminal.
+- Create `.env` file and populate with your own values. Check `.env.example` for variables/format used.
+``` bash
+DB_NAME=spring # your database name
+DB_PASSWORD=1234 # your database password
+```
+- Various scripts are provided in the package file, but many are helpers for other scripts; here are the most needed ones:
+  - `dev`: starts the frontend and backend in dev mode, with file watching (note that the backend runs on port 3100, and the frontend is proxied to it).
+  - `lint`: runs ESLint against all the JavaScript in the project.
+  - `serve`: builds and starts the app in production mode locally.
 
-Pick one member of the team to own the repository and pipeline. That person should do the following:
+## Notes
 
- 1. Create a fork of this repository for the team, and rename it something appropriate for your project.
- 2. Click the "Deploy to Heroku" button and create a Heroku account when prompted.
- 3. Fill in the name of the application, select Europe, then click "Deploy App".
- 4. Create a Heroku | Postgres | Hobby dev database. You have to connect the database to your existing application (Provision this add-on to an app).
- 5. If everything goes fine, you will have a DATABASE_URL config variable, in your project settings | config vars. You don't need to set it manually, it will be picked up when your app runs in Heroku. Since it's set only in the Heroku, the default local settings will be applied otherwise (see db.js in case you need to change it !!)  
- 6. Once it has deployed successfully, click the "Manage app" button to view the application details.
- 7. Go to the "Deploy" tab, select "Connect to GitHub" and choose your repo.
- 8. Click "Enable automatic deploys".
-
-Whenever you commit to master (or e.g. merge a [pull request]) it will get automatically deployed!
-
-You should now make sure all of the project team are [collaborators] on the repository.
-
-## Scripts
-
-Various scripts are provided in the package file, but many are helpers for other scripts; here are the ones you'll
-commonly use:
-
- - `dev`: starts the frontend and backend in dev mode, with file watching (note that the backend runs on port 3100, and
-    the frontend is proxied to it).
- - `lint`: runs ESLint against all the JavaScript in the project.
- - `serve`: builds and starts the app in production mode locally.
+- CSP (content security policy) is turned off by default.
+``` javascript
+helmet({
+		contentSecurityPolicy: false
+	})
+```
 
 ### Debugging
 
