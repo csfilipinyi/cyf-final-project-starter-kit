@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap");
 
 body {
   /* margin: 10vh; */
@@ -33,10 +33,9 @@ body {
 }
 
 .logout-img {
- width: 68px;
- height: 68px;
- margin-right:10px;
-  
+  width: 68px;
+  height: 68px;
+  margin-right: 10px;
 }
 
 .sign-form {
@@ -76,8 +75,8 @@ input {
   height: 2rem;
   width: 7rem;
 }
-.submit-btn{
-   background-color: #219653;
+.submit-btn {
+  background-color: #219653;
   color: #efefef;
   border: none;
   font-size: 18px;
@@ -422,13 +421,13 @@ li {
     margin-left: 0;
   }
   .lo-wrapper {
-  width: 100%;
-   margin-left: 0;
+    width: 100%;
+    margin-left: 0;
   }
   .lo-style {
-  width: 100%;
-} 
-.p-0{
-  padding: 0;
-}
+    width: 100%;
+  }
+  .p-0 {
+    padding: 0;
+  }
 }
