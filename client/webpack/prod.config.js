@@ -5,52 +5,52 @@ const { merge } = require("webpack-merge");
 const common = require("./common.config");
 
 module.exports = merge(common, {
-  devtool: "source-map",
-  mode: "production",
-  optimization: {
-    runtimeChunk: "single",
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-          chunks: "all",
-        },
-      },
-    },
-  },
-  output: {
-    filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "../../dist/static"),
-  },
-  plugins: [
-    new HtmlWebpackTagsPlugin({
-      usePublicPath: false,
-      scripts: [
-        {
-          path: "https://unpkg.com/react@17.0.1/umd/react.production.min.js",
-          attributes: {
-            crossorigin: "",
-            scriptsrc: "self",
-          },
-          external: {
-            packageName: "react",
-            variableName: "React",
-          },
-        },
-        {
-          path:
-            "https://unpkg.com/react-dom@17.0.1/umd/react-dom.production.min.js",
-          attributes: {
-            crossorigin: "",
-            scriptsrc: "self",
-          },
-          external: {
-            packageName: "react-dom",
-            variableName: "ReactDOM",
-          },
-        },
-      ],
-    }),
-  ],
+	devtool: "source-map",
+	mode: "production",
+	optimization: {
+		runtimeChunk: "single",
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					test: /[\\/]node_modules[\\/]/,
+					name: "vendor",
+					chunks: "all",
+				},
+			},
+		},
+	},
+	output: {
+		filename: "[name].[contenthash].js",
+		path: path.resolve(__dirname, "../../dist/static"),
+	},
+	plugins: [
+		new HtmlWebpackTagsPlugin({
+			usePublicPath: false,
+			scripts: [
+				{
+					path: "https://unpkg.com/react@17.0.1/umd/react.production.min.js",
+					attributes: {
+						crossorigin: "",
+						scriptsrc: "self",
+					},
+					external: {
+						packageName: "react",
+						variableName: "React",
+					},
+				},
+				{
+					path:
+						"https://unpkg.com/react-dom@17.0.1/umd/react-dom.production.min.js",
+					attributes: {
+						crossorigin: "",
+						scriptsrc: "self",
+					},
+					external: {
+						packageName: "react-dom",
+						variableName: "ReactDOM",
+					},
+				},
+			],
+		}),
+	],
 });
