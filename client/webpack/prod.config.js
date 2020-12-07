@@ -31,7 +31,6 @@ module.exports = merge(common, {
 					path: "https://unpkg.com/react@17.0.1/umd/react.production.min.js",
 					attributes: {
 						crossorigin: "",
-						scriptsrc: "self",
 					},
 					external: {
 						packageName: "react",
@@ -43,7 +42,6 @@ module.exports = merge(common, {
 						"https://unpkg.com/react-dom@17.0.1/umd/react-dom.production.min.js",
 					attributes: {
 						crossorigin: "",
-						scriptsrc: "self",
 					},
 					external: {
 						packageName: "react-dom",
