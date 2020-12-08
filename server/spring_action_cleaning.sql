@@ -1,4 +1,4 @@
-ALTER TABLE clients DROP COLUMN if exists main_address_id;
+ALTER TABLE if exists clients DROP COLUMN if exists main_address_id;
 drop table if exists job_codes;
 drop table if exists jobs;
 drop table if exists addresses;
@@ -119,3 +119,18 @@ insert into addresses (contact_name, address, contact_phone, client_id, cleaner_
 insert into addresses (contact_name, address, contact_phone, client_id, cleaner_id) values ('Lenci Grayne', '70 Weeping Birch Plaza', '850-852-3281', 1, 1);
 insert into addresses (contact_name, address, contact_phone, client_id, cleaner_id) values ('Horatio Mascall', '590 Schurz Place', '553-419-2650', 2, 2);
 insert into addresses (contact_name, address, contact_phone, client_id, cleaner_id) values ('Haley Beldan', '757 Mayfield Court', '531-295-7126', 3, 3);
+
+UPDATE clients SET main_address_id=1 WHERE id=1;
+UPDATE clients SET main_address_id=2 WHERE id=2;
+UPDATE clients SET main_address_id=3 WHERE id=3;
+UPDATE clients SET main_address_id=4 WHERE id=4;
+UPDATE clients SET main_address_id=5 WHERE id=5;
+UPDATE clients SET main_address_id=6 WHERE id=6;
+UPDATE clients SET main_address_id=7 WHERE id=7;
+UPDATE clients SET main_address_id=8 WHERE id=8;
+UPDATE clients SET main_address_id=9 WHERE id=9;
+UPDATE clients SET main_address_id=10 WHERE id=10;
+
+insert into admins (name, email, password) values ('Brandais Moyne', 'bmoyne0@state.gov', 'xQUXYIzjv8V');
+insert into admins (name, email, password) values ('Raquela Ramage', 'rramage1@salon.com', 'hBG6fkwhZN');
+insert into admins (name, email, password) values ('Agustin Challenger', 'achallenger2@godaddy.com', 'UQ3FcKNdI');
