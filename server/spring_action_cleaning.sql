@@ -1,4 +1,4 @@
-ALTER TABLE clients DROP COLUMN if exists main_address_id;
+ALTER TABLE if exists clients DROP COLUMN if exists main_address_id;
 drop table if exists job_codes;
 drop table if exists jobs;
 drop table if exists addresses;
