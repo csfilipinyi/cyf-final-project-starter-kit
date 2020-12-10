@@ -7,11 +7,11 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: "babel-loader?cacheDirectory",
+				use: { loader: "babel-loader?cacheDirectory" },
 			},
 			{
 				test: /\.(png|svg|jpe?g|gif)$/,
-				loader: "file-loader",
+				use: { loader: "file-loader" },
 			},
 			{
 				test: /\.css$/,
