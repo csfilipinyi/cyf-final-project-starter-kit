@@ -1,25 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import { FaRegUser } from 'react-icons/fa';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        Tech pirates
-        </a>
-      </header>
+    <div className="nav">
+    <ul>
+    <li><FaRegUser size={25}/>Username</li>
+    <li><img src="https://syllabus.codeyourfuture.io/img/logo.png" alt="cyf logo" width="200px" height="60px"/></li>
+    <li><button className= "Star">Log out</button></li>
+</ul>
     </div>
-  );
+       
+        <h2>Welcome to the class</h2>
+        <p>You are now logged in </p>
+        
+      
+      </div>
+  )  
 }
 
 export default App;

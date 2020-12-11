@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+.Star {
+  background-color: red;
+  color: White;
+  font-weight: bold;
+}
+
+.nav{
+  background-color: darkgray;
+}
+.nav ul{
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-decoration: none;
+  
+}
+
+.nav ul li{
+  margin-top: 30px; 
+}
+
+h2{
+  margin-top: 180px;
+  font-size: larger;
+}
