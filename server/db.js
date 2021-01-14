@@ -19,7 +19,7 @@ if (process.env.DATABASE_URL) {
     host: "localhost",
     database: "cyf_knowledge_checklist",
     password: process.env.db_password,
-    port: 5433,
+    port: process.env.db_port || 5432,
   };
 }
 pool = new Pool(config);
