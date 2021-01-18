@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dataTesting from "../dataTesting.json";
-import BoxDisplay from "../components/BoxDisplay";
+import CalculateAverageScore from "../components/CalculateAverageScore";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -103,7 +103,10 @@ function MentorsView() {
           </ul> */}
           {studentId && (
             <div className="box-display-component">
-              <BoxDisplay studentId={studentId} studentName={studentName} />
+              <CalculateAverageScore
+                studentId={studentId}
+                studentName={studentName}
+              />
             </div>
           )}
           <h2 className="mentor-greet">Students List:</h2>

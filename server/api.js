@@ -30,7 +30,7 @@ router.get("/", (_, res, next) => {
     res.json({ message: "Welcome to Knowledge Checklist" });
   });
 });
-// <---------------get endpoint to all learning Objectives in BoxDisplay ---------->
+// <---------------get endpoint to all learning Objectives in CalculateAverageScore ---------->
 
 router.get("/abilities/:id", authorization, mentorsOnly, (req, res) => {
   const userId = Number(req.params.id);
@@ -282,7 +282,7 @@ router.post("/login", validInfo, async (req, res) => {
       user.rows[0].user_password
     );
     if (!validPassword) {
-      return res.status(401).json({error: "Password or Email is incorrect"});
+      return res.status(401).json({ error: "Password or Email is incorrect" });
     }
 
     const token = jwtGenerator(
@@ -295,7 +295,7 @@ router.post("/login", validInfo, async (req, res) => {
       message: "login successful",
       id: user.rows[0].user_id,
       role: user.rows[0].user_role,
-      name: user.rows[0].first_name
+      name: user.rows[0].first_name,
     });
   } catch (err) {
     console.error(err.message);
@@ -306,7 +306,11 @@ router.post("/login", validInfo, async (req, res) => {
 router.get("/verify", authorization, async (req, res) => {
   try {
     console.log("passed the authorization");
-    res.json({ id: req.user.id, role: req.user.role, name: req.user.first_name });
+    res.json({
+      id: req.user.id,
+      role: req.user.role,
+      name: req.user.first_name,
+    });
   } catch (err) {
     console.error("error", err.message);
     res.status(500).send("Server error");
