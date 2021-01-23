@@ -20,17 +20,13 @@ Graduate Directory aims to help CYF graduates get hired.
 - Mentors/Admin can login to the admin panel to add eligible GitHub usernames and skills.
   They can also send emails to graduates.    
 
- - Overview Page
- ![Overview Page](readme-1.png)
+ -  ![Overview Page](readme-1.png "Overview Page")
 
- - View Page
- ![View Page](client\src\assets\images\readme-2.png)
+ -  ![View Page](readme-2.png "View Page")
 
- - Edit Page
- ![Edit Page](client\src\assets\images\readme-3.png)
- ![Edit Page](client\src\assets\images\readme-4.png)
- ![Edit Page](client\src\assets\images\readme-5.png)
-
+ -  ![Edit Page](readme-3.png "Edit Page")
+ -  ![Edit Page](readme-4.png "Edit Page")
+ -  ![Edit Page](readme-5.png "Edit Page")
 
 
 ## Scripts
