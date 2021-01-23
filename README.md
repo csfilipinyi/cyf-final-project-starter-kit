@@ -21,7 +21,7 @@ Graduate Directory aims to help CYF graduates get hired.
   They can also send emails to graduates.    
 
  - Overview Page
- ![Overview Page](client\src\assets\images\readme-1.png)
+ ![Overview Page](client\src\assets\images\readme-1.png "Description")
 
  - View Page
  ![View Page](client\src\assets\images\readme-2.png)
