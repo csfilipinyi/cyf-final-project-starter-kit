@@ -28,7 +28,11 @@ const Admin = () => {
                                 return <p>{i.skill_name}</p>
                             })}
                         </SkillsContainer>}
-                    {display==='accounts'&&<AccountsContainer/>}
+                    {display==='accounts'&&<AccountsContainer>
+                    {github_accounts.map((i)=>{
+                                return <p>{i.account_name}</p>
+                            })}
+                    </AccountsContainer>}
                 </Container>
             This is Admin Page
         </Screen>
