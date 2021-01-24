@@ -7,14 +7,16 @@ import OverviewProfileCard from '../components/OverviewProfileCard'
 import Introducing from '../components/Introducing'
 
 const ViewAllProfiles = () => {
-    const { allProfiles, getProfile, isLoading, error }= useContext(ProfileContext);
+    const { allProfiles, getProfile, getAllProfiles, isLoading, error }= useContext(ProfileContext);
+
+	console.log('all profiles', allProfiles);	
 
 	useEffect(()=>{
-		!allProfiles&&getProfile()
+		getAllProfiles();
 	},[])
 
     return (
-        <Screen>
+		<Screen>
             <Header />
             <Introducing
 				header = 'Welcome to the CodeYourFuture Graduate Directory'				
@@ -29,7 +31,7 @@ const ViewAllProfiles = () => {
 				{isLoading ? 
 					<p>Loading...</p>
 					: allProfiles && allProfiles.map(( profile, i ) => {
-						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } />
+						return <OverviewProfileCard singleProfile={ profile } getProfile={getProfile} key={ i } />
 					})}
 				{error && <p>{error}</p>}
 			</Container>

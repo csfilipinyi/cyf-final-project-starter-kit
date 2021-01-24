@@ -3,13 +3,23 @@ import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../assets/images/logo.png';
 import {AuthContext} from '../context/AuthContext'
+import {ProfileContext} from '../context/ProfileContext'
 
 const LogoName = () => {
     const {isAuthenticated} = useContext (AuthContext)
+    const {getAllProfiles, allProfiles} = useContext (ProfileContext)
+
     let history = useHistory()
 
-    const handleClick =()=>{
-        isAuthenticated?history.push('/profiles'):history.push('/')
+    const handleClick = async ()=>{
+        console.log('logo clicked', {allProfiles})
+        await getAllProfiles();
+        if (allProfiles&&isAuthenticated){
+            console.log('logo clicked true', {allProfiles});
+            history.push('/profiles')
+        } else {
+            history.push('/')
+        }
     }
     
     return (

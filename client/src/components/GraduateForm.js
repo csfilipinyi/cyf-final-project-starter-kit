@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormField from "../constant/FormField";
 import StyledButton from "../constant/StyledButton";
@@ -8,19 +8,38 @@ import RichEditorField from '../constant/RichEditorField'
 import FormSwitchButton from '../constant/FormSwitchButton'
 import { ProfileContext } from "../context/ProfileContext";
 import { AuthContext } from "../context/AuthContext";
+import { AdminContext } from "../context/AdminContext";
 import styled from "styled-components";
 
 const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
   let history = useHistory();
-  const { github_id, github_avatar, logOut } = useContext(AuthContext);
-  const { statement, deleteProfile } = useContext(ProfileContext);
-
+  const { github_id, github_avatar } = useContext(AuthContext);
+  const { statement} = useContext(ProfileContext);
+  const { fetchSkills, skillsList } = useContext(AdminContext);
+  
   const [newSkills, setNewSkills] = useState([]);
+  const [skillError, setSkillError] = useState(true);
   const [isHired, setIsHired] = useState(false);
   
+  const handleSkillError=()=>{
+    !newSkills.length>0?setSkillError(true):setSkillError(false)
+  }
+
+  useEffect(()=>{
+    handleSkillError()
+  },[newSkills])
+
   useEffect(()=>{
   	profile&&profile.skills&&setNewSkills([...newSkills, ...profile.skills])
   },[profile])
+
+  useEffect (()=>{
+    fetchSkills()
+  },[])
+
+  useEffect (()=>{
+    profile&&setIsHired(profile.is_hired)
+  },[])
 
   const handleSubmit = async (values) => {
     const {
@@ -33,8 +52,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
       github,
       linkedin,
       portfolio,
-      cv,
-      skills
+      cv
     } = values;
     const newProfile = {
       first_name: firstName,
@@ -53,31 +71,26 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
       statement:statement,
       is_hired:isHired
     };
-    await handleClick(newProfile);
-    history.push(`/myprofile`);
+    if(!skillError){
+      await handleClick(newProfile);
+      history.push(`/myprofile`);
+    }
   };
 
   const handleReset = () => {
     history.push(`/myprofile`);
   };
   
+  const addSkill =(e)=>{
+    e.preventDefault()
+    let word =e.target.textContent.toLowerCase() 
+    !newSkills.includes(word)&&setNewSkills([...newSkills, word])
+  }
+
   const deleteSkill = (e) => {
     e.preventDefault();
     let remainedSkills = newSkills.filter((skill) => skill !== e.target.value);
     setNewSkills(remainedSkills);
-  };
-
-  const handleValidate = async (e, setFieldValue) => {
-    e.persist();
-    // const res = await skills();
-    // const response = res.map((x) => x.toUpperCase());
-    let event = e.key;
-    let word = e.target.value.trim().toUpperCase();
-    if (event == " ") {
-      // response.includes(word) &&!newSkills.includes(word)&&
-      setNewSkills([...newSkills, word]);
-      setFieldValue("skills", " ");
-    }
   };
 
   const initialValue = profile
@@ -121,6 +134,7 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
             <StyledForm id="formLogin" noValidate>
               <FormSwitchButton
                 name="isHired"
+                profile={profile}
                 isHired={isHired}
                 handleSwitch={()=>setIsHired(!isHired)}
               />
@@ -134,13 +148,13 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               />
               <FormField
                 name="email"
-                description="if you don't want your e-mail address to be public, please add contact@codeyourfuture.com instead"
+                description="If you don't want your e-mail address to be public, please add contact@codeyourfuture.io"
                 label="Your Email"
               />
               <FormField
                 name="aboutMe"
                 height="90px"
-                description="Provide one sentence summary of what makes you tick. This will also be shown on the main page"
+                description="Provide a one sentence summary that demonstrates what you are passionate about. This will be shown on the main page of the site"
                 label="About Me"
                 as="textarea"
               />
@@ -154,55 +168,64 @@ const GraduateForm = ({ profile, handleClick, askBeforeDelete }) => {
               />
               <FormField
                 name="interest"
-                description="Add the 3 key things that you are passionate about.this will show on the main page"
+                description="Add the 3 key things that you are most passionate about here. This will show on the main page of the site"
                 label="Key Interests"
               />
               <FormField
                 name="github"
-                label="Github"
+                label="Github Link"
               />
               <FormField
                 name="linkedin"
-                label="Linked In"
+                label="LinkedIn Link"
               />
               <FormField
                 name="portfolio"
                 label="Your Portfolio/Project"
               />
-               <FormField
+              <FormField
                 name="cv"
                 description="Please provide a link to your CV. You can do that by creating a Google doc and sharing the link to that document. You may use any other online service."
                 label="Your CV"
               />
-              <FormField
-								name='skills'
-								label='Your key skills'
-                info = 'Type your skills and press ‘Space’'
-								onKeyUp={(e)=>handleValidate(e, props.setFieldValue)}
-							/> 
-							<ViewSkills>{newSkills&&newSkills.map((skill, i)=>{
-								return <Skill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></Skill>;
-							})}</ViewSkills>
+              <Label>Your Key Skills</Label>
+              
+              {skillError&&<Error>Key Skills Required</Error>} 
+              
+              <PossibleSkills>
+                      {skillsList&&skillsList.map((skill,i)=>{
+                        return <Skill key={i} onClick={addSkill}>{skill.skill_name.toUpperCase()}</Skill>
+                      })
+                    }
+              </PossibleSkills>
+              <Description>Select your skills. if you have another skill undescribed above. please<a href={`mailto:contact@codeyourfuture.io`}> inform us</a></Description>
+							<ViewSkills>
+                      {newSkills&&newSkills.map((skill, i)=>{
+                          return <SelectedSkill key={i}>{skill}<X onClick={deleteSkill} type='delete' value={skill}>X</X></SelectedSkill>;
+                      })}
+              </ViewSkills>
              </StyledForm>
             <ButtonContainer>
-              <StyledButton
-                name="Cancel"
-                className="md"
-                type='button'
-                handleClick={props.handleReset}
-              />
               {askBeforeDelete&&<StyledButton
-                name="Delete"
-                className="danger"
+                name="Delete Profile"
+                className="danger-md"
                 type='button'
                 handleClick={askBeforeDelete}
               />}
-              <StyledButton
-                name="Save"
-                className="sm"
-                type="submit"
-                handleClick={props.handleSubmit}
-              />
+              <SubButtonContainer>            
+                <StyledButton
+                  name="Cancel"
+                  className="cancel"
+                  type='button'
+                  handleClick={props.handleReset}
+                  />
+                <StyledButton
+                  name="Save"
+                  className="success-sm"
+                  type="submit"
+                  handleClick={props.handleSubmit}
+                  />
+              </SubButtonContainer>
             </ButtonContainer>
           </>
         )}
@@ -225,9 +248,12 @@ const ValidationSchema = Yup.object().shape({
   surname: Yup.string()
     .required("Required")
     .max(15, 'Should be less than 15'),
+  email:Yup.string()
+  .email('Wrong email format')
+  .required('Required'),
   aboutMe: Yup.string()
   .required("Required")
-  .max(100, 'Should be less than 100'),
+  .max(80, 'Should be less than 80'),
 	location: Yup.string()
     .required("Required")
     .max(15, 'Should be less than 15'),
@@ -240,21 +266,32 @@ const ValidationSchema = Yup.object().shape({
     .required("Required"),
   portfolio: Yup.string()
     .required("Required"),
-  skills: Yup.string()
-		.required("Required"),
+  cv: Yup.string()
+    .required("Required")
 });
 
 const ViewSkills = styled.div`
   display: flex;
   width: 100%;
+  width: 700px;
+  flex-wrap:wrap;
 `;
 
-const Skill = styled.div`
+const SelectedSkill = styled.div`
   border: 1px solid #dedede;
   border-radius: 2px;
   background-color: #f3f3f3;
   margin: 3px;
   padding: 3px 10px;
+`;
+
+const Skill = styled.div`
+  border: 1px solid black;
+  border-radius: 2px;
+  background-color: #f5f5f5;
+  margin: 3px;
+  padding: 3px 10px;
+  cursor:pointer;
 `;
 
 const X = styled.button`
@@ -272,28 +309,47 @@ const StyledForm = styled(Form)`
 const ButtonContainer = styled.div`
   margin:50px 0;
   display:flex;
-  width:55%;
+  width:700px;
   justify-content:space-between;
 `;
+
+const SubButtonContainer =styled.div`
+  display:flex;
+  justify-content:flex-end;
+  width:100%
+`
 
 const Label = styled.label`
   color: #000000;
   font-family: ${(props) => props.theme.fontFamily.primary};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
-  margin-top: 30px;
+  margin-top:20px;
 `;
 
 const Description = styled.p`
-  color: #000000;
-  font-family: ${(props) => props.theme.fontFamily.primary};
-  font-size: 18px;
-  font-style: italic;
-  letter-spacing: 0;
-  text-align: left;
-  padding-right: 300px;
-  margin-top: 5px;
-  margin-bottom: 30px;
+color: #000000;
+font-family: ${(props) => props.theme.fontFamily.primary};
+font-size: 16px;
+font-style: italic;
+letter-spacing: 0;
+text-align: left;
+width:65%;
+margin-bottom:15px;
 `;
+
+const Error = styled.p`
+  font-size: "10px";
+  line-height: 14px;
+  color: red;
+  margin: 0;
+  padding: 0;
+`
+
+const PossibleSkills = styled.div`
+  display: flex;
+  width: 700px;
+  flex-wrap:wrap;
+`

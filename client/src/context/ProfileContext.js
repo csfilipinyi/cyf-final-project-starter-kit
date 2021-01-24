@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-
+import {base_url_back} from '../../../base_url'
 
 //Created Context
 export const ProfileContext = React.createContext();
@@ -22,7 +22,6 @@ const types = {
 //Stored actions in a reducer
 
 const profileReducer = (state, action) => {
-	console.log('context action', action)
 	switch (action.type) {
 	case types.Set_Is_Loading:
 		return { ...state, isLoading: true };
@@ -56,9 +55,7 @@ const ProfileState = (props) =>{
 		error:null,
 	};
 
-	// const baseUrl = 'https://designed-gd.herokuapp.com/api'
-
-	const baseUrl ='http://localhost:3100/api'
+	const baseUrl = `${base_url_back}/api`
 
 	const [state, dispatch] = useReducer(profileReducer, initialState);
 
@@ -66,7 +63,23 @@ const ProfileState = (props) =>{
 		dispatch({ type: types.Set_Is_Loading }),
 		axios.get(`${baseUrl}/graduates`)
 			.then((response)=>{
-				dispatch({ type: types.Set_All_Profiles, payload:response.data });
+			// let idList = response.data.map(p=>p.id).filter((p,i,a)=>a.indexOf(p)===i)
+			let grad =response.data.reduce((acc, gr)=>{
+				if(acc[gr.id]){
+					Array.isArray(acc[gr.id].skill_name) ?
+					acc[gr.id].skill_name=[...acc[gr.id].skill_name, gr.skill_name]:
+					acc[gr.id].skill_name=[gr.skill_name]
+				} else{
+					acc[gr.id]=gr;
+				}
+				return acc
+			},{})
+
+			let graduates = [];
+			for (let g in grad) {
+				graduates.push(grad[g]) 
+			}
+			dispatch({ type: types.Set_All_Profiles, payload:graduates });
 			})
 			.catch((error)=>{
 				dispatch({ type:types.Set_Error, payload:error });
@@ -148,7 +161,6 @@ const ProfileState = (props) =>{
 	};
 
 	const setRichtText = (text)=>{
-		console.log('profile context text', text, state.statement)
 		dispatch({ type: types.Set_Rich_Text, payload:text });
 	}
 

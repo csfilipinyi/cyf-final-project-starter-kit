@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
+import {base_url_back} from '../../../base_url'
 
 
 
@@ -29,9 +30,9 @@ const authReducer = (state, action) => {
     case types.Set_UserName:
         return { ...state, github_id: action.payload.id, userName:action.payload.name, isAuthenticated:true, isLoading: false };
     case types.Set_Is_Graduate:
-        return { ...state, isGraduate:false, isLoading: false }; 
+        return { ...state, isGraduate:action.payload, isLoading: false }; 
     case types.Set_Is_Admin:
-        return { ...state, isAdmin:true, isLoading: false }; 
+        return { ...state, isAdmin:true, isAuthenticated:true, isLoading: false }; 
     case types.Set_Github:
         return {...state, github_name:action.payload.accountname, github_avatar:action.payload.avatar}    
     case types.Logout:
@@ -57,11 +58,10 @@ const authReducer = (state, action) => {
         
         const [state, dispatch] = useReducer(authReducer, initialState);
         
-        // const baseUrl = 'https://designed-gd.herokuapp.com/api'
-        const baseUrl = 'http://localhost:3100/api'
-        
+        const baseUrl = `${base_url_back}/api`
+
         const fetchUserName = (code)=>{
-            return axios.get(`https://designed-gd.herokuapp.com/api/callback?code=${code}`)
+            return axios.get(`https://dev-graduate-directory.herokuapp.com/api/callback?code=${code}`)
             .then(response => {
                 return response.data
             })
@@ -87,7 +87,6 @@ const authReducer = (state, action) => {
                         return  dispatch({ type: types.Set_UserName, payload:{name, id}})
                         }
                         if(response.status==201){
-                            console.log('isAdmin context called')
                         return  dispatch({ type: types.Set_Is_Admin})
                         }
                         if (response.status==206){
@@ -96,12 +95,16 @@ const authReducer = (state, action) => {
                         }
                 })
                 .catch((error)=>{
-                    dispatch({ type:types.Set_Is_Graduate });
+                    dispatch({ type:types.Set_Is_Graduate, payload:false });
                 });
         }
 
         const logOut = ()=>{
             dispatch({ type:types.Logout});
+        }
+
+        const setGraduate = ()=>{
+            return dispatch({ type:types.Set_Is_Graduate, payload:true});
         }
 
     return (
@@ -120,6 +123,7 @@ const authReducer = (state, action) => {
                 checkGraduate,
                 fetchUserName, 
                 setGithub,
+                setGraduate,
                 logOut
 			}}
 		>

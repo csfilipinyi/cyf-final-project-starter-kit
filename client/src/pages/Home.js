@@ -1,21 +1,22 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory} from 'react-router-dom';
 import OverviewProfileCard from '../components/OverviewProfileCard';
 import Introducing from '../components/Introducing';
+import FilterProfiles from '../components/FilterProfiles'
 import Logo from '../constant/Logo'
 import { ProfileContext } from '../context/ProfileContext';
 import { AuthContext } from '../context/AuthContext';
 import styled from 'styled-components';
 import GitHubLogin from "react-github-login";
+import {base_url} from '../../../base_url'
 
 
 const Home = () => {
 	let history = useHistory();
+	const [filteredProfiles, setFilteredProfiles]=useState([])
+	const { getAllProfiles, getProfile, clearProfile, allProfiles, isLoading, error }= useContext(ProfileContext);
+	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, userName, isGraduate, isAdmin} = useContext(AuthContext);
 
-	const { getAllProfiles, getProfile, clearProfile, allProfiles, profile, isLoading, error }= useContext(ProfileContext);
-	const { fetchUserName, checkGraduate, setGithub, isAuthenticated, github_id, github_avatar, userName, isGraduate, isAdmin} = useContext(AuthContext);
-
-	console.log('home page', isAdmin)
 	const onSuccess = async (response) =>{
 		const accessCode = response.code;
 		const githubname = await fetchUserName(accessCode);
@@ -33,7 +34,9 @@ const Home = () => {
 		if(userName){
 			navigateToProfile()
 		}
-	},[userName, github_id])
+	},[userName])
+
+	useEffect(()=>setFilteredProfiles(allProfiles), [allProfiles])
 
 	useEffect (()=>{
 		!userName&&isAuthenticated&&history.push('/profiles/new')
@@ -43,8 +46,7 @@ const Home = () => {
 
     const onFailure = response => console.error(response);  
 
-	useEffect(getAllProfiles, []);
-
+	useEffect(()=>getAllProfiles(), []);
 	return (
 		<Screen>
 			<Header>
@@ -52,8 +54,7 @@ const Home = () => {
 				<GitHub clientId='d46845e5f1d464b34454' //this needs to change according to heroku app configs
 				onSuccess={onSuccess}
 				onFailure={onFailure}
-				// redirectUri={'https://designed-gd.herokuapp.com/login'}
-				redirectUri={'http://localhost:3000/login'}
+				redirectUri={`${base_url}/login`}
 				buttonText='Graduate Login'
 				/>
 			</Header>
@@ -66,10 +67,11 @@ const Home = () => {
 			<Info>If you see a likely candidate please contact the graduate directly. If you would like to have a broader conversation about your hiring needs, we’d love to chat - contact us at <span> </span>
 			<LinkCYF href='mailto:contact@codeyourfuture.io'> contact@codeyourfuture.io</LinkCYF>
 			</Info>
+			<FilterProfiles allProfiles={allProfiles} setFilteredProfiles={setFilteredProfiles}/>
 			<Container>
-				{isLoading ? <Text>Loading...</Text>
-					: allProfiles && allProfiles.map(( profile, i ) => {
-						return <OverviewProfileCard profile={ profile } getProfile={getProfile} key={ i } avatar={github_avatar}/>;
+				{isLoading?<Text>Loading...</Text>			
+					: filteredProfiles && filteredProfiles.map(( singleProfile, i ) => {
+						return <OverviewProfileCard singleProfile={ singleProfile } getProfile={getProfile} key={ i } />
 					})}
 				{error && <Text>{error}</Text>}
 			</Container>
@@ -88,14 +90,15 @@ const Header = styled.div`
 `;
 
 const GitHub = styled(GitHubLogin)`
-	height: 56px;
-	width: 106px;
+	height: 60px;
+	width: 160px;
 	border-radius: 2px;
 	color:#fff;
 	margin-right:15%;
 	align-self:center;
 	font-weight:bold;
 	font-family: Arial;
+	border:2px solid green;
 	background-color:${(props)=>props.theme.colors.primaryGreen};		
 `
 

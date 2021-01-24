@@ -4,43 +4,44 @@ import styled from "styled-components";
 import ViewSkills from "../components/ViewSkills";
 import StyledButton from "../constant/StyledButton";
 import { useHistory } from "react-router-dom";
-import GitHubIcon from "./GitHubIconIcon.js";
+import GitHubIcon from "./GitHubIcon";
 import LinkedinIcon from "./LinkedinIcon";
 import CvIcon from "./CvIcon";
 import EmailIcon from "./EmailIcon";
 import HiredLabel from '../constant/HiredLabel'
 
-const OverviewProfileCard = ({ profile, getProfile}) => {
+const OverviewProfileCard = ({ singleProfile, getProfile}) => {
   let history = useHistory();
-  console.log('card is hired', profile.is_hired)
+  
+  const {is_hired, first_name, surname, avatar_url, about_me,interest, github_link, linkedin_link, cv_link, github_id}=singleProfile
   const handleClick = async (id) => {
     await getProfile(id);
-    history.push(`/profiles/${profile.first_name}`);
+    history.push(`/profiles/${singleProfile.first_name}`);
   };
   
   return (
     <CardContainer>
-      {profile.is_hired&&<HiredLabel/>}
-      <Img src={profile.avatar_url}/>
+      {is_hired&&<HiredLabel/>}
+      <Img src={avatar_url}/>
       <CardBody>
         <CardTitle>
-          {profile.first_name} {profile.surname}
+          {first_name} {surname}
         </CardTitle>
         <SubContainer>
-          {profile.about_me&&<CardText>{profile.about_me}</CardText>}
+          {about_me&&<CardText>{about_me}</CardText>}
         </SubContainer>
         <SubContainer>
-         {profile.about_me&&<CardText>{profile.interest}</CardText>}
+         {interest&&<CardTextInt>{interest}</CardTextInt>}
         </SubContainer>
         <IconContainer>
-          {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
-          {profile.linkedin_link&&<LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>}
-          <CvIcon></CvIcon>
-          <EmailIcon></EmailIcon>
+          {github_link&&<GitHubIcon gitHubLink={github_link}></GitHubIcon>}
+          {linkedin_link&&<LinkedinIcon linkedinLink={linkedin_link}></LinkedinIcon>}
+          <CvIcon CvLink={cv_link}></CvIcon>
+          <EmailIcon singleProfile={singleProfile}></EmailIcon>
         </IconContainer>
         <StyledButton
           name="View Profile"
-          handleClick={() => handleClick(`${profile.github_id}`)}
+          handleClick={() => handleClick(`${github_id}`)}
         />
       </CardBody>
     </CardContainer>
@@ -69,16 +70,17 @@ const IconContainer = styled.div`
   display: flex;
   justify-content:space-around;
   align-items:center;
-  margin-bottom:3px 0 10px 0;
+  margin:3px 0 10px 0;
   width:90%;
 `;
 
 const SubContainer = styled.div`
   display: flex;
   height: 65px;
-  width: 80%;
+  width: 85%;
   justify-content: center;
   align-items: center;
+  margin-top:7px;
 `;
 const CardBody = styled(Card.Body)`
   display: flex;
@@ -101,6 +103,13 @@ const CardText = styled(Card.Text)`
   font-size: 16px;
   font-family: Lato;
   text-align: center;
+`;
+
+const CardTextInt = styled(Card.Text)`
+  font-size: 16px;
+  font-family: Lato;
+  text-align: center;
+  font-style:italic;
 `;
 
 const Img= styled(Card.Img)`

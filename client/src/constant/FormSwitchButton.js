@@ -53,8 +53,8 @@ const Label =styled.label`
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    width: 100px;
-    height: 50px;
+    width: 70px;
+    height: 35px;
     background:red;
     border-radius: 100px;
     position: relative;
@@ -69,8 +69,8 @@ const Button = styled.span`
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     border-radius: 45px;
     transition: 0.2s;
     background: #fff;
@@ -80,7 +80,7 @@ const Button = styled.span`
 const Description = styled.label`
     color: #000000;
     font-family: ${(props) => props.theme.fontFamily.primary};
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     margin:0 5px;
 `

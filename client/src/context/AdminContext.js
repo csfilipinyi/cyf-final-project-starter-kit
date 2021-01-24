@@ -1,12 +1,16 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
+import {base_url_back} from '../../../base_url'
+
 
 export const AdminContext = React.createContext();
 
 
 const types = {
     Set_Skills: "Set_Skills",
-	Set_Github_Accounts:'Set_Github_Accounts',
+    Set_New_Skill:"Set_New_Skill",
+    Set_Github_Accounts:"Set_Github_Accounts",
+    Set_New_Account:"Set_New_Account",
     Set_Error: "Set_Error",
 };
 
@@ -14,9 +18,13 @@ const types = {
 const authReducer = (state, action) => {
 	switch (action.type) {
         case types.Set_Skills:
-            return { ...state, skills:action.payload };
+            return { ...state, skillsList:action.payload };
+        case types.Set_New_Skill:
+            return { ...state, skillsList:[...state.skillsList, action.payload], isLoading:false };
         case types.Set_Github_Accounts:
-            return { ...state, github_accounts:action.payload };
+            return { ...state, github_accounts:action.payload, isLoading:false};
+        case types.Set_New_Account:
+            return { ...state, github_accounts:[...state.github_accounts, action.payload], isLoading:false};
         default:
             return state;
         }
@@ -25,16 +33,15 @@ const authReducer = (state, action) => {
                     
 const AdminState = (props) =>{
     const initialState={
-        skills:null,
-        github_accounts:null,
+        skillsList:[],
+        github_accounts:[],
         isLoading:false,
         error:null,
     }
     
     const [state, dispatch] = useReducer(authReducer, initialState);
     
-    // const baseUrl = 'https://designed-gd.herokuapp.com/api'
-        const baseUrl = 'http://localhost:3100/api'
+    const baseUrl = `${base_url_back}/api`
         
       
     const fetchSkills = ()=>{
@@ -59,17 +66,49 @@ const AdminState = (props) =>{
             });
     }
 
-        
+    const addNewAccount=(githubName)=>{
+        dispatch({ type: types.Set_Is_Loading });
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+		axios.post(`${baseUrl}/accounts`, githubName, config)
+			.then((response)=>{
+				dispatch({ type: types.Set_New_Account, payload:response.data})
+			})
+			.catch((error)=>{
+				dispatch({ type:types.Set_Error, payload:error });
+		});
+    };
+    
+    const addNewSkill=(skill)=>{
+        dispatch({ type: types.Set_Is_Loading });
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+		axios.post(`${baseUrl}/skills`, skill, config)
+			.then((response)=>{
+				dispatch({ type: types.Set_New_Skill, payload:response.data})
+			})
+			.catch((error)=>{
+				dispatch({ type:types.Set_Error, payload:error });
+		});
+	};
 
     return (
 		<AdminContext.Provider
 			value={{
-                skills:state.skills,
+                skillsList:state.skillsList,
                 github_accounts:state.github_accounts,
                 isLoading:state.isLoading,
                 error:state.error,
                 fetchGithubAccounts,
-                fetchSkills               
+                addNewAccount,
+                fetchSkills,
+                addNewSkill,               
 			}}
 		>
 			{props.children}

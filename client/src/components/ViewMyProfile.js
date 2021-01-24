@@ -3,56 +3,57 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { ProfileContext } from "../context/ProfileContext";
 import styled from "styled-components";
-import GitHubIcon from "./GitHubIconIcon.js";
+import GitHubIcon from "./GitHubIcon.js";
 import LinkedinIcon from "./LinkedinIcon";
 import CvIcon from "./CvIcon";
 import EmailIcon from "./EmailIcon";
 import RichEditorReader from '../constant/RichEditorReader'
 
-const ViewMyProfile = ({ profile }) => {
+const ViewMyProfile = (props) => {
 
   let history = useHistory();
   const { isAuthenticated } = useContext(AuthContext);
+  const { profile} = useContext(ProfileContext);
 
   const handleClick = () => {
     history.push("/profile/edit");
   };
-
+  
   return (
-    <Container>
+    <>{profile&&<Container>
       <Img src={profile.avatar_url}/>
       <SubCon>
-        <Name>
+        {profile.first_name&&profile.surname&&<Name>
         {profile.first_name} {profile.surname}
         {profile.is_hired && <HiredLabel>Hired</HiredLabel>}
-        </Name>
-        <Description>{profile.location}</Description>
+        </Name>}
+        {profile.location&&<Description>{profile.location}</Description>}
         <IconContainer>
-          <GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>
-          <LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>
-          <CvIcon></CvIcon>
-          <EmailIcon></EmailIcon>
+        {profile.github_link&&<GitHubIcon gitHubLink={profile.github_link}></GitHubIcon>}
+        {profile.linkedin_link&&<LinkedinIcon linkedinLink={profile.linkedin_link}></LinkedinIcon>}
+          <CvIcon CvLink={profile.cv_link}></CvIcon>
+          <EmailIcon singleProfile={profile}></EmailIcon>
         </IconContainer>
         <DescHead>About Me</DescHead>
-        <Description>{profile.about_me}</Description>
-        <SubHeads> {profile.first_name}'s Interests</SubHeads>
-        <Description>{profile.interest}</Description>
-        <SubHeads>{profile.first_name}’s skills</SubHeads>
+        {profile.about_me&&<Description>{profile.about_me}</Description>}
+        {profile.first_name&&<SubHeads> {profile.first_name}'s Interests</SubHeads>}
+        {profile.interest&&<Description>{profile.interest}</Description>}
+        {profile.first_name&&<SubHeads>{profile.first_name}’s skills</SubHeads>}
         <SkillsContainer>
           {profile.skills && profile.skills.map((skill) => {
             return <SkillBox>{skill}</SkillBox>;
           })}
         </SkillsContainer>
-        <SubHeads>{profile.first_name}'s Portfolio</SubHeads>
-        <SocialText href={profile.portfolio_link} target="blank">
-          Portfolio
-        </SocialText>
+        {profile.portfolio_link&&<SocialText href={profile.portfolio_link} target="blank">
+          {profile.first_name}'s Portfolio
+        </SocialText>}
         {profile.statement&&<ContainerStatement>
           <DescHeadPS>Personal Statement</DescHeadPS>
           <RichEditorReader/>
         </ContainerStatement>}
       </SubCon>
-    </Container>
+    </Container>}
+    </>
   );
 };
 
@@ -102,7 +103,7 @@ const Name = styled.div`
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-right:5px;
+  margin:0 5px 5px 0;
   color: #000000;
   font-family: Lato;
   font-size: 28px;
@@ -113,7 +114,7 @@ const Name = styled.div`
 const DescHead = styled.p`
   color: #000000;
   font-family: Lato;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
@@ -122,7 +123,7 @@ const DescHead = styled.p`
 const DescHeadPS = styled.p`
   color: #000000;
   font-family: Lato;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 0;
   line-height: 24px;
@@ -134,7 +135,6 @@ const Description = styled.p`
   font-family: Lato;
   font-size: 18px;
   letter-spacing: 0;
-  line-height: 24px;
   margin-bottom: 20px;
 `;
 const SubHeads = styled.p`
@@ -149,13 +149,16 @@ const SubHeads = styled.p`
 const SkillsContainer = styled.div`
   display: flex;
   margin-bottom: 20px;
+  width: 100%;
+  flex-wrap:wrap;
 `;
 
 const SkillBox = styled.div`
   border: 1px solid #dedede;
   border-radius: 2px;
   background-color: #f3f3f3;
-  margin-right: 16px;
+  margin: 10px;
+  padding:3px 5px;
 `;
 
 const SocialText = styled.a`
@@ -168,7 +171,7 @@ const SocialText = styled.a`
 `;
 const IconContainer = styled.div`
   display: flex;
-  justify-content:space-around;
-  width:120px;
+  justify-content:space-between;
+  width:200px;
   margin-bottom: 20px;
 `;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 const GitHubIcon = ({ gitHubLink }) => {
   return (
       <Container>
-        <GitLink href={gitHubLink} target="blank">
+        <GitLink href={gitHubLink} target="_blank">
           <GIcon src={GHIcon} />
         </GitLink>
       </Container>

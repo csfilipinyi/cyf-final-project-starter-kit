@@ -8,7 +8,7 @@ import '../RichText.css'
 
 const RichEditorReader = () => {
     const {profile} =useContext(ProfileContext)
-    console.log('editor reader', profile.statement)
+
     const contentState = convertFromRaw(JSON.parse(profile.statement));
     const editorState = EditorState.createWithContent(contentState);
 
