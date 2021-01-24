@@ -1,35 +1,33 @@
-# Starter Kit
+# Setup Project Locally 
+ - clone repo
+ - yarn install
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+# Entry points in the app to get started adding features:
+ - Client folder ---> src contains all the front-end code.
+ - Server Folder contains all the back-end code.
 
- - [x] Full stack ES8+ with [Babel]
- - [x] [Node] LTS support (verified working on 10.x, 12.x and 14.x LTS releases)
- - [x] [Express] server
- - [x] [React] client with [Webpack]
- - [x] Linting with [ESLint]
- - [x] Dev mode (watch modes for client and server, proxy to avoid CORS issues)
- - [x] Production build (single deployment artifact, React loaded via CDN)
- - [x] [Heroku Postgres] database
- - [x] [Heroku] deployment
- - [x] [Cloud Foundry] deployment
- - [x] [Docker] build
+# Features
+Graduate Directory aims to help CYF graduates get hired. 
 
-## Setup
+- The platform allows graduates to publicise their profiles by logging in with their GitHub.
+  The app uses Oauth2 authentication flow to sign in eligible CYF graduates. First time login takes the graduate to a form where they are prompted to fill in their details which are displayed on the overview as well as individual profile pages.
+  Subsquent login shows graduate their profile which they can edit by selecting the Edit option in the dropdown menu at top right. 
+  The graduate also has the option to delete their profile or change their employment status to 'Hired' which is also displayed on their card on the overview page.
 
-Pick one member of the team to own the repository and pipeline. That person should do the following:
+- Potential employers can view the overview page and individual profile pages. They can also
+  contact suitable candidates by directly sending an email.
 
- 1. Create a fork of this repository for the team, and rename it something appropriate for your project.
- 2. Click the "Deploy to Heroku" button and create a Heroku account when prompted.
- 3. Fill in the name of the application, select Europe, then click "Deploy App".
- 4. Create a Heroku | Postgres | Hobby dev database. You have to connect the database to your existing application (Provision this add-on to an app).
- 5. If everything goes fine, you will have a DATABASE_URL config variable, in your project settings | config vars. You don't need to set it manually, it will be picked up when your app runs in Heroku. Since it's set only in the Heroku, the default local settings will be applied otherwise (see db.js in case you need to change it !!)  
- 6. Once it has deployed successfully, click the "Manage app" button to view the application details.
- 7. Go to the "Deploy" tab, select "Connect to GitHub" and choose your repo.
- 8. Click "Enable automatic deploys".
+- Mentors/Admin can login to the admin panel to add eligible GitHub usernames and skills.
+  They can also send emails to graduates.    
 
-Whenever you commit to master (or e.g. merge a [pull request]) it will get automatically deployed!
+   ![Overview Page](readme-1.png "Overview Page")
 
-You should now make sure all of the project team are [collaborators] on the repository.
+   ![View Page](readme-2.png "View Page")
+
+   ![Edit Page](readme-3.png "Edit Page")
+   ![Edit Page](readme-4.png "Edit Page")
+   ![Edit Page](readme-5.png "Edit Page")
+
 
 ## Scripts
 
