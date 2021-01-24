@@ -1,5 +1,4 @@
 import React from "react";
-//import { useRoutes, A } from "hookrouter";
 import {
   BrowserRouter as Router,
   Switch,
