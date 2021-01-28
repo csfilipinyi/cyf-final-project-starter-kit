@@ -112,12 +112,13 @@ function MentorsView() {
           <ul className="student-list">
             {studentList.map(({ user_id, first_name, last_name }) => {
               return (
-                <li key={user_id} className="students-name">
+                <li key={user_id} className="students-name ">
                   <Link
                     to={`./MentorsView?studentId=${user_id}`}
                     className="name-list"
                   >
-                    {`${first_name} ${last_name}`}
+                  <div>{`${first_name} ${last_name}`}</div>  
+                   <div><i class="fas fa-arrow-right"></i></div> 
                   </Link>
                 </li>
               );
