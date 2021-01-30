@@ -332,9 +332,10 @@ li {
   margin-bottom: 10%;
 } */
 
-/* .name-list {
-  font-size: larger;
-} */
+.name-list {
+display: flex;
+justify-content: space-between;
+}
 
 /* .student-list {
   position: relative;
