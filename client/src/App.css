@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;300&display=swap");
 
 body {
-  /* margin: 10vh; */
   font-family: "Raleway", sans-serif;
 }
 
@@ -10,6 +9,9 @@ body {
 }
 .main-container {
   margin-bottom: 10vh;
+}
+.main-container-mentorView {
+  display: flex;
 }
 .header {
   position: relative;
@@ -153,13 +155,12 @@ li {
 }
 
 .learning-objective-container {
-  padding-bottom: 60px;
+  width: 70vw;
   background-color: #efefef;
-  position: absolute;
-  margin-left: 25%;
+  margin-left: 5vw;
+  margin-right: 5vw;
   margin-bottom: 11vh;
-  width: 60%;
-  padding: 2%;
+  padding: 10px;
 }
 .edit-display-container {
   padding-bottom: 60px;
@@ -184,10 +185,9 @@ li {
   background-color: red;
 }
 .default-skill-display {
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 24px;
-  font-weight: 400;
-  line-height: 65px;
+  line-height: 50px;
 }
 
 .default-skill-display:hover {
@@ -195,11 +195,32 @@ li {
 }
 
 .active-skill-display {
+  color: #070100;
+  background-color: rgb(255, 255, 255);
+  padding: 8px;
+  border-radius: 5px;
+}
+.skills-container A {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  font-size: larger;
+  font-weight: 600;
+}
+/* .skills-container A:focus {
+  background-color: white;
   color: #db4437;
   font-weight: bolder;
-  background-color: white;
-  padding: 8px;
-  border-radius: 2px;
+  border-radius: 4px;
+  text-decoration: none;
+} */
+
+.skills-container .edit-btn:not A:hover {
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid whites;
+  text-align: center;
 }
 
 .skills-container {
@@ -247,34 +268,9 @@ li {
   margin-right: 30px;
 }
 
-.skills-container A {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  margin-top: 40px;
-  font-size: larger;
-  font-weight: 600;
-}
-
-.skills-container .edit-btn:not A:hover {
-  border-radius: 4px;
-  color: white;
-  text-decoration: none;
-  border-bottom: 1px solid whites;
-  text-align: center;
-}
-
 /* .skills-container A:checked {
   background-color: rgb(18, 88, 90);
 } */
-
-.skills-container A:focus {
-  background-color: white;
-  color: #db4437;
-  font-weight: bolder;
-  border-radius: 4px;
-  text-decoration: none;
-}
 
 /* .current {
   background-color: yellow;
@@ -333,8 +329,8 @@ li {
 } */
 
 .name-list {
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* .student-list {
@@ -369,6 +365,10 @@ justify-content: space-between;
   position: relative;
 }
 
+.skills-main-container {
+  display: flex;
+  /* justify-content: space-around; */
+}
 .mentorsview-page {
   position: relative;
 }
@@ -379,33 +379,6 @@ justify-content: space-between;
   position: relative;
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #efefef;
-  height: 10vh;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer-input {
-  border-radius: 0%;
-}
-
-.footer-contact img {
-  height: 20px;
-  margin-left: 10px;
-}
-
-.footer-submit {
-  background-color: #db4437;
-  color: #efefef;
-}
 .display-details {
   display: flex;
   justify-content: space-between;

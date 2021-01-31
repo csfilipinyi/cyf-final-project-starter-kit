@@ -44,27 +44,29 @@ export default function SkillsNav() {
       <h1 className="welcome-msg">
         Welcome {window.localStorage.getItem("name")}
       </h1>
-      <div className="skills-container  ">
-        {skills.map((skill) => (
-          <Route
-            path={`/skills/${skill}`}
-            component={() => <SkillTracker skill={skill} />}
-          />
-        ))}
+      <div className="skills-main-container">
+        <div className="skills-container">
+          {skills.map((skill) => (
+            <NavLink
+              to={`/skills/${skill}`}
+              activeClassName="active-skill-display"
+              className="default-skill-display"
+            >
+              {skillLabel(skill)}
+            </NavLink>
+          ))}
+        </div>
 
-        {skills.map((skill) => (
-          <NavLink
-            to={`/skills/${skill}`}
-            activeClassName="active-skill-display"
-            className="default-skill-display"
-          >
-            {skillLabel(skill)}
-          </NavLink>
-        ))}
+        <div>
+          {skills.map((skill) => (
+            <Route
+              path={`/skills/${skill}`}
+              component={() => <SkillTracker skill={skill} />}
+            />
+          ))}
+        </div>
       </div>
-      <div>
-        <Footer />
-      </div>
+      {/* <Footer /> */}
     </div>
   );
 }

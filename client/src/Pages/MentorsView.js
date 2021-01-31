@@ -84,7 +84,7 @@ function MentorsView() {
       <h1 className="welcome-msg">
         Welcome {window.localStorage.getItem("name")}
       </h1>
-      <div className="main-container">
+      <div className="main-container-mentorView">
         <div className="studentName-Container">
           {/* <ul>
             {studentList.map(({ user_id, first_name, last_name }) => {
@@ -100,14 +100,7 @@ function MentorsView() {
               );
             })}
           </ul> */}
-          {studentId && (
-            <div className="box-display-component">
-              <StudentResultsContainer
-                studentId={studentId}
-                studentName={studentName}
-              />
-            </div>
-          )}
+
           <h2 className="mentor-greet">Students List:</h2>
           <ul className="student-list">
             {studentList.map(({ user_id, first_name, last_name }) => {
@@ -117,15 +110,26 @@ function MentorsView() {
                     to={`./MentorsView?studentId=${user_id}`}
                     className="name-list"
                   >
-                  <div>{`${first_name} ${last_name}`}</div>  
-                   <div><i class="fas fa-arrow-right"></i></div> 
+                    <div>{`${first_name} ${last_name}`}</div>
+                    <div>
+                      <i class="fas fa-arrow-right"></i>
+                    </div>
                   </Link>
                 </li>
               );
             })}
           </ul>
         </div>
+        {studentId && (
+          <div className="box-display-component">
+            <StudentResultsContainer
+              studentId={studentId}
+              studentName={studentName}
+            />
+          </div>
+        )}
       </div>
+
       <Footer />
     </div>
   );
