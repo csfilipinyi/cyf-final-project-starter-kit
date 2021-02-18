@@ -5,7 +5,7 @@
       "type": "node",
       "request": "attach",
       "name": "Debug server",
-      "port": 9229,
+      "port": 3105,
       "skipFiles": [
         "<node_internals>/**"
       ]

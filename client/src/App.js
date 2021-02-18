@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import Routes from "./Routes";
+import ProfileState from './context/ProfileContext';
+import AuthState from './context/AuthContext'
+import AdminState from './context/AdminContext'
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./styles/GlobalStyle";
+import { theme } from "./styles/Theme";
 
-import "./App.css";
-import { getMessage } from "./service";
-import logo from "./logo.svg";
-
-export function App() {
-	const [message, setMessage] = useState("Loading...");
-
-	useEffect(() => {
-		getMessage().then((message) => setMessage(message));
-	}, []);
-
+const App = () => {
 	return (
-		<main role="main">
-			<div>
-				<img className="logo" data-qa="logo" src={logo} alt="Just the React logo" />
-				<h1 className="message" data-qa="message">{message}</h1>
-			</div>
-		</main>
+		<AuthState>		
+			<ProfileState>
+				<AdminState>
+					<ThemeProvider theme={theme}>
+						<GlobalStyles />
+						<Routes />
+					</ThemeProvider>
+				</AdminState>
+			</ProfileState>
+		</AuthState>
 	);
-}
+};
 
 export default App;
